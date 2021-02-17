@@ -1,0 +1,19 @@
+<CaptionToolBar>
+	<Group width="23%">
+		<Options>
+			<Tool symbol="icon-chevron-left"/>
+			<Tool symbol="icon-chevron-right"/>
+		</Options>
+	</Group>
+	<Group>
+		<Options>
+			<Tool name="Day"/>
+			<Tool name="Week"/>
+			<Tool name="Month"/>
+			<Tool name="Year" state="active"/>
+		</Options>
+	</Group>
+	<Group width="31%">
+		<Search width="170px" placeholder="Search"/>
+	</Group>
+</CaptionToolBar>
