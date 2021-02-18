@@ -65,41 +65,66 @@ content {
 
 		.days {
 			flex: 1;
-			padding-left: 59px;
-			overflow-x: hidden;
-			overflow-y: auto;
+			position: relative;
+			
+			.days-wrapper {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				overflow-x: hidden;
+				overflow-y: auto;
+				display: flex;
 
-			.entries {
-				position: relative;
-				height: 200%;
-				background-image: linear-gradient(#ddd 1px, transparent 1px),
-								linear-gradient(transparent 22px, #e0e0e0 23px, transparent 23px),
-								linear-gradient(90deg, #ddd 1px, transparent 1px),
-								linear-gradient(90deg, transparent 71.6375%, rgba(0,0,0,.025) 71.6375%, rgba(0,0,0,.025) 100%, transparent 100%);
-				background-size: 14.29% 44px,
-								14.29% 44px,
-								14.29% 44px,
-								100% auto;
+				> div {
+					height: 1056px;
+				}
 
-				.event {
-					background: #d3ebfd;
-					// box-shadow: 0 3px 11px rgba(0,0,0,.075);
-					border-left: 3px solid darken(#d3ebfd, 19%);
-					border-radius: 4px;
-					padding: 5px 3px;
+				.col-hours {
+					width: 59px;
+				}
+
+				.col-day {
+					background-image: linear-gradient(#ddd 1px, transparent 1px), linear-gradient(transparent 22px, #e0e0e0 23px, transparent 23px);
+					background-size: 100% 44px, 100% 44px;
+					border-left: 1px solid #ddd;
+					position: relative;
+					flex: 1;
+
+					&:nth-child(7),
+					&:nth-child(8) { background-color: rgba(0,0,0,.0125); }
+				}
+
+				.entries {
 					position: absolute;
+					top: 0;
+					left: 59px;
+					
+					.event {
+						background: #d3ebfd;
+						// box-shadow: 0 3px 11px rgba(0,0,0,.075);
+						border-left: 3px solid darken(#d3ebfd, 19%);
+						border-radius: 4px;
+						padding: 5px 3px;
+						position: absolute;
+						width: 127px;
 
-					&:nth-child(1) { top: 221px; left: 130px; width: 127px; height: 65px; }
-					&:nth-child(2) { top: 309px; left: 259px; width: 127px; height: 131px; }
-					&:nth-child(3) { top: 177px; left: 387px; width: 127px; height: 87px; }
-					&:nth-child(4) { top: 331px; left: 516px; width: 127px; height: 65px; }
+						&:nth-child(1) { top: 221px; left: 1px; height: 65px; }
+						&:nth-child(2) { top: 309px; left: 130px; height: 131px; }
+						&:nth-child(3) { top: 177px; left: 387px; height: 87px; }
+						&:nth-child(4) { top: 331px; left: 516px; height: 65px; }
+						&:nth-child(5) { top: 456px; left: 258px; height: 87px; }
+						&:nth-child(6) { top: 236px; left: 645px; height: 65px; }
+						&:nth-child(7) { top: 280px; left: 773px; height: 87px; }
 
-					span {
-						display: block;
-						white-space: nowrap;
-						overflow: hidden;
-						text-overflow: ellipsis;
-						color: darken(#d3ebfd, 47%);
+						span {
+							display: block;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							color: darken(#d3ebfd, 47%);
+						}
 					}
 				}
 			}
