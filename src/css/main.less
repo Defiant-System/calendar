@@ -44,6 +44,27 @@ content {
 	right: 0;
 	bottom: 0;
 
+	&.show-year {
+		.view-week,
+		.view-month {
+			display: none;
+		}
+	}
+
+	&.show-month {
+		.view-week,
+		.view-year {
+			display: none;
+		}
+	}
+
+	&.show-week {
+		.view-year,
+		.view-month {
+			display: none;
+		}
+	}
+
 	h2 {
 		font-weight: 300;
 		font-size: 29px;

@@ -10,10 +10,10 @@
 	</Group>
 	<Group>
 		<Options>
-			<Tool name="Day"/>
-			<Tool name="Week"/>
-			<Tool name="Month"/>
-			<Tool name="Year" state="active"/>
+			<Tool name="Day" click="switch-view" arg="day"/>
+			<Tool name="Week" click="switch-view" arg="week"/>
+			<Tool name="Month" click="switch-view" arg="month"/>
+			<Tool name="Year" click="switch-view" arg="year" state="active"/>
 		</Options>
 	</Group>
 	<Group width="31%">
