@@ -6,6 +6,9 @@ const calendar = {
 			content: window.find("content"),
 			daysWrapper: window.find(".days-wrapper"),
 		};
+
+		// temp
+		window.find(".toolbar-tool_").get(5).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,
