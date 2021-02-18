@@ -10,10 +10,99 @@ content {
 		font-weight: 400;
 		font-size: 29px;
 		text-align: center;
-		margin-bottom: 7px;
+		margin-bottom: 11px;
 
 		b {
 			font-weight: 700;
+		}
+	}
+}
+
+.view-week {
+	display: flex;
+    flex-direction: column;
+    height: 100%;
+	padding: 17px 0 0;
+
+	.week {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+
+		u.col-hours {
+			// background: rgba(0,0,0,.1);
+			flex: initial;
+			width: 59px;
+		}
+
+		.weekdays {
+			display: flex;
+			// height: 37px;
+			padding-top: 3px;
+			text-transform: uppercase;
+
+			b {
+				flex: 1;
+				padding: 0 0 0 3px;
+				font-size: 11px;
+				font-weight: 400;
+				color: #bbb;
+				border-bottom: 1px solid #ccc;
+
+				&.weekend i {
+					color: #999;
+				}
+
+				i {
+					display: block;
+					padding: 5px 0 7px;
+					font-style: normal;
+					font-size: 19px;
+					color: #555;
+				}
+			}
+		}
+
+		.days {
+			flex: 1;
+			padding-left: 59px;
+			overflow-x: hidden;
+			overflow-y: auto;
+
+			.entries {
+				position: relative;
+				height: 200%;
+				background-image: linear-gradient(#ddd 1px, transparent 1px),
+								linear-gradient(transparent 22px, #e0e0e0 23px, transparent 23px),
+								linear-gradient(90deg, #ddd 1px, transparent 1px),
+								linear-gradient(90deg, transparent 71.6375%, rgba(0,0,0,.025) 71.6375%, rgba(0,0,0,.025) 100%, transparent 100%);
+				background-size: 14.29% 44px,
+								14.29% 44px,
+								14.29% 44px,
+								100% auto;
+
+				.event {
+					background: #d3ebfd;
+					// box-shadow: 0 3px 11px rgba(0,0,0,.075);
+					border-left: 3px solid darken(#d3ebfd, 19%);
+					border-radius: 4px;
+					padding: 5px 3px;
+					position: absolute;
+
+					&:nth-child(1) { top: 221px; left: 130px; width: 127px; height: 65px; }
+					&:nth-child(2) { top: 309px; left: 259px; width: 127px; height: 131px; }
+					&:nth-child(3) { top: 177px; left: 387px; width: 127px; height: 87px; }
+					&:nth-child(4) { top: 331px; left: 516px; width: 127px; height: 65px; }
+
+					span {
+						display: block;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						color: darken(#d3ebfd, 47%);
+					}
+				}
+			}
 		}
 	}
 }
@@ -23,10 +112,6 @@ content {
     flex-direction: column;
     height: 100%;
 	padding: 17px 0 0;
-
-	h2 {
-		margin-bottom: 11px;
-	}
 
 	.month {
 		display: flex;
@@ -93,6 +178,10 @@ content {
 .view-year {
 	padding: 15px 19px 0;
 	font-size: 0;
+
+	h2 {
+		margin-bottom: 7px;
+	}
 
 	.month {
 		// background: rgba(0,0,0,.1);
