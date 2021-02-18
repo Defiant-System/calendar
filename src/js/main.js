@@ -2,7 +2,13 @@
 const calendar = {
 	init() {
 		// fast references
-		this.content = window.find("content");
+		this.els = {
+			content: window.find("content"),
+			daysWrapper: window.find(".days-wrapper"),
+		};
+
+		// temp
+		this.els.daysWrapper.scrollTop(100);
 	},
 	dispatch(event) {
 		switch (event.type) {

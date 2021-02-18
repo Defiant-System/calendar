@@ -92,38 +92,91 @@ content {
 					position: relative;
 					flex: 1;
 
-					&:nth-child(7),
-					&:nth-child(8) { background-color: rgba(0,0,0,.0125); }
+					&.col-weekend { background-color: rgba(0,0,0,.0125); }
+
+					&:nth-child(2) .event { top: 309px; height: 131px; }
+					&:nth-child(3) .event { top: 177px; height: 87px; }
+					&:nth-child(4) .event { top: 331px; height: 65px; }
+					&:nth-child(5) .event { top: 456px; height: 87px; }
+					&:nth-child(6) .event { top: 236px; height: 65px; }
+					&:nth-child(7) .event { top: 280px; height: 87px; }
+					&:nth-child(8) .event { top: 221px; height: 65px; }
 				}
 
-				.entries {
+				.event {
+					background: #d3ebfd;
+					box-shadow: 0 4px 5px -2px rgba(0,0,0,.15);
+					border-left: 3px solid darken(#d3ebfd, 23%);
+					border-radius: 4px;
+					padding: 5px 4px;
 					position: absolute;
-					top: 0;
-					left: 59px;
-					
-					.event {
-						background: #d3ebfd;
-						// box-shadow: 0 3px 11px rgba(0,0,0,.075);
-						border-left: 3px solid darken(#d3ebfd, 19%);
-						border-radius: 4px;
-						padding: 5px 3px;
-						position: absolute;
-						width: 127px;
+					left: 0;
+					right: 1px;
 
-						&:nth-child(1) { top: 221px; left: 1px; height: 65px; }
-						&:nth-child(2) { top: 309px; left: 130px; height: 131px; }
-						&:nth-child(3) { top: 177px; left: 387px; height: 87px; }
-						&:nth-child(4) { top: 331px; left: 516px; height: 65px; }
-						&:nth-child(5) { top: 456px; left: 258px; height: 87px; }
-						&:nth-child(6) { top: 236px; left: 645px; height: 65px; }
-						&:nth-child(7) { top: 280px; left: 773px; height: 87px; }
+					span {
+						display: block;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						color: darken(#d3ebfd, 53%);
+
+						&.event-time {
+							font-weight: 700;
+							padding-bottom: 3px;
+						}
+					}
+
+					&.green {
+						background: #ccf7c1;
+						border-left-color: darken(#ccf7c1, 37%);
 
 						span {
-							display: block;
-							white-space: nowrap;
-							overflow: hidden;
-							text-overflow: ellipsis;
-							color: darken(#d3ebfd, 47%);
+							color: darken(#ccf7c1, 59%);
+						}
+					}
+
+					&.orange {
+						background: #fbaf75;
+						border-left-color: darken(#fbaf75, 37%);
+
+						span {
+							color: darken(#fbaf75, 59%);
+						}
+					}
+
+					&.yellow {
+						background: #ffd366;
+						border-left-color: darken(#ffd366, 37%);
+
+						span {
+							color: darken(#ffd366, 59%);
+						}
+					}
+
+					&.purple {
+						background: #f2dcfd;
+						border-left-color: darken(#f2dcfd, 21%);
+
+						span {
+							color: darken(#f2dcfd, 59%);
+						}
+					}
+
+					&.red {
+						background: #ffa0a0;
+						border-left-color: darken(#ffa0a0, 21%);
+
+						span {
+							color: darken(#ffa0a0, 59%);
+						}
+					}
+
+					&.cyan {
+						background: #aee;
+						border-left-color: darken(#aee, 21%);
+
+						span {
+							color: darken(#aee, 59%);
 						}
 					}
 				}
