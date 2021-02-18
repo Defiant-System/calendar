@@ -68,13 +68,22 @@ content {
 	h2 {
 		font-weight: 300;
 		font-size: 29px;
+		font-family: "Jost", sans-serif;
 		text-align: center;
 		margin-bottom: 11px;
-		font-family: "Jost", sans-serif;
 
 		b {
 			font-weight: 500;
 		}
+	}
+
+	h3 {
+		color: #e66;
+		font-weight: 400;
+		font-size: 17px;
+		font-family: "Jost", sans-serif;
+		padding: 0 11px;
+		margin-bottom: 5px;
 	}
 }
 
@@ -282,6 +291,7 @@ content {
 			height: 23px;
 			text-transform: uppercase;
 			border-bottom: 1px solid #ccc;
+			font-family: "Jost", sans-serif;
 
 			b {
 				flex: 1;
@@ -298,7 +308,7 @@ content {
 				display: inline-block;
 				width: 14.285%;
 				height: 16.66%;
-				padding: 2px 7px;
+				padding: 4px 6px;
 				font-weight: 400;
 				font-size: 14px;
 				border-right: 1px solid;
@@ -326,6 +336,17 @@ content {
 
 				&.non-day {
 					color: #c2c2c2;
+
+					i {
+						font-weight: 300;
+					}
+				}
+
+				i {
+					font-size: 13px;
+					font-style: normal;
+					font-weight: 500;
+					font-family: "Jost", sans-serif;
 				}
 			}
 		}
@@ -351,14 +372,6 @@ content {
 
 		&:hover {
 			box-shadow: 0 0 0 3px rgba(0,0,0,.075); // #3366dd4a
-		}
-
-		h3 {
-			color: #e66;
-			font-weight: 400;
-			font-size: 17px;
-			padding: 0 11px;
-			margin-bottom: 5px;
 		}
 
 		b {
