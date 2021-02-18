@@ -11,6 +11,82 @@ content {
 		font-size: 29px;
 		text-align: center;
 		margin-bottom: 7px;
+
+		b {
+			font-weight: 700;
+		}
+	}
+}
+
+.view-month {
+	display: flex;
+    flex-direction: column;
+    height: 100%;
+	padding: 17px 0 0;
+
+	h2 {
+		margin-bottom: 11px;
+	}
+
+	.month {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		padding: 5px 0 0 0;
+		text-align: right;
+
+		.weekdays {
+			display: flex;
+			height: 23px;
+			text-transform: uppercase;
+			border-bottom: 1px solid #ccc;
+
+			b {
+				flex: 1;
+				padding: 5px 7px;
+				font-weight: 400;
+			}
+		}
+
+		.days {
+			flex: 1;
+			font-size: 0;
+
+			b {
+				display: inline-block;
+				width: 14.285%;
+				height: 16.66%;
+				padding: 2px 7px;
+				font-weight: 400;
+				font-size: 14px;
+				border-right: 1px solid;
+				border-bottom: 1px solid;
+				border-color: #ccc;
+
+				&:nth-child(7n) {
+					border-right: 0;
+				}
+
+				&:nth-last-child(1),
+				&:nth-last-child(2),
+				&:nth-last-child(3),
+				&:nth-last-child(4),
+				&:nth-last-child(5),
+				&:nth-last-child(6),
+				&:nth-last-child(7) {
+					border-bottom: 0;
+				}
+
+				&.weekend {
+					background: rgba(0,0,0,.025);
+					color: #999;
+				}
+
+				&.non-day {
+					color: #c2c2c2;
+				}
+			}
+		}
 	}
 }
 
@@ -28,7 +104,7 @@ content {
 		cursor: pointer;
 
 		&:hover {
-			box-shadow: 0 0 0 3px rgba(0,0,0,.10); // #3366dd4a
+			box-shadow: 0 0 0 3px rgba(0,0,0,.075); // #3366dd4a
 		}
 
 		h3 {
@@ -63,6 +139,7 @@ content {
 				&.weekend {
 					color: #999;
 				}
+
 				&.non-day {
 					color: #c2c2c2;
 				}
