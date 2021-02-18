@@ -93,16 +93,15 @@ content {
     height: 100%;
 	padding: 17px 0 0;
 
+	u.col-hours {
+		flex: initial;
+		width: 59px;
+	}
+
 	.week {
 		display: flex;
 		flex-direction: column;
 		flex: 1;
-
-		u.col-hours {
-			// background: rgba(0,0,0,.1);
-			flex: initial;
-			width: 59px;
-		}
 
 		.weekdays {
 			display: flex;
@@ -151,6 +150,21 @@ content {
 			}
 		}
 
+		.day-legends {
+			display: flex;
+			height: 23px;
+
+			u.col-hours {
+				border-bottom: 1px solid #ccc;
+			}
+			
+			b {
+				flex: 1;
+				border-left: 1px solid #ddd;
+				border-bottom: 1px solid #ccc;
+			}
+		}
+
 		.days {
 			flex: 1;
 			position: relative;
@@ -171,6 +185,18 @@ content {
 
 				.col-hours {
 					width: 59px;
+					padding: 45px 9px 0 0;
+					text-align: right;
+					font-family: "Jost", sans-serif;
+					font-size: 11px;
+					line-height: 0;
+					color: #888;
+
+					b {
+						display: block;
+						font-weight: 300;
+						height: 44px;
+					}
 				}
 
 				.col-day {
