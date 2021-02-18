@@ -6,7 +6,7 @@
 		<meta name="license" value="AGPL-3.0"/>
 		<meta name="repository" value="https://github.com/Defiant-System/calendar"/>
 		<meta name="width" value="960" min="720"/>
-		<meta name="height" value="600" min="460"/>
+		<meta name="height" value="610" min="460"/>
 		<meta name="top" value="150"/>
 		<meta name="left" value="180"/>
 		<meta name="minimize"/>

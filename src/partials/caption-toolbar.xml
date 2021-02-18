@@ -1,7 +1,10 @@
 <CaptionToolBar>
 	<Group width="23%">
+		<Tool symbol="icon-calendar"/>
+
 		<Options>
 			<Tool symbol="icon-chevron-left"/>
+			<Tool name="Today"/>
 			<Tool symbol="icon-chevron-right"/>
 		</Options>
 	</Group>
