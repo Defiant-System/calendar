@@ -430,6 +430,7 @@ content {
 			font-size: 0;
 
 			b {
+				position: relative;
 				display: inline-block;
 				width: 14.285%;
 				height: 16.66%;
@@ -488,6 +489,45 @@ content {
 					text-align: center;
 					padding-top: 4px;
 				}
+
+				.entries-wrapper {
+					position: absolute;
+					top: 19px;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					overflow: hidden;
+					font-size: 12px;
+					padding: 0 2px;
+
+					.entry {
+						position: relative;
+						display: block;
+						text-align: left;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+						overflow: hidden;
+						padding: 1px 0 2px 13px;
+
+						&:before {
+							content: "";
+							background: darken(#c8e6fc, 13%);
+							position: absolute;
+							top: 2px;
+							left: 1px;
+							width: 9px;
+							height: 9px;
+							border-radius: 50%;
+						}
+
+						&.green:before  { background: darken(#c0f6b2, 7%); }
+						&.orange:before { background: darken(#fbaf75, 7%); }
+						&.yellow:before { background: darken(#ffd366, 7%); }
+						&.purple:before { background: darken(#eccafc, 7%); }
+						&.red:before    { background: darken(#ffa0a0, 7%); }
+						&.cyan:before   { background: darken(#aee, 7%); }
+					}
+				}
 			}
 		}
 	}
@@ -497,12 +537,16 @@ content {
 	padding: 15px 19px 0;
 	font-size: 0;
 
+	h2 {
+		margin-bottom: 7px;
+	}
+
 	.month {
 		// background: rgba(0,0,0,.1);
 		display: inline-block;
 		width: 25%;
 		padding: 9px 7px;
-		margin: 0 0 15px 0;
+		margin: 0 0 9px 0;
 		font-family: "Jost", sans-serif;
 		border-radius: 4px;
 		cursor: pointer;
@@ -517,13 +561,13 @@ content {
 			font-weight: 500;
 			font-size: 11px;
 			text-align: center;
-			padding: 3px 0;
+			padding: 5px 0 4px;
 		}
 
 		.weekdays {
 			font-size: 0;
-			color: #888;
-			padding: 3px 1px 3px;
+			color: #aaa;
+			padding: 3px 1px 0px;
 			margin-bottom: 3px;
 		}
 
@@ -533,7 +577,7 @@ content {
 
 			b {
 				&.weekend {
-					color: #999;
+					color: #bbb;
 				}
 
 				&.non-day {
@@ -550,9 +594,9 @@ content {
 						background: #e66;
 						position: absolute;
 						top: 0;
-						left: 7px;
-						width: 17px;
-						height: 17px;
+						left: 5px;
+						width: 20px;
+						height: 20px;
 						z-index: -1;
 						border-radius: 50%;
 					}
