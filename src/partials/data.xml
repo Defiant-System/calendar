@@ -1,0 +1,29 @@
+
+<Holidays>
+	<i date="2021-01-01" name="Nyårsdagen" />
+	<i date="2021-01-06" name="Trettondedag jul" />
+	<i date="2021-02-14" name="Alla hjärtans dag" />
+	<i date="2021-03-28" name="Sommartid" />
+	<i date="2021-04-01" name="Skärtorsdagen" />
+	<i date="2021-04-01" name="1 april" />
+	<i date="2021-04-02" name="Långfredagen" />
+	<i date="2021-04-04" name="Påsk" />
+	<i date="2021-04-05" name="Annandag påsk" />
+	<i date="2021-05-01" name="Första maj" />
+	<i date="2021-05-13" name="Kristi Himmelsfärdsdag" />
+	<i date="2021-05-23" name="Pingstdagen" />
+	<i date="2021-05-24" name="Annandag pingst" />
+	<i date="2021-05-30" name="Mors dag" />
+	<i date="2021-07-06" name="Sveriges nationaldag" />
+	<i date="2021-07-25" name="Midsommarafton" />
+	<i date="2021-07-26" name="Midsommardagen" />
+	<i date="2021-10-31" name="Halloween" />
+	<i date="2021-10-31" name="Vintertid" />
+	<i date="2021-11-06" name="Alla helgons dag" />
+	<i date="2021-11-14" name="Fars dag" />
+	<i date="2021-12-13" name="Lucia" />
+	<i date="2021-12-24" name="Julafton" />
+	<i date="2021-12-25" name="Juldagen" />
+	<i date="2021-12-26" name="Annandag jul" />
+	<i date="2021-12-31" name="Nyårsafton" />
+</Holidays>

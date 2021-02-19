@@ -22,7 +22,6 @@ const Render = {
 		htm.push(`</div>`);
 	},
 	day(opt) {
-		// return;
 		let I18n = this.i18n,
 			now = new Date,
 			date = opt.date || now,
@@ -59,17 +58,20 @@ const Render = {
 			.find(".days-wrapper").scrollTop(320);
 	},
 	week(opt) {
-		// return;
 		let I18n = this.i18n,
 			now = new Date,
 			nowYear = now.getFullYear(),
 			nowMonth = now.getMonth(),
 			nowDate = now.getDate(),
 			date = opt.date || now,
+			dDay = date.getDay(),
 			htm = [];
 
+		// sunday check
+		if (dDay === 0) dDay = 7;
+
 		// reset date to first of the week
-		date.setWeek(date.getWeek());
+		date.setDate(date.getDate() - dDay + 1);
 
 		let dateIndex = date.getDate(),
 			iYear = date.getFullYear(),
