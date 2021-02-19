@@ -8,7 +8,7 @@ const calendar = {
 		};
 
 		// temp
-		window.find(".toolbar-tool_").get(5).trigger("click");
+		window.find(".toolbar-tool_").get(7).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,

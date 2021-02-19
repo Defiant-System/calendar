@@ -123,7 +123,7 @@ content {
 
 				&.today {
 					i:nth-child(2) {
-						background: #369;
+						background: #e66;
 						color: #fff;
 						position: relative;
 						left: -2px;
@@ -231,9 +231,9 @@ content {
 		}
 
 		.event {
-			background: #d3ebfd;
+			background: #c8e6fc;
 			box-shadow: 0 4px 5px -2px rgba(0,0,0,.15);
-			border-left: 3px solid darken(#d3ebfd, 23%);
+			border-left: 3px solid darken(#c8e6fc, 23%);
 			border-radius: 4px;
 			padding: 5px 4px;
 			position: absolute;
@@ -245,7 +245,7 @@ content {
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
-				color: darken(#d3ebfd, 53%);
+				color: darken(#c8e6fc, 53%);
 
 				&.event-time {
 					font-weight: 700;
@@ -254,11 +254,11 @@ content {
 			}
 
 			&.green {
-				background: #ccf7c1;
-				border-left-color: darken(#ccf7c1, 37%);
-				color: darken(#ccf7c1, 37%);
+				background: #c0f6b2;
+				border-left-color: darken(#c0f6b2, 37%);
+				color: darken(#c0f6b2, 37%);
 
-				span { color: darken(#ccf7c1, 59%); }
+				span { color: darken(#c0f6b2, 59%); }
 			}
 
 			&.orange {
@@ -266,7 +266,7 @@ content {
 				border-left-color: darken(#fbaf75, 37%);
 				color: darken(#fbaf75, 37%);
 
-				span { color: darken(#fbaf75, 59%); }
+				span { color: darken(#fbaf75, 53%); }
 			}
 
 			&.yellow {
@@ -274,15 +274,15 @@ content {
 				border-left-color: darken(#ffd366, 37%);
 				color: darken(#ffd366, 37%);
 
-				span { color: darken(#ffd366, 59%); }
+				span { color: darken(#ffd366, 53%); }
 			}
 
 			&.purple {
-				background: #f2dcfd;
-				border-left-color: darken(#f2dcfd, 21%);
-				color: darken(#f2dcfd, 37%);
+				background: #eccafc;
+				border-left-color: darken(#eccafc, 21%);
+				color: darken(#eccafc, 37%);
 
-				span { color: darken(#f2dcfd, 59%); }
+				span { color: darken(#eccafc, 59%); }
 			}
 
 			&.red {
@@ -328,6 +328,10 @@ content {
 				flex: 1;
 				padding: 5px 7px;
 				font-weight: 400;
+
+				&.weekend {
+					color: #999;
+				}
 			}
 		}
 
@@ -339,7 +343,7 @@ content {
 				display: inline-block;
 				width: 14.285%;
 				height: 16.66%;
-				padding: 4px 6px;
+				padding: 2px 3px;
 				font-weight: 400;
 				font-size: 14px;
 				border-right: 1px solid;
@@ -360,6 +364,15 @@ content {
 					border-bottom: 0;
 				}
 
+				&.today {
+					i {
+						position: relative;
+						left: 1px;
+						background: #e66;
+						color: #fff;
+					}
+				}
+
 				&.weekend {
 					background: rgba(0,0,0,.025);
 					color: #999;
@@ -374,10 +387,16 @@ content {
 				}
 
 				i {
+					display: inline-block;
 					font-size: 13px;
 					font-style: normal;
 					font-weight: 500;
 					font-family: "Jost", sans-serif;
+					width: 21px;
+					height: 21px;
+					border-radius: 50%;
+					text-align: center;
+					padding-top: 4px;
 				}
 			}
 		}
@@ -430,6 +449,23 @@ content {
 				&.non-day {
 					color: #c2c2c2;
 					font-weight: 300;
+				}
+				
+				&.today {
+					position: relative;
+					color: #fff;
+
+					&:before {
+						content: "";
+						background: #e66;
+						position: absolute;
+						top: 0;
+						left: 7px;
+						width: 17px;
+						height: 17px;
+						z-index: -1;
+						border-radius: 50%;
+					}
 				}
 			}
 		}
