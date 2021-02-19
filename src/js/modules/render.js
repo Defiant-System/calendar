@@ -8,6 +8,19 @@ const Render = {
 			hours: "24h", // "am/pm",
 		};
 	},
+	hours(htm) {
+		htm.push(`<div class="col-hours">`);
+		[...Array(23)].map((a, index) => {
+			let className = [],
+				hour = (index + 1).toString().padStart("0", 1)
+			// office hours
+			if (index > 6 && index < 18) className.push("work-hours");
+
+			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
+			htm.push(`<b${className}>${hour}:00</b>`);
+		});
+		htm.push(`</div>`);
+	},
 	day(opt) {
 		// return;
 		let I18n = this.i18n,
@@ -25,31 +38,20 @@ const Render = {
 		// title: day
 		htm.push(`<h2><i>${I18n.days[iDay]}</i> <b>${I18n.months[iMonth]} ${iDate}</b> ${iYear}</h2>`);
 		htm.push(`<div class="day">`);
-
-		// legend
-		htm.push(`<div class="day-legends">`);
-		htm.push(`<u class="col-hours"></u>`);
-		htm.push(`<b></b>`);
-		htm.push(`</div>`);
-
-		htm.push(`<div class="day"><div class="days-wrapper">`);
-			// hours column
-			htm.push(`<div class="col-hours">`);
-			[...Array(23)].map((a, index) => {
-				let className = [],
-					hour = (index + 1).toString().padStart("0", 1);
-				// office hours
-				if (index > 6 && index < 18) className.push("work-hours");
-
-				className = (className.length) ? ` class="${className.join(" ")}"` : ``;
-				htm.push(`<b${className}>${hour}:00</b>`);
-			});
+			
+			// legend
+			htm.push(`<div class="day-legends">`);
+			htm.push(`<u class="col-hours"></u>`);
+			htm.push(`<b></b>`);
 			htm.push(`</div>`);
-
+			// day wrapper
+			htm.push(`<div class="day"><div class="days-wrapper">`);
+			// hours column
+			this.hours(htm);
 			// day column
 			htm.push(`<div class="col-day"></div>`);
-		htm.push(`</div></div>`);
-
+			htm.push(`</div></div>`);
+		
 		// closing tag
 		htm.push(`</div>`);
 
@@ -113,17 +115,7 @@ const Render = {
 			// row: days
 			htm.push(`<div class="days"><div class="days-wrapper">`);
 				// hours column
-				htm.push(`<div class="col-hours">`);
-				[...Array(23)].map((a, index) => {
-					let className = [],
-						hour = (index + 1).toString().padStart("0", 1)
-					// office hours
-					if (index > 6 && index < 18) className.push("work-hours");
-
-					className = (className.length) ? ` class="${className.join(" ")}"` : ``;
-					htm.push(`<b${className}>${hour}:00</b>`);
-				});
-				htm.push(`</div>`);
+				this.hours(htm);
 
 				// weekdays
 				I18n.days.map((name, index) => {
