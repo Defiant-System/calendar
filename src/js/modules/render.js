@@ -11,8 +11,80 @@ const Render = {
 	day() {
 		
 	},
-	week() {
+	week(opt) {
+		// return;
+		let I18n = this.i18n,
+			now = new Date,
+			date = opt.date || now,
+			htm = [],
+			dateIndex = 15;
+
+		// reset date to first of the week
+		date.setDate(dateIndex);
+
+		let iYear = date.getFullYear(),
+			iMonth = date.getMonth(),
+			iDay = date.getDay();
 		
+		// title: week
+		htm.push(`<h2><b>${I18n.months[iMonth]}</b> ${iYear}</h2>`);
+		htm.push(`<div class="week">`);
+
+		// weekdays
+		htm.push(`<div class="weekdays">`);
+		htm.push(`<u class="col-hours"></u>`);
+		I18n.days.map((name, index) => {
+			let className = [],
+				dayIndex = dateIndex + index;
+
+			if (index >= 5) className.push("weekend");
+			if (dayIndex === 19) className.push("today");
+			
+			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
+			htm.push(`<b${className}><i>${name.slice(0, 3)}</i><i>${dayIndex}</i></b>`);
+		});
+		htm.push(`</div>`);
+
+
+		// legends
+		htm.push(`<div class="day-legends">`);
+		htm.push(`<u class="col-hours"></u>`);
+		I18n.days.map((name, index) => {
+			let className = [],
+				dayIndex = dateIndex + index;
+
+			if (index >= 5) className.push("weekend");
+
+			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
+			htm.push(`<b${className}></b>`);
+		});
+		htm.push(`</div>`);
+
+
+		// days
+		htm.push(`<div class="days"><div class="days-wrapper">`);
+
+		// hours column
+		htm.push(`<div class="col-hours">`);
+		[...Array(23)].map((a, index) => {
+			let hour = (index + 1).toString().padStart("0", 1)
+			htm.push(`<b>${hour}:00</b>`);
+		});
+		htm.push(`</div>`);
+
+		// weekdays
+		I18n.days.map((name, index) => {
+			htm.push(`<div class="col-day"></div>`);
+		});
+
+		htm.push(`</div></div>`);
+
+
+		// closing tab
+		htm.push(`</div>`);
+
+		opt.el.html(htm.join(""));
+		// console.log(date.getWeek());
 	},
 	month(opt) {
 		let I18n = this.i18n,
@@ -60,6 +132,8 @@ const Render = {
 			htm.push(`<b${className}><i>${imDate}</i></b>`);
 		});
 		htm.push(`</div>`);
+
+		// closing tab
 		htm.push(`</div>`);
 		
 		if (opt.el) {

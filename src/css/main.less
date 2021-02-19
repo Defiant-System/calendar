@@ -318,7 +318,7 @@ content {
 				color: #666;
 				border-bottom: 1px solid #d5d5d5;
 
-				&.weekend i {
+				&.weekend i:nth-child(2) {
 					color: #999;
 				}
 
@@ -364,7 +364,12 @@ content {
 				position: relative;
 				border-left: 1px solid #d5d5d5;
 				border-bottom: 1px solid #ccc;
+				min-height: 23px;
 				padding: 1px;
+
+				&.weekend {
+					background: rgba(0,0,0,.025);
+				}
 
 				.event {
 					position: relative;
