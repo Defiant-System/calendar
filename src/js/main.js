@@ -1,4 +1,7 @@
 
+@import "./modules/draw.js";
+
+
 const calendar = {
 	init() {
 		// fast references
@@ -7,8 +10,15 @@ const calendar = {
 			daysWrapper: window.find(".days-wrapper"),
 		};
 
+		// initiate Draw object
+		Draw.init();
+
 		// temp
-		window.find(".toolbar-tool_").get(7).trigger("click");
+		let date = new Date(2021, 1),
+			el = window.find(".view-month");
+		Draw.month({ date, el });
+
+		window.find(".toolbar-tool_").get(6).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,
