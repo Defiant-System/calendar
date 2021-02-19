@@ -46,8 +46,8 @@ const Render = {
 			});
 			htm.push(`</div>`);
 
+			// day column
 			htm.push(`<div class="col-day"></div>`);
-
 		htm.push(`</div></div>`);
 
 		// closing tag
