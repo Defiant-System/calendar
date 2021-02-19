@@ -15,8 +15,8 @@ const Render = {
 			date = opt.date || now,
 			iYear = date.getFullYear(),
 			iMonth = date.getMonth(),
-			iDate = now.getDate(),
-			iDay = now.getDay() - 1,
+			iDate = date.getDate(),
+			iDay = date.getDay() - 1,
 			htm = [];
 		
 		// sunday check
