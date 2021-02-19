@@ -3,9 +3,9 @@
 		<Tool symbol="icon-calendar"/>
 
 		<Options>
-			<Tool symbol="icon-chevron-left"/>
-			<Tool name="Today"/>
-			<Tool symbol="icon-chevron-right"/>
+			<Tool symbol="icon-chevron-left" click="view-go" arg="-1"/>
+			<Tool name="Today" click="view-go" arg="now"/>
+			<Tool symbol="icon-chevron-right" click="view-go" arg="1"/>
 		</Options>
 	</Group>
 	<Group>
@@ -13,7 +13,7 @@
 			<Tool name="Day" click="switch-view" arg="day"/>
 			<Tool name="Week" click="switch-view" arg="week"/>
 			<Tool name="Month" click="switch-view" arg="month"/>
-			<Tool name="Year" click="switch-view" arg="year" state="active"/>
+			<Tool name="Year" click="switch-view" arg="year"/>
 		</Options>
 	</Group>
 	<Group width="31%">

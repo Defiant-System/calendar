@@ -1,5 +1,6 @@
 
-@import "./modules/draw.js";
+@import "./modules/render.js";
+@import "./modules/view.js";
 
 
 const calendar = {
@@ -7,18 +8,14 @@ const calendar = {
 		// fast references
 		this.els = {
 			content: window.find("content"),
-			daysWrapper: window.find(".days-wrapper"),
 		};
 
-		// initiate Draw object
-		Draw.init();
+		// initiate objects and view
+		Render.init();
+		View.init();
 
-		// temp
-		let date = new Date(2021, 1),
-			el = window.find(".view-month");
-		Draw.month({ date, el });
-
-		window.find(".toolbar-tool_").get(6).trigger("click");
+		// initiate first view
+		window.find(".toolbar-tool_").get(7).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,
@@ -32,13 +29,11 @@ const calendar = {
 				break;
 			// custom events
 			case "switch-view":
-				Self.els.content.prop({ "className": "show-"+ event.arg });
-
-				// temp
-				if (["week", "day"].includes(event.arg)) {
-					Self.els.daysWrapper.scrollTop(300);
-				}
+				View.switch(event.arg);
 				return true;
+			case "view-go":
+				View.go(event.arg);
+				break;
 		}
 	}
 };
