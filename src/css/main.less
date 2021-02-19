@@ -46,21 +46,32 @@ content {
 
 	&.show-year {
 		.view-week,
-		.view-month {
+		.view-month,
+		.view-day {
 			display: none;
 		}
 	}
 
 	&.show-month {
 		.view-week,
-		.view-year {
+		.view-year,
+		.view-day {
 			display: none;
 		}
 	}
 
 	&.show-week {
 		.view-year,
-		.view-month {
+		.view-month,
+		.view-day {
+			display: none;
+		}
+	}
+
+	&.show-day {
+		.view-year,
+		.view-month,
+		.view-week {
 			display: none;
 		}
 	}
@@ -71,6 +82,11 @@ content {
 		font-family: "Jost", sans-serif;
 		text-align: center;
 		margin-bottom: 11px;
+
+		i {
+			font-style: normal;
+			color: #e66;
+		}
 
 		b {
 			font-weight: 500;
@@ -84,6 +100,188 @@ content {
 		font-family: "Jost", sans-serif;
 		padding: 0 11px;
 		margin-bottom: 5px;
+	}
+}
+
+.days-wrapper{
+	.col-hours {
+		width: 59px;
+		padding: 43px 9px 0 0;
+		text-align: right;
+		font-family: "Jost", sans-serif;
+		font-size: 11px;
+		line-height: 0;
+		color: #aaa;
+
+		b {
+			display: block;
+			font-weight: 300;
+			height: 44px;
+
+			&.work-hours {
+				color: #222;
+			}
+		}
+	}
+
+	.col-day {
+		background-image: linear-gradient(#ddd 1px, transparent 1px), linear-gradient(transparent 22px, #e0e0e0 23px, transparent 23px);
+		background-size: 100% 44px, 100% 44px;
+		background-position: 0 -1px;
+		border-left: 1px solid #ddd;
+		position: relative;
+		flex: 1;
+
+		&.col-weekend { background-color: rgba(0,0,0,.0125); }
+
+		&:nth-child(2) .event { top: 509px; height: 131px; }
+		&:nth-child(3) .event { top: 377px; height: 87px; }
+		&:nth-child(4) .event { top: 531px; height: 65px; }
+		&:nth-child(5) .event { top: 656px; height: 87px; }
+		&:nth-child(6) .event { top: 436px; height: 65px; }
+		&:nth-child(7) .event { top: 480px; height: 87px; }
+		&:nth-child(8) .event { top: 421px; height: 65px; }
+	}
+}
+
+.event {
+	background: #c8e6fc;
+	box-shadow: 0 4px 5px -2px rgba(0,0,0,.15);
+	border-left: 3px solid darken(#c8e6fc, 23%);
+	border-radius: 4px;
+	padding: 5px 4px;
+	position: absolute;
+	left: 0;
+	right: 1px;
+
+	span {
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: darken(#c8e6fc, 53%);
+
+		&.event-time {
+			font-weight: 700;
+			padding-bottom: 3px;
+		}
+	}
+
+	&.green {
+		background: #c0f6b2;
+		border-left-color: darken(#c0f6b2, 37%);
+		color: darken(#c0f6b2, 37%);
+
+		span { color: darken(#c0f6b2, 59%); }
+	}
+
+	&.orange {
+		background: #fbaf75;
+		border-left-color: darken(#fbaf75, 37%);
+		color: darken(#fbaf75, 37%);
+
+		span { color: darken(#fbaf75, 53%); }
+	}
+
+	&.yellow {
+		background: #ffd366;
+		border-left-color: darken(#ffd366, 37%);
+		color: darken(#ffd366, 37%);
+
+		span { color: darken(#ffd366, 53%); }
+	}
+
+	&.purple {
+		background: #eccafc;
+		border-left-color: darken(#eccafc, 21%);
+		color: darken(#eccafc, 37%);
+
+		span { color: darken(#eccafc, 59%); }
+	}
+
+	&.red {
+		background: #ffa0a0;
+		border-left-color: darken(#ffa0a0, 21%);
+		color: darken(#ffa0a0, 37%);
+
+		span { color: darken(#ffa0a0, 59%); }
+	}
+
+	&.cyan {
+		background: #aee;
+		border-left-color: darken(#aee, 21%);
+		color: darken(#aee, 37%);
+
+		span { color: darken(#aee, 59%); }
+	}
+}
+
+
+.view-day {
+	display: flex;
+    flex-direction: column;
+    height: 100%;
+	padding: 17px 0 0;
+
+	h2 {
+		b:after {
+			content: ",";
+		}
+	}
+
+	u.col-hours {
+		flex: initial;
+		width: 59px;
+	}
+
+	.day {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+
+	.day-legends {
+		display: flex;
+
+		u.col-hours {
+			border-bottom: 1px solid #ccc;
+		}
+
+		b {
+			flex: 1;
+			position: relative;
+			border-top: 1px solid #d5d5d5;
+			border-left: 1px solid #d5d5d5;
+			border-bottom: 1px solid #ccc;
+			padding: 1px;
+
+			.event {
+				position: relative;
+				border-left: 0;
+				box-shadow: 0 0 0;
+				padding: 4px 5px;
+			}
+		}
+	}
+
+	.day {
+		flex: 1;
+		position: relative;
+		
+		.days-wrapper {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			overflow-x: hidden;
+			overflow-y: auto;
+			display: flex;
+
+			> div {
+				height: 1055px;
+			}
+		}
 	}
 }
 
@@ -153,7 +351,6 @@ content {
 
 		.day-legends {
 			display: flex;
-			// height: 24px;
 
 			u.col-hours {
 				border-bottom: 1px solid #ccc;
@@ -192,113 +389,6 @@ content {
 				> div {
 					height: 1055px;
 				}
-
-				.col-hours {
-					width: 59px;
-					padding: 43px 9px 0 0;
-					text-align: right;
-					font-family: "Jost", sans-serif;
-					font-size: 11px;
-					line-height: 0;
-					color: #888;
-
-					b {
-						display: block;
-						font-weight: 300;
-						height: 44px;
-					}
-				}
-
-				.col-day {
-					background-image: linear-gradient(#ddd 1px, transparent 1px), linear-gradient(transparent 22px, #e0e0e0 23px, transparent 23px);
-					background-size: 100% 44px, 100% 44px;
-					background-position: 0 -1px;
-					border-left: 1px solid #ddd;
-					position: relative;
-					flex: 1;
-
-					&.col-weekend { background-color: rgba(0,0,0,.0125); }
-
-					&:nth-child(2) .event { top: 309px; height: 131px; }
-					&:nth-child(3) .event { top: 177px; height: 87px; }
-					&:nth-child(4) .event { top: 331px; height: 65px; }
-					&:nth-child(5) .event { top: 456px; height: 87px; }
-					&:nth-child(6) .event { top: 236px; height: 65px; }
-					&:nth-child(7) .event { top: 280px; height: 87px; }
-					&:nth-child(8) .event { top: 221px; height: 65px; }
-				}
-			}
-		}
-
-		.event {
-			background: #c8e6fc;
-			box-shadow: 0 4px 5px -2px rgba(0,0,0,.15);
-			border-left: 3px solid darken(#c8e6fc, 23%);
-			border-radius: 4px;
-			padding: 5px 4px;
-			position: absolute;
-			left: 0;
-			right: 1px;
-
-			span {
-				display: block;
-				white-space: nowrap;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				color: darken(#c8e6fc, 53%);
-
-				&.event-time {
-					font-weight: 700;
-					padding-bottom: 3px;
-				}
-			}
-
-			&.green {
-				background: #c0f6b2;
-				border-left-color: darken(#c0f6b2, 37%);
-				color: darken(#c0f6b2, 37%);
-
-				span { color: darken(#c0f6b2, 59%); }
-			}
-
-			&.orange {
-				background: #fbaf75;
-				border-left-color: darken(#fbaf75, 37%);
-				color: darken(#fbaf75, 37%);
-
-				span { color: darken(#fbaf75, 53%); }
-			}
-
-			&.yellow {
-				background: #ffd366;
-				border-left-color: darken(#ffd366, 37%);
-				color: darken(#ffd366, 37%);
-
-				span { color: darken(#ffd366, 53%); }
-			}
-
-			&.purple {
-				background: #eccafc;
-				border-left-color: darken(#eccafc, 21%);
-				color: darken(#eccafc, 37%);
-
-				span { color: darken(#eccafc, 59%); }
-			}
-
-			&.red {
-				background: #ffa0a0;
-				border-left-color: darken(#ffa0a0, 21%);
-				color: darken(#ffa0a0, 37%);
-
-				span { color: darken(#ffa0a0, 59%); }
-			}
-
-			&.cyan {
-				background: #aee;
-				border-left-color: darken(#aee, 21%);
-				color: darken(#aee, 37%);
-
-				span { color: darken(#aee, 59%); }
 			}
 		}
 	}
@@ -450,7 +540,7 @@ content {
 					color: #c2c2c2;
 					font-weight: 300;
 				}
-				
+
 				&.today {
 					position: relative;
 					color: #fff;

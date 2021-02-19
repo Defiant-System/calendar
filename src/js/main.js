@@ -8,7 +8,7 @@ const calendar = {
 		};
 
 		// temp
-		window.find(".toolbar-tool_").get(7).trigger("click");
+		window.find(".toolbar-tool_").get(4).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,
@@ -25,8 +25,8 @@ const calendar = {
 				Self.els.content.prop({ "className": "show-"+ event.arg });
 
 				// temp
-				if (event.arg === "week") {
-					Self.els.daysWrapper.scrollTop(100);
+				if (["week", "day"].includes(event.arg)) {
+					Self.els.daysWrapper.scrollTop(295);
 				}
 				return true;
 		}
