@@ -21,11 +21,6 @@ const View = {
 		this.els.content.prop({ "className": "show-"+ type });
 		this.active = type;
 		this.go();
-
-		// temp
-		if (["week", "day"].includes(type)) {
-			this.els.daysWrapper.scrollTop(300);
-		}
 	},
 	go(to) {
 		let date = this.date,

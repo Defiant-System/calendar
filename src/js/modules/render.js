@@ -8,87 +8,144 @@ const Render = {
 			hours: "24h", // "am/pm",
 		};
 	},
-	day() {
+	day(opt) {
+		// return;
+		let I18n = this.i18n,
+			now = new Date,
+			date = opt.date || now,
+			iYear = date.getFullYear(),
+			iMonth = date.getMonth(),
+			iDate = now.getDate(),
+			iDay = now.getDay() - 1,
+			htm = [];
 		
+		// sunday check
+		if (iDay < 0) iDay = 6;
+
+		// title: day
+		htm.push(`<h2><i>${I18n.days[iDay]}</i> <b>${I18n.months[iMonth]} ${iDate}</b> ${iYear}</h2>`);
+		htm.push(`<div class="day">`);
+
+		// legend
+		htm.push(`<div class="day-legends">`);
+		htm.push(`<u class="col-hours"></u>`);
+		htm.push(`<b></b>`);
+		htm.push(`</div>`);
+
+		htm.push(`<div class="day"><div class="days-wrapper">`);
+			// hours column
+			htm.push(`<div class="col-hours">`);
+			[...Array(23)].map((a, index) => {
+				let className = [],
+					hour = (index + 1).toString().padStart("0", 1);
+				// office hours
+				if (index > 6 && index < 18) className.push("work-hours");
+
+				className = (className.length) ? ` class="${className.join(" ")}"` : ``;
+				htm.push(`<b${className}>${hour}:00</b>`);
+			});
+			htm.push(`</div>`);
+
+			htm.push(`<div class="col-day"></div>`);
+
+		htm.push(`</div></div>`);
+
+		// closing tag
+		htm.push(`</div>`);
+
+		opt.el.html(htm.join(""))
+			.find(".days-wrapper").scrollTop(320);
 	},
 	week(opt) {
 		// return;
 		let I18n = this.i18n,
 			now = new Date,
+			nowYear = now.getFullYear(),
+			nowMonth = now.getMonth(),
+			nowDate = now.getDate(),
 			date = opt.date || now,
-			htm = [],
-			dateIndex = 15;
+			htm = [];
 
 		// reset date to first of the week
-		date.setDate(dateIndex);
+		date.setWeek(date.getWeek());
 
-		let iYear = date.getFullYear(),
+		let dateIndex = date.getDate(),
+			iYear = date.getFullYear(),
 			iMonth = date.getMonth(),
-			iDay = date.getDay();
+			iDay = now.getDay();
 		
 		// title: week
 		htm.push(`<h2><b>${I18n.months[iMonth]}</b> ${iYear}</h2>`);
 		htm.push(`<div class="week">`);
 
-		// weekdays
-		htm.push(`<div class="weekdays">`);
-		htm.push(`<u class="col-hours"></u>`);
-		I18n.days.map((name, index) => {
-			let className = [],
-				dayIndex = dateIndex + index;
+			// row: weekdays
+			htm.push(`<div class="weekdays">`);
+			htm.push(`<u class="col-hours"></u>`);
+			I18n.days.map((name, index) => {
+				let wDate = new Date(iYear, iMonth, dateIndex + index),
+					iwDate = wDate.getDate(),
+					className = [];
 
-			if (index >= 5) className.push("weekend");
-			if (dayIndex === 19) className.push("today");
-			
-			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
-			htm.push(`<b${className}><i>${name.slice(0, 3)}</i><i>${dayIndex}</i></b>`);
-		});
+				if (index >= 5) className.push("weekend");
+				if (wDate.getFullYear() === nowYear &&
+					wDate.getMonth() === nowMonth &&
+					wDate.getDate() === nowDate) className.push("today");
+				
+				className = (className.length) ? ` class="${className.join(" ")}"` : ``;
+				htm.push(`<b${className}><i>${name.slice(0, 3)}</i><i>${iwDate}</i></b>`);
+			});
+			htm.push(`</div>`);
+
+			// row: legends
+			htm.push(`<div class="day-legends">`);
+			htm.push(`<u class="col-hours"></u>`);
+			I18n.days.map((name, index) => {
+				let className = [],
+					dayIndex = dateIndex + index;
+
+				if (index >= 5) className.push("weekend");
+
+				className = (className.length) ? ` class="${className.join(" ")}"` : ``;
+				htm.push(`<b${className}></b>`);
+			});
+			htm.push(`</div>`);
+
+			// row: days
+			htm.push(`<div class="days"><div class="days-wrapper">`);
+				// hours column
+				htm.push(`<div class="col-hours">`);
+				[...Array(23)].map((a, index) => {
+					let className = [],
+						hour = (index + 1).toString().padStart("0", 1)
+					// office hours
+					if (index > 6 && index < 18) className.push("work-hours");
+
+					className = (className.length) ? ` class="${className.join(" ")}"` : ``;
+					htm.push(`<b${className}>${hour}:00</b>`);
+				});
+				htm.push(`</div>`);
+
+				// weekdays
+				I18n.days.map((name, index) => {
+					let className = ["col-day"];
+					if (index >= 5) className.push("col-weekend");
+
+					htm.push(`<div class="${className.join(" ")}"></div>`);
+				});
+			htm.push(`</div></div>`);
+
+		// closing tag
 		htm.push(`</div>`);
 
-
-		// legends
-		htm.push(`<div class="day-legends">`);
-		htm.push(`<u class="col-hours"></u>`);
-		I18n.days.map((name, index) => {
-			let className = [],
-				dayIndex = dateIndex + index;
-
-			if (index >= 5) className.push("weekend");
-
-			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
-			htm.push(`<b${className}></b>`);
-		});
-		htm.push(`</div>`);
-
-
-		// days
-		htm.push(`<div class="days"><div class="days-wrapper">`);
-
-		// hours column
-		htm.push(`<div class="col-hours">`);
-		[...Array(23)].map((a, index) => {
-			let hour = (index + 1).toString().padStart("0", 1)
-			htm.push(`<b>${hour}:00</b>`);
-		});
-		htm.push(`</div>`);
-
-		// weekdays
-		I18n.days.map((name, index) => {
-			htm.push(`<div class="col-day"></div>`);
-		});
-
-		htm.push(`</div></div>`);
-
-
-		// closing tab
-		htm.push(`</div>`);
-
-		opt.el.html(htm.join(""));
-		// console.log(date.getWeek());
+		opt.el.html(htm.join(""))
+			.find(".days-wrapper").scrollTop(320);
 	},
 	month(opt) {
 		let I18n = this.i18n,
 			now = new Date,
+			nowYear = now.getFullYear(),
+			nowMonth = now.getMonth(),
+			nowDate = now.getDate(),
 			date = opt.date || now,
 			weekDays = opt.weekDays || 3,
 			htm = [];
@@ -124,16 +181,16 @@ const Render = {
 
 			if ([0,6].includes(mDate.getDay())) className.push("weekend");
 			if (mDate.getMonth() !== iMonth) className.push("non-day");
-			if (mDate.getFullYear() === now.getFullYear() &&
-				mDate.getMonth() === now.getMonth() &&
-				mDate.getDate() === now.getDate()) className.push("today");
+			if (mDate.getFullYear() === nowYear &&
+				mDate.getMonth() === nowMonth &&
+				mDate.getDate() === nowDate) className.push("today");
 
 			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
 			htm.push(`<b${className}><i>${imDate}</i></b>`);
 		});
 		htm.push(`</div>`);
 
-		// closing tab
+		// closing tag
 		htm.push(`</div>`);
 		
 		if (opt.el) {
