@@ -18,6 +18,7 @@ const Render = {
 		let I18n = this.i18n,
 			now = new Date,
 			date = opt.date || now,
+			weekDays = opt.weekDays || 3,
 			htm = [];
 		
 		// reset date to first of the month
@@ -38,7 +39,7 @@ const Render = {
 		htm.push(`<div class="weekdays">`);
 		I18n.days.map((name, index) => {
 			let className = index >= 5 ? ` class="weekend"` : ``;
-			htm.push(`<b${className}>${name.slice(0,3)}</b>`);
+			htm.push(`<b${className}>${name.slice(0, weekDays)}</b>`);
 		});
 		htm.push(`</div>`);
 
@@ -84,7 +85,7 @@ const Render = {
 
 		[...Array(12)].map((a, index) => {
 			let mDate = new Date(iYear, iMonth + index),
-				mHtm = this.month({ date: mDate });
+				mHtm = this.month({ date: mDate, weekDays: 1 });
 			// remove title
 			mHtm.shift();
 			// add to rendered html
