@@ -43,7 +43,7 @@ const Render = {
 		});
 		htm.push(`</div>`);
 
-		// days
+		// iterate 42 days
 		htm.push(`<div class="days">`);
 		[...Array(42)].map((a, index) => {
 			let mDate = new Date(iYear, iMonth, index - iDay + 2),
@@ -60,7 +60,6 @@ const Render = {
 			htm.push(`<b${className}><i>${imDate}</i></b>`);
 		});
 		htm.push(`</div>`);
-
 		htm.push(`</div>`);
 		
 		if (opt.el) {
@@ -83,6 +82,7 @@ const Render = {
 		let iYear = date.getFullYear(),
 			iMonth = date.getMonth();
 
+		// iterate 12 months
 		[...Array(12)].map((a, index) => {
 			let mDate = new Date(iYear, iMonth + index),
 				mHtm = this.month({ date: mDate, weekDays: 1 });
@@ -93,5 +93,8 @@ const Render = {
 		});
 
 		opt.el.html(htm.join(""));
+
+		// reset date to today
+		date.setMonth(now.getMonth());
 	}
 };
