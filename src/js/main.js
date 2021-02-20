@@ -17,7 +17,7 @@ const calendar = {
 		Events.init();
 
 		// initiate first view
-		window.find(".toolbar-tool_").get(6).trigger("click");
+		window.find(".toolbar-tool_").get(4).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,

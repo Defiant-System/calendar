@@ -17,6 +17,19 @@ const Events = {
 			el;
 		// console.log(opt);
 		switch (event.type) {
+			case "populate-year":
+				// iterate event nodes
+				Nodes.map(node => {
+					let starts = +node.getAttribute("starts"),
+						dateStart = new Date(starts),
+						dMonth = dateStart.getFullYear() +"-"+ dateStart.getMonth(),
+						dDate = dateStart.getDate(),
+						color = node.getAttribute("calId");
+					// add class to day element
+					Self.els.year.find(`.month[data-date="${dMonth}"] b:not(.non-day) i:contains("${dDate}")`)
+						.map(el => +el.innerHTML === +dDate ? $(el.parentNode).addClass(`has-event ${color}`) : null);
+				});
+				break;
 			case "populate-month":
 				// assemble elements info
 				Self.els.month.find(`.days b:not(.non-day)`).map(day => {
@@ -79,6 +92,9 @@ const Events = {
 						pipe[key].el.html(htm);
 					}
 				});
+				break;
+			case "populate-day":
+				console.log(123);
 				break;
 		}
 	}
