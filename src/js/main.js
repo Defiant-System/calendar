@@ -1,4 +1,5 @@
 
+@import "./modules/events.js";
 @import "./modules/render.js";
 @import "./modules/view.js";
 
@@ -11,8 +12,9 @@ const calendar = {
 		};
 
 		// initiate objects and view
-		Render.init();
 		View.init();
+		Render.init();
+		Events.init();
 
 		// initiate first view
 		window.find(".toolbar-tool_").get(5).trigger("click");
@@ -32,6 +34,11 @@ const calendar = {
 			// custom events
 			case "switch-view":
 				View.switch(event.arg);
+
+				// temp
+				let xNodes = window.bluePrint.selectNodes(`//Events/i`);
+				Events.dispatch({ type: "populate-week", xNodes });
+				
 				return true;
 			case "view-go":
 				View.go(event.arg);

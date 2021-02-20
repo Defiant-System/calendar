@@ -27,3 +27,7 @@
 	<i date="2021-12-26" name="Annandag jul" />
 	<i date="2021-12-31" name="Nyårsafton" />
 </Holidays>
+
+<Events>
+	<i calId="purple" starts="1613473200000"  ends="1613480400000" title="Example event"/>
+</Events>

@@ -7,8 +7,8 @@ const Render = {
 		this.i18n = {
 			months: ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 			days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-			weekStartsWith: 1, // 5, 6
-			hours: "24h", // "am/pm",
+			weekStartsWith: 1, // 1, 5, 6
+			hours: "24h", // "24h", "am/pm"
 		};
 	},
 	hours(htm) {
@@ -23,7 +23,7 @@ const Render = {
 
 			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
 			hour = I18n.hours === "24h"
-					? hour.toString().padStart("0", 1) +":00"
+					? hour.toString().padStart(2, "0") +":00"
 					: (hour % 12 || 12) + ((hour < 12) ? " AM" : " PM");
 
 			htm.push(`<b${className}>${hour}</b>`);
@@ -130,8 +130,7 @@ const Render = {
 			htm.push(`<div class="day-legends">`);
 			htm.push(`<u class="col-hours"></u>`);
 			days.map((name, index) => {
-				let className = [],
-					dayIndex = dateIndex + index;
+				let className = [];
 
 				if (toStart === 1 && index >= 5) className.push("weekend");
 				if (toStart === -1 && (index >= 6 || index === 0)) className.push("weekend");
@@ -149,12 +148,14 @@ const Render = {
 
 				// weekdays
 				days.map((name, index) => {
-					let className = ["col-day"];
+					let wDate = new Date(iYear, iMonth, dateIndex + index + ((toStart < 0) ? 1 : 0)),
+						iwDate = wDate.getDate(),
+						className = ["col-day"];
 					if (toStart === 1 && index >= 5) className.push("col-weekend");
 					if (toStart === -1 && (index >= 6 || index === 0)) className.push("col-weekend");
 					if (toStart === -2 && index <= 1) className.push("col-weekend");
 
-					htm.push(`<div class="${className.join(" ")}"></div>`);
+					htm.push(`<div class="${className.join(" ")}" data-date="${iwDate}"></div>`);
 				});
 			htm.push(`</div></div>`);
 
