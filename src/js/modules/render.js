@@ -1,10 +1,13 @@
 
 const Render = {
 	init() {
+		this.getSettings();
+	},
+	getSettings() {
 		this.i18n = {
 			months: ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 			days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-			weekStartsWith: 6, // 1
+			weekStartsWith: 1, // 5, 6
 			hours: "24h", // "am/pm",
 		};
 	},
@@ -66,18 +69,33 @@ const Render = {
 	week(opt) {
 		let I18n = this.i18n,
 			now = new Date,
+			days = [...I18n.days],
 			nowYear = now.getFullYear(),
 			nowMonth = now.getMonth(),
 			nowDate = now.getDate(),
 			date = opt.date || now,
 			dDay = date.getDay(),
-			htm = [];
+			htm = [],
+			toStart = 1;
+		
+		switch (I18n.weekStartsWith) {
+			case 5:
+				toStart = days.splice(5, 2);
+				days = toStart.concat(days);
+				toStart = -2;
+				break;
+			case 6:
+				toStart = days.splice(6, 1);
+				days = toStart.concat(days);
+				toStart = -1;
+				break;
+		}
 
 		// sunday check
 		if (dDay === 0) dDay = 7;
 
 		// reset date to first of the week
-		date.setDate(date.getDate() - dDay + 1);
+		date.setDate(date.getDate() - dDay + toStart);
 
 		let dateIndex = date.getDate(),
 			iYear = date.getFullYear(),
@@ -91,12 +109,14 @@ const Render = {
 			// row: weekdays
 			htm.push(`<div class="weekdays">`);
 			htm.push(`<u class="col-hours"></u>`);
-			I18n.days.map((name, index) => {
-				let wDate = new Date(iYear, iMonth, dateIndex + index),
+			days.map((name, index) => {
+				let wDate = new Date(iYear, iMonth, dateIndex + index + ((toStart < 0) ? 1 : 0)),
 					iwDate = wDate.getDate(),
 					className = [];
 
-				if (index >= 5) className.push("weekend");
+				if (toStart === 1 && index >= 5) className.push("weekend");
+				if (toStart === -1 && (index >= 6 || index === 0)) className.push("weekend");
+				if (toStart === -2 && index <= 1) className.push("weekend");
 				if (wDate.getFullYear() === nowYear &&
 					wDate.getMonth() === nowMonth &&
 					wDate.getDate() === nowDate) className.push("today");
@@ -109,11 +129,13 @@ const Render = {
 			// row: legends
 			htm.push(`<div class="day-legends">`);
 			htm.push(`<u class="col-hours"></u>`);
-			I18n.days.map((name, index) => {
+			days.map((name, index) => {
 				let className = [],
 					dayIndex = dateIndex + index;
 
-				if (index >= 5) className.push("weekend");
+				if (toStart === 1 && index >= 5) className.push("weekend");
+				if (toStart === -1 && (index >= 6 || index === 0)) className.push("weekend");
+				if (toStart === -2 && index <= 1) className.push("weekend");
 
 				className = (className.length) ? ` class="${className.join(" ")}"` : ``;
 				htm.push(`<b${className}></b>`);
@@ -126,9 +148,11 @@ const Render = {
 				this.hours(htm);
 
 				// weekdays
-				I18n.days.map((name, index) => {
+				days.map((name, index) => {
 					let className = ["col-day"];
-					if (index >= 5) className.push("col-weekend");
+					if (toStart === 1 && index >= 5) className.push("col-weekend");
+					if (toStart === -1 && (index >= 6 || index === 0)) className.push("col-weekend");
+					if (toStart === -2 && index <= 1) className.push("col-weekend");
 
 					htm.push(`<div class="${className.join(" ")}"></div>`);
 				});
@@ -143,13 +167,28 @@ const Render = {
 	month(opt) {
 		let I18n = this.i18n,
 			now = new Date,
+			days = [...I18n.days],
 			nowYear = now.getFullYear(),
 			nowMonth = now.getMonth(),
 			nowDate = now.getDate(),
 			date = opt.date || now,
 			weekDays = opt.weekDays || 3,
-			htm = [];
+			htm = [],
+			toStart = 1;
 		
+		switch (I18n.weekStartsWith) {
+			case 5:
+				toStart = days.splice(5, 2);
+				days = toStart.concat(days);
+				toStart = -1;
+				break;
+			case 6:
+				toStart = days.splice(6, 1);
+				days = toStart.concat(days);
+				toStart = 0;
+				break;
+		}
+
 		// reset date to first of the month
 		date.setDate(1);
 
@@ -166,7 +205,7 @@ const Render = {
 
 		// weekdays
 		htm.push(`<div class="weekdays">`);
-		I18n.days.map((name, index) => {
+		days.map((name, index) => {
 			let className = index >= 5 ? ` class="weekend"` : ``;
 			htm.push(`<b${className}>${name.slice(0, weekDays)}</b>`);
 		});
@@ -175,7 +214,7 @@ const Render = {
 		// iterate 42 days
 		htm.push(`<div class="days">`);
 		[...Array(42)].map((a, index) => {
-			let mDate = new Date(iYear, iMonth, index - iDay + 2),
+			let mDate = new Date(iYear, iMonth, index - iDay + toStart + 1),
 				imDate = mDate.getDate(),
 				className = [];
 
