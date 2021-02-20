@@ -11,13 +11,21 @@ const calendar = {
 			content: window.find("content"),
 		};
 
+		// events data storage; temp in bluePrint
+		// TODO: move data to storage files
+		this.data = window.bluePrint;
+
 		// initiate objects and view
 		View.init();
 		Render.init();
 		Events.init();
 
+		// parse holidays
+		let xNodes = window.bluePrint.selectNodes(`//Holidays/*`);
+		Events.dispatch({ type: "parse-holidays", xNodes });
+
 		// initiate first view
-		window.find(".toolbar-tool_").get(4).trigger("click");
+		window.find(".toolbar-tool_").get(6).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,
@@ -35,9 +43,12 @@ const calendar = {
 			case "switch-view":
 				View.switch(event.arg);
 
-				// temp
-				let xNodes = window.bluePrint.selectNodes(`//Events/i[@starts="1613818800000"]`);
-				Events.dispatch({ type: `populate-${event.arg}`, xNodes });
+				// signal events to render date range
+				Events.dispatch({
+					type: `populate-${event.arg}`,
+					starts: View.rangeStart,
+					ends: View.rangeEnd,
+				});
 
 				return true;
 			case "view-go":

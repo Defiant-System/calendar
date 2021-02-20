@@ -1,39 +1,42 @@
 
 <Holidays>
-	<i date="2021-01-01" name="Nyårsdagen" />
-	<i date="2021-01-06" name="Trettondedag jul" />
-	<i date="2021-02-14" name="Alla hjärtans dag" />
-	<i date="2021-03-28" name="Sommartid" />
-	<i date="2021-04-01" name="Skärtorsdagen" />
-	<i date="2021-04-01" name="1 april" />
-	<i date="2021-04-02" name="Långfredagen" />
-	<i date="2021-04-04" name="Påsk" />
-	<i date="2021-04-05" name="Annandag påsk" />
-	<i date="2021-05-01" name="Första maj" />
-	<i date="2021-05-13" name="Kristi Himmelsfärdsdag" />
-	<i date="2021-05-23" name="Pingstdagen" />
-	<i date="2021-05-24" name="Annandag pingst" />
-	<i date="2021-05-30" name="Mors dag" />
-	<i date="2021-07-06" name="Sveriges nationaldag" />
-	<i date="2021-07-25" name="Midsommarafton" />
-	<i date="2021-07-26" name="Midsommardagen" />
-	<i date="2021-10-31" name="Halloween" />
-	<i date="2021-10-31" name="Vintertid" />
-	<i date="2021-11-06" name="Alla helgons dag" />
-	<i date="2021-11-14" name="Fars dag" />
-	<i date="2021-12-13" name="Lucia" />
-	<i date="2021-12-24" name="Julafton" />
-	<i date="2021-12-25" name="Juldagen" />
-	<i date="2021-12-26" name="Annandag jul" />
-	<i date="2021-12-31" name="Nyårsafton" />
+	<i date="2021-01-01" title="Nyårsdagen" />
+	<i date="2021-01-06" title="Trettondedag jul" />
+	<i date="2021-02-14" title="Alla hjärtans dag" />
+	<i date="2021-02-16" title="Fettisdagen" />
+	<i date="2021-03-28" title="Sommartid" />
+	<i date="2021-04-01" title="Skärtorsdagen" />
+	<i date="2021-04-01" title="1 april" />
+	<i date="2021-04-02" title="Långfredagen" />
+	<i date="2021-04-04" title="Påsk" />
+	<i date="2021-04-05" title="Annandag påsk" />
+	<i date="2021-05-01" title="Första maj" />
+	<i date="2021-05-13" title="Kristi Himmelsfärdsdag" />
+	<i date="2021-05-23" title="Pingstdagen" />
+	<i date="2021-05-24" title="Annandag pingst" />
+	<i date="2021-05-30" title="Mors dag" />
+	<i date="2021-07-06" title="Sveriges nationaldag" />
+	<i date="2021-07-25" title="Midsommarafton" />
+	<i date="2021-07-26" title="Midsommardagen" />
+	<i date="2021-10-31" title="Halloween" />
+	<i date="2021-10-31" title="Vintertid" />
+	<i date="2021-11-06" title="Alla helgons dag" />
+	<i date="2021-11-14" title="Fars dag" />
+	<i date="2021-12-13" title="Lucia" />
+	<i date="2021-12-24" title="Julafton" />
+	<i date="2021-12-25" title="Juldagen" />
+	<i date="2021-12-26" title="Annandag jul" />
+	<i date="2021-12-31" title="Nyårsafton" />
 </Holidays>
 
 <Events>
-	<i calId="cyan" starts="1613381400000"  ends="1613386800000" title="Another event"/>
-	<i calId="yellow" starts="1613473200000"  ends="1613480400000" title="Example event"/>
-	<i calId="green" starts="1613548800000"  ends="1613554200000" title="Another very long event title"/>
-	<i calId="purple" starts="1613642400000"  ends="1613660400000" title="Another event"/>
-	<i calId="blue" starts="1613725200000"  ends="1613728800000" title="Another event"/>
-	<i calId="orange" starts="1613736000000"  ends="1613745000000" title="Another event"/>
-	<i calId="blue" starts="1613818800000"  ends="1613829600000" title="Example event"/>
+	<i calId="purple" starts="1612339200000" ends="1612350000000" title="Birthday"/>
+
+	<i calId="cyan" starts="1613381400000" ends="1613386800000" title="Another event"/>
+	<i calId="yellow" starts="1613473200000" ends="1613480400000" title="Example event"/>
+	<i calId="green" starts="1613548800000" ends="1613554200000" title="Another very long event title"/>
+	<i calId="purple" starts="1613642400000" ends="1613660400000" title="Another event"/>
+	<i calId="blue" starts="1613725200000" ends="1613728800000" title="Another event"/>
+	<i calId="orange" starts="1613736000000" ends="1613745000000" title="Another event"/>
+	<i calId="blue" starts="1613818800000" ends="1613829600000" title="Example event"/>
 </Events>

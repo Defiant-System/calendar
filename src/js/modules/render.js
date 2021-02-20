@@ -50,7 +50,7 @@ const Render = {
 			// legend
 			htm.push(`<div class="day-legends">`);
 			htm.push(`<u class="col-hours"></u>`);
-			htm.push(`<b></b>`);
+			htm.push(`<b data-date="${iDate}"></b>`);
 			htm.push(`</div>`);
 			// day wrapper
 			htm.push(`<div class="day"><div class="days-wrapper">`);
@@ -130,14 +130,16 @@ const Render = {
 			htm.push(`<div class="day-legends">`);
 			htm.push(`<u class="col-hours"></u>`);
 			days.map((name, index) => {
-				let className = [];
+				let wDate = new Date(iYear, iMonth, dateIndex + index + ((toStart < 0) ? 1 : 0)),
+					iwDate = wDate.getDate(),
+					className = [];
 
 				if (toStart === 1 && index >= 5) className.push("weekend");
 				if (toStart === -1 && (index >= 6 || index === 0)) className.push("weekend");
 				if (toStart === -2 && index <= 1) className.push("weekend");
 
 				className = (className.length) ? ` class="${className.join(" ")}"` : ``;
-				htm.push(`<b${className}></b>`);
+				htm.push(`<b${className} data-date="${iwDate}"></b>`);
 			});
 			htm.push(`</div>`);
 

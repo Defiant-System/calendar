@@ -55,6 +55,25 @@ const View = {
 				if (to) date = to;
 		}
 
+		switch (type) {
+			case "year":
+				this.rangeStart = 1609455600000;
+				this.rangeEnd = 1640991600000;
+				break;
+			case "month":
+				this.rangeStart = 1612134000000;
+				this.rangeEnd = 1614553200000;
+				break;
+			case "week":
+				this.rangeStart = 1613381400000;
+				this.rangeEnd = 1613818800000;
+				break;
+			case "day":
+				this.rangeStart = 1613775600000;
+				this.rangeEnd = 1613862000000;
+				break;
+		}
+
 		Render[type]({ date, el: this.els[this.active] });
 	}
 };
