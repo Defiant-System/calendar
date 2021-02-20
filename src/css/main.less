@@ -1,4 +1,5 @@
 
+@gray   : #ddd;
 @blue   : #c8e6fc;
 @green  : #c0f6b2;
 @orange : #fbaf75;
@@ -138,6 +139,14 @@ content {
 			padding-bottom: 3px;
 			color: darken(@blue, 53%);
 		}
+	}
+
+	&.gray {
+		background: @gray;
+		border-left-color: darken(@gray, 37%);
+		color: darken(@gray, 47%);
+
+		span.event-title { color: darken(@gray, 59%); }
 	}
 
 	&.green {
@@ -497,6 +506,7 @@ content {
 							border-radius: 50%;
 						}
 
+						&.gray:before   { background: darken(@gray, 13%); }
 						&.blue:before   { background: darken(@blue, 13%); }
 						&.green:before  { background: darken(@green, 29%); }
 						&.orange:before { background: darken(@orange, 11%); }
@@ -584,6 +594,11 @@ content {
 					&.blue:not(.today)  {
 						color: darken(@blue, 37%);
 						&:before { background: darken(@blue, 3%); }
+					}
+
+					&.gray:not(.today)  {
+						color: darken(@gray, 37%);
+						&:before { background: darken(@gray, 3%); }
 					}
 
 					&.green:not(.today)  {

@@ -26,7 +26,7 @@ const Events = {
 					let str = node.getAttribute("date") +" 01:00",
 						date = new Date(str);
 					node.setAttribute("starts", date.valueOf());
-					node.setAttribute("calId", "orange");
+					node.setAttribute("calId", "gray");
 				});
 				break;
 			case "populate-legend-holidays":

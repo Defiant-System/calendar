@@ -39,7 +39,12 @@ const View = {
 				week:  { g: "getWeek",     s: "setWeek" },
 				day:   { g: "getDate",     s: "setDate" },
 			},
-			method = methods[type];
+			method = methods[type],
+			tDate,
+			tYear,
+			tMonth,
+			tWeek,
+			tDay;
 		
 		switch (to) {
 			case "now":
@@ -55,22 +60,44 @@ const View = {
 				if (to) date = to;
 		}
 
+		tYear = date.getFullYear();
+		tMonth = date.getMonth();
+		tWeek = date.getWeek();
+		tDay = date.getDate();
+
 		switch (type) {
 			case "year":
-				this.rangeStart = 1609455600000;
-				this.rangeEnd = 1640991600000;
+				// calculate range start
+				tDate = new Date(tYear, 0);
+				this.rangeStart = tDate.valueOf();
+				// calculate range end
+				tDate.setFullYear(tYear + 1);
+				this.rangeEnd = tDate.valueOf();
 				break;
 			case "month":
-				this.rangeStart = 1612134000000;
-				this.rangeEnd = 1614553200000;
+				// calculate range start
+				tDate = new Date(tYear, tMonth);
+				this.rangeStart = tDate.valueOf();
+				// calculate range end
+				tDate.setMonth(tMonth + 1);
+				this.rangeEnd = tDate.valueOf();
 				break;
 			case "week":
-				this.rangeStart = 1613381400000;
-				this.rangeEnd = 1613818800000;
+				// calculate range start
+				tDate = new Date(tYear, tMonth, tDay);
+				tDate.setWeek(tWeek);
+				this.rangeStart = tDate.valueOf();
+				// calculate range end
+				tDate.setWeek(tWeek + 1);
+				this.rangeEnd = tDate.valueOf();
 				break;
 			case "day":
-				this.rangeStart = 1613775600000;
-				this.rangeEnd = 1613862000000;
+				// calculate range start
+				tDate = new Date(tYear, tMonth, tDay);
+				this.rangeStart = tDate.valueOf();
+				// calculate range end
+				tDate.setDate(tDay + 1);
+				this.rangeEnd = tDate.valueOf();
 				break;
 		}
 

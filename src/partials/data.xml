@@ -38,5 +38,5 @@
 	<i calId="purple" starts="1613642400000" ends="1613660400000" title="Another event"/>
 	<i calId="blue" starts="1613725200000" ends="1613728800000" title="Another event"/>
 	<i calId="orange" starts="1613736000000" ends="1613745000000" title="Another event"/>
-	<i calId="blue" starts="1613818800000" ends="1613829600000" title="Example event"/>
+	<i calId="blue" starts="1613905200000" ends="1613908800000" title="Example event"/>
 </Events>

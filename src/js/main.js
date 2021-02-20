@@ -25,7 +25,7 @@ const calendar = {
 		Events.dispatch({ type: "parse-holidays", xNodes });
 
 		// initiate first view
-		window.find(".toolbar-tool_").get(7).trigger("click");
+		window.find(".toolbar-tool_").get(5).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,
