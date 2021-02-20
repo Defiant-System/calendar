@@ -25,7 +25,7 @@ const calendar = {
 		Events.dispatch({ type: "parse-holidays", xNodes });
 
 		// initiate first view
-		window.find(".toolbar-tool_").get(6).trigger("click");
+		window.find(".toolbar-tool_").get(5).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,
@@ -42,14 +42,6 @@ const calendar = {
 			// custom events
 			case "switch-view":
 				View.switch(event.arg);
-
-				// signal events to render date range
-				Events.dispatch({
-					type: `populate-${event.arg}`,
-					starts: View.rangeStart,
-					ends: View.rangeEnd,
-				});
-
 				return true;
 			case "view-go":
 				View.go(event.arg);

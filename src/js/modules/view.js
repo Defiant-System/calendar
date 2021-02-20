@@ -61,10 +61,10 @@ const View = {
 		}
 
 		// calculation helpers
-		tYear = this.date.getFullYear();
-		tMonth = this.date.getMonth();
-		tWeek = this.date.getWeek();
-		tDay = this.date.getDate();
+		tYear = date.getFullYear();
+		tMonth = date.getMonth();
+		tWeek = date.getWeek();
+		tDay = date.getDate();
 
 		switch (type) {
 			case "year":
@@ -103,5 +103,12 @@ const View = {
 		}
 
 		Render[type]({ date, el: this.els[this.active] });
+
+		// signal events to render date range
+		Events.dispatch({
+			type: `populate-${type}`,
+			starts: this.rangeStart,
+			ends: this.rangeEnd,
+		});
 	}
 };
