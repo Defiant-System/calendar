@@ -207,7 +207,13 @@ const Render = {
 		// weekdays
 		htm.push(`<div class="weekdays">`);
 		days.map((name, index) => {
-			let className = index >= 5 ? ` class="weekend"` : ``;
+			let className = [];
+
+			if (toStart === 1 && index >= 5) className.push("weekend");
+			if (toStart === 0 && (index >= 6 || index === 0)) className.push("weekend");
+			if (toStart === -1 && index <= 1) className.push("weekend");
+
+			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
 			htm.push(`<b${className}>${name.slice(0, weekDays)}</b>`);
 		});
 		htm.push(`</div>`);

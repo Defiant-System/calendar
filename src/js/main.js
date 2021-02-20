@@ -17,7 +17,7 @@ const calendar = {
 		Events.init();
 
 		// initiate first view
-		window.find(".toolbar-tool_").get(5).trigger("click");
+		window.find(".toolbar-tool_").get(6).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,
@@ -37,8 +37,8 @@ const calendar = {
 
 				// temp
 				let xNodes = window.bluePrint.selectNodes(`//Events/i`);
-				Events.dispatch({ type: "populate-week", xNodes });
-				
+				Events.dispatch({ type: `populate-${event.arg}`, xNodes });
+
 				return true;
 			case "view-go":
 				View.go(event.arg);

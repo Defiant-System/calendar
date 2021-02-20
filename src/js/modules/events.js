@@ -17,8 +17,35 @@ const Events = {
 			el;
 		// console.log(opt);
 		switch (event.type) {
+			case "populate-month":
+				// assemble elements info
+				Self.els.month.find(`.days b:not(.non-day)`).map(day => {
+					let el = $(day);
+					pipe[el.find("i").html()] = { el, htm: [] };
+				});
+
+				// iterate event nodes
+				Nodes.map(node => {
+					let starts = +node.getAttribute("starts"),
+						dateStart = new Date(starts),
+						dayDate = dateStart.getDate(),
+						color = node.getAttribute("calId"),
+						title = node.getAttribute("title");
+
+					pipe[dayDate].htm.push(`<div class="entry ${color}">${title}</div>`);
+				});
+
+				// expose rendered event html to DOM
+				Object.keys(pipe).map(key => {
+					let htm = pipe[key].htm.join("");
+					if (htm) {
+						htm = `<div class="entries-wrapper">${htm}</div>`;
+						pipe[key].el.append(htm);
+					}
+				});
+				break;
 			case "populate-week":
-				// assemble column info
+				// assemble elements info
 				Self.els.week.find(`.col-day`).map(col => {
 					let el = $(col);
 					pipe[el.data("date")] = { el, htm: [] };
@@ -48,7 +75,9 @@ const Events = {
 				// expose rendered event html to DOM
 				Object.keys(pipe).map(key => {
 					let htm = pipe[key].htm.join("");
-					pipe[key].el.html(htm);
+					if (htm) {
+						pipe[key].el.html(htm);
+					}
 				});
 				break;
 		}
