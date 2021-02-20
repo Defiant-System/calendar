@@ -4,7 +4,7 @@ const Render = {
 		this.i18n = {
 			months: ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 			days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-			firstWeekDay: 1, // 6
+			weekStartsWith: 6, // 1
 			hours: "24h", // "am/pm",
 		};
 	},
@@ -159,7 +159,7 @@ const Render = {
 
 		// title: month
 		htm.push(`<h2><b>${I18n.months[iMonth]}</b> ${iYear}</h2>`);
-		htm.push(`<div class="month">`);
+		htm.push(`<div class="month" data-date="${iYear}-${iMonth}">`);
 		
 		// month name
 		htm.push(`<h3>${I18n.months[iMonth]}</h3>`);

@@ -15,10 +15,12 @@ const calendar = {
 		View.init();
 
 		// initiate first view
-		window.find(".toolbar-tool_").get(5).trigger("click");
+		window.find(".toolbar-tool_").get(7).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,
+			date,
+			month,
 			el;
 		switch (event.type) {
 			// system events
@@ -33,6 +35,12 @@ const calendar = {
 				return true;
 			case "view-go":
 				View.go(event.arg);
+				break;
+			case "select-month":
+				month = $(event.target).parents(".month");
+				date = month.data("date").split("-");
+				View.switch("month");
+				View.go(new Date(date[0], date[1], 1));
 				break;
 		}
 	}

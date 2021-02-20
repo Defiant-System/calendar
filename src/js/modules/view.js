@@ -19,15 +19,14 @@ const View = {
 
 		// this.go("now");
 	},
-	switch(type) {
+	switch(type, noGo) {
 		this.els.content.prop({ "className": "show-"+ type });
 		this.active = type;
-		this.go();
+		if (!noGo) this.go();
 	},
 	go(to) {
 		let date = this.date,
 			type = this.active,
-			el = this.els[type],
 			methods = {
 				year:  { g: "getFullYear", s: "setFullYear" },
 				month: { g: "getMonth",    s: "setMonth" },
@@ -46,8 +45,10 @@ const View = {
 			case "1":
 				date[method.s](date[method.g]() + 1);
 				break;
+			default:
+				if (to) date = to;
 		}
 
-		Render[type]({ date, el });
+		Render[type]({ date, el: this.els[this.active] });
 	}
 };
