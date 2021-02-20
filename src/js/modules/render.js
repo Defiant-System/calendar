@@ -9,15 +9,21 @@ const Render = {
 		};
 	},
 	hours(htm) {
+		let I18n = this.i18n;
+
 		htm.push(`<div class="col-hours">`);
 		[...Array(23)].map((a, index) => {
 			let className = [],
-				hour = (index + 1).toString().padStart("0", 1)
+				hour = index + 1;
 			// office hours
 			if (index > 6 && index < 18) className.push("work-hours");
 
 			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
-			htm.push(`<b${className}>${hour}:00</b>`);
+			hour = I18n.hours === "24h"
+					? hour.toString().padStart("0", 1) +":00"
+					: (hour % 12 || 12) + ((hour < 12) ? " AM" : " PM");
+
+			htm.push(`<b${className}>${hour}</b>`);
 		});
 		htm.push(`</div>`);
 	},

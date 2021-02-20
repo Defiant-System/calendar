@@ -14,7 +14,7 @@ const View = {
 		// defaults
 		this.active = "year";
 		this.date = new Date();
-		this.date = new Date(2020, 11, 29);
+		// this.date = new Date(2020, 11, 29);
 		// this.date = new Date(2021, 0, 10);
 
 		// this.go("now");

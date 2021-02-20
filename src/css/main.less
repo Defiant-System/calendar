@@ -135,14 +135,19 @@ content {
 	}
 
 	.col-day {
-		background-image: linear-gradient(#ddd 1px, transparent 1px), linear-gradient(transparent 22px, #e0e0e0 23px, transparent 23px);
-		background-size: 100% 44px, 100% 44px;
+		background-image: linear-gradient(#ddd 1px, transparent 1px),
+							linear-gradient(transparent 22px, #e0e0e0 23px, transparent 23px),
+							linear-gradient(rgba(0,0,0,.0125) 0px, rgba(0,0,0,.0125) 352px, transparent 352px, transparent 792px, rgba(0,0,0,.0125) 792px);
+		background-size: 100% 44px, 100% 44px, 100% 1056px;
 		background-position: 0 -1px;
 		border-left: 1px solid #ddd;
 		position: relative;
 		flex: 1;
 
-		&.col-weekend { background-color: rgba(0,0,0,.0125); }
+		&.col-weekend {
+			background-color: rgba(0,0,0,.0125);
+			background-image: linear-gradient(#ddd 1px, transparent 1px), linear-gradient(transparent 22px, #e0e0e0 23px, transparent 23px);
+		}
 
 		&:nth-child(2) .event { top: 509px; height: 131px; }
 		&:nth-child(3) .event { top: 377px; height: 87px; }
