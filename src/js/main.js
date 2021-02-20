@@ -36,7 +36,7 @@ const calendar = {
 				View.switch(event.arg);
 
 				// temp
-				let xNodes = window.bluePrint.selectNodes(`//Events/i`);
+				let xNodes = window.bluePrint.selectNodes(`//Events/i[@starts="1613818800000"]`);
 				Events.dispatch({ type: `populate-${event.arg}`, xNodes });
 
 				return true;
