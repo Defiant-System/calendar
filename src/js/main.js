@@ -39,7 +39,7 @@ const calendar = {
 			case "select-month":
 				month = $(event.target).parents(".month");
 				date = month.data("date").split("-");
-				View.switch("month");
+				View.switch("month", true);
 				View.go(new Date(date[0], date[1], 1));
 				break;
 		}

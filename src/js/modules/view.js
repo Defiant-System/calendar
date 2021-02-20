@@ -3,6 +3,7 @@ const View = {
 	init() {
 		// fast references
 		this.els = {
+			toolbar: window.find(".win-caption-toolbar_"),
 			content: window.find("content"),
 			daysWrapper: window.find(".days-wrapper"),
 			year: window.find(".view-year"),
@@ -22,6 +23,11 @@ const View = {
 	switch(type, noGo) {
 		this.els.content.prop({ "className": "show-"+ type });
 		this.active = type;
+
+		// update toolbar
+		this.els.toolbar.find(`.toolbar-tool_[data-click="switch-view"]`).removeClass("tool-active_");
+		this.els.toolbar.find(`.toolbar-tool_[data-arg="${type}"]`).addClass("tool-active_");
+
 		if (!noGo) this.go();
 	},
 	go(to) {
