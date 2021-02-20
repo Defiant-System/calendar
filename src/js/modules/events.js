@@ -43,16 +43,33 @@ const Events = {
 				});
 				break;
 			case "populate-year":
+				// root DOM element
+				el = Self.els.year;
+				// iterate holiday nodes
+				xPath = `//Holidays/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				APP.data.selectNodes(xPath).map(node => {
+					let date = new Date(+node.getAttribute("starts")),
+						iMonth = date.getFullYear() +"-"+ date.getMonth(),
+						iDate = date.getDate(),
+						title = node.getAttribute("title");
+					// add class to day element
+					el.find(`.month[data-date="${iMonth}"] b:not(.non-day) i:contains("${iDate}")`)
+						.map(el => {
+							if (+el.innerHTML === +iDate) {
+								$(el.parentNode).addClass(`has-event holiday`).attr({ title });
+							}
+						});
+				});
 				// iterate event nodes
 				xPath = `//Events/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.data.selectNodes(xPath).map(node => {
 					let starts = +node.getAttribute("starts"),
-						dateStart = new Date(starts),
-						dMonth = dateStart.getFullYear() +"-"+ dateStart.getMonth(),
-						dDate = dateStart.getDate(),
+						date = new Date(starts),
+						dMonth = date.getFullYear() +"-"+ date.getMonth(),
+						dDate = date.getDate(),
 						color = node.getAttribute("calId");
 					// add class to day element
-					Self.els.year.find(`.month[data-date="${dMonth}"] b:not(.non-day) i:contains("${dDate}")`)
+					el.find(`.month[data-date="${dMonth}"] b:not(.non-day) i:contains("${dDate}")`)
 						.map(el => +el.innerHTML === +dDate ? $(el.parentNode).addClass(`has-event ${color}`) : null);
 				});
 				break;
@@ -77,8 +94,8 @@ const Events = {
 				xPath = `//Events/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.data.selectNodes(xPath).map(node => {
 					let starts = +node.getAttribute("starts"),
-						dateStart = new Date(starts),
-						dayDate = dateStart.getDate(),
+						date = new Date(starts),
+						dayDate = date.getDate(),
 						color = node.getAttribute("calId"),
 						title = node.getAttribute("title");
 

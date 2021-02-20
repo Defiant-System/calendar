@@ -562,11 +562,12 @@ content {
 		padding: 9px 7px;
 		margin: 0 0 9px 0;
 		font-family: "Jost", sans-serif;
-		border-radius: 4px;
+		border-radius: 5px;
 		cursor: pointer;
 
 		&:hover {
-			box-shadow: 0 0 0 3px rgba(0,0,0,.075); // #3366dd4a
+			background: rgba(0,0,0,.035);
+			// box-shadow: 0 0 0 3px rgba(0,0,0,.075); // #3366dd4a
 		}
 
 		b {
@@ -595,7 +596,7 @@ content {
 
 			b {
 				&.weekend {
-					color: #bbb;
+					color: #e77;
 				}
 
 				&.non-day {
@@ -650,6 +651,10 @@ content {
 					&.cyan:not(.today)   {
 						color: darken(@cyan, 47%);
 						&:before { background: darken(@cyan, 3%); }
+					}
+
+					&.holiday {
+						&:before { background: rgba(0,0,0,.065); }
 					}
 				}
 
