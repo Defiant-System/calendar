@@ -13,24 +13,24 @@ const Events = {
 		let Self = Events,
 			Nodes = event.xNodes,
 			hHeight = 44,
-			htm = {
-				"15": [],
-				"16": [],
-				"17": [],
-				"18": [],
-				"19": [],
-				"20": [],
-				"21": [],
-			},
+			pipe = {},
 			el;
 		// console.log(opt);
 		switch (event.type) {
 			case "populate-week":
+				// assemble column info
+				Self.els.week.find(`.col-day`).map(col => {
+					let el = $(col);
+					pipe[el.data("date")] = { el, htm: [] };
+				});
+
+				// iterate event nodes
 				Nodes.map(node => {
 					let starts = +node.getAttribute("starts"),
 						ends = +node.getAttribute("ends"),
 						dateStart = new Date(starts),
 						dateEnds = new Date(ends),
+						dayDate = dateStart.getDate(),
 						color = node.getAttribute("calId"),
 						title = node.getAttribute("title"),
 						hours = dateStart.getHours().toString().padStart(2, "0"),
@@ -39,16 +39,16 @@ const Events = {
 						top = dateStart.getHours() * hHeight,
 						height = ((ends - starts) / 3600000) * hHeight;
 
-					htm["16"].push(`<div class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
-					htm["16"].push(`<span class="event-time">${timeStarts}</span>`);
-					htm["16"].push(`<span class="event-title">${title}</span>`);
-					htm["16"].push(`</div>`);
+					pipe[dayDate].htm.push(`<div class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
+					pipe[dayDate].htm.push(`<span class="event-time">${timeStarts}</span>`);
+					pipe[dayDate].htm.push(`<span class="event-title">${title}</span>`);
+					pipe[dayDate].htm.push(`</div>`);
 				});
 
-				el = Self.els.week;
-				Object.keys(htm).map(key => {
-					let str = htm[key].join("");
-					el.find(`.col-day[data-date="${key}"]`).html(str);
+				// expose rendered event html to DOM
+				Object.keys(pipe).map(key => {
+					let htm = pipe[key].htm.join("");
+					pipe[key].el.html(htm);
 				});
 				break;
 		}

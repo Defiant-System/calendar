@@ -29,5 +29,10 @@
 </Holidays>
 
 <Events>
-	<i calId="purple" starts="1613473200000"  ends="1613480400000" title="Example event"/>
+	<i calId="cyan" starts="1613381400000"  ends="1613386800000" title="Another event"/>
+	<i calId="yellow" starts="1613473200000"  ends="1613480400000" title="Example event"/>
+	<i calId="green" starts="1613548800000"  ends="1613554200000" title="Another event"/>
+	<i calId="purple" starts="1613642400000"  ends="1613660400000" title="Another event"/>
+	<i calId="blue" starts="1613725200000"  ends="1613728800000" title="Another event"/>
+	<i calId="orange" starts="1613736000000"  ends="1613745000000" title="Another event"/>
 </Events>
