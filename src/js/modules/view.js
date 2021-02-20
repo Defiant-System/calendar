@@ -60,10 +60,11 @@ const View = {
 				if (to) date = to;
 		}
 
-		tYear = date.getFullYear();
-		tMonth = date.getMonth();
-		tWeek = date.getWeek();
-		tDay = date.getDate();
+		// calculation helpers
+		tYear = this.date.getFullYear();
+		tMonth = this.date.getMonth();
+		tWeek = this.date.getWeek();
+		tDay = this.date.getDate();
 
 		switch (type) {
 			case "year":

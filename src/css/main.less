@@ -493,20 +493,28 @@ content {
 						white-space: nowrap;
 						text-overflow: ellipsis;
 						overflow: hidden;
-						padding: 1px 0 2px 13px;
+						padding: 2px 0 2px 13px;
+						margin-bottom: 1px;
+						border-radius: 3px;
 
 						&:before {
 							content: "";
 							background: darken(#c8e6fc, 13%);
 							position: absolute;
-							top: 2px;
+							top: 3px;
 							left: 1px;
 							width: 9px;
 							height: 9px;
 							border-radius: 50%;
 						}
 
-						&.gray:before   { background: darken(@gray, 13%); }
+						&.gray {
+							background: lighten(@gray, 5%);
+							color: darken(@gray, 43%);
+							padding: 3px;
+
+							&:before { display: none; }
+						}
 						&.blue:before   { background: darken(@blue, 13%); }
 						&.green:before  { background: darken(@green, 29%); }
 						&.orange:before { background: darken(@orange, 11%); }
