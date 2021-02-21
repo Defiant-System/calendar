@@ -165,17 +165,20 @@ const Events = {
 					let starts = +node.getAttribute("starts"),
 						ends = +node.getAttribute("ends"),
 						dateStart = new Date(starts),
-						dateEnds = new Date(ends),
+						dateEnd = new Date(ends),
 						color = node.getAttribute("calId"),
 						title = node.getAttribute("title"),
-						hours = dateStart.getHours().toString().padStart(2, "0"),
-						minutes = dateStart.getMinutes().toString().padStart(2, "0"),
-						timeStarts = Self.getTime(hours, minutes),
+						startHours = dateStart.getHours(),
+						startMinutes = dateStart.getMinutes(),
+						endHours = dateEnd.getHours(),
+						endMinutes = dateEnd.getMinutes(),
+						timeStarts = Self.formatTime(startHours, startMinutes),
+						timeEnds = Self.formatTime(endHours, endMinutes),
 						top = (dateStart.getHours() * hHeight) + (dateStart.getMinutes() / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight;
 
 					pipe.htm.push(`<div class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
-					pipe.htm.push(`<span class="event-time">${timeStarts}</span>`);
+					pipe.htm.push(`<span class="event-time">${timeStarts}</span>`); // —${timeEnds}
 					pipe.htm.push(`<span class="event-title">${title}</span>`);
 					pipe.htm.push(`</div>`);
 				});
