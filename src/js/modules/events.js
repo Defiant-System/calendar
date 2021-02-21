@@ -133,7 +133,7 @@ const Events = {
 						hours = dateStart.getHours().toString().padStart(2, "0"),
 						minutes = dateStart.getMinutes().toString().padStart(2, "0"),
 						timeStarts = hours +":"+ minutes,
-						top = dateStart.getHours() * hHeight,
+						top = (dateStart.getHours() * hHeight) + (dateStart.getMinutes() / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight;
 
 					pipe[dayDate].htm.push(`<div class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
@@ -168,7 +168,7 @@ const Events = {
 						hours = dateStart.getHours().toString().padStart(2, "0"),
 						minutes = dateStart.getMinutes().toString().padStart(2, "0"),
 						timeStarts = hours +":"+ minutes,
-						top = dateStart.getHours() * hHeight,
+						top = (dateStart.getHours() * hHeight) + (dateStart.getMinutes() / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight;
 
 					pipe.htm.push(`<div class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
