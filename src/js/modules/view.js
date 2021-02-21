@@ -31,7 +31,9 @@ const View = {
 		if (!noGo) this.go();
 	},
 	go(to) {
-		let date = this.date,
+		let I18n = Render.i18n,
+			dayInMs = 60 * 60 * 24 * 1000,
+			date = this.date,
 			type = this.active,
 			methods = {
 				year:  { g: "getFullYear", s: "setFullYear" },
@@ -91,6 +93,14 @@ const View = {
 				// calculate range end
 				tDate.setWeek(tWeek + 1);
 				this.rangeEnd = tDate.valueOf();
+
+				if (I18n.weekStartsWith === 6) {
+					this.rangeStart -= dayInMs;
+					this.rangeEnd -= dayInMs;
+				} else if (I18n.weekStartsWith === 5) {
+					this.rangeStart -= dayInMs * 2;
+					this.rangeEnd -= dayInMs * 2;
+				}
 				break;
 			case "day":
 				// calculate range start
