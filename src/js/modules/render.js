@@ -45,21 +45,28 @@ const Render = {
 
 		// title: day
 		htm.push(`<h2><i>${I18n.days[iDay]}</i> <b>${I18n.months[iMonth]} ${iDate}</b> ${iYear}</h2>`);
-		htm.push(`<div class="day">`);
+		htm.push(`<div class="day-layout">`);
 			
+			// day view
+			htm.push(`<div class="day">`);
 			// legend
 			htm.push(`<div class="day-legends">`);
 			htm.push(`<u class="col-hours"></u>`);
 			htm.push(`<b data-date="${iDate}"></b>`);
 			htm.push(`</div>`);
 			// day wrapper
-			htm.push(`<div class="day"><div class="days-wrapper">`);
+			htm.push(`<div class="day-content"><div class="days-wrapper">`);
 			// hours column
 			this.hours(htm);
 			// day column
-			htm.push(`<div class="col-day"></div>`);
-			htm.push(`</div></div>`);
+			htm.push(`<div class="col-day"></div></div></div>`);
+			htm.push(`</div>`);
 		
+			// upcoming events
+			htm.push(`<div class="whats-next">`);
+			htm.push(`<h4>Upcoming</h4>`);
+			htm.push(`</div>`);
+
 		// closing tag
 		htm.push(`</div>`);
 

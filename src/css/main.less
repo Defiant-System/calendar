@@ -77,6 +77,14 @@ content {
 		padding: 0 11px;
 		margin-bottom: 5px;
 	}
+
+	h4 {
+		font-weight: 400;
+		font-size: 15px;
+		font-family: "Jost", sans-serif;
+		padding: 0 11px;
+		margin-bottom: 5px;
+	}
 }
 
 .days-wrapper{
@@ -209,46 +217,61 @@ content {
 		width: 59px;
 	}
 
-	.day {
+	.day-layout {
 		display: flex;
-		flex-direction: column;
 		flex: 1;
-	}
 
-	.day-legends {
-		display: flex;
-
-		u.col-hours {
-			border-bottom: 1px solid #ccc;
+		.day {
+			display: flex;
+			flex-direction: column;
+			flex: 1;
+			border-right: 1px solid #ccc;
 		}
 
-		b {
-			flex: 1;
-			position: relative;
-			border-top: 1px solid #d5d5d5;
-			border-left: 1px solid #d5d5d5;
-			border-bottom: 1px solid #ccc;
-			min-height: 24px;
-			padding: 1px;
+		.day-legends {
+			display: flex;
 
-			.event {
+			u.col-hours {
+				border-bottom: 1px solid #ccc;
+			}
+
+			b {
+				flex: 1;
 				position: relative;
-				// border-left: 0;
-				box-shadow: 0 0 0;
-				padding: 4px 5px;
-				margin: 0;
+				border-top: 1px solid #d5d5d5;
+				border-left: 1px solid #d5d5d5;
+				border-bottom: 1px solid #ccc;
+				min-height: 24px;
+				padding: 1px;
 
-				&.gray {
-					background: @lgndEvent;
-					border-left-color: darken(@lgndEvent, 17%);
-					color: darken(@lgndEvent, 37%);
-					text-shadow: 0 1px 1px #fff;
+				.event {
+					position: relative;
+					// border-left: 0;
+					box-shadow: 0 0 0;
+					padding: 4px 5px;
+					margin: 0;
+
+					&.gray {
+						background: @lgndEvent;
+						border-left-color: darken(@lgndEvent, 17%);
+						color: darken(@lgndEvent, 37%);
+						text-shadow: 0 1px 1px #fff;
+					}
 				}
+			}
+		}
+
+		.whats-next {
+			width: 280px;
+			margin-left: 7px;
+
+			h4 {
+				text-align: center;
 			}
 		}
 	}
 
-	.day {
+	.day-content {
 		flex: 1;
 		position: relative;
 		
