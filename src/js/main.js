@@ -21,8 +21,16 @@ const calendar = {
 		Events.init();
 
 		// parse holidays
-		let xNodes = window.bluePrint.selectNodes(`//Holidays/*`);
+		let xNodes = this.data.selectNodes(`//Holidays/*`);
 		Events.dispatch({ type: "parse-holidays", xNodes });
+		// parse events (temp)
+		this.data.selectNodes(`//Events/*[not(@starts)]`).map(node => {
+			let starts = new Date(node.getAttribute("date-starts")),
+				ends = new Date(node.getAttribute("date-ends"));
+
+			node.setAttribute("starts", starts.valueOf());
+			node.setAttribute("ends", ends.valueOf());
+		});
 
 		// initiate first view
 		window.find(".toolbar-tool_").get(5).trigger("click");

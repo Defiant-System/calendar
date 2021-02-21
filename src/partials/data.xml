@@ -30,13 +30,12 @@
 </Holidays>
 
 <Events>
-	<i calId="purple" starts="1612339200000" ends="1612350000000" title="Birthday"/>
-
-	<i calId="cyan" starts="1613381400000" ends="1613386800000" title="Another event"/>
-	<i calId="yellow" starts="1613473200000" ends="1613480400000" title="Example event"/>
-	<i calId="green" starts="1613548800000" ends="1613554200000" title="Another very long event title"/>
-	<i calId="purple" starts="1613642400000" ends="1613660400000" title="Another event"/>
-	<i calId="blue" starts="1613725200000" ends="1613728800000" title="Another event"/>
-	<i calId="orange" starts="1613736000000" ends="1613745000000" title="Another event"/>
-	<i calId="blue" starts="1613905200000" ends="1613908800000" title="Example event"/>
+	<i date-starts="2021-02-03 09:00" date-ends="2021-02-03 12:00" calId="purple" title="Birthday"/>
+	<i date-starts="2021-02-15 10:30" date-ends="2021-02-15 11:30" calId="cyan" title="Another event"/>
+	<i date-starts="2021-02-16 12:00" date-ends="2021-02-16 14:00" calId="yellow" title="Example event"/>
+	<i date-starts="2021-02-17 11:00" date-ends="2021-02-17 15:30" calId="green" title="Another very long event title"/>
+	<i date-starts="2021-02-18 09:00" date-ends="2021-02-18 13:00" calId="purple" title="Another event"/>
+	<i date-starts="2021-02-19 10:00" date-ends="2021-02-19 11:00" calId="blue" title="Another event"/>
+	<i date-starts="2021-02-19 13:00" date-ends="2021-02-19 15:30" calId="orange" title="Another event"/>
+	<i date-starts="2021-02-21 10:00" date-ends="2021-02-21 13:00" calId="blue" title="Example event"/>
 </Events>
