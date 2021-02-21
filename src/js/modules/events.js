@@ -126,18 +126,21 @@ const Events = {
 					let starts = +node.getAttribute("starts"),
 						ends = +node.getAttribute("ends"),
 						dateStart = new Date(starts),
-						dateEnds = new Date(ends),
+						dateEnd = new Date(ends),
 						dayDate = dateStart.getDate(),
 						color = node.getAttribute("calId"),
 						title = node.getAttribute("title"),
-						hours = dateStart.getHours().toString().padStart(2, "0"),
-						minutes = dateStart.getMinutes().toString().padStart(2, "0"),
-						timeStarts = hours +":"+ minutes,
-						top = (dateStart.getHours() * hHeight) + (dateStart.getMinutes() / 60 * hHeight),
+						startHours = dateStart.getHours(),
+						startMinutes = dateStart.getMinutes(),
+						endHours = dateEnd.getHours(),
+						endMinutes = dateEnd.getMinutes(),
+						timeStarts = Self.formatTime(startHours, startMinutes),
+						timeEnds = Self.formatTime(endHours, endMinutes),
+						top = (startHours * hHeight) + (startMinutes / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight;
 
 					pipe[dayDate].htm.push(`<div class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
-					pipe[dayDate].htm.push(`<span class="event-time">${timeStarts}</span>`);
+					pipe[dayDate].htm.push(`<span class="event-time">${timeStarts}</span>`); // —${timeEnds}
 					pipe[dayDate].htm.push(`<span class="event-title">${title}</span>`);
 					pipe[dayDate].htm.push(`</div>`);
 				});
@@ -167,7 +170,7 @@ const Events = {
 						title = node.getAttribute("title"),
 						hours = dateStart.getHours().toString().padStart(2, "0"),
 						minutes = dateStart.getMinutes().toString().padStart(2, "0"),
-						timeStarts = hours +":"+ minutes,
+						timeStarts = Self.getTime(hours, minutes),
 						top = (dateStart.getHours() * hHeight) + (dateStart.getMinutes() / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight;
 
@@ -179,6 +182,19 @@ const Events = {
 				// expose rendered event html to DOM
 				el.find(".col-day").html(pipe.htm.join(""));
 				break;
+		}
+	},
+	formatTime(hours, minutes) {
+		switch (Render.i18n.hours) {
+			case "24h":
+				hours = hours.toString().padStart(2, "0");
+				minutes = minutes.toString().padStart(2, "0");
+				return `${hours}:${minutes}`;
+			case "am/pm":
+				let suffix = hours < 12 ? "AM" : "PM";
+				hours = hours % 12 || 12;
+				minutes = minutes.toString().padStart(2, "0");
+				return `${hours}:${minutes} ${suffix}`;
 		}
 	}
 };
