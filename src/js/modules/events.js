@@ -18,6 +18,7 @@ const Events = {
 			pipe = {},
 			xHolidays,
 			xPath,
+			now,
 			el;
 		// console.log(opt);
 		switch (event.type) {
@@ -30,6 +31,13 @@ const Events = {
 					node.setAttribute("calId", "gray");
 				});
 				break;
+			case "append-now-line":
+				now = new Date();
+				if (now.valueOf() > View.rangeStart && now.valueOf() < View.rangeEnd) {
+					Self.els.main.find(".days-wrapper").append(`<div class="now-line"></div>`);
+					Self.dispatch({ type: "update-now-line" });
+				}
+				break;
 			case "update-now-line":
 				el = Self.els.main.find(".days-wrapper .now-line");
 				// prevents multiple timers
@@ -37,8 +45,8 @@ const Events = {
 				// stop if there is no now-line in DOM
 				if (!el.length) return;
 
-				let now = new Date(),
-					nowDate = now.getDate(),
+				now = new Date();
+				let nowDate = now.getDate(),
 					nowHours = now.getHours(),
 					nowMinutes = now.getMinutes(),
 					nowSeconds = now.getSeconds(),
@@ -177,8 +185,7 @@ const Events = {
 				});
 
 				// now time line
-				el.find(".days-wrapper").append(`<div class="now-line"></div>`);
-				Self.dispatch({ type: "update-now-line" });
+				Self.dispatch({ type: "append-now-line" });
 				break;
 			case "populate-day":
 				// root DOM element
@@ -214,8 +221,7 @@ const Events = {
 				el.find(".col-day").html(pipe.htm.join(""));
 
 				// now time line
-				el.find(".days-wrapper").append(`<div class="now-line"></div>`);
-				Self.dispatch({ type: "update-now-line" });
+				Self.dispatch({ type: "append-now-line" });
 
 				console.log("render sidebar");
 				break;
