@@ -206,13 +206,16 @@ const Render = {
 
 		// title: month
 		htm.push(`<h2><b>${I18n.months[iMonth]}</b> ${iYear}</h2>`);
-		htm.push(`<div class="month" data-date="${iYear}-${iMonth}">`);
+		htm.push(`<div class="month ${opt.weekNumbers ? "show-week-numbers" : ""}" data-date="${iYear}-${iMonth}">`);
 		
 		// month name
 		htm.push(`<h3>${I18n.months[iMonth]}</h3>`);
 
 		// weekdays
 		htm.push(`<div class="weekdays">`);
+		// week number UI
+		if (opt.weekNumbers) htm.push(`<b class="week-nr"></b>`);
+		// loop days
 		days.map((name, index) => {
 			let className = [];
 
@@ -229,9 +232,11 @@ const Render = {
 		htm.push(`<div class="days">`);
 		[...Array(42)].map((a, index) => {
 			let mDate = new Date(iYear, iMonth, index - iDay + toStart + 1),
+				imWeek = mDate.getWeek(),
 				imDate = mDate.getDate(),
 				className = [];
 
+			if (opt.weekNumbers && index % 7 === 0) htm.push(`<b class="week-nr">${imWeek}</b>`);
 			if ([0,6].includes(mDate.getDay())) className.push("weekend");
 			if (mDate.getMonth() !== iMonth) className.push("non-day");
 			if (mDate.getFullYear() === nowYear &&

@@ -56,7 +56,7 @@ content {
 	.sidebar {
 		position: relative;
 		width: 0;
-		transition: width 200ms ease-in-out;
+		transition: width 150ms ease-in-out;
 
 		&.show {
 			width: 239px;
@@ -107,11 +107,16 @@ content {
 
 				b {
 					display: inline-block;
-					width: 14%;
+					width: 13%;
 					font-weight: 500;
 					font-size: 11px;
 					text-align: center;
 					padding: 5px 0 4px;
+
+					&.week-nr {
+						width: 9%;
+						opacity: .5;
+					}
 
 					i {
 						font-style: normal;
@@ -136,6 +141,13 @@ content {
 					padding: 0 1px;
 
 					b {
+						&.week-nr {
+							background: rgba(0,0,0,.1);
+
+							&:nth-child(1) { border-radius: 3px 3px 0 0; }
+							&:nth-child(41) { border-radius: 0 0 3px 3px; }
+						}
+
 						&.weekend {
 							color: #e77;
 						}
