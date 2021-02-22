@@ -1,4 +1,5 @@
 
+@import "./modules/sidebar.js";
 @import "./modules/events.js";
 @import "./modules/render.js";
 @import "./modules/view.js";
@@ -20,6 +21,7 @@ const calendar = {
 		View.init();
 		Render.init();
 		Events.init();
+		Sidebar.init();
 
 		// parse holidays
 		let xNodes = this.data.selectNodes(`//Holidays/*`);
