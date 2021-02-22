@@ -31,6 +31,19 @@ const Events = {
 					node.setAttribute("calId", "gray");
 				});
 				break;
+			case "populate-legend-holidays":
+				// iterate holiday nodes
+				xPath = `//Holidays/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				APP.data.selectNodes(xPath).map(node => {
+					let date = new Date(+node.getAttribute("starts")),
+						wDate = date.getDate(),
+						title = node.getAttribute("title"),
+						color = node.getAttribute("calId"),
+						htm = `<div class="event ${color}">${title}</div>`;
+					
+					event.el.find(`.day-legends b[data-date="${wDate}"]`).append(htm);
+				});
+				break;
 			case "append-now-line":
 				now = Date.now();
 				if (now > View.rangeStart && now < View.rangeEnd) {
@@ -59,19 +72,6 @@ const Events = {
 				// update every minute
 				Self.lineTimer = setTimeout(() =>
 					Self.dispatch({ type: "update-now-line" }), (60 - nowSeconds) * 1000);
-				break;
-			case "populate-legend-holidays":
-				// iterate holiday nodes
-				xPath = `//Holidays/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
-				APP.data.selectNodes(xPath).map(node => {
-					let date = new Date(+node.getAttribute("starts")),
-						wDate = date.getDate(),
-						title = node.getAttribute("title"),
-						color = node.getAttribute("calId"),
-						htm = `<div class="event ${color}">${title}</div>`;
-					
-					event.el.find(`.day-legends b[data-date="${wDate}"]`).html(htm);
-				});
 				break;
 			case "populate-year":
 				// root DOM element

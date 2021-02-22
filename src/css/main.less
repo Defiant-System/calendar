@@ -312,7 +312,12 @@ content {
 					// border-left: 0;
 					box-shadow: 0 0 0;
 					padding: 4px 5px;
-					margin: 0;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					margin: 0 0 1px;
+
+					&:last-child { margin-bottom: 0; }
 
 					&.gray {
 						background: @lgndEvent;
@@ -447,7 +452,9 @@ content {
 					white-space: nowrap;
 					overflow: hidden;
 					text-overflow: ellipsis;
-					margin: 0;
+					margin: 0 0 1px;
+
+					&:last-child { margin-bottom: 0; }
 
 					&.gray {
 						background: @lgndEvent;
