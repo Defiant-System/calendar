@@ -434,6 +434,7 @@ content {
 				border-bottom: 1px solid #ccc;
 				min-height: 24px;
 				padding: 1px;
+				min-width: 0;
 
 				&.weekend {
 					background: rgba(0,0,0,.025);
@@ -441,9 +442,11 @@ content {
 
 				.event {
 					position: relative;
-					// border-left: 0;
 					box-shadow: 0 0 0;
 					padding: 4px 5px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
 					margin: 0;
 
 					&.gray {
