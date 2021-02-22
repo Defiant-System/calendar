@@ -746,8 +746,17 @@ content {
 						&:before { background: darken(@cyan, 3%); }
 					}
 
-					&.holiday {
-						&:before { background: rgba(0,0,0,.065); }
+					&.holiday:not(.today, .blue, .gray, .green, .orange, .yellow, .purple, .red, .cyan) {
+						&:before {
+							background: rgba(200,0,200,.125);
+							top: 0;
+							right: auto;
+							left: 50%;
+							width: 20px;
+							height: 20px;
+							border-radius: 50%;
+							margin-left: -10px;
+						}
 					}
 				}
 
@@ -760,6 +769,7 @@ content {
 						background: @today;
 						position: absolute;
 						top: 0;
+						right: auto;
 						left: 50%;
 						width: 20px;
 						height: 20px;
