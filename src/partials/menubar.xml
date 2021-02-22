@@ -2,7 +2,31 @@
 	<Menu name="Calendar">
 		<Menu name="About Calendar" shell="win -a"/>
 		<Menu type="divider"/>
+		<Menu name="New Calendar"/>
+		<Menu name="Import"/>
+		<Menu name="Export"/>
+		<Menu type="divider"/>
 		<Menu name="Quit Calendar" shell="win -c"/>
+	</Menu>
+	<Menu name="Edit">
+		<Menu name="Copy"/>
+		<Menu name="Cut"/>
+		<Menu name="Paste"/>
+		<Menu name="Delete"/>
+	</Menu>
+	<Menu name="View">
+		<Menu name="By Day" check-group="view-option"/>
+		<Menu name="By Week" check-group="view-option" is-checked="1"/>
+		<Menu name="By Month" check-group="view-option"/>
+		<Menu name="By Year" check-group="view-option"/>
+		<Menu type="divider"/>
+		<Menu name="Go to Today"/>
+		<Menu name="Next"/>
+		<Menu name="Previous"/>
+		<Menu type="divider"/>
+		<Menu name="Show Calendar List"/>
+		<Menu name="Show Time Line"/>
+		<Menu name="Hide Week Numbers"/>
 	</Menu>
 	<Menu name="Help">
 		<Menu name="Help" click="open-help"/>
