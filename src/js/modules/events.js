@@ -3,6 +3,7 @@ const Events = {
 	init() {
 		// fast references
 		this.els = {
+			main: window.find(".main"),
 			year: window.find(".view-year"),
 			month: window.find(".view-month"),
 			week: window.find(".view-week"),
@@ -28,6 +29,27 @@ const Events = {
 					node.setAttribute("starts", date.valueOf());
 					node.setAttribute("calId", "gray");
 				});
+				break;
+			case "update-now-line":
+				el = Self.els.main.find(".days-wrapper .now-line");
+				// prevents multiple timers
+				clearTimeout(Self.lineTimer);
+				// stop if there is no now-line in DOM
+				if (!el.length) return;
+
+				let now = new Date(),
+					nowDate = now.getDate(),
+					nowHours = now.getHours(),
+					nowMinutes = now.getMinutes(),
+					time = Self.formatTime(nowHours, nowMinutes),
+					nowTop = (nowHours * hHeight) + (nowMinutes / 60 * hHeight),
+					dayLeft = el.parent().find(`.col-day[data-date="${nowDate}"]`).offset().left,
+					style = `--time-top: ${nowTop}px; --day-left: ${dayLeft}px;`;
+
+				el.data({ time }).attr({ style });
+
+				Self.lineTimer = setTimeout(() =>
+					Self.dispatch({ type: "update-now-line" }), 60 * 1000);
 				break;
 			case "populate-legend-holidays":
 				// iterate holiday nodes
@@ -144,6 +166,7 @@ const Events = {
 					pipe[dayDate].htm.push(`<span class="event-title">${title}</span>`);
 					pipe[dayDate].htm.push(`</div>`);
 				});
+
 				// expose rendered event html to DOM
 				Object.keys(pipe).map(key => {
 					let htm = pipe[key].htm.join("");
@@ -151,6 +174,10 @@ const Events = {
 						pipe[key].el.html(htm);
 					}
 				});
+
+				// now time line
+				el.find(".days-wrapper").append(`<div class="now-line"></div>`);
+				Self.dispatch({ type: "update-now-line" });
 				break;
 			case "populate-day":
 				// root DOM element
@@ -184,6 +211,10 @@ const Events = {
 				});
 				// expose rendered event html to DOM
 				el.find(".col-day").html(pipe.htm.join(""));
+
+				// now time line
+				el.find(".days-wrapper").append(`<div class="now-line"></div>`);
+				Self.dispatch({ type: "update-now-line" });
 
 				console.log("render sidebar");
 				break;

@@ -59,7 +59,7 @@ const Render = {
 			// hours column
 			this.hours(htm);
 			// day column
-			htm.push(`<div class="col-day"></div></div></div>`);
+			htm.push(`<div class="col-day" data-date="${iDate}"></div></div></div>`);
 			htm.push(`</div>`);
 		
 			// upcoming events
