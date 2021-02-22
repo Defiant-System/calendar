@@ -32,8 +32,8 @@ const Events = {
 				});
 				break;
 			case "append-now-line":
-				now = new Date();
-				if (now.valueOf() > View.rangeStart && now.valueOf() < View.rangeEnd) {
+				now = Date.now();
+				if (now > View.rangeStart && now < View.rangeEnd) {
 					Self.els.main.find(".days-wrapper").append(`<div class="now-line"></div>`);
 					Self.dispatch({ type: "update-now-line" });
 				}
