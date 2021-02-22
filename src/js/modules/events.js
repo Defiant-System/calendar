@@ -54,9 +54,9 @@ const Events = {
 					nowTop = (nowHours * hHeight) + (nowMinutes / 60 * hHeight),
 					dayLeft = el.parent().find(`.col-day[data-date="${nowDate}"]`).offset().left,
 					style = `--time-top: ${nowTop}px; --day-left: ${dayLeft}px;`;
-
+				// update now line
 				el.data({ time }).attr({ style });
-
+				// update every minute
 				Self.lineTimer = setTimeout(() =>
 					Self.dispatch({ type: "update-now-line" }), (60 - nowSeconds) * 1000);
 				break;

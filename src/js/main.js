@@ -42,9 +42,13 @@ const calendar = {
 			month,
 			isOn,
 			el;
+		// console.log(event);
 		switch (event.type) {
 			// system events
 			case "window.open":
+				break;
+			case "window.resize":
+				Events.dispatch({ type: "update-now-line" });
 				break;
 			case "open-help":
 				defiant.shell("fs -u '~/help/index.md'");
