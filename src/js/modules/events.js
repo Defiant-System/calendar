@@ -41,6 +41,7 @@ const Events = {
 					nowDate = now.getDate(),
 					nowHours = now.getHours(),
 					nowMinutes = now.getMinutes(),
+					nowSeconds = now.getSeconds(),
 					time = Self.formatTime(nowHours, nowMinutes),
 					nowTop = (nowHours * hHeight) + (nowMinutes / 60 * hHeight),
 					dayLeft = el.parent().find(`.col-day[data-date="${nowDate}"]`).offset().left,
@@ -49,7 +50,7 @@ const Events = {
 				el.data({ time }).attr({ style });
 
 				Self.lineTimer = setTimeout(() =>
-					Self.dispatch({ type: "update-now-line" }), 60 * 1000);
+					Self.dispatch({ type: "update-now-line" }), (60 - nowSeconds) * 1000);
 				break;
 			case "populate-legend-holidays":
 				// iterate holiday nodes
