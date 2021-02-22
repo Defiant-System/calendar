@@ -48,6 +48,7 @@ const calendar = {
 			case "window.open":
 				break;
 			case "window.resize":
+				// update now line
 				Events.dispatch({ type: "update-now-line" });
 				break;
 			case "open-help":
@@ -56,7 +57,11 @@ const calendar = {
 			// custom events
 			case "toggle-sidebar":
 				isOn = Self.els.sidebar.hasClass("show");
-				Self.els.sidebar.toggleClass("show", isOn);
+
+				Self.els.sidebar.cssSequence((isOn ? "!" : "") +"show", "transitionend", el =>
+					// update now line
+					Events.dispatch({ type: "update-now-line" }));
+
 				return !isOn;
 			case "switch-view":
 				View.switch(event.arg);
