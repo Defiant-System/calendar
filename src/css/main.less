@@ -154,7 +154,7 @@ content {
 			h3 {
 				font-size: 15px;
 				text-align: left;
-				padding: 3px 0;
+				padding: 3px 0 5px;
 				margin: 0;
 				color: #333;
 			}
@@ -163,6 +163,64 @@ content {
 
 				li {
 					padding: 2px 0;
+
+					.form-checkbox_ {
+						position: relative;
+						top: 1px;
+
+						&.gray i {
+							background: lighten(@gray, 5%);
+							border-color: lighten(@gray, 17%);
+
+							&:after { box-shadow: -1px 1px 0 lighten(@gray, 17%); }
+						}
+						&.blue i {
+							background: darken(@blue, 13%);
+							border-color: darken(@blue, 23%);
+
+							&:after { box-shadow: -1px 1px 0 darken(@blue, 23%); }
+						}
+						&.green i {
+							background: darken(@green, 29%);
+							border-color: darken(@green, 43%);
+
+							&:after { box-shadow: -1px 1px 0 darken(@green, 43%); }
+						}
+						&.orange i {
+							background: darken(@orange, 11%);
+							border-color: darken(@orange, 23%);
+
+							&:after { box-shadow: -1px 1px 0 darken(@orange, 23%); }
+						}
+						&.yellow i {
+							background: darken(@yellow, 13%);
+							border-color: darken(@yellow, 23%);
+
+							&:after { box-shadow: -1px 1px 0 darken(@yellow, 23%); }
+						}
+						&.purple i {
+							background: darken(@purple, 11%);
+							border-color: darken(@purple, 23%);
+
+							&:after { box-shadow: -1px 1px 0 darken(@purple, 23%); }
+						}
+						&.red i {
+							background: darken(@red, 11%);
+							border-color: darken(@red, 23%);
+
+							&:after { box-shadow: -1px 1px 0 darken(@red, 23%); }
+						}
+						&.cyan i {
+							background: darken(@cyan, 21%);
+							border-color: darken(@cyan, 37%);
+
+							&:after { box-shadow: -1px 1px 0 darken(@cyan, 37%); }
+						}
+					}
+
+					label {
+						margin-left: -2px;
+					}
 				}
 			}
 		}
