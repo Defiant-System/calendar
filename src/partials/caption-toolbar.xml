@@ -1,7 +1,6 @@
 <CaptionToolBar>
 	<Group width="23%">
-		<Tool symbol="icon-calendar"/>
-
+		<Tool symbol="icon-calendar" click="toggle-sidebar"/>
 		<Options>
 			<Tool symbol="icon-chevron-left" click="view-go" arg="-1"/>
 			<Tool name="Today" click="view-go" arg="now"/>

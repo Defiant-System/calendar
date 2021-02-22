@@ -9,6 +9,7 @@ const calendar = {
 		// fast references
 		this.els = {
 			content: window.find("content"),
+			sidebar: window.find(".sidebar"),
 		};
 
 		// events data storage; temp in bluePrint
@@ -33,12 +34,13 @@ const calendar = {
 		});
 
 		// initiate first view
-		window.find(".toolbar-tool_").get(4).trigger("click");
+		window.find(".toolbar-tool_").get(5).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,
 			date,
 			month,
+			isOn,
 			el;
 		switch (event.type) {
 			// system events
@@ -48,6 +50,10 @@ const calendar = {
 				defiant.shell("fs -u '~/help/index.md'");
 				break;
 			// custom events
+			case "toggle-sidebar":
+				isOn = Self.els.sidebar.hasClass("show");
+				Self.els.sidebar.toggleClass("show", isOn);
+				return !isOn;
 			case "switch-view":
 				View.switch(event.arg);
 				return true;

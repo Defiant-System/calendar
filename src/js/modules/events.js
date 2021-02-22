@@ -184,6 +184,8 @@ const Events = {
 				});
 				// expose rendered event html to DOM
 				el.find(".col-day").html(pipe.htm.join(""));
+
+				console.log("render sidebar");
 				break;
 		}
 	},

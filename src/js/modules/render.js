@@ -63,9 +63,7 @@ const Render = {
 			htm.push(`</div>`);
 		
 			// upcoming events
-			htm.push(`<div class="whats-next">`);
-			htm.push(`<h4>Upcoming</h4>`);
-			htm.push(`</div>`);
+			htm.push(`<div class="upcoming"></div>`);
 
 		// closing tag
 		htm.push(`</div>`);
