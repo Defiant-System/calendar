@@ -1,5 +1,4 @@
 
-@import "./modules/sidebar.js";
 @import "./modules/events.js";
 @import "./modules/render.js";
 @import "./modules/view.js";
@@ -10,7 +9,6 @@ const calendar = {
 		// fast references
 		this.els = {
 			content: window.find("content"),
-			sidebar: window.find(".sidebar"),
 		};
 
 		// events data storage; temp in bluePrint
@@ -21,7 +19,8 @@ const calendar = {
 		View.init();
 		Render.init();
 		Events.init();
-		Sidebar.init();
+		// init sub objects
+		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
 
 		// parse holidays
 		let xNodes = this.data.selectNodes(`//Holidays/*`);
@@ -43,7 +42,6 @@ const calendar = {
 			date,
 			month,
 			isOn,
-			width,
 			el;
 		// console.log(event);
 		switch (event.type) {
@@ -59,24 +57,7 @@ const calendar = {
 				break;
 			// custom events
 			case "toggle-sidebar":
-				isOn = Self.els.sidebar.hasClass("show");
-				width = Sidebar.els.sidebar.width();
-
-				if (isOn) {
-					window.width -= width;
-
-					Self.els.sidebar.cssSequence("!show", "transitionend", el =>
-						// update now line
-						Events.dispatch({ type: "update-now-line" }));
-				} else {
-					window.width += width;
-
-					Self.els.sidebar.cssSequence("show", "transitionend", el =>
-						// update now line
-						Events.dispatch({ type: "update-now-line" }));
-				}
-
-				return !isOn;
+				return Self.sidebar.dispatch(event);
 			case "switch-view":
 				View.switch(event.arg);
 				return true;
@@ -91,7 +72,8 @@ const calendar = {
 				View.go(new Date(date[0], date[1], 1));
 				break;
 		}
-	}
+	},
+	sidebar: @import "./modules/sidebar.js",
 };
 
 window.exports = calendar;
