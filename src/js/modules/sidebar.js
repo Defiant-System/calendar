@@ -22,7 +22,8 @@
 			date,
 			width,
 			isOn,
-			htm;
+			htm,
+			el;
 		switch (event.type) {
 			case "toggle-sidebar":
 				isOn = Self.els.sidebar.hasClass("show");
@@ -52,6 +53,10 @@
 				Self.els.miniCal.append(htm.join(""));
 				break;
 			case "toggle-calendars":
+				el = $(event.target);
+				if (el.attr("type") !== "checkbox") return;
+				console.log(event);
+				break;
 			case "sidebar-go-prev":
 			case "sidebar-go-next":
 				console.log(event);
