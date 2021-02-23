@@ -12,6 +12,7 @@
 
 // applies to window body
 background: #fcfcfc;
+overflow: visible;
 transition: width 150ms ease-in-out;
 
 content {
@@ -57,6 +58,7 @@ content {
 	.sidebar {
 		position: relative;
 		width: 0;
+		overflow: hidden;
 		transition: width 150ms ease-in-out;
 
 		&.show {
@@ -349,8 +351,7 @@ content {
 	background: rgba(240,240,240,.85);
 	backdrop-filter: blur(21px);
 	position: absolute;
-	top: 430px;
-	left: 556px;
+	z-index: 11;
 	width: 240px;
 	padding: 15px 17px 17px;
 	border-radius: 13px;
@@ -448,6 +449,7 @@ content {
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		pointer-events: none;
 
 		&.event-title {
 			font-weight: 700;
