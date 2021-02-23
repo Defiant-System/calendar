@@ -73,16 +73,18 @@ const calendar = {
 				View.go(new Date(date[0], date[1], 1));
 				break;
 			default:
-				if (event.el) {
-					pEl = event.el.parents("div[data-area]");
+				if (event.target) {
+					el = $(event.target);
+					pEl = el.parents("div[data-area]");
 					name = pEl.attr("data-area");
 					if (pEl.length && Self[name].dispatch) {
-						Self[name].dispatch(event);
+						Self[name].dispatch({ ...event, el });
 					}
 				}
 		}
 	},
 	sidebar: @import "./modules/sidebar.js",
+	popup: @import "./modules/popup.js",
 };
 
 window.exports = calendar;

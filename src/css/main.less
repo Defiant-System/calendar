@@ -349,7 +349,7 @@ content {
 	background: rgba(240,240,240,.85);
 	backdrop-filter: blur(21px);
 	position: absolute;
-	top: 230px;
+	top: 430px;
 	left: 556px;
 	width: 240px;
 	padding: 15px 17px 17px;
@@ -633,7 +633,8 @@ content {
 			overflow-y: auto;
 			display: flex;
 
-			> div:not(.now-line) {
+			.col-hours,
+			.col-day {
 				height: 1055px;
 			}
 		}
@@ -760,7 +761,8 @@ content {
 				overflow-y: auto;
 				display: flex;
 
-				> div:not(.now-line) {
+				.col-hours,
+				.col-day {
 					height: 1055px;
 				}
 
