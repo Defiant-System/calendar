@@ -345,7 +345,54 @@ content {
 	}
 }
 
-.days-wrapper{
+.popup-event {
+	background: rgba(240,240,240,.85);
+	backdrop-filter: blur(21px);
+	position: absolute;
+	top: 230px;
+	left: 556px;
+	width: 240px;
+	padding: 15px 17px 17px;
+	border-radius: 13px;
+	box-shadow: 0 0 0 1px rgba(0,0,0,.1),
+				0 3px 19px rgba(0,0,0,.3);
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 66px;
+		left: -16px;
+		width: 0;
+		height: 0;
+		border-top: 12px solid transparent;
+		border-bottom: 12px solid transparent;
+		border-right: 15px solid rgba(0,0,0,.15);
+		filter: drop-shadow(-3px 0 3px rgba(0,0,0,.75));
+	}
+
+	&:after {
+		content: "";
+		position: absolute;
+		top: 66px;
+		left: -14px;
+		width: 0;
+		height: 0;
+		border-top: 12px solid transparent;
+		border-bottom: 12px solid transparent;
+		border-right: 14px solid rgba(240,240,240,.95);
+	}
+
+	hr {
+		margin: 11px -17px;
+	}
+
+	h3 {
+		padding: 0;
+		color: #333;
+	}
+}
+
+.days-wrapper {
 	.col-hours {
 		width: 59px;
 		padding: 43px 9px 0 0;

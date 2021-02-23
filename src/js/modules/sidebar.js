@@ -11,10 +11,11 @@
 			miniCal: window.find(".mini-calendar"),
 		};
 
+		// auto render sídebar contents
 		this.dispatch({ type: "render-calendar" });
 
 		// temp
-		setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
+		// setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
 	},
 	dispatch(event) {
 		let APP = calendar,
