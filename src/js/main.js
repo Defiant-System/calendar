@@ -43,6 +43,7 @@ const calendar = {
 			date,
 			month,
 			isOn,
+			width,
 			el;
 		// console.log(event);
 		switch (event.type) {
@@ -59,10 +60,21 @@ const calendar = {
 			// custom events
 			case "toggle-sidebar":
 				isOn = Self.els.sidebar.hasClass("show");
+				width = Sidebar.els.sidebar.width();
 
-				Self.els.sidebar.cssSequence((isOn ? "!" : "") +"show", "transitionend", el =>
-					// update now line
-					Events.dispatch({ type: "update-now-line" }));
+				if (isOn) {
+					window.width -= width;
+
+					Self.els.sidebar.cssSequence("!show", "transitionend", el =>
+						// update now line
+						Events.dispatch({ type: "update-now-line" }));
+				} else {
+					window.width += width;
+
+					Self.els.sidebar.cssSequence("show", "transitionend", el =>
+						// update now line
+						Events.dispatch({ type: "update-now-line" }));
+				}
 
 				return !isOn;
 			case "switch-view":

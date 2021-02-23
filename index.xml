@@ -5,10 +5,10 @@
 		<meta name="author" value="Hakan Bilgin" namespace="ant"/>
 		<meta name="license" value="AGPL-3.0"/>
 		<meta name="repository" value="https://github.com/Defiant-System/calendar"/>
-		<meta name="width" value="960" min="720"/>
-		<meta name="height" value="645" min="460"/>
+		<meta name="width" value="900" min="720"/>
+		<meta name="height" value="630" min="460"/>
 		<meta name="top" value="160"/>
-		<meta name="left" value="180"/>
+		<meta name="left" value="90"/>
 		<meta name="minimize"/>
 		<meta name="maximize"/>
 		<meta name="resize"/>

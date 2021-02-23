@@ -53,6 +53,7 @@ const Events = {
 				break;
 			case "update-now-line":
 				el = Self.els.main.find(".days-wrapper .now-line");
+				
 				// prevents multiple timers
 				clearTimeout(Self.lineTimer);
 				// stop if there is no now-line in DOM
