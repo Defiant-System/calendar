@@ -60,7 +60,7 @@ content {
 		transition: width 150ms ease-in-out;
 
 		&.show {
-			width: 239px;
+			width: 223px;
 		}
 
 		hr {
@@ -76,7 +76,7 @@ content {
 			top: 0;
 			right: 0;
 			bottom: 0;
-			width: 239px;
+			width: 223px;
 			background: var(--sidebar-bg);
 			border-right: 1px solid rgba(0,0,0,.1);
 			padding: 7px 9px;
@@ -121,6 +121,8 @@ content {
 					}
 
 					i {
+						position: relative;
+						z-index: 1;
 						font-style: normal;
 					}
 				}
@@ -157,6 +159,24 @@ content {
 						&.non-day {
 							color: #c2c2c2;
 							font-weight: 300;
+						}
+
+						&.today {
+							position: relative;
+							color: #fff;
+
+							&:before {
+								content: "";
+								background: @today;
+								position: absolute;
+								top: 0;
+								right: auto;
+								left: 50%;
+								width: 20px;
+								height: 20px;
+								border-radius: 50%;
+								margin-left: -10px;
+							}
 						}
 					}
 				}
@@ -847,6 +867,8 @@ content {
 			padding: 5px 0 4px;
 
 			i {
+				position: relative;
+				z-index: 1;
 				font-style: normal;
 			}
 		}
@@ -882,7 +904,6 @@ content {
 						left: 1px;
 						right: 1px;
 						bottom: 1px;
-						z-index: -1;
 						border-radius: 3px;
 					}
 
@@ -953,7 +974,6 @@ content {
 						left: 50%;
 						width: 20px;
 						height: 20px;
-						z-index: -1;
 						border-radius: 50%;
 						margin-left: -10px;
 					}

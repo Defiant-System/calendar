@@ -8,9 +8,10 @@ const Sidebar = {
 			miniCal: window.find(".mini-calendar"),
 		};
 
-		// temp
 		this.dispatch({ type: "render-calendar" });
-		// window.find(".toolbar-tool_").get(0).trigger("click");
+
+		// temp
+		window.find(".toolbar-tool_").get(0).trigger("click");
 	},
 	dispatch(event) {
 		let Self = Sidebar,
