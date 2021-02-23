@@ -2,7 +2,7 @@
 
 <xsl:template name="popup-event">
 	<div class="popup-event">
-		<h3>New Event</h3>
+		<h3><xsl:value-of select="@title"/></h3>
 		Add Location
 		<hr/>
 		25 Feb 2021 09:15 to 11:45

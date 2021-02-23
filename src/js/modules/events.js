@@ -33,7 +33,7 @@ const Events = {
 				break;
 			case "populate-legend-holidays":
 				// iterate holiday nodes
-				xPath = `//Holidays/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				xPath = `//Holidays/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.data.selectNodes(xPath).map(node => {
 					let date = new Date(+node.getAttribute("starts")),
 						wDate = date.getDate(),
@@ -78,7 +78,7 @@ const Events = {
 				// root DOM element
 				el = Self.els.year;
 				// iterate holiday nodes
-				xPath = `//Holidays/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				xPath = `//Holidays/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.data.selectNodes(xPath).map(node => {
 					let date = new Date(+node.getAttribute("starts")),
 						iMonth = date.getFullYear() +"-"+ date.getMonth(),
@@ -93,7 +93,7 @@ const Events = {
 						});
 				});
 				// iterate event nodes
-				xPath = `//Events/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				xPath = `//Events/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.data.selectNodes(xPath).map(node => {
 					let starts = +node.getAttribute("starts"),
 						date = new Date(starts),
@@ -114,24 +114,26 @@ const Events = {
 					pipe[el.find("i").html()] = { el, htm: [] };
 				});
 				// iterate holiday nodes
-				xPath = `//Holidays/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				xPath = `//Holidays/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.data.selectNodes(xPath).map(node => {
-					let date = new Date(+node.getAttribute("starts")),
+					let id = node.getAttribute("id"),
+						date = new Date(+node.getAttribute("starts")),
 						iDate = date.getDate(),
 						title = node.getAttribute("title"),
 						color = node.getAttribute("calId");
-					pipe[iDate].htm.push(`<div class="entry ${color}">${title}</div>`);
+					pipe[iDate].htm.push(`<div data-id="${id}" class="entry ${color}">${title}</div>`);
 				});
 				// iterate event nodes
-				xPath = `//Events/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				xPath = `//Events/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.data.selectNodes(xPath).map(node => {
-					let starts = +node.getAttribute("starts"),
+					let id = node.getAttribute("id"),
+						starts = +node.getAttribute("starts"),
 						date = new Date(starts),
 						dayDate = date.getDate(),
 						color = node.getAttribute("calId"),
 						title = node.getAttribute("title");
 
-					pipe[dayDate].htm.push(`<div class="entry ${color}">${title}</div>`);
+					pipe[dayDate].htm.push(`<div data-id="${id}" class="entry ${color}">${title}</div>`);
 				});
 				// expose rendered event html to DOM
 				Object.keys(pipe).map(key => {
@@ -153,9 +155,10 @@ const Events = {
 					pipe[el.data("date")] = { el, htm: [] };
 				});
 				// iterate event nodes
-				xPath = `//Events/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				xPath = `//Events/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.data.selectNodes(xPath).map(node => {
-					let starts = +node.getAttribute("starts"),
+					let id = node.getAttribute("id"),
+						starts = +node.getAttribute("starts"),
 						ends = +node.getAttribute("ends"),
 						dateStart = new Date(starts),
 						dateEnd = new Date(ends),
@@ -171,7 +174,7 @@ const Events = {
 						top = (startHours * hHeight) + (startMinutes / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight;
 
-					pipe[dayDate].htm.push(`<div class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
+					pipe[dayDate].htm.push(`<div data-id="${id}" class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
 					pipe[dayDate].htm.push(`<span class="event-time">${timeStarts}</span>`); // —${timeEnds}
 					pipe[dayDate].htm.push(`<span class="event-title">${title}</span>`);
 					pipe[dayDate].htm.push(`</div>`);
@@ -196,9 +199,10 @@ const Events = {
 				// single pipe element
 				pipe = { htm: [] };
 				// iterate event nodes
-				xPath = `//Events/i[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				xPath = `//Events/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.data.selectNodes(xPath).map(node => {
-					let starts = +node.getAttribute("starts"),
+					let id = node.getAttribute("id"),
+						starts = +node.getAttribute("starts"),
 						ends = +node.getAttribute("ends"),
 						dateStart = new Date(starts),
 						dateEnd = new Date(ends),
@@ -213,7 +217,7 @@ const Events = {
 						top = (dateStart.getHours() * hHeight) + (dateStart.getMinutes() / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight;
 
-					pipe.htm.push(`<div class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
+					pipe.htm.push(`<div data-id="${id}" class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
 					pipe.htm.push(`<span class="event-time">${timeStarts}</span>`); // —${timeEnds}
 					pipe.htm.push(`<span class="event-title">${title}</span>`);
 					pipe.htm.push(`</div>`);

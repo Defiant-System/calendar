@@ -15,24 +15,29 @@ const calendar = {
 		// TODO: move data to storage files
 		this.data = window.bluePrint;
 
-		// initiate objects and view
-		View.init();
-		Render.init();
-		Events.init();
-		// init sub objects
-		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
 
 		// parse holidays
 		let xNodes = this.data.selectNodes(`//Holidays/*`);
 		Events.dispatch({ type: "parse-holidays", xNodes });
+		// parse events, set ID's
+		this.data.selectNodes(`//event[not(@id)]`).map((node, index) =>
+			node.setAttribute("id", index));
 		// parse events (temp)
-		this.data.selectNodes(`//Events/*[not(@starts)]`).map(node => {
+		this.data.selectNodes(`//event[not(@starts)]`).map(node => {
 			let starts = new Date(node.getAttribute("date-starts")),
 				ends = new Date(node.getAttribute("date-ends"));
 
 			node.setAttribute("starts", starts.valueOf());
 			node.setAttribute("ends", ends.valueOf());
 		});
+
+
+		// initiate objects and view
+		View.init();
+		Render.init();
+		Events.init();
+		// init sub objects
+		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
 
 		// initiate first view
 		window.find(".toolbar-tool_").get(5).trigger("click");

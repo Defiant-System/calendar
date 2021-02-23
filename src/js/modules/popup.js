@@ -11,14 +11,19 @@
 	dispatch(event) {
 		let APP = calendar,
 			Self = APP.popup,
-			htm,
+			append,
 			el;
 		switch (event.type) {
 			case "popup-event-details":
+				// DOM element to append popup
+				append = event.el.parents(".days-wrapper");
+				// remove potential existing popup
+				append.find(".popup-event").remove();
+				// render event details
 				window.render({
 					template: "popup-event",
-					// match: `//*`,
-					append: event.el.parents(".days-wrapper"),
+					match: `//event[@id="${event.el.data("id")}"]`,
+					append,
 				});
 				break;
 		}

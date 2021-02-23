@@ -1,43 +1,43 @@
 
 <Holidays>
-	<i date="2021-01-01" title="Nyårsdagen" />
-	<i date="2021-01-06" title="Trettondedag jul" />
-	<i date="2021-02-14" title="Alla hjärtans dag" />
-	<i date="2021-02-16" title="Fettisdagen" />
-	<i date="2021-03-08" title="Internationella kvinnodagen" />
-	<i date="2021-03-28" title="Sommartid" />
-	<i date="2021-04-01" title="Skärtorsdagen" />
-	<i date="2021-04-01" title="1 april" />
-	<i date="2021-04-02" title="Långfredagen" />
-	<i date="2021-04-03" title="Påskafton" />
-	<i date="2021-04-04" title="Påskdagen" />
-	<i date="2021-04-05" title="Annandag påsk" />
-	<i date="2021-05-01" title="Första maj" />
-	<i date="2021-05-13" title="Kristi Himmelsfärdsdag" />
-	<i date="2021-05-23" title="Pingstdagen" />
-	<i date="2021-05-24" title="Annandag pingst" />
-	<i date="2021-05-30" title="Mors dag" />
-	<i date="2021-07-06" title="Sveriges nationaldag" />
-	<i date="2021-07-25" title="Midsommarafton" />
-	<i date="2021-07-26" title="Midsommardagen" />
-	<i date="2021-10-31" title="Halloween" />
-	<i date="2021-10-31" title="Vintertid" />
-	<i date="2021-11-06" title="Alla helgons dag" />
-	<i date="2021-11-14" title="Fars dag" />
-	<i date="2021-12-13" title="Lucia" />
-	<i date="2021-12-24" title="Julafton" />
-	<i date="2021-12-25" title="Juldagen" />
-	<i date="2021-12-26" title="Annandag jul" />
-	<i date="2021-12-31" title="Nyårsafton" />
+	<event date="2021-01-01" title="Nyårsdagen" />
+	<event date="2021-01-06" title="Trettondedag jul" />
+	<event date="2021-02-14" title="Alla hjärtans dag" />
+	<event date="2021-02-16" title="Fettisdagen" />
+	<event date="2021-03-08" title="Internationella kvinnodagen" />
+	<event date="2021-03-28" title="Sommartid" />
+	<event date="2021-04-01" title="Skärtorsdagen" />
+	<event date="2021-04-01" title="1 april" />
+	<event date="2021-04-02" title="Långfredagen" />
+	<event date="2021-04-03" title="Påskafton" />
+	<event date="2021-04-04" title="Påskdagen" />
+	<event date="2021-04-05" title="Annandag påsk" />
+	<event date="2021-05-01" title="Första maj" />
+	<event date="2021-05-13" title="Kristi Himmelsfärdsdag" />
+	<event date="2021-05-23" title="Pingstdagen" />
+	<event date="2021-05-24" title="Annandag pingst" />
+	<event date="2021-05-30" title="Mors dag" />
+	<event date="2021-07-06" title="Sveriges nationaldag" />
+	<event date="2021-07-25" title="Midsommarafton" />
+	<event date="2021-07-26" title="Midsommardagen" />
+	<event date="2021-10-31" title="Halloween" />
+	<event date="2021-10-31" title="Vintertid" />
+	<event date="2021-11-06" title="Alla helgons dag" />
+	<event date="2021-11-14" title="Fars dag" />
+	<event date="2021-12-13" title="Lucia" />
+	<event date="2021-12-24" title="Julafton" />
+	<event date="2021-12-25" title="Juldagen" />
+	<event date="2021-12-26" title="Annandag jul" />
+	<event date="2021-12-31" title="Nyårsafton" />
 </Holidays>
 
 <Events>
-	<i date-starts="2021-02-03 09:00" date-ends="2021-02-03 12:00" calId="purple" title="Birthday"/>
-	<i date-starts="2021-02-22 10:30" date-ends="2021-02-22 11:30" calId="cyan" title="Another event"/>
-	<i date-starts="2021-02-23 12:15" date-ends="2021-02-23 14:00" calId="yellow" title="Example event"/>
-	<i date-starts="2021-02-24 14:00" date-ends="2021-02-24 16:30" calId="green" title="Another very long event title"/>
-	<i date-starts="2021-02-25 09:00" date-ends="2021-02-25 13:15" calId="purple" title="Another event"/>
-	<i date-starts="2021-02-26 10:00" date-ends="2021-02-26 11:00" calId="blue" title="Another event"/>
-	<i date-starts="2021-02-26 13:00" date-ends="2021-02-26 15:30" calId="orange" title="Another event"/>
-	<i date-starts="2021-02-27 14:00" date-ends="2021-02-27 16:00" calId="blue" title="Example event"/>
+	<event date-starts="2021-02-03 09:00" date-ends="2021-02-03 12:00" calId="purple" title="Birthday"/>
+	<event date-starts="2021-02-22 10:30" date-ends="2021-02-22 11:30" calId="cyan" title="Another event"/>
+	<event date-starts="2021-02-23 12:15" date-ends="2021-02-23 14:00" calId="yellow" title="Example event"/>
+	<event date-starts="2021-02-24 14:00" date-ends="2021-02-24 16:30" calId="green" title="Another very long event title"/>
+	<event date-starts="2021-02-25 09:00" date-ends="2021-02-25 13:15" calId="purple" title="Another event"/>
+	<event date-starts="2021-02-26 10:00" date-ends="2021-02-26 11:00" calId="blue" title="Another event"/>
+	<event date-starts="2021-02-26 13:00" date-ends="2021-02-26 15:30" calId="orange" title="Another event"/>
+	<event date-starts="2021-02-27 14:00" date-ends="2021-02-27 16:00" calId="blue" title="Example event"/>
 </Events>
