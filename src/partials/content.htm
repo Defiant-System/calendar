@@ -5,7 +5,13 @@
 	<div class="sidebar" data-area="sidebar">
 		<div class="sidebar-wrapper">
 			<div class="mini-calendar">
-				<!-- sidebar calendar HTML goes here -->
+				<div class="cal-nav">
+					<span class="icon-chevron-left" data-click="sidebar-go-prev"></span>
+					<span class="icon-chevron-right" data-click="sidebar-go-next"></span>
+				</div>
+				<div class="cal-reel">
+					<!-- sidebar calendar HTML goes here -->
+				</div>
 			</div>
 
 			<hr />
@@ -14,19 +20,19 @@
 				<h3>Calendars</h3>
 				<ul>
 					<li>
-						<span class="form-checkbox_ blue"><input type="checkbox" id="calendar-blue" checked/><i></i></span>
+						<span class="form-checkbox_ blue"><input type="checkbox" id="calendar-blue" data-change="toggle-calendars" checked/><i></i></span>
 						<label for="calendar-blue">Swedish Holidays</label>
 					</li>
 					<li>
-						<span class="form-checkbox_ green"><input type="checkbox" id="calendar-green" checked/><i></i></span>
+						<span class="form-checkbox_ green"><input type="checkbox" id="calendar-green" data-change="toggle-calendars" checked/><i></i></span>
 						<label for="calendar-green">Birthdays</label>
 					</li>
 					<li>
-						<span class="form-checkbox_ purple"><input type="checkbox" id="calendar-purple" checked/><i></i></span>
+						<span class="form-checkbox_ purple"><input type="checkbox" id="calendar-purple" data-change="toggle-calendars" checked/><i></i></span>
 						<label for="calendar-purple">Home</label>
 					</li>
 					<li>
-						<span class="form-checkbox_ cyan"><input type="checkbox" id="calendar-cyan" checked/><i></i></span>
+						<span class="form-checkbox_ cyan"><input type="checkbox" id="calendar-cyan" data-change="toggle-calendars" checked/><i></i></span>
 						<label for="calendar-cyan">Work</label>
 					</li>
 				</ul>

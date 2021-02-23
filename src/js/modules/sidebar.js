@@ -14,7 +14,7 @@
 		this.dispatch({ type: "render-calendar" });
 
 		// temp
-		window.find(".toolbar-tool_").get(0).trigger("click");
+		setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
 	},
 	dispatch(event) {
 		let APP = calendar,
@@ -51,6 +51,7 @@
 
 				Self.els.miniCal.append(htm.join(""));
 				break;
+			case "toggle-calendars":
 			case "sidebar-go-prev":
 			case "sidebar-go-next":
 				console.log(event);

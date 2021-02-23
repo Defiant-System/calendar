@@ -41,7 +41,8 @@ const calendar = {
 		let Self = calendar,
 			date,
 			month,
-			isOn,
+			name,
+			pEl,
 			el;
 		// console.log(event);
 		switch (event.type) {
@@ -71,6 +72,14 @@ const calendar = {
 				View.switch("month", true);
 				View.go(new Date(date[0], date[1], 1));
 				break;
+			default:
+				if (event.el) {
+					pEl = event.el.parents("div[data-area]");
+					name = pEl.attr("data-area");
+					if (pEl.length && Self[name].dispatch) {
+						Self[name].dispatch(event);
+					}
+				}
 		}
 	},
 	sidebar: @import "./modules/sidebar.js",

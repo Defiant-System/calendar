@@ -83,11 +83,56 @@ content {
 		}
 
 		.mini-calendar {
-			// padding-bottom: 3px;
-			// margin-bottom: 11px;
-			// border-bottom: 1px solid rgba(0,0,0,.1);
+			position: relative;
+
+			.cal-nav {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				z-index: 2;
+				height: 23px;
+				font-size: 0;
+				text-align: right;
+				padding: 7px 0 0;
+
+				.icon-chevron-left,
+				.icon-chevron-right {
+					display: inline-block;
+					width: 17px;
+					height: 17px;
+					padding: 3px;
+					cursor: pointer;
+					border-radius: 50%;
+					margin-left: 1px;
+
+					&:hover {
+						background-color: rgba(0,0,0,.15);
+					}
+
+					&:active {
+						background-color: rgba(0,0,0,.25);
+					}
+
+					&:after {
+						content: "";
+						display: block;
+						position: relative;
+						width: 11px;
+						height: 11px;
+						opacity: .5;
+						background: url(~/icons/icon-chevron-right.png);
+					}
+
+					&.icon-chevron-left:after {
+						left: -1px;
+						background: url(~/icons/icon-chevron-left.png);
+					}
+				}
+			}
 
 			h2 {
+				position: relative;
 				font-size: 21px;
 				text-align: left;
 				padding: 5px 3px 0;
