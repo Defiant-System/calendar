@@ -35,11 +35,12 @@ const Events = {
 				// iterate holiday nodes
 				xPath = `//Holidays/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.data.selectNodes(xPath).map(node => {
-					let date = new Date(+node.getAttribute("starts")),
+					let id = node.getAttribute("id"),
+						date = new Date(+node.getAttribute("starts")),
 						wDate = date.getDate(),
 						title = node.getAttribute("title"),
 						color = node.getAttribute("calId"),
-						htm = `<div class="event ${color}">${title}</div>`;
+						htm = `<div data-id="${id}"class="event ${color}">${title}</div>`;
 					
 					event.el.find(`.day-legends b[data-date="${wDate}"]`).append(htm);
 				});

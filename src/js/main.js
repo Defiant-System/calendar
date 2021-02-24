@@ -47,6 +47,7 @@ const calendar = {
 			date,
 			month,
 			name,
+			target,
 			pEl,
 			el;
 		// console.log(event);
@@ -79,11 +80,11 @@ const calendar = {
 				break;
 			default:
 				if (event.target) {
-					el = $(event.target);
-					pEl = el.parents("div[data-area]");
+					target = $(event.target);
+					pEl = target.parents("div[data-area]");
 					name = pEl.attr("data-area");
 					if (pEl.length && Self[name].dispatch) {
-						Self[name].dispatch({ ...event, el });
+						Self[name].dispatch({ ...event, target });
 					}
 				}
 		}
