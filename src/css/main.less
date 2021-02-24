@@ -357,6 +357,8 @@ content {
 	border-radius: 13px;
 	box-shadow: 0 0 0 1px rgba(0,0,0,.1),
 				0 3px 19px rgba(0,0,0,.3);
+	transform-origin: 0 50%;
+	animation: pop 120ms linear forwards;
 
 	&:before {
 		content: "";
@@ -1094,6 +1096,13 @@ content {
 			}
 		}
 	}
+}
+
+
+@keyframes pop {
+	0%   { transform: scale(.25); opacity: 0; }
+	91%  { transform: scale(1.1); opacity: 1; }
+	100% { transform: scale(1); opacity: 1; }
 }
 
 
