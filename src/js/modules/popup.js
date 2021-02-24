@@ -57,21 +57,16 @@
 		}
 	},
 	getPosition(el, rEl) {
-		let pos = {
+		let pEl = el,
+			pos = {
 				top: el.offsetHeight / 2,
 				left: el.offsetWidth + 11,
-			},
-			pEl = el;
-		
-		while (pEl.parentNode !== rEl) {
+			};
+		while (pEl !== rEl) {
 			pos.top += (pEl.offsetTop - pEl.parentNode.scrollTop);
 			pos.left += (pEl.offsetLeft - pEl.parentNode.scrollLeft);
-			pEl = pEl.parentNode;
+			pEl = pEl.offsetParent;
 		}
-
-		console.log(pEl);
-		console.log(pos);
-
 		return pos;
 	}
 }
