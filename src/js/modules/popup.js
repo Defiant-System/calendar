@@ -45,7 +45,7 @@
 
 				// position popup
 				pos = Self.getPosition(event.target[0], append[0]);
-				pos.top -= (popup.height() / 2);
+				pos.top -= 47;
 
 				// add suffix
 				for (let key in pos) pos[key] += "px";
