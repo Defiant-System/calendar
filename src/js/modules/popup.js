@@ -18,6 +18,7 @@
 			top,
 			left,
 			popup,
+			pos,
 			pEl,
 			el;
 		switch (event.type) {
@@ -29,6 +30,8 @@
 				break;
 			// custom events
 			case "popup-event-details":
+				if (!event.target.hasClass("event")) return;
+				
 				// DOM element to append popup
 				Self.els.root = append = event.el;
 				Self.els.wrapper = wrapper = append.find(".days-wrapper");
@@ -41,10 +44,11 @@
 				popup = window.render({ template: "popup-event", match, append });
 
 				// position popup
-				// pEl = event.target.parent();
-				// top = (event.target.prop("offsetTop") - wrapper.prop("scrollTop")) +"px";
-				// left = (pEl.prop("offsetLeft") + pEl.prop("offsetWidth") + 11) +"px";
-				let pos = Self.getPosition(event.target, append);
+				pos = Self.getPosition(event.target[0], append[0]);
+				pos.top -= (popup.height() / 2);
+
+				// add suffix
+				for (let key in pos) pos[key] += "px";
 				popup.css(pos);
 
 				// bind event handler
@@ -52,14 +56,18 @@
 				break;
 		}
 	},
-	getPosition(el, pEl) {
-		let top = 300,
-			left = 300,
-			pos = { top, left };
-
-
-		// add suffix
-		for (let key in pos) pos[key] += "px";
+	getPosition(el, rEl) {
+		let pos = {
+				top: el.offsetHeight / 2,
+				left: el.offsetWidth + 11,
+			},
+			pEl = el;
+		
+		while (pEl.parentNode !== rEl) {
+			pos.top += (pEl.offsetTop - pEl.parentNode.scrollTop);
+			pos.left += (pEl.offsetLeft - pEl.parentNode.scrollLeft);
+			pEl = pEl.parentNode;
+		}
 
 		return pos;
 	}
