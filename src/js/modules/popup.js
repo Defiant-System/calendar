@@ -31,7 +31,7 @@
 			// custom events
 			case "popup-event-details":
 				if (!event.target.hasClass("event")) return;
-				
+
 				// DOM element to append popup
 				Self.els.root = append = event.el;
 				Self.els.wrapper = wrapper = append.find(".days-wrapper");
@@ -68,6 +68,9 @@
 			pos.left += (pEl.offsetLeft - pEl.parentNode.scrollLeft);
 			pEl = pEl.parentNode;
 		}
+
+		console.log(pEl);
+		console.log(pos);
 
 		return pos;
 	}
