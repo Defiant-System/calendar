@@ -899,13 +899,13 @@ content {
 
 				.entries-wrapper {
 					position: absolute;
-					top: 23px;
+					top: 24px;
 					left: 0;
 					right: 0;
 					bottom: 2px;
 					overflow: hidden;
 					font-size: 12px;
-					padding: 0 3px;
+					padding: 0 1px;
 
 					.entry {
 						position: relative;
@@ -914,7 +914,7 @@ content {
 						white-space: nowrap;
 						text-overflow: ellipsis;
 						overflow: hidden;
-						padding: 2px 0 2px 13px;
+						padding: 2px 2px 2px 15px;
 						margin-bottom: 1px;
 						border-radius: 3px;
 
@@ -923,7 +923,7 @@ content {
 							background: darken(#c8e6fc, 13%);
 							position: absolute;
 							top: 3px;
-							left: 1px;
+							left: 3px;
 							width: 9px;
 							height: 9px;
 							border-radius: 50%;
@@ -943,6 +943,13 @@ content {
 						&.purple:before { background: darken(@purple, 11%); }
 						&.red:before    { background: darken(@red, 11%); }
 						&.cyan:before   { background: darken(@cyan, 21%); }
+
+						&.active {
+							background: #6da6f9;
+							color: #fff;
+
+							&:before { background: #fff }
+						}
 					}
 				}
 			}
