@@ -4,9 +4,7 @@
 {
 	init() {
 		// fast references
-		this.els = {
-			content: window.find("content"),
-		};
+		this.els = {};
 	},
 	dispatch(event) {
 		let APP = calendar,

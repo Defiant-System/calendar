@@ -3,25 +3,85 @@ const Events = {
 	init() {
 		// fast references
 		this.els = {
+			doc: $(document),
 			main: window.find(".main"),
 			year: window.find(".view-year"),
 			month: window.find(".view-month"),
 			week: window.find(".view-week"),
 			day: window.find(".view-day"),
 		};
+
+		// bind event handlers
+		this.els.week.on("mousedown", this.dispatch);
 	},
 	dispatch(event) {
 		let APP = calendar,
 			Self = Events,
+			Drag = Self.drag,
 			Nodes = event.xNodes,
 			hHeight = 44,
 			pipe = {},
 			xHolidays,
 			xPath,
 			now,
+			top, left, width, height,
+			clone,
 			el;
 		// console.log(opt);
 		switch (event.type) {
+			// native events
+			case "mousedown":
+				// prevent default behaviour
+				event.preventDefault();
+				// origin of event
+				el = $(event.target);
+
+				// clone event element
+				clone = event.target.cloneNode(true);
+				clone = el.parents(".days-wrapper").append(clone);
+				clone
+					.addClass("clone")
+					.css({
+						left: (el.parent().prop("offsetLeft") + 1) +"px",
+						width: el.width() +"px",
+						height: el.height() +"px",
+					});
+
+				// prepare drag object
+				Self.drag = {
+					clickX: event.clientX,
+					clickY: event.clientY,
+					clone,
+				};
+
+				if (el.hasClass("event")) {
+					Self.drag.orgEl = el.addClass("ghost");
+					Self.drag.offsetY = el.prop("offsetTop");
+				}
+
+				// bind event handlers
+				Self.els.doc.on("mousemove mouseup", Self.dispatch);
+				break;
+			case "mousemove":
+				top = event.clientY - Drag.clickY + Drag.offsetY;
+				left = event.clientX - Drag.clickX;
+				
+				if (Drag.clone) {
+					Drag.clone.css({
+						top: top +"px",
+						// left: left +"px",
+					});
+				}
+				break;
+			case "mouseup":
+				// reset original event element
+				Drag.orgEl.removeClass("ghost");
+				// clean up DOM
+				Drag.clone.remove();
+				// unbind event handlers
+				Self.els.doc.off("mousemove mouseup", Self.dispatch);
+				break;
+			// custom events
 			case "parse-holidays":
 				// iterate holidays nodes
 				Nodes.map(node => {
