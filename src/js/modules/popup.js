@@ -45,7 +45,7 @@
 
 				// position popup
 				pos = Self.getPosition(event.target[0], append[0]);
-				pos.top -= 47;
+				pos.top -= 43;
 
 				// add suffix
 				for (let key in pos) pos[key] += "px";
@@ -60,7 +60,7 @@
 		let pEl = el,
 			pos = {
 				top: el.offsetHeight / 2,
-				left: el.offsetWidth + 11,
+				left: el.offsetWidth + 15,
 			};
 		while (pEl !== rEl) {
 			pos.top += (pEl.offsetTop - pEl.parentNode.scrollTop);
