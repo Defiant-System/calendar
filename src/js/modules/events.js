@@ -25,7 +25,7 @@ const Events = {
 			xPath,
 			now,
 			cols,
-			top, left, width, height, pos,
+			top, left, width, height, pos, type,
 			clone,
 			pEl,
 			el;
@@ -43,11 +43,16 @@ const Events = {
 					// TODO: append new ghost event
 					return;
 				}
-
-				top = el.prop("offsetTop");
+				// pos & dim
+				top = el.prop("offsetTop") + 1;
 				left = pEl.prop("offsetLeft") + 1;
 				width = el.width();
 				height = el.height();
+				
+				// type of operation
+				type = "move";
+				if (event.offsetY < 5) type = "n-resize";
+				if (event.offsetY > height - 5) type = "s-resize";
 
 				// clone event element
 				clone = event.target.cloneNode(true);
@@ -56,17 +61,18 @@ const Events = {
 
 				// collect info about columns
 				cols = pEl.parent().find(".col-day").map(el =>
-					({ left: el.offsetLeft, width: el.offsetWidth - 1 }));
+					({ left: el.offsetLeft + 1, width: el.offsetWidth - 2 }));
 
 				// prepare drag object
 				Self.drag = {
+					timeEl: el.find(".event-time"),
 					clickX: event.clientX,
 					clickY: event.clientY,
 					org: { top, left, width, height },
 					snapY: 11,
 					cols,
 					clone,
-					timeEl: el.find(".event-time"),
+					type,
 				};
 
 				if (el.hasClass("event")) {
@@ -77,18 +83,34 @@ const Events = {
 				Self.els.doc.on("mousemove mouseup", Self.dispatch);
 				break;
 			case "mousemove":
-				top = event.clientY - Drag.clickY + Drag.org.top;
-				top -= top % Drag.snapY;
-
-				pos = event.clientX - Drag.clickX + Drag.org.left;
-				pos = Drag.cols.reduce((prev, curr) =>
-					Math.abs(curr.left - pos) < Math.abs(prev.left - pos) ? curr : prev);
-				left = pos.left;
-				width = pos.width;
-
-				if (Drag.clone) {
-					Drag.clone.css({ top, left, width });
+				// type of operation
+				switch (Drag.type) {
+					case "n-resize":
+						top = event.clientY - Drag.clickY + Drag.org.top;
+						top -= top % Drag.snapY;
+						left = Drag.org.left;
+						width = Drag.org.width;
+						height = Drag.org.height + (Drag.org.top - top);
+						break;
+					case "s-resize":
+						top = Drag.org.top;
+						left = Drag.org.left;
+						width = Drag.org.width;
+						height = event.clientY - Drag.clickY + Drag.org.height;
+						height -= height % Drag.snapY;
+						break;
+					case "move":
+						pos = event.clientX - Drag.clickX + Drag.org.left;
+						pos = Drag.cols.reduce((prev, curr) => Math.abs(curr.left - pos) < Math.abs(prev.left - pos) ? curr : prev);
+						top = event.clientY - Drag.clickY + Drag.org.top;
+						top -= top % Drag.snapY;
+						left = pos.left;
+						width = pos.width;
+						height = Drag.org.height;
+						break;
 				}
+				// UI update
+				Drag.clone.css({ top, left, width, height });
 				break;
 			case "mouseup":
 				// reset original event element
