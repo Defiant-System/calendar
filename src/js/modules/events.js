@@ -24,9 +24,9 @@ const Events = {
 			xEvent,
 			xHolidays,
 			xPath,
-			now, cols, clone,
+			now, hours, minutes, seconds, time,
 			top, left, width, height, pos, type,
-			pEl,
+			pEl, cols, clone,
 			el;
 		// console.log(opt);
 		switch (event.type) {
@@ -42,10 +42,6 @@ const Events = {
 					// TODO: append new ghost event
 					return;
 				}
-
-				// event node
-				xPath = `//Events/event[@id= "${el.data("id")}"]`;
-				xEvent = APP.data.selectSingleNode(xPath);
 
 				// pos & dim
 				top = el.prop("offsetTop") + 1;
@@ -69,13 +65,10 @@ const Events = {
 
 				// prepare drag object
 				Self.drag = {
-					xEvent,
-					starts: +xEvent.getAttribute("starts"),
-					ends: +xEvent.getAttribute("ends"),
-					timeEl: el.find(".event-time"),
+					timeEl: clone.find(".event-time"),
 					clickX: event.clientX,
 					clickY: event.clientY,
-					org: { top, left, width, height },
+					org: { el, top, left, width, height },
 					snapY: 11,
 					cols,
 					clone,
@@ -83,7 +76,7 @@ const Events = {
 				};
 
 				if (el.hasClass("event")) {
-					Self.drag.orgEl = el.addClass("ghost");
+					el.addClass("ghost");
 				}
 
 				// bind event handlers
@@ -116,12 +109,32 @@ const Events = {
 						height = Drag.org.height;
 						break;
 				}
+				// time update
+				hours = Math.floor(top / hHeight);
+				minutes = ((top % hHeight) / hHeight) * 60;
+				time = Self.formatTime(hours, minutes);
+				Drag.timeEl.html(time);
 				// UI update
 				Drag.clone.css({ top, left, width, height });
 				break;
 			case "mouseup":
+				// event node
+				xPath = `//Events/event[@id= "${Drag.org.el.data("id")}"]`;
+				xEvent = APP.data.selectSingleNode(xPath);
+
+				// update original event
+				top = Drag.clone.css("top");
+				left = Drag.clone.css("left");
+				width = Drag.clone.css("width");
+				height = Drag.clone.css("height");
+				Drag.org.el.css({ top, width, height });
+
+				// update original event-time
+				time = Drag.clone.find(".event-time").html();
+				Drag.org.el.find(".event-time").html(time);
+
 				// reset original event element
-				Drag.orgEl.removeClass("ghost");
+				Drag.org.el.removeClass("ghost");
 				// clean up DOM
 				Drag.clone.remove();
 				// unbind event handlers
@@ -167,19 +180,20 @@ const Events = {
 				if (!el.length) return;
 
 				now = new Date();
+				hours = now.getHours();
+				minutes = now.getMinutes();
+				seconds = now.getSeconds();
+				time = Self.formatTime(hours, minutes);
+
 				let nowDate = now.getDate(),
-					nowHours = now.getHours(),
-					nowMinutes = now.getMinutes(),
-					nowSeconds = now.getSeconds(),
-					time = Self.formatTime(nowHours, nowMinutes),
-					nowTop = (nowHours * hHeight) + (nowMinutes / 60 * hHeight),
+					nowTop = (hours * hHeight) + (minutes / 60 * hHeight),
 					dayLeft = el.parent().find(`.col-day[data-date="${nowDate}"]`).offset().left,
 					style = `--time-top: ${nowTop}px; --day-left: ${dayLeft}px;`;
 				// update now line
 				el.data({ time }).attr({ style });
 				// update every minute
 				Self.lineTimer = setTimeout(() =>
-					Self.dispatch({ type: "update-now-line" }), (60 - nowSeconds) * 1000);
+					Self.dispatch({ type: "update-now-line" }), (60 - seconds) * 1000);
 				break;
 			case "populate-year":
 				// root DOM element
