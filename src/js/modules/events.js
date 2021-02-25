@@ -32,16 +32,19 @@ const Events = {
 		switch (event.type) {
 			// native events
 			case "mousedown":
-				// prevent default behaviour
-				event.preventDefault();
 				// origin of event
 				el = $(event.target);
 				pEl = el.parent();
+				// remove potential pop up event
+				pEl.trigger("scroll");
 
 				if (!el.hasClass("event")) {
 					// TODO: append new ghost event
 					return;
 				}
+				
+				// prevent default behaviour
+				event.preventDefault();
 
 				// pos & dim
 				top = el.prop("offsetTop") + 1;
@@ -140,6 +143,11 @@ const Events = {
 				if (left !== Drag.org.left) {
 					let col = Drag.cols.find(col => col.left === left);
 					col.el.appendChild(Drag.org.el[0]);
+				}
+
+				if (top === Drag.org.top && left === Drag.org.left && height === Drag.org.height) {
+					// no change - pop up event details
+					Drag.org.el.trigger("click");
 				}
 
 				// clean up DOM
