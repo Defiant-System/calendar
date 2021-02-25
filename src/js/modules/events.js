@@ -21,12 +21,11 @@ const Events = {
 			Nodes = event.xNodes,
 			hHeight = 44,
 			pipe = {},
+			xEvent,
 			xHolidays,
 			xPath,
-			now,
-			cols,
+			now, cols, clone,
 			top, left, width, height, pos, type,
-			clone,
 			pEl,
 			el;
 		// console.log(opt);
@@ -43,12 +42,17 @@ const Events = {
 					// TODO: append new ghost event
 					return;
 				}
+
+				// event node
+				xPath = `//Events/event[@id= "${el.data("id")}"]`;
+				xEvent = APP.data.selectSingleNode(xPath);
+
 				// pos & dim
 				top = el.prop("offsetTop") + 1;
 				left = pEl.prop("offsetLeft") + 1;
 				width = el.width();
 				height = el.height();
-				
+
 				// type of operation
 				type = "move";
 				if (event.offsetY < 5) type = "n-resize";
@@ -65,6 +69,9 @@ const Events = {
 
 				// prepare drag object
 				Self.drag = {
+					xEvent,
+					starts: +xEvent.getAttribute("starts"),
+					ends: +xEvent.getAttribute("ends"),
 					timeEl: el.find(".event-time"),
 					clickX: event.clientX,
 					clickY: event.clientY,
@@ -314,7 +321,7 @@ const Events = {
 						endMinutes = dateEnd.getMinutes(),
 						timeStarts = Self.formatTime(startHours, startMinutes),
 						timeEnds = Self.formatTime(endHours, endMinutes),
-						top = (dateStart.getHours() * hHeight) + (dateStart.getMinutes() / 60 * hHeight),
+						top = (startHours * hHeight) + (startMinutes / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight;
 
 					pipe.htm.push(`<div data-id="${id}" class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
