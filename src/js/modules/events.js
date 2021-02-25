@@ -26,7 +26,7 @@ const Events = {
 			xPath,
 			now, hours, minutes, seconds, time,
 			top, left, width, height, pos, type,
-			pEl, cols, clone,
+			pEl, cols, clone, htm,
 			el;
 		// console.log(opt);
 		switch (event.type) {
@@ -38,11 +38,22 @@ const Events = {
 				// remove potential pop up event
 				pEl.trigger("scroll");
 
-				if (!el.hasClass("event")) {
-					// TODO: append new ghost event
-					return;
+				switch (true) {
+					case el.hasClass("col-day"):
+						pipe.id = "-1";
+						pipe.color = "purple";
+						pipe.top = 360;
+						pipe.height = 44;
+						pipe.timeStarts = Self.formatTime(12, 0);
+						pipe.title = "Event";
+						htm = Self.renderEvent(pipe);
+						return console.log(htm);
+						break;
+					case !el.hasClass("event"):
+					case el.parents(".popup-event").length:
+						return;
 				}
-				
+
 				// prevent default behaviour
 				event.preventDefault();
 
@@ -308,12 +319,10 @@ const Events = {
 						timeStarts = Self.formatTime(startHours, startMinutes),
 						timeEnds = Self.formatTime(endHours, endMinutes),
 						top = (startHours * hHeight) + (startMinutes / 60 * hHeight),
-						height = ((ends - starts) / 3600000) * hHeight;
-
-					pipe[dayDate].htm.push(`<div data-id="${id}" class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
-					pipe[dayDate].htm.push(`<span class="event-time">${timeStarts}</span>`); // —${timeEnds}
-					pipe[dayDate].htm.push(`<span class="event-title">${title}</span>`);
-					pipe[dayDate].htm.push(`</div>`);
+						height = ((ends - starts) / 3600000) * hHeight,
+						htm = Self.renderEvent({ id, color, top, height, timeStarts, title });
+					// add event html to pipe
+					pipe[dayDate].htm.push(htm);
 				});
 
 				// expose rendered event html to DOM
@@ -351,12 +360,10 @@ const Events = {
 						timeStarts = Self.formatTime(startHours, startMinutes),
 						timeEnds = Self.formatTime(endHours, endMinutes),
 						top = (startHours * hHeight) + (startMinutes / 60 * hHeight),
-						height = ((ends - starts) / 3600000) * hHeight;
-
-					pipe.htm.push(`<div data-id="${id}" class="event ${color}" style="top: ${top}px; height: ${height}px;">`);
-					pipe.htm.push(`<span class="event-time">${timeStarts}</span>`); // —${timeEnds}
-					pipe.htm.push(`<span class="event-title">${title}</span>`);
-					pipe.htm.push(`</div>`);
+						height = ((ends - starts) / 3600000) * hHeight,
+						htm = Self.renderEvent({ id, color, top, height, timeStarts, title });
+					// add event html to pipe
+					pipe.htm.push(htm);
 				});
 				// expose rendered event html to DOM
 				el.find(".col-day").html(pipe.htm.join(""));
@@ -367,6 +374,13 @@ const Events = {
 				console.log("render sidebar");
 				break;
 		}
+	},
+	renderEvent(opt) {
+		let htm = `<div data-id="${opt.id}" class="event ${opt.color}" style="top: ${opt.top}px; height: ${opt.height}px;">
+						<span class="event-time">${opt.timeStarts}</span>
+						<span class="event-title">${opt.title}</span>
+					</div>`;
+		return htm.replace(/\t|\n/g, "");
 	},
 	formatTime(hours, minutes) {
 		switch (Render.i18n.hours) {
