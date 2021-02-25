@@ -12,7 +12,7 @@ const Events = {
 		};
 
 		// bind event handlers
-		this.els.week.on("mousedown", this.dispatch);
+		window.find(".view-week, .view-day").on("mousedown", this.dispatch);
 	},
 	dispatch(event) {
 		let APP = calendar,
@@ -103,7 +103,7 @@ const Events = {
 						pos = event.clientX - Drag.clickX + Drag.org.left;
 						pos = Drag.cols.reduce((prev, curr) => Math.abs(curr.left - pos) < Math.abs(prev.left - pos) ? curr : prev);
 						top = event.clientY - Drag.clickY + Drag.org.top;
-						top -= top % Drag.snapY;
+						if (!event.shiftKey) top -= top % Drag.snapY;
 						left = pos.left;
 						width = pos.width;
 						height = Drag.org.height;
@@ -111,7 +111,7 @@ const Events = {
 				}
 				// time update
 				hours = Math.floor(top / hHeight);
-				minutes = ((top % hHeight) / hHeight) * 60;
+				minutes = Math.round(((top % hHeight) / hHeight) * 60);
 				time = Self.formatTime(hours, minutes);
 				Drag.timeEl.html(time);
 				// UI update
