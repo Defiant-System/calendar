@@ -61,7 +61,7 @@ const Events = {
 
 				// collect info about columns
 				cols = pEl.parent().find(".col-day").map(el =>
-					({ left: el.offsetLeft + 1, width: el.offsetWidth - 2 }));
+					({ el, left: el.offsetLeft + 1, width: el.offsetWidth - 2 }));
 
 				// prepare drag object
 				Self.drag = {
@@ -87,7 +87,7 @@ const Events = {
 				switch (Drag.type) {
 					case "n-resize":
 						top = event.clientY - Drag.clickY + Drag.org.top;
-						top -= top % Drag.snapY;
+						if (!event.shiftKey) top -= top % Drag.snapY;
 						left = Drag.org.left;
 						width = Drag.org.width;
 						height = Drag.org.height + (Drag.org.top - top);
@@ -97,7 +97,7 @@ const Events = {
 						left = Drag.org.left;
 						width = Drag.org.width;
 						height = event.clientY - Drag.clickY + Drag.org.height;
-						height -= height % Drag.snapY;
+						if (!event.shiftKey) height -= height % Drag.snapY;
 						break;
 					case "move":
 						pos = event.clientX - Drag.clickX + Drag.org.left;
@@ -122,19 +122,26 @@ const Events = {
 				xPath = `//Events/event[@id= "${Drag.org.el.data("id")}"]`;
 				xEvent = APP.data.selectSingleNode(xPath);
 
-				// update original event
-				top = Drag.clone.css("top");
-				left = Drag.clone.css("left");
-				width = Drag.clone.css("width");
-				height = Drag.clone.css("height");
-				Drag.org.el.css({ top, width, height });
-
 				// update original event-time
 				time = Drag.clone.find(".event-time").html();
 				Drag.org.el.find(".event-time").html(time);
 
+				// update original event
+				top = Drag.clone.prop("offsetTop");
+				left = Drag.clone.prop("offsetLeft");
+				width = Drag.clone.prop("offsetWidth");
+				height = Drag.clone.prop("offsetHeight");
+				Drag.org.el.css({ top, width, height });
+
 				// reset original event element
 				Drag.org.el.removeClass("ghost");
+
+				// change DOM parent if needed
+				if (left !== Drag.org.left) {
+					let col = Drag.cols.find(col => col.left === left);
+					col.el.appendChild(Drag.org.el[0]);
+				}
+
 				// clean up DOM
 				Drag.clone.remove();
 				// unbind event handlers
