@@ -127,7 +127,7 @@ const Events = {
 				Drag.org.el.find(".event-time").html(time);
 
 				// update original event
-				top = Drag.clone.prop("offsetTop");
+				top = Drag.clone.prop("offsetTop") + 1;
 				left = Drag.clone.prop("offsetLeft");
 				width = Drag.clone.prop("offsetWidth");
 				height = Drag.clone.prop("offsetHeight");
