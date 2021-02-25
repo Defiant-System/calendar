@@ -24,8 +24,10 @@ const Events = {
 			xHolidays,
 			xPath,
 			now,
-			top, left, width, height,
+			cols,
+			top, left, width, height, pos,
 			clone,
+			pEl,
 			el;
 		// console.log(opt);
 		switch (event.type) {
@@ -35,42 +37,57 @@ const Events = {
 				event.preventDefault();
 				// origin of event
 				el = $(event.target);
+				pEl = el.parent();
+
+				if (!el.hasClass("event")) {
+					// TODO: append new ghost event
+					return;
+				}
+
+				top = el.prop("offsetTop");
+				left = pEl.prop("offsetLeft") + 1;
+				width = el.width();
+				height = el.height();
 
 				// clone event element
 				clone = event.target.cloneNode(true);
 				clone = el.parents(".days-wrapper").append(clone);
-				clone
-					.addClass("clone")
-					.css({
-						left: (el.parent().prop("offsetLeft") + 1) +"px",
-						width: el.width() +"px",
-						height: el.height() +"px",
-					});
+				clone.addClass("clone").css({ top, left, width, height });
+
+				// collect info about columns
+				cols = pEl.parent().find(".col-day").map(el =>
+					({ left: el.offsetLeft, width: el.offsetWidth - 1 }));
 
 				// prepare drag object
 				Self.drag = {
 					clickX: event.clientX,
 					clickY: event.clientY,
+					org: { top, left, width, height },
+					snapY: 11,
+					cols,
 					clone,
+					timeEl: el.find(".event-time"),
 				};
 
 				if (el.hasClass("event")) {
 					Self.drag.orgEl = el.addClass("ghost");
-					Self.drag.offsetY = el.prop("offsetTop");
 				}
 
 				// bind event handlers
 				Self.els.doc.on("mousemove mouseup", Self.dispatch);
 				break;
 			case "mousemove":
-				top = event.clientY - Drag.clickY + Drag.offsetY;
-				left = event.clientX - Drag.clickX;
-				
+				top = event.clientY - Drag.clickY + Drag.org.top;
+				top -= top % Drag.snapY;
+
+				pos = event.clientX - Drag.clickX + Drag.org.left;
+				pos = Drag.cols.reduce((prev, curr) =>
+					Math.abs(curr.left - pos) < Math.abs(prev.left - pos) ? curr : prev);
+				left = pos.left;
+				width = pos.width;
+
 				if (Drag.clone) {
-					Drag.clone.css({
-						top: top +"px",
-						// left: left +"px",
-					});
+					Drag.clone.css({ top, left, width });
 				}
 				break;
 			case "mouseup":

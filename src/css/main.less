@@ -459,6 +459,23 @@ content {
 	border-left: 3px solid darken(@blue, 23%);
 	// box-shadow: 0 4px 5px -2px rgba(0,0,0,.15);
 
+	&:before,
+	&:after {
+		content: "";
+		background: transparent;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		cursor: row-resize;
+	}
+
+	&:after {
+		top: auto;
+		bottom: 0;
+	}
+
 	span {
 		display: block;
 		white-space: nowrap;
