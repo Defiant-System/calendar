@@ -199,7 +199,7 @@ const Events = {
 					xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
 
 					// update event element with ID
-					el.data({ id });
+					el.data({ id }).trigger("click");
 
 				} else {
 					// event node
