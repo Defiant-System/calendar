@@ -32,46 +32,65 @@ const Events = {
 		switch (event.type) {
 			// native events
 			case "mousedown":
-				// origin of event
+				// defaults
 				el = $(event.target);
 				pEl = el.parent();
+				type = "move";
+
 				// remove potential pop up event
 				pEl.trigger("scroll");
-
-				switch (true) {
-					case el.hasClass("col-day"):
-						pipe.id = "-1";
-						pipe.color = "purple";
-						pipe.top = 360;
-						pipe.height = 44;
-						pipe.timeStarts = Self.formatTime(12, 0);
-						pipe.title = "Event";
-						htm = Self.renderEvent(pipe);
-						return console.log(htm);
-						break;
-					case !el.hasClass("event"):
-					case el.parents(".popup-event").length:
-						return;
+				
+				// conditional checks
+				if (!el.hasClass("col-day") && (!el.hasClass("event") || el.parents(".popup-event").length)) {
+					return;
 				}
 
 				// prevent default behaviour
 				event.preventDefault();
 
-				// pos & dim
-				top = el.prop("offsetTop") + 1;
-				left = pEl.prop("offsetLeft") + 1;
-				width = el.width();
-				height = el.height();
+				if (el.hasClass("col-day")) {
+					// time
+					hours = Math.floor(event.offsetY / hHeight);
+					minutes = event.offsetY - (hours * hHeight);
+					minutes = minutes - (minutes % (hHeight / 2));
 
-				// type of operation
-				type = "move";
-				if (event.offsetY < 5) type = "n-resize";
-				if (event.offsetY > height - 5) type = "s-resize";
+					// pos & dim
+					top = (hours * hHeight) + minutes;
+					left = 0;
+					width = el.width() - 1;
+					height = hHeight / 2;
 
-				// clone event element
-				clone = event.target.cloneNode(true);
-				clone = el.parents(".days-wrapper").append(clone);
-				clone.addClass("clone").css({ top, left, width, height });
+					// render new event HTML
+					htm = Self.renderEvent({
+						id: "-1",
+						color: "purple",
+						title: "Event",
+						timeStarts: Self.formatTime(hours, (minutes / hHeight) * 60),
+						height,
+						top,
+					});
+
+					// prepare for resize
+					pEl = el;
+					el = clone = pEl.append(htm);
+					type = "s-resize";
+
+				} else {
+					// pos & dim
+					top = el.prop("offsetTop") + 1;
+					left = pEl.prop("offsetLeft") + 1;
+					width = el.width();
+					height = el.height();
+					
+					// type of operation
+					if (event.offsetY < 5) type = "n-resize";
+					if (event.offsetY > height - 5) type = "s-resize";
+
+					// clone event element
+					clone = event.target.cloneNode(true);
+					clone = el.parents(".days-wrapper").append(clone);
+					clone.addClass("clone").css({ top, left, width, height });
+				}
 
 				// collect info about columns
 				cols = pEl.parent().find(".col-day").map(el =>
@@ -83,13 +102,13 @@ const Events = {
 					clickX: event.clientX,
 					clickY: event.clientY,
 					org: { el, top, left, width, height },
-					snapY: 11,
+					snapY: hHeight / 4,
 					cols,
 					clone,
 					type,
 				};
 
-				if (el.hasClass("event")) {
+				if (el.data("id") !== "-1") {
 					el.addClass("ghost");
 				}
 
