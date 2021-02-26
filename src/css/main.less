@@ -6,7 +6,7 @@
 @yellow : #ffd366;
 @purple : #eccafc;
 @cyan   : #aee;
-@red    : #ffa0a0;
+@red    : #fdb6b6;
 @today  : #e66;
 @lgndEvent: #bae0f6;
 
@@ -525,6 +525,14 @@ content {
 		color: darken(@yellow, 37%);
 
 		span.event-title { color: darken(@yellow, 43%); }
+	}
+
+	&.red {
+		background: @red;
+		border-left-color: darken(@red, 11%);
+		color: darken(@red, 47%);
+
+		span.event-title { color: darken(@red, 47%); }
 	}
 
 	&.purple {
