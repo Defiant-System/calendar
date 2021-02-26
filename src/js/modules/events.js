@@ -63,6 +63,7 @@ const Events = {
 					// render new event HTML
 					htm = Self.renderEvent({
 						id: "-1",
+						type: "week",
 						color: "purple",
 						title: "Event",
 						timeStarts: Self.formatTime(hours, (minutes / hHeight) * 60),
@@ -290,8 +291,10 @@ const Events = {
 						date = new Date(+node.getAttribute("starts")),
 						iDate = date.getDate(),
 						title = node.getAttribute("title"),
-						color = node.getAttribute("calId");
-					pipe[iDate].htm.push(`<div data-id="${id}" class="entry ${color}">${title}</div>`);
+						color = node.getAttribute("calId"),
+						htm = Self.renderEvent({ type: "month", id, color, title });
+					// add event html to pipe
+					pipe[iDate].htm.push(htm);
 				});
 				// iterate event nodes
 				xPath = `//Events/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
@@ -301,9 +304,10 @@ const Events = {
 						date = new Date(starts),
 						dayDate = date.getDate(),
 						color = node.getAttribute("calId"),
-						title = node.getAttribute("title");
-
-					pipe[dayDate].htm.push(`<div data-id="${id}" class="entry ${color}">${title}</div>`);
+						title = node.getAttribute("title"),
+						htm = Self.renderEvent({ type: "month", id, color, title });
+					// add event html to pipe
+					pipe[dayDate].htm.push(htm);
 				});
 				// expose rendered event html to DOM
 				Object.keys(pipe).map(key => {
@@ -343,7 +347,7 @@ const Events = {
 						timeEnds = Self.formatTime(endHours, endMinutes),
 						top = (startHours * hHeight) + (startMinutes / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight,
-						htm = Self.renderEvent({ id, color, top, height, timeStarts, title });
+						htm = Self.renderEvent({ type: "week", id, color, top, height, timeStarts, title });
 					// add event html to pipe
 					pipe[dayDate].htm.push(htm);
 				});
@@ -384,7 +388,7 @@ const Events = {
 						timeEnds = Self.formatTime(endHours, endMinutes),
 						top = (startHours * hHeight) + (startMinutes / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight,
-						htm = Self.renderEvent({ id, color, top, height, timeStarts, title });
+						htm = Self.renderEvent({ type: "day", id, color, top, height, timeStarts, title });
 					// add event html to pipe
 					pipe.htm.push(htm);
 				});
@@ -399,10 +403,19 @@ const Events = {
 		}
 	},
 	renderEvent(opt) {
-		let htm = `<div data-id="${opt.id}" class="event ${opt.color}" style="top: ${opt.top}px; height: ${opt.height}px;">
+		let htm;
+		switch (opt.type) {
+			case "month":
+				htm = `<div data-id="${opt.id}" class="entry ${opt.color}">${opt.title}</div>`;
+				break;
+			case "week":
+			case "day":
+				htm = `<div data-id="${opt.id}" class="event ${opt.color}" style="top: ${opt.top}px; height: ${opt.height}px;">
 						<span class="event-time">${opt.timeStarts}</span>
 						<span class="event-title">${opt.title}</span>
 					</div>`;
+				break;
+		}
 		return htm.replace(/\t|\n/g, "");
 	},
 	formatTime(hours, minutes) {
