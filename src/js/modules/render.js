@@ -246,7 +246,7 @@ const Render = {
 				mDate.getDate() === nowDate) className.push("today");
 
 			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
-			htm.push(`<b${className}><i>${imDate}</i></b>`);
+			htm.push(`<b${className}><i>${imDate}</i><div class="entries-wrapper"></div></b>`);
 		});
 		htm.push(`</div>`);
 

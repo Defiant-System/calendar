@@ -51,6 +51,15 @@
 				Self.els.wrapper.bind("scroll", Self.dispatch);
 				break;
 			case "popup-month-entry-details":
+				// origin element
+				el = $(event.target);
+
+				// conditions
+				if (!el.hasClass("entry") && el.parent().hasClass("days")) {
+					return Events.dispatch({ type: "create-event-month-view", el });
+				}
+				if (!el.parent().hasClass("entries-wrapper")) return;
+
 				// DOM element to append popup
 				append = event.el;
 				// inactivate old active item

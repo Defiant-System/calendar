@@ -50,7 +50,7 @@ const calendar = {
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
 
 		// initiate first view
-		window.find(".toolbar-tool_").get(5).trigger("click");
+		window.find(".toolbar-tool_").get(6).trigger("click");
 	},
 	dispatch(event) {
 		let Self = calendar,

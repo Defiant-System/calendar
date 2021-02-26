@@ -214,6 +214,24 @@ const Events = {
 				}
 				break;
 			// custom events
+			case "create-event-month-view":
+				pipe = {
+					type: "month",
+					id: Self.createEventId(),
+					color: "purple",
+					title: "New Event",
+					starts: new Date("2021-02-16 12:00"),
+					ends: new Date("2021-02-16 13:00"),
+				};
+				htm = Self.renderEvent(pipe);
+				el = event.el.find(".entries-wrapper").prepend(htm);
+
+				// create new event node
+				htm = `<event id="${pipe.id}" starts="${pipe.starts.valueOf()}" ends="${pipe.ends.valueOf()}" calId="${pipe.color}" title="${pipe.title}"/>`;
+				xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
+
+				el.trigger("click");
+				break;
 			case "parse-holidays":
 				// iterate holidays nodes
 				Nodes.map(node => {
@@ -336,8 +354,7 @@ const Events = {
 				Object.keys(pipe).map(key => {
 					let htm = pipe[key].htm.join("");
 					if (htm) {
-						htm = `<div class="entries-wrapper">${htm}</div>`;
-						pipe[key].el.append(htm);
+						pipe[key].el.find(".entries-wrapper").append(htm);
 					}
 				});
 				break;

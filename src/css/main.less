@@ -356,7 +356,9 @@ content {
 	padding: 15px 17px 17px;
 	border-radius: 13px;
 	box-shadow: 0 0 0 1px rgba(0,0,0,.1),
-				0 3px 19px rgba(0,0,0,.3);
+				0 19px 31px 3px rgba(0,0,0,.14),
+				0 7px 37px 8px rgba(0,0,0,.12),
+				0 9px 13px -5px rgba(0,0,0,.2);
 	transform-origin: 0 25%;
 	animation: pop 120ms linear forwards;
 
@@ -370,7 +372,7 @@ content {
 		border-top: 12px solid transparent;
 		border-bottom: 12px solid transparent;
 		border-right: 15px solid rgba(0,0,0,.15);
-		filter: drop-shadow(-2px 0 2px rgba(0,0,0,.5));
+		filter: drop-shadow(-3px 0 5px rgba(0,0,0,.5));
 	}
 
 	&:after {
@@ -932,6 +934,7 @@ content {
 					border-radius: 50%;
 					text-align: center;
 					padding-top: 4px;
+					pointer-events: none;
 				}
 
 				.entries-wrapper {
@@ -943,6 +946,7 @@ content {
 					overflow: hidden;
 					font-size: 12px;
 					padding: 0 1px;
+					pointer-events: none;
 
 					.entry {
 						position: relative;
@@ -954,6 +958,7 @@ content {
 						padding: 2px 2px 2px 15px;
 						margin-bottom: 1px;
 						border-radius: 3px;
+						pointer-events: all;
 
 						&:before {
 							content: "";
