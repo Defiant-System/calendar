@@ -65,6 +65,9 @@ const calendar = {
 			// system events
 			case "window.open":
 				break;
+			case "window.close":
+				// TODO: save event data to storage
+				break;
 			case "window.resize":
 				// update now line
 				Events.dispatch({ type: "update-now-line" });
