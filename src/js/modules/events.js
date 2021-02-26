@@ -41,7 +41,7 @@ const Events = {
 				pEl.trigger("scroll");
 
 				// conditional checks
-				if (!el.hasClass("col-day") && (!el.hasClass("event") || el.parents(".popup-event").length || event.button === 2)) {
+				if (!el.hasClass("col-day") && (!el.hasClass("event") || el.parents(".popup-event").length) || event.button === 2) {
 					return;
 				}
 
