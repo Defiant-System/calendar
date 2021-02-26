@@ -55,6 +55,27 @@ content {
 		}
 	}
 
+	[class*="icon-"],
+	[class^="icon-"] {
+		position: relative;
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		vertical-align: middle;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		background-size: auto 100%;
+		image-rendering: -webkit-optimize-contrast;
+
+		&.icon-location-pin { background-image: url(~/icons/icon-location-pin.png); }
+		&.icon-bell         { background-image: url(~/icons/icon-bell.png); }
+		&.icon-suitcase     { background-image: url(~/icons/icon-suitcase.png); }
+		&.icon-paperclip    { background-image: url(~/icons/icon-paperclip.png); }
+		&.icon-user         { background-image: url(~/icons/icon-user.png); }
+		&.icon-calendar     { background-image: url(~/icons/icon-calendar.png); }
+		&.icon-question     { background-image: url(~/icons/icon-question.png); }
+	}
+
 	.sidebar {
 		position: relative;
 		width: 0;
@@ -353,7 +374,7 @@ content {
 	position: absolute;
 	z-index: 11;
 	width: 240px;
-	padding: 15px 17px 17px;
+	padding: 15px 11px 17px;
 	border-radius: 13px;
 	box-shadow: 0 0 0 1px rgba(0,0,0,.1),
 				0 19px 31px 3px rgba(0,0,0,.14),
@@ -388,12 +409,49 @@ content {
 	}
 
 	hr {
-		margin: 11px -17px;
+		margin: 10px -11px;
 	}
 
-	h3 {
-		padding: 0;
-		color: #333;
+	div {
+		display: flex;
+
+		&:nth-child(1) {
+			margin-bottom: 5px;
+		}
+
+		.calendar-color {
+			position: relative;
+			top: 0;
+			display: inline-block;
+			margin-right: 5px;
+			vertical-align: top;
+			width: 16px;
+			height: 16px;
+			box-shadow: inset 0 1px 1px rgba(0,0,0,.15);
+			border: 1px solid rgba(0,0,0,.15);
+			border-radius: 50%;
+
+			&.purple { background: @purple; }
+		}
+
+		[class*="icon-"],
+		[class^="icon-"] {
+			opacity: .35;
+			margin-right: 7px;
+			vertical-align: top;
+			top: 2px;
+		}
+
+		h3, div, input {
+			flex: 1;
+			vertical-align: top;
+			padding: 3px 0;
+		}
+
+		h3 {
+			padding: 0;
+			color: #333;
+		}
 	}
 
 	input {

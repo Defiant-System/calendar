@@ -2,14 +2,29 @@
 
 <xsl:template name="popup-event">
 	<div class="popup-event">
-		<h3><xsl:value-of select="@title"/></h3>
-		<input type="text" placeholder="Add Location"/>
+		<div>
+			<i class="calendar-color purple"></i>
+			<h3><xsl:value-of select="@title"/></h3>
+		</div>
+		<div>
+			<i class="icon-location-pin"></i>
+			<input type="text" placeholder="Add Location"/>
+		</div>
 		<hr/>
-		25 Feb 2021 09:15 to 11:45
+		<div>
+			<i class="icon-calendar"></i>
+			<div>25 Feb 2021 09:15 to 11:45</div>
+		</div>
 		<hr/>
-		<input type="text" placeholder="Add Invitees"/>
+		<div>
+			<i class="icon-user"></i>
+			<input type="text" placeholder="Add Invitees"/>
+		</div>
 		<hr/>
-		<input type="text" placeholder="Add Notes, URL or Attachments"/>
+		<div>
+			<i class="icon-paperclip"></i>
+			<input type="text" placeholder="Add Notes, URL or Attachments"/>
+		</div>
 	</div>
 </xsl:template>
 
