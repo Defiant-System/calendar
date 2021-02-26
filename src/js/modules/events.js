@@ -181,7 +181,11 @@ const Events = {
 				}
 
 				// clean up DOM
-				Drag.clone.remove();
+				if (Drag.clone.data("id") === "-1") {
+					console.log("TODO: add entry to XML data");
+				} else {
+					Drag.clone.remove();
+				}
 				// unbind event handlers
 				Self.els.doc.off("mousemove mouseup", Self.dispatch);
 				break;
