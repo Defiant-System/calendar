@@ -39,7 +39,7 @@ const Events = {
 
 				// remove potential pop up event
 				pEl.trigger("scroll");
-				
+
 				// conditional checks
 				if (!el.hasClass("col-day") && (!el.hasClass("event") || el.parents(".popup-event").length)) {
 					return;
@@ -57,7 +57,7 @@ const Events = {
 					// pos & dim
 					top = (hours * hHeight) + minutes;
 					left = 0;
-					width = el.width() - 1;
+					width = el.width() - 2;
 					height = hHeight / 2;
 
 					// render new event HTML

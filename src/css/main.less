@@ -477,6 +477,10 @@ content {
 		bottom: 0;
 	}
 
+	&[data-id="-1"] {
+		&:before, &:after { display: none; }
+	}
+
 	span {
 		display: block;
 		white-space: nowrap;
