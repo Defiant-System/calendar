@@ -155,6 +155,9 @@ const Events = {
 				// fast reference to original element
 				el = Drag.org.el;
 
+				// unbind event handlers
+				Self.els.doc.off("mousemove mouseup", Self.dispatch);
+
 				// update original event-time
 				time = Drag.clone.find(".event-time").html();
 				el.find(".event-time").html(time);
@@ -209,10 +212,6 @@ const Events = {
 					// remove clone from DOM
 					Drag.clone.remove();
 				}
-				console.log(xEvent);
-
-				// unbind event handlers
-				Self.els.doc.off("mousemove mouseup", Self.dispatch);
 				break;
 			// custom events
 			case "parse-holidays":
