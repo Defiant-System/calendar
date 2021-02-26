@@ -41,7 +41,7 @@ const Events = {
 				pEl.trigger("scroll");
 
 				// conditional checks
-				if (!el.hasClass("col-day") && (!el.hasClass("event") || el.parents(".popup-event").length)) {
+				if (!el.hasClass("col-day") && (!el.hasClass("event") || el.parents(".popup-event").length || event.button === 2)) {
 					return;
 				}
 
@@ -433,7 +433,7 @@ const Events = {
 				break;
 			case "week":
 			case "day":
-				htm = `<div data-id="${opt.id}" class="event ${opt.color}" style="top: ${opt.top}px; height: ${opt.height}px;">
+				htm = `<div data-context="event" data-id="${opt.id}" class="event ${opt.color}" style="top: ${opt.top}px; height: ${opt.height}px;">
 						<span class="event-time">${opt.timeStarts}</span>
 						<span class="event-title">${opt.title}</span>
 					</div>`;

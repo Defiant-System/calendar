@@ -44,8 +44,7 @@
 				// position popup
 				pos = Self.getPosition(event.target[0], append[0]);
 				pos.top -= 43;
-				// add suffix
-				for (let key in pos) pos[key] += "px";
+				// position popup
 				popup.css(pos);
 
 				// bind event handler
@@ -72,8 +71,7 @@
 				pos = Self.getPosition(event.target[0], append[0]);
 				pos.top -= 43;
 				pos.left -= 2;
-				// add suffix
-				for (let key in pos) pos[key] += "px";
+				// position popup
 				popup.css(pos);
 				break;
 		}

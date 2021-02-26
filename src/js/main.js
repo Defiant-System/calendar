@@ -63,6 +63,12 @@ const calendar = {
 			case "open-help":
 				defiant.shell("fs -u '~/help/index.md'");
 				break;
+			// contextmenu events
+			case "change-event-calendar":
+			case "event-calendar-info":
+			case "delete-event-calendar":
+				console.log(event);
+				break;
 			// custom events
 			case "toggle-sidebar":
 				return Self.sidebar.dispatch(event);

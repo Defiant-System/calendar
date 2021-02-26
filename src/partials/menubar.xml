@@ -33,4 +33,24 @@
 		<Menu type="divider"/>
 		<Menu name="License"/>
 	</Menu>
+
+	<Menu for="event">
+		<Menu name="Get Info" click="event-calendar-info"/>
+		<Menu type="divider"/>
+		<Menu type="colors" caption="Calendar:" click="change-event-calendar">
+			<Color arg="#64b2eb" active="1"/>
+			<Color arg="#f67c7c"/>
+			<Color arg="#d38df4"/>
+			<Color arg="#f29d5c"/>
+			<Color arg="#faea4b"/>
+			<Color arg="#96f67d"/>
+			<Color arg="#9fe5e5"/>
+		</Menu>
+		<Menu type="divider"/>
+		<Menu name="Delete" click="delete-event-calendar"/>
+		<Menu type="divider"/>
+		<Menu name="Mail Event" disabled="1"/>
+		<Menu name="Email Participants" disabled="1"/>
+		<Menu name="Message Participants" disabled="1"/>
+	</Menu>
 </MenuBar>
