@@ -65,7 +65,7 @@ const Events = {
 						id: "-1",
 						type: "week",
 						color: "purple",
-						title: "Event",
+						title: "New Event",
 						timeStarts: Self.formatTime(hours, (minutes / hHeight) * 60),
 						height,
 						top,
@@ -152,41 +152,65 @@ const Events = {
 				Drag.clone.css({ top, left, width, height });
 				break;
 			case "mouseup":
-				// event node
-				xPath = `//Events/event[@id= "${Drag.org.el.data("id")}"]`;
-				xEvent = APP.data.selectSingleNode(xPath);
+				// fast reference to original element
+				el = Drag.org.el;
 
 				// update original event-time
 				time = Drag.clone.find(".event-time").html();
-				Drag.org.el.find(".event-time").html(time);
+				el.find(".event-time").html(time);
 
 				// update original event
 				top = Drag.clone.prop("offsetTop") + 1;
 				left = Drag.clone.prop("offsetLeft");
 				width = Drag.clone.prop("offsetWidth");
 				height = Drag.clone.prop("offsetHeight");
-				Drag.org.el.css({ top, width, height });
+				el.css({ top, width, height });
 
 				// reset original event element
-				Drag.org.el.removeClass("ghost");
+				el.removeClass("ghost");
 
 				// change DOM parent if needed
 				if (left !== Drag.org.left) {
 					let col = Drag.cols.find(col => col.left === left);
-					col.el.appendChild(Drag.org.el[0]);
+					col.el.appendChild(el[0]);
 				}
 
 				if (top === Drag.org.top && left === Drag.org.left && height === Drag.org.height) {
 					// no change - pop up event details
-					Drag.org.el.trigger("click");
+					el.trigger("click");
 				}
 
 				// clean up DOM
 				if (Drag.clone.data("id") === "-1") {
-					console.log("TODO: add entry to XML data");
+					let id = Self.createEventId(),
+						sDate = el.parents(".days-wrapper").data("date"),
+						sDay = el.parent().data("date").padStart(2, "0"),
+						sTime = el.find(".event-time").html(),
+						starts = `${sDate}-${sDay} ${sTime}`,
+						topHeight = top + height,
+						eHours = Math.floor(topHeight / hHeight).toString().padStart(2, "0"),
+						eMinutes = Math.round(((topHeight % hHeight) / hHeight) * 60).toString().padStart(2, "0"),
+						ends = `${sDate}-${sDay} ${eHours}:${eMinutes}`,
+						color = el.prop("className").split(" ")[1],
+						title = el.find(".event-title").html();
+
+					// create new event node
+					htm = `<event id="${id}" starts="${starts}" ends="${ends}" calId="${color}" title="${title}"/>`;
+					xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
+
+					// update event element with ID
+					el.data({ id });
+
 				} else {
+					// event node
+					xPath = `./event[@id= "${el.data("id")}"]`;
+					xEvent = APP.xEvents.selectSingleNode(xPath);
+					
+					// remove clone from DOM
 					Drag.clone.remove();
 				}
+				console.log(xEvent);
+
 				// unbind event handlers
 				Self.els.doc.off("mousemove mouseup", Self.dispatch);
 				break;
@@ -264,8 +288,8 @@ const Events = {
 						});
 				});
 				// iterate event nodes
-				xPath = `//Events/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
-				APP.data.selectNodes(xPath).map(node => {
+				xPath = `./event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				APP.xEvents.selectNodes(xPath).map(node => {
 					let starts = +node.getAttribute("starts"),
 						date = new Date(starts),
 						dMonth = date.getFullYear() +"-"+ date.getMonth(),
@@ -297,8 +321,8 @@ const Events = {
 					pipe[iDate].htm.push(htm);
 				});
 				// iterate event nodes
-				xPath = `//Events/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
-				APP.data.selectNodes(xPath).map(node => {
+				xPath = `./event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				APP.xEvents.selectNodes(xPath).map(node => {
 					let id = node.getAttribute("id"),
 						starts = +node.getAttribute("starts"),
 						date = new Date(starts),
@@ -329,8 +353,8 @@ const Events = {
 					pipe[el.data("date")] = { el, htm: [] };
 				});
 				// iterate event nodes
-				xPath = `//Events/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
-				APP.data.selectNodes(xPath).map(node => {
+				xPath = `./event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				APP.xEvents.selectNodes(xPath).map(node => {
 					let id = node.getAttribute("id"),
 						starts = +node.getAttribute("starts"),
 						ends = +node.getAttribute("ends"),
@@ -371,8 +395,8 @@ const Events = {
 				// single pipe element
 				pipe = { htm: [] };
 				// iterate event nodes
-				xPath = `//Events/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
-				APP.data.selectNodes(xPath).map(node => {
+				xPath = `./event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				APP.xEvents.selectNodes(xPath).map(node => {
 					let id = node.getAttribute("id"),
 						starts = +node.getAttribute("starts"),
 						ends = +node.getAttribute("ends"),
@@ -430,5 +454,10 @@ const Events = {
 				minutes = minutes.toString().padStart(2, "0");
 				return `${hours}:${minutes} ${suffix}`;
 		}
+	},
+	createEventId() {
+		let ids = calendar.xEvents.selectNodes("./event").map(node => +node.getAttribute("id")),
+			idMax = ids.sort((a, b) => b - a)[0];
+		return idMax ? idMax + 1 : 1;
 	}
 };

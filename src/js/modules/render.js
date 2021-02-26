@@ -38,6 +38,7 @@ const Render = {
 			iMonth = date.getMonth(),
 			iDate = date.getDate(),
 			iDay = date.getDay() - 1,
+			mDate = `${iYear}-${(iMonth+1).toString().padStart(2, "0")}`,
 			htm = [];
 		
 		// sunday check
@@ -55,7 +56,7 @@ const Render = {
 			htm.push(`<b data-date="${iDate}"></b>`);
 			htm.push(`</div>`);
 			// day wrapper
-			htm.push(`<div class="day-content"><div class="days-wrapper">`);
+			htm.push(`<div class="day-content"><div class="days-wrapper" data-date="${mDate}">`);
 			// hours column
 			this.hours(htm);
 			// day column
@@ -105,7 +106,8 @@ const Render = {
 		let dateIndex = date.getDate(),
 			iYear = date.getFullYear(),
 			iMonth = date.getMonth(),
-			iDay = now.getDay();
+			iDay = now.getDay(),
+			mDate = `${iYear}-${(iMonth+1).toString().padStart(2, "0")}`;
 		
 		// title: week
 		htm.push(`<h2><b>${I18n.months[iMonth]}</b> ${iYear}</h2>`);
@@ -149,7 +151,7 @@ const Render = {
 			htm.push(`</div>`);
 
 			// row: days
-			htm.push(`<div class="days"><div class="days-wrapper">`);
+			htm.push(`<div class="days"><div class="days-wrapper" data-date="${mDate}">`);
 				// hours column
 				this.hours(htm);
 

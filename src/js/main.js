@@ -14,6 +14,7 @@ const calendar = {
 		// events data storage; temp in bluePrint
 		// TODO: move data to storage files
 		this.data = window.bluePrint;
+		this.xEvents = this.data.selectSingleNode(`//Events`);
 
 
 		// parse holidays
