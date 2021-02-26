@@ -27,6 +27,10 @@
 				break;
 			// custom events
 			case "popup-event-details":
+				// if popup exists, remove and return
+				el = event.el.find(".popup-event");
+				if (el.length) return el.remove();
+
 				// conditional check
 				if (!event.target.hasClass("event")) return;
 

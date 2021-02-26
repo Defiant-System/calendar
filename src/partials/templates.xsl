@@ -3,7 +3,9 @@
 <xsl:template name="popup-event">
 	<div class="popup-event">
 		<div>
-			<i class="calendar-color purple"></i>
+			<i>
+				<xsl:attribute name="class">calendar-color <xsl:value-of select="@calId"/></xsl:attribute>
+			</i>
 			<h3><xsl:value-of select="@title"/></h3>
 		</div>
 		<div>
