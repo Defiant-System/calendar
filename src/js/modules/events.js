@@ -38,9 +38,13 @@ const Events = {
 				type = "move";
 
 				// conditional checks
-				if (!el.hasClass("col-day") && (!el.hasClass("event") || el.parents(".popup-event").length) || event.button === 2) {
+				if (!el.hasClass("col-day")
+						&& (!el.hasClass("event") || el.parents(".popup-event").length)
+						|| el.parents(".day-legends").length
+						|| event.button === 2) {
 					return;
 				}
+
 				// if popup exists, remove and return
 				let exists = el.parents("[data-area]").find(".popup-event");
 				if (exists.length) return pEl.trigger("scroll");
@@ -208,7 +212,7 @@ const Events = {
 
 				} else {
 					// event node
-					xPath = `./event[@id= "${el.data("id")}"]`;
+					xPath = `.//event[@id= "${el.data("id")}"]`;
 					xEvent = APP.xEvents.selectSingleNode(xPath);
 					
 					// remove clone from DOM
@@ -240,7 +244,6 @@ const Events = {
 					let str = node.getAttribute("date") +" 01:00",
 						date = new Date(str);
 					node.setAttribute("starts", date.valueOf());
-					node.setAttribute("calId", "gray");
 				});
 				break;
 			case "populate-legend-holidays":
@@ -307,7 +310,7 @@ const Events = {
 						});
 				});
 				// iterate event nodes
-				xPath = `./event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				xPath = `.//event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.xEvents.selectNodes(xPath).map(node => {
 					let starts = +node.getAttribute("starts"),
 						date = new Date(starts),
@@ -340,8 +343,11 @@ const Events = {
 					pipe[iDate].htm.push(htm);
 				});
 				// iterate event nodes
-				xPath = `./event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				xPath = `.//event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.xEvents.selectNodes(xPath).map(node => {
+					// skip holidays - its already done
+					if (node.parentNode.nodeName === "Holidays") return;
+
 					let id = node.getAttribute("id"),
 						starts = +node.getAttribute("starts"),
 						date = new Date(starts),
@@ -371,7 +377,7 @@ const Events = {
 					pipe[el.data("date")] = { el, htm: [] };
 				});
 				// iterate event nodes
-				xPath = `./event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				xPath = `.//event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.xEvents.selectNodes(xPath).map(node => {
 					let id = node.getAttribute("id"),
 						starts = +node.getAttribute("starts"),
@@ -413,7 +419,7 @@ const Events = {
 				// single pipe element
 				pipe = { htm: [] };
 				// iterate event nodes
-				xPath = `./event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				xPath = `.//event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.xEvents.selectNodes(xPath).map(node => {
 					let id = node.getAttribute("id"),
 						starts = +node.getAttribute("starts"),
@@ -475,7 +481,7 @@ const Events = {
 		}
 	},
 	createEventId() {
-		let ids = calendar.xEvents.selectNodes("./event").map(node => +node.getAttribute("id")),
+		let ids = calendar.xEvents.selectNodes(".//event").map(node => +node.getAttribute("id")),
 			idMax = ids.sort((a, b) => b - a)[0];
 		return idMax ? idMax + 1 : 1;
 	}

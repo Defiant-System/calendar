@@ -25,6 +25,7 @@
 			id,
 			list,
 			eventEl,
+			eventType,
 			pEl,
 			el;
 		switch (event.type) {
@@ -42,7 +43,7 @@
 
 				// event node
 				id = el.data("id");
-				xPath = `./event[@id = "${id}"]`;
+				xPath = `.//event[@id = "${id}"]`;
 				xEvent = APP.xEvents.selectSingleNode(xPath);
 				// DOM element
 				eventEl = Self.els.content.find(`.entry[data-id="${id}"], .event[data-id="${id}"]`);
@@ -67,7 +68,7 @@
 				// remove popup element from DOM
 				el.remove();
 				// unbind possible event handler
-				Self.els.wrapper.off("scroll", Self.dispatch);
+				if (Self.els.wrapper) Self.els.wrapper.off("scroll", Self.dispatch);
 				break;
 			case "popup-event-details":
 				// conditional check
@@ -83,17 +84,23 @@
 
 				// event node
 				id = event.target.data("id");
-				xPath = `./event[@id = "${id}"]`;
+				xPath = `.//event[@id = "${id}"]`;
 				xEvent = APP.xEvents.selectSingleNode(xPath);
 
-				dateStart = new defiant.Moment(+xEvent.getAttribute("starts"));
-				console.log(dateStart.format("D MMM YYYY"));
-				// dateEnd = new Date(+xEvent.getAttribute("ends"));
-
-				// update event node with i18n values
-				xEvent.setAttribute("i18n-date", "25 Feb 2021");
-				xEvent.setAttribute("i18n-starts", "09:15");
-				xEvent.setAttribute("i18n-ends", "11:45");
+				eventType = xEvent.getAttribute("type");
+				switch (eventType) {
+					case "day":
+						dateStart = new defiant.Moment(+xEvent.getAttribute("starts"));
+						xEvent.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
+						break;
+					default:
+						// update event node with i18n values
+						dateStart = new defiant.Moment(+xEvent.getAttribute("starts"));
+						dateEnd = new defiant.Moment(+xEvent.getAttribute("ends"));
+						xEvent.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
+						xEvent.setAttribute("i18n-starts", dateStart.format("HH:mm"));
+						xEvent.setAttribute("i18n-ends", dateEnd.format("HH:mm"));
+				}
 
 				// xpath matching event node
 				match = `//event[@id="${id}"]`;
@@ -105,13 +112,15 @@
 				pos.top -= 43;
 				// position popup
 				popup.css(pos);
-				// focus on first "input" field
-				popup.find("h3").focus();
 
-				// add range array to time-starts + time-ends
-				list = Render.hours({ type: "values", hourTicks: 4 });
-				popup.find(".event-starts").addClass("drag-vRange_").data({ list: list.join(",") });
-				popup.find(".event-ends").addClass("drag-vRange_").data({ list: list.join(",") });
+				if (eventType !== "day") {
+					// focus on first "input" field
+					popup.find("h3").focus();
+					// add range array to time-starts + time-ends
+					list = Render.hours({ type: "values", hourTicks: 4 });
+					popup.find(".event-starts").addClass("drag-vRange_").data({ list: list.join(",") });
+					popup.find(".event-ends").addClass("drag-vRange_").data({ list: list.join(",") });
+				}
 
 				// bind event handler
 				Self.els.wrapper.on("scroll", Self.dispatch);
@@ -133,12 +142,23 @@
 
 				// event node
 				id = event.target.data("id");
-				xPath = `./event[@id = "${id}"]`;
+				xPath = `.//event[@id = "${id}"]`;
 				xEvent = APP.xEvents.selectSingleNode(xPath);
-				// update event node with i18n values
-				xEvent.setAttribute("i18n-date", "25 Feb 2021");
-				xEvent.setAttribute("i18n-starts", "09:15");
-				xEvent.setAttribute("i18n-ends", "11:45");
+
+				eventType = xEvent.getAttribute("type");
+				switch (eventType) {
+					case "day":
+						dateStart = new defiant.Moment(+xEvent.getAttribute("starts"));
+						xEvent.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
+						break;
+					default:
+						// update event node with i18n values
+						dateStart = new defiant.Moment(+xEvent.getAttribute("starts"));
+						dateEnd = new defiant.Moment(+xEvent.getAttribute("ends"));
+						xEvent.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
+						xEvent.setAttribute("i18n-starts", dateStart.format("HH:mm"));
+						xEvent.setAttribute("i18n-ends", dateEnd.format("HH:mm"));
+				}
 
 				// DOM element to append popup
 				append = event.el;
@@ -160,13 +180,15 @@
 				pos.left -= 2;
 				// position popup
 				popup.css(pos);
-				// focus on first "input" field
-				popup.find("h3").focus();
 
-				// add range array to time-starts + time-ends
-				list = Render.hours({ type: "values", hourTicks: 4 });
-				popup.find(".event-starts").addClass("drag-vRange_").data({ list: list.join(",") });
-				popup.find(".event-ends").addClass("drag-vRange_").data({ list: list.join(",") });
+				if (eventType !== "day") {
+					// focus on first "input" field
+					popup.find("h3").focus();
+					// add range array to time-starts + time-ends
+					list = Render.hours({ type: "values", hourTicks: 4 });
+					popup.find(".event-starts").addClass("drag-vRange_").data({ list: list.join(",") });
+					popup.find(".event-ends").addClass("drag-vRange_").data({ list: list.join(",") });
+				}
 				break;
 		}
 	},
