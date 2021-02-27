@@ -93,7 +93,8 @@
 
 				// add range array to time-starts + time-ends
 				list = Render.hours({ type: "values", step: 2 });
-				console.log(list);
+				popup.find(".event-starts").data({ list: list.join(",") });
+				popup.find(".event-ends").data({ list: list.join(",") });
 
 				// bind event handler
 				Self.els.wrapper.bind("scroll", Self.dispatch);

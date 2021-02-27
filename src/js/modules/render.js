@@ -8,7 +8,7 @@ const Render = {
 			months: ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 			days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
 			weekStartsWith: 1, // 1, 5, 6
-			hours: "am/pm", // "24h", "am/pm"
+			hours: "24h", // "24h", "am/pm"
 		};
 	},
 	hours(opt, htm) {
