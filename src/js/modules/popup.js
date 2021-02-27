@@ -60,6 +60,10 @@
 				// conditional check
 				if (!event.target.hasClass("event")) return;
 
+				if (event.el.find(".popup-event").length) {
+					return Self.dispatch({ type: "popup-update-event" });
+				}
+
 				// DOM element to append popup
 				Self.els.root = append = event.el;
 				Self.els.wrapper = append.find(".days-wrapper");

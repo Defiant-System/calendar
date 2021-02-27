@@ -43,7 +43,7 @@ const Events = {
 				}
 				// if popup exists, remove and return
 				let exists = el.parents("[data-area]").find(".popup-event");
-				// if (exists.length) return pEl.trigger("scroll");
+				if (exists.length) return pEl.trigger("scroll");
 
 				// prevent default behaviour
 				event.preventDefault();
@@ -63,6 +63,7 @@ const Events = {
 					// render new event HTML
 					htm = Self.renderEvent({
 						id: Self.createEventId(),
+						isNew: true,
 						type: "week",
 						color: "purple",
 						title: "New Event",
@@ -110,7 +111,7 @@ const Events = {
 				};
 
 				// TODO: fix this
-				if (el.data("id") !== "-1") {
+				if (!el.hasClass("isNew")) {
 					el.addClass("ghost");
 				}
 
@@ -185,8 +186,7 @@ const Events = {
 				}
 
 				// clean up DOM
-				// TODO: fix this
-				if (Drag.clone.data("id") === "-1") {
+				if (Drag.clone.hasClass("isNew")) {
 					let id = Self.createEventId(),
 						sDate = el.parents(".days-wrapper").data("date"),
 						sDay = el.parent().data("date").padStart(2, "0"),
@@ -445,14 +445,15 @@ const Events = {
 		}
 	},
 	renderEvent(opt) {
-		let htm;
+		let isNew = opt.isNew ? "isNew" : "",
+			htm;
 		switch (opt.type) {
 			case "month":
-				htm = `<div data-id="${opt.id}" class="entry ${opt.color}">${opt.title}</div>`;
+				htm = `<div data-id="${opt.id}" class="entry ${opt.color} ${isNew}">${opt.title}</div>`;
 				break;
 			case "week":
 			case "day":
-				htm = `<div data-context="event" data-id="${opt.id}" class="event ${opt.color}" style="top: ${opt.top}px; height: ${opt.height}px;">
+				htm = `<div data-context="event" data-id="${opt.id}" class="event ${opt.color} ${isNew}" style="top: ${opt.top}px; height: ${opt.height}px;">
 						<span class="event-time">${opt.timeStarts}</span>
 						<span class="event-title">${opt.title}</span>
 					</div>`;
