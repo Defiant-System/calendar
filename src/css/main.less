@@ -283,6 +283,12 @@ content {
 
 							&:after { box-shadow: -1px 1px 0 darken(@blue, 23%); }
 						}
+						&.lightblue i {
+							background: darken(@blue, 5%);
+							border-color: darken(@blue, 17%);
+
+							&:after { box-shadow: -1px 1px 0 darken(@blue, 17%); }
+						}
 						&.green i {
 							background: darken(@green, 29%);
 							border-color: darken(@green, 43%);
@@ -483,6 +489,7 @@ content {
 			&.cyan   { background: darken(@cyan, 7%); }
 			&.red    { background: darken(@red, 7%); }
 			&.gray   { background: darken(@gray, 3%); }
+			&.lightblue { background: lighten(@blue, 7%); }
 		}
 
 		[class*="icon-"],
@@ -618,6 +625,14 @@ content {
 		color: darken(@gray, 47%);
 
 		span.event-title { color: darken(@gray, 59%); }
+	}
+
+	&.lightblue {
+		background: lighten(@blue, 5%);
+		border-left-color: darken(@blue, 21%);
+		color: darken(@blue, 29%);
+
+		span.event-title { color: darken(@blue, 31%); }
 	}
 
 	&.green {
@@ -1089,7 +1104,14 @@ content {
 						&.gray {
 							background: lighten(@gray, 5%);
 							color: darken(@gray, 43%);
-							padding: 3px;
+							padding: 3px 4px;
+
+							&:before { display: none; }
+						}
+						&.lightblue {
+							background: lighten(@blue, 5%);
+							color: darken(@blue, 53%);
+							padding: 3px 4px;
 
 							&:before { display: none; }
 						}
@@ -1188,6 +1210,10 @@ content {
 
 					&.blue:not(.today)  {
 						color: darken(@blue, 37%);
+						&:before { background: darken(@blue, 3%); }
+					}
+
+					&.lightblue:not(.today)  {
 						&:before { background: darken(@blue, 3%); }
 					}
 

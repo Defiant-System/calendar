@@ -254,7 +254,7 @@ const Events = {
 						date = new Date(+node.getAttribute("starts")),
 						wDate = date.getDate(),
 						title = node.getAttribute("title"),
-						color = node.getAttribute("calId"),
+						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
 						htm = `<div data-id="${id}"class="event ${color}">${title}</div>`;
 					
 					event.el.find(`.day-legends b[data-date="${wDate}"]`).append(htm);
@@ -316,7 +316,7 @@ const Events = {
 						date = new Date(starts),
 						dMonth = date.getFullYear() +"-"+ date.getMonth(),
 						dDate = date.getDate(),
-						color = node.getAttribute("calId");
+						color = node.getAttribute("calId") || node.parentNode.getAttribute("color");
 					// add class to day element
 					el.find(`.month[data-date="${dMonth}"] b:not(.non-day) i:contains("${dDate}")`)
 						.map(el => +el.innerHTML === +dDate ? $(el.parentNode).addClass(`has-event ${color}`) : null);
@@ -337,7 +337,7 @@ const Events = {
 						date = new Date(+node.getAttribute("starts")),
 						iDate = date.getDate(),
 						title = node.getAttribute("title"),
-						color = node.getAttribute("calId"),
+						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
 						htm = Self.renderEvent({ type: "month", id, color, title });
 					// add event html to pipe
 					pipe[iDate].htm.push(htm);
@@ -352,7 +352,7 @@ const Events = {
 						starts = +node.getAttribute("starts"),
 						date = new Date(starts),
 						dayDate = date.getDate(),
-						color = node.getAttribute("calId"),
+						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
 						title = node.getAttribute("title"),
 						htm = Self.renderEvent({ type: "month", id, color, title });
 					// add event html to pipe
@@ -385,7 +385,7 @@ const Events = {
 						dateStart = new Date(starts),
 						dateEnd = new Date(ends),
 						dayDate = dateStart.getDate(),
-						color = node.getAttribute("calId"),
+						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
 						title = node.getAttribute("title"),
 						startHours = dateStart.getHours(),
 						startMinutes = dateStart.getMinutes(),
@@ -426,7 +426,7 @@ const Events = {
 						ends = +node.getAttribute("ends"),
 						dateStart = new Date(starts),
 						dateEnd = new Date(ends),
-						color = node.getAttribute("calId"),
+						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
 						title = node.getAttribute("title"),
 						startHours = dateStart.getHours(),
 						startMinutes = dateStart.getMinutes(),
