@@ -16,7 +16,7 @@
 			<input type="text" placeholder="Add Location"/>
 		</div>
 		<hr/>
-		<div class="row-date active">
+		<div class="row-date">
 			<i class="icon-calendar"></i>
 			<div>
 				<span class="event-date">25 Feb 2021</span>

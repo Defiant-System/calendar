@@ -92,9 +92,9 @@
 				popup.find("h3").focus();
 
 				// add range array to time-starts + time-ends
-				list = Render.hours({ type: "values", step: 2 });
-				popup.find(".event-starts").data({ list: list.join(",") });
-				popup.find(".event-ends").data({ list: list.join(",") });
+				list = Render.hours({ type: "values", hourTicks: 4 });
+				popup.find(".event-starts").addClass("drag-vRange_").data({ list: list.join(",") });
+				popup.find(".event-ends").addClass("drag-vRange_").data({ list: list.join(",") });
 
 				// bind event handler
 				Self.els.wrapper.bind("scroll", Self.dispatch);

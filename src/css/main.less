@@ -434,7 +434,17 @@ content {
 					padding-left: 0;
 				}
 
-				&.editing {
+				&.event-starts,
+				&.event-ends {
+					// &.drag-vRange_ { cursor: ns-resize; }
+					&.drag-hRange_ { cursor: ew-resize; }
+
+					&:hover {
+						color: #000;
+					}
+				}
+
+				&.drag-editing_ {
 					color: #111;
 
 					&:before {
@@ -451,8 +461,8 @@ content {
 				}
 			}
 
-			&.active {
-				span:not(.editing) {
+			&:active {
+				span:not(.drag-editing_) {
 					color: #777;
 				}
 			}

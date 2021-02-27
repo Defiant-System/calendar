@@ -16,7 +16,7 @@ const Render = {
 			list = [],
 			minutes;
 
-		switch (opt.step) {
+		switch (opt.hourTicks) {
 			case 2: minutes = ["00", "30"]; break;
 			case 4: minutes = ["00", "15", "30", "45"]; break;
 			default: minutes = ["00"];
