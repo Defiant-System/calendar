@@ -419,6 +419,47 @@ content {
 			margin-bottom: 5px;
 		}
 
+		&.active {
+
+		}
+
+		&.row-head {}
+		&.row-location {}
+		&.row-date {
+			span {
+				position: relative;
+				padding: 0 2px;
+
+				&:nth-child(1) {
+					padding-left: 0;
+				}
+
+				&.editing {
+					color: #111;
+
+					&:before {
+						content: "";
+						position: absolute;
+						top: -3px;
+						left: -1px;
+						right: -1px;
+						bottom: -3px;
+						z-index: 2;
+						border-radius: 4px;
+						box-shadow: 0 0 0 3px #6da6f9cc;
+					}
+				}
+			}
+
+			&.active {
+				span:not(.editing) {
+					color: #777;
+				}
+			}
+		}
+		&.row-users {}
+		&.row-attachments {}
+
 		.calendar-color {
 			position: relative;
 			top: 1px;
@@ -484,7 +525,7 @@ content {
 .days-wrapper {
 	.col-hours {
 		width: 59px;
-		padding: 43px 9px 0 0;
+		padding: 43px 8px 0 0;
 		text-align: right;
 		font-family: "Jost", sans-serif;
 		font-size: 11px;
@@ -664,7 +705,7 @@ content {
 		color: saturate(darken(@today, 7%), 11%);
 		font-size: 12px;
 		white-space: nowrap;
-		margin-right: 8px;
+		margin-right: 7px;
 	}
 }
 

@@ -3,7 +3,7 @@
 <xsl:template name="popup-event">
 	<div class="popup-event">
 		<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
-		<div>
+		<div class="row-head">
 			<i>
 				<xsl:attribute name="class">calendar-color <xsl:value-of select="@calId"/></xsl:attribute>
 			</i>
@@ -11,22 +11,27 @@
 				<xsl:if test="not(@isNew)"><xsl:value-of select="@title"/></xsl:if>
 			</h3>
 		</div>
-		<div>
+		<div class="row-location">
 			<i class="icon-location-pin"></i>
 			<input type="text" placeholder="Add Location"/>
 		</div>
 		<hr/>
-		<div>
+		<div class="row-date active">
 			<i class="icon-calendar"></i>
-			<div>25 Feb 2021 09:15 to 11:45</div>
+			<div>
+				<span class="event-date">25 Feb 2021</span>
+				<span class="event-starts">09:15</span>
+				<span>to</span>
+				<span class="event-ends">11:45</span>
+			</div>
 		</div>
 		<hr/>
-		<div>
+		<div class="row-users">
 			<i class="icon-user"></i>
 			<input type="text" placeholder="Add Invitees"/>
 		</div>
 		<hr/>
-		<div>
+		<div class="row-attachments">
 			<i class="icon-paperclip"></i>
 			<input type="text" placeholder="Add Notes, URL or Attachments"/>
 		</div>

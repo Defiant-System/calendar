@@ -21,6 +21,7 @@
 			popup,
 			pos,
 			id,
+			list,
 			eventEl,
 			pEl,
 			el;
@@ -89,6 +90,10 @@
 				popup.css(pos);
 				// focus on first "input" field
 				popup.find("h3").focus();
+
+				// add range array to time-starts + time-ends
+				list = Render.hours({ type: "values", step: 2 });
+				console.log(list);
 
 				// bind event handler
 				Self.els.wrapper.bind("scroll", Self.dispatch);

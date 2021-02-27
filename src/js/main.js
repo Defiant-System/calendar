@@ -34,9 +34,9 @@ const calendar = {
 			node.setAttribute("id", index));
 		// parse events (temp)
 		this.data.selectNodes(`//event[not(@starts)]`).map(node => {
-			let starts = new Date(node.getAttribute("date-starts")),
-				ends = new Date(node.getAttribute("date-ends"));
-
+			let starts = new Date(node.getAttribute("iso-starts")),
+				ends = new Date(node.getAttribute("iso-ends"));
+			// convert to milliseconds
 			node.setAttribute("starts", starts.valueOf());
 			node.setAttribute("ends", ends.valueOf());
 		});
@@ -52,7 +52,7 @@ const calendar = {
 		// initiate first view
 		window.find(".toolbar-tool_").get(5).trigger("click");
 
-		// setTimeout(() => window.find(".entry").get(4).trigger("click"), 300);
+		setTimeout(() => window.find(".entry, .event").get(1).trigger("click"), 300);
 	},
 	dispatch(event) {
 		let Self = calendar,

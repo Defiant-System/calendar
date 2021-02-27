@@ -8,27 +8,46 @@ const Render = {
 			months: ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 			days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
 			weekStartsWith: 1, // 1, 5, 6
-			hours: "24h", // "24h", "am/pm"
+			hours: "am/pm", // "24h", "am/pm"
 		};
 	},
-	hours(htm) {
-		let I18n = this.i18n;
+	hours(opt, htm) {
+		let I18n = this.i18n,
+			list = [],
+			minutes;
 
-		htm.push(`<div class="col-hours">`);
-		[...Array(23)].map((a, index) => {
-			let className = [],
-				hour = index + 1;
-			// office hours
-			if (index > 6 && index < 18) className.push("work-hours");
+		switch (opt.step) {
+			case 2: minutes = ["00", "30"]; break;
+			case 4: minutes = ["00", "15", "30", "45"]; break;
+			default: minutes = ["00"];
+		}
 
-			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
-			hour = I18n.hours === "24h"
-					? hour.toString().padStart(2, "0") +":00"
-					: (hour % 12 || 12) + ((hour < 12) ? " AM" : " PM");
-
-			htm.push(`<b${className}>${hour}</b>`);
+		[...Array(24)].map((a, hours) => {
+			minutes.map(minute => {
+				let time;
+				switch (I18n.hours) {
+					case "24h":
+						time = hours.toString().padStart(2, "0") +":"+ minute;
+						break;
+					case "am/pm":
+						time = (hours % 12 || 12) +":"+ minute + ((hours < 12) ? " AM" : " PM");
+						break;
+				}
+				list.push(time);
+			});
 		});
-		htm.push(`</div>`);
+
+		if (opt.type === "values") return list;
+		else {
+			htm.push(`<div class="col-hours">`);
+			list.map((time, index) => {
+				let className = [];
+				if (index > 6 && index < 18) className.push("work-hours");
+				className = (className.length) ? ` class="${className.join(" ")}"` : ``;
+				if (index > 0) htm.push(`<b${className}>${time}</b>`);
+			});
+			htm.push(`</div>`);
+		}
 	},
 	day(opt) {
 		let I18n = this.i18n,
@@ -58,7 +77,7 @@ const Render = {
 			// day wrapper
 			htm.push(`<div class="day-content"><div class="days-wrapper" data-date="${mDate}">`);
 			// hours column
-			this.hours(htm);
+			this.hours({ type: "html" }, htm);
 			// day column
 			htm.push(`<div class="col-day" data-date="${iDate}"></div></div></div>`);
 			htm.push(`</div>`);
@@ -153,7 +172,7 @@ const Render = {
 			// row: days
 			htm.push(`<div class="days"><div class="days-wrapper" data-date="${mDate}">`);
 				// hours column
-				this.hours(htm);
+				this.hours({ type: "html" }, htm);
 
 				// weekdays
 				days.map((name, index) => {
