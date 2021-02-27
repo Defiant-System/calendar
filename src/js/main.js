@@ -75,8 +75,15 @@ const calendar = {
 				Events.dispatch({ type: "update-now-line" });
 				break;
 			case "window.keystroke":
-				if (event.char === "esc") {
-					Self.popup.dispatch({ type: "popup-no-update-event" });
+				switch (event.char) {
+					case "esc":
+						return Self.popup.dispatch({ type: "popup-no-update-event" });
+					case "return":
+						// prevent default behaviour
+						event.preventDefault();
+
+						Self.popup.dispatch({ type: "popup-update-event" });
+						return;
 				}
 				break;
 			case "open-help":

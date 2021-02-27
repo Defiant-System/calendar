@@ -21,14 +21,13 @@
 			popup,
 			pos,
 			id,
+			eventEl,
 			pEl,
 			el;
 		switch (event.type) {
 			// native events
 			case "scroll":
 				Self.dispatch({ type: "popup-update-event" });
-				// bind event handler
-				Self.els.wrapper.unbind("scroll", Self.dispatch);
 				break;
 			// custom events
 			case "popup-no-update-event":
@@ -39,22 +38,30 @@
 				id = el.data("id");
 				xPath = `./event[@id = "${id}"]`;
 				xEvent = APP.xEvents.selectSingleNode(xPath);
+				// DOM element
+				eventEl = Self.els.content.find(`.entry[data-id="${id}"], .event[data-id="${id}"]`);
+				eventEl.removeClass("isNew");
 
 				if (event.type === "popup-no-update-event") {
 					if (xEvent.getAttribute("isNew")) {
 						// remove event node
 						xEvent.parentNode.removeChild(xEvent);
 						// remove event HTML element
-						Self.els.content
-							.find(`.entry[data-id="${id}"], .event[data-id="${id}"]`)
-							.remove();
+						eventEl.remove();
 					}
 				} else {
-					console.log("Update Event node!");
+					let title = el.find("h3").text();
+					// update event node
+					xEvent.setAttribute("title", title);
+					// update DOM element
+					if (eventEl.hasClass("entry")) eventEl.html(title);
+					else eventEl.find(".event-title").html(title);
 				}
 
 				// remove popup element from DOM
 				el.remove();
+				// unbind possible event handler
+				Self.els.wrapper.unbind("scroll", Self.dispatch);
 				break;
 			case "popup-event-details":
 				// conditional check
@@ -80,7 +87,6 @@
 				pos.top -= 43;
 				// position popup
 				popup.css(pos);
-
 				// focus on first "input" field
 				popup.find("h3").focus();
 
@@ -124,7 +130,6 @@
 				pos.left -= 2;
 				// position popup
 				popup.css(pos);
-
 				// focus on first "input" field
 				popup.find("h3").focus();
 				break;
