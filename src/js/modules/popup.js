@@ -4,11 +4,15 @@
 {
 	init() {
 		// fast references
-		this.els = {};
+		this.els = {
+			content: window.find("content"),
+		};
 	},
 	dispatch(event) {
 		let APP = calendar,
 			Self = APP.popup,
+			xPath,
+			xEvent,
 			append,
 			match,
 			rect,
@@ -16,21 +20,43 @@
 			left,
 			popup,
 			pos,
+			id,
 			pEl,
 			el;
 		switch (event.type) {
 			// native events
 			case "scroll":
-				Self.els.root.find(".popup-event").remove();
+				Self.dispatch({ type: "popup-update-event" });
 				// bind event handler
 				Self.els.wrapper.unbind("scroll", Self.dispatch);
 				break;
 			// custom events
-			case "popup-event-details":
-				// if popup exists, remove and return
-				el = event.el.find(".popup-event");
-				if (el.length) return el.remove();
+			case "popup-no-update-event":
+			case "popup-update-event":
+				el = Self.els.content.find(".popup-event");
 
+				// event node
+				id = el.data("id");
+				xPath = `./event[@id = "${id}"]`;
+				xEvent = APP.xEvents.selectSingleNode(xPath);
+
+				if (event.type === "popup-no-update-event") {
+					if (xEvent.getAttribute("isNew")) {
+						// remove event node
+						xEvent.parentNode.removeChild(xEvent);
+						// remove event HTML element
+						Self.els.content
+							.find(`.entry[data-id="${id}"], .event[data-id="${id}"]`)
+							.remove();
+					}
+				} else {
+					console.log("Update Event node!");
+				}
+
+				// remove popup element from DOM
+				el.remove();
+				break;
+			case "popup-event-details":
 				// conditional check
 				if (!event.target.hasClass("event")) return;
 
@@ -57,6 +83,11 @@
 			case "popup-month-entry-details":
 				// origin element
 				el = $(event.target);
+
+				// if popup exists, remove and return
+				if (!el.parents(".popup-event").length && event.el.find(".popup-event").length) {
+					return Self.dispatch({ type: "popup-update-event" });
+				}
 
 				// conditions
 				if (!el.hasClass("entry") && el.parent().hasClass("days")) {

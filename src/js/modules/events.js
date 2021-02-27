@@ -37,14 +37,13 @@ const Events = {
 				pEl = el.parent();
 				type = "move";
 
-				// if popup exists, remove and return
-				let exists = el.parents("[data-area]").find(".popup-event");
-				if (exists.length) return pEl.trigger("scroll");
-
 				// conditional checks
 				if (!el.hasClass("col-day") && (!el.hasClass("event") || el.parents(".popup-event").length) || event.button === 2) {
 					return;
 				}
+				// if popup exists, remove and return
+				let exists = el.parents("[data-area]").find(".popup-event");
+				// if (exists.length) return pEl.trigger("scroll");
 
 				// prevent default behaviour
 				event.preventDefault();
@@ -199,7 +198,7 @@ const Events = {
 						title = el.find(".event-title").html();
 
 					// create new event node
-					htm = `<event id="${id}" starts="${starts}" ends="${ends}" calId="${color}" title="${title}"/>`;
+					htm = `<event isNew="true" id="${id}" starts="${starts}" ends="${ends}" calId="${color}" title="${title}"/>`;
 					xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
 
 					// update event element with ID
@@ -228,7 +227,7 @@ const Events = {
 				el = event.el.find(".entries-wrapper").prepend(htm);
 
 				// create new event node
-				htm = `<event id="${pipe.id}" starts="${pipe.starts.valueOf()}" ends="${pipe.ends.valueOf()}" calId="${pipe.color}" title="${pipe.title}"/>`;
+				htm = `<event isNew="true" id="${pipe.id}" starts="${pipe.starts.valueOf()}" ends="${pipe.ends.valueOf()}" calId="${pipe.color}" title="${pipe.title}"/>`;
 				xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
 
 				el.trigger("click");

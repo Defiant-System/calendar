@@ -50,9 +50,9 @@ const calendar = {
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
 
 		// initiate first view
-		window.find(".toolbar-tool_").get(5).trigger("click");
+		window.find(".toolbar-tool_").get(6).trigger("click");
 
-		// setTimeout(() => window.find(".entry").get(4).trigger("click"), 300);
+		setTimeout(() => window.find(".entry").get(4).trigger("click"), 300);
 	},
 	dispatch(event) {
 		let Self = calendar,
@@ -73,6 +73,11 @@ const calendar = {
 			case "window.resize":
 				// update now line
 				Events.dispatch({ type: "update-now-line" });
+				break;
+			case "window.keystroke":
+				if (event.char === "esc") {
+					Self.popup.dispatch({ type: "popup-no-update-event" });
+				}
 				break;
 			case "open-help":
 				defiant.shell("fs -u '~/help/index.md'");
