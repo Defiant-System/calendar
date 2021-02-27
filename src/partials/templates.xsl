@@ -1,7 +1,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:template name="popup-event">
-	<div class="popup-event">
+	<div class="popup-event" data-area="popup">
 		<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
 		<div class="row-head">
 			<i>
@@ -20,9 +20,9 @@
 			<i class="icon-calendar"></i>
 			<div>
 				<span class="event-date">25 Feb 2021</span>
-				<span class="event-starts">09:15</span>
+				<span class="event-starts" data-change="popup-time-change">09:15</span>
 				<span>to</span>
-				<span class="event-ends">11:45</span>
+				<span class="event-ends" data-change="popup-time-change">11:45</span>
 			</div>
 		</div>
 		<hr/>

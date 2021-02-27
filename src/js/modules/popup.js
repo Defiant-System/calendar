@@ -31,6 +31,9 @@
 				Self.dispatch({ type: "popup-update-event" });
 				break;
 			// custom events
+			case "popup-time-change":
+				console.log(event);
+				break;
 			case "popup-no-update-event":
 			case "popup-update-event":
 				el = Self.els.content.find(".popup-event");
@@ -62,7 +65,7 @@
 				// remove popup element from DOM
 				el.remove();
 				// unbind possible event handler
-				Self.els.wrapper.unbind("scroll", Self.dispatch);
+				Self.els.wrapper.off("scroll", Self.dispatch);
 				break;
 			case "popup-event-details":
 				// conditional check
@@ -97,7 +100,7 @@
 				popup.find(".event-ends").addClass("drag-vRange_").data({ list: list.join(",") });
 
 				// bind event handler
-				Self.els.wrapper.bind("scroll", Self.dispatch);
+				Self.els.wrapper.on("scroll", Self.dispatch);
 				break;
 			case "popup-month-entry-details":
 				// origin element
@@ -138,6 +141,11 @@
 				popup.css(pos);
 				// focus on first "input" field
 				popup.find("h3").focus();
+
+				// add range array to time-starts + time-ends
+				list = Render.hours({ type: "values", hourTicks: 4 });
+				popup.find(".event-starts").addClass("drag-vRange_").data({ list: list.join(",") });
+				popup.find(".event-ends").addClass("drag-vRange_").data({ list: list.join(",") });
 				break;
 		}
 	},
