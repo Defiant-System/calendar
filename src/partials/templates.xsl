@@ -19,10 +19,10 @@
 		<div class="row-date">
 			<i class="icon-calendar"></i>
 			<div>
-				<span class="event-date">25 Feb 2021</span>
-				<span class="event-starts" data-change="popup-time-change">09:15</span>
+				<span class="event-date"><xsl:value-of select="@i18n-date"/></span>
+				<span class="event-starts" data-change="popup-time-change"><xsl:value-of select="@i18n-starts"/></span>
 				<span>to</span>
-				<span class="event-ends" data-change="popup-time-change">11:45</span>
+				<span class="event-ends" data-change="popup-time-change"><xsl:value-of select="@i18n-ends"/></span>
 			</div>
 		</div>
 		<hr/>

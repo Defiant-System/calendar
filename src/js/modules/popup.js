@@ -13,6 +13,8 @@
 			Self = APP.popup,
 			xPath,
 			xEvent,
+			dateStart,
+			dateEnd,
 			append,
 			match,
 			rect,
@@ -79,10 +81,22 @@
 				Self.els.root = append = event.el;
 				Self.els.wrapper = append.find(".days-wrapper");
 
-				// remove potential existing popup
-				append.find(".popup-event").remove();
+				// event node
+				id = event.target.data("id");
+				xPath = `./event[@id = "${id}"]`;
+				xEvent = APP.xEvents.selectSingleNode(xPath);
+
+				dateStart = new defiant.Moment(+xEvent.getAttribute("starts"));
+				console.log(dateStart.format("D MMM YYYY"));
+				// dateEnd = new Date(+xEvent.getAttribute("ends"));
+
+				// update event node with i18n values
+				xEvent.setAttribute("i18n-date", "25 Feb 2021");
+				xEvent.setAttribute("i18n-starts", "09:15");
+				xEvent.setAttribute("i18n-ends", "11:45");
+
 				// xpath matching event node
-				match = `//event[@id="${event.target.data("id")}"]`;
+				match = `//event[@id="${id}"]`;
 				// render event details
 				popup = window.render({ template: "popup-event", match, append });
 
@@ -117,19 +131,26 @@
 				}
 				if (!el.parent().hasClass("entries-wrapper")) return;
 
+				// event node
+				id = event.target.data("id");
+				xPath = `./event[@id = "${id}"]`;
+				xEvent = APP.xEvents.selectSingleNode(xPath);
+				// update event node with i18n values
+				xEvent.setAttribute("i18n-date", "25 Feb 2021");
+				xEvent.setAttribute("i18n-starts", "09:15");
+				xEvent.setAttribute("i18n-ends", "11:45");
+
 				// DOM element to append popup
 				append = event.el;
 				// inactivate old active item
 				append.find(".entry.active").removeClass("active");
-				// remove potential existing popup
-				append.find(".popup-event").remove();
 				// conditional check
 				if (!event.target.hasClass("entry")) return;
 				// make item "active"
 				event.target.addClass("active");
 				
 				// xpath matching event node
-				match = `//event[@id="${event.target.data("id")}"]`;
+				match = `//event[@id="${id}"]`;
 				// render event details
 				popup = window.render({ template: "popup-event", match, append });
 

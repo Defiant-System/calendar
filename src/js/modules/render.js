@@ -1,15 +1,7 @@
 
 const Render = {
 	init() {
-		this.getSettings();
-	},
-	getSettings() {
-		this.i18n = {
-			months: ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-			days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-			weekStartsWith: 1, // 1, 5, 6
-			hours: "24h", // "24h", "am/pm"
-		};
+		this.i18n = defiant.Moment.i18n;
 	},
 	hours(opt, htm) {
 		let I18n = this.i18n,
