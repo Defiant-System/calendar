@@ -77,6 +77,9 @@
 				// position popup
 				popup.css(pos);
 
+				// focus on first "input" field
+				popup.find("h3").focus();
+
 				// bind event handler
 				Self.els.wrapper.bind("scroll", Self.dispatch);
 				break;
@@ -117,6 +120,9 @@
 				pos.left -= 2;
 				// position popup
 				popup.css(pos);
+
+				// focus on first "input" field
+				popup.find("h3").focus();
 				break;
 		}
 	},

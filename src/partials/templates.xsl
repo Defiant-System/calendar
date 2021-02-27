@@ -7,7 +7,7 @@
 			<i>
 				<xsl:attribute name="class">calendar-color <xsl:value-of select="@calId"/></xsl:attribute>
 			</i>
-			<h3><xsl:value-of select="@title"/></h3>
+			<h3 contenteditable="true" placeholder="New Event" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><xsl:value-of select="@title"/></h3>
 		</div>
 		<div>
 			<i class="icon-location-pin"></i>

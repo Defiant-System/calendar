@@ -62,7 +62,7 @@ const Events = {
 
 					// render new event HTML
 					htm = Self.renderEvent({
-						id: "-1",
+						id: Self.createEventId(),
 						type: "week",
 						color: "purple",
 						title: "New Event",
@@ -109,6 +109,7 @@ const Events = {
 					type,
 				};
 
+				// TODO: fix this
 				if (el.data("id") !== "-1") {
 					el.addClass("ghost");
 				}
@@ -184,6 +185,7 @@ const Events = {
 				}
 
 				// clean up DOM
+				// TODO: fix this
 				if (Drag.clone.data("id") === "-1") {
 					let id = Self.createEventId(),
 						sDate = el.parents(".days-wrapper").data("date"),
