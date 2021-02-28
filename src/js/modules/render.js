@@ -193,7 +193,7 @@ const Render = {
 
 		// title: month
 		htm.push(`<h2><b>${meta.i18nMonth}</b> ${meta.i18nYear}</h2>`);
-		htm.push(`<div class="month ${opt.weekNumbers ? "show-week-numbers" : ""}" data-date="${meta.yearMonth}">`);
+		htm.push(`<div class="month" data-date="${meta.yearMonth}">`);
 		
 		// month name
 		htm.push(`<h3>${meta.i18nMonth}</h3>`);

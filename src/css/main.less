@@ -128,7 +128,7 @@ content {
 					padding: 3px;
 					cursor: pointer;
 					border-radius: 50%;
-					margin-left: 1px;
+					margin: 0 1px;
 
 					&:hover {
 						background-color: rgba(0,0,0,.15);
@@ -149,7 +149,6 @@ content {
 					}
 
 					&.icon-chevron-left:after {
-						left: -1px;
 						background-image: url(~/icons/icon-chevron-left.png);
 					}
 				}
@@ -164,11 +163,49 @@ content {
 				color: #333;
 			}
 
+			.cal-reel {
+				// background: rgba(0,0,0,.1);
+				position: relative;
+				width: 100%;
+				overflow: hidden;
+
+				.reel-wrapper {
+					position: relative;
+					left: 0;
+					white-space: nowrap;
+					font-size: 0;
+
+					&.go-next {
+						transition: left 250ms ease-in-out;
+						left: -204px;
+					}
+
+					&.go-prev {
+						transition: left 250ms ease-in-out;
+						left: 204px;
+					}
+
+					.mini-cal-wrapper {
+						display: inline-block;
+						white-space: normal;
+						width: 204px;
+
+						&.prepend {
+							position: absolute;
+							top: 0;
+							left: -204px;
+						}
+					}
+				}
+			}
+
 			.month {
 				display: block;
+				width: 100%;
 				padding: 7px 0 0;
 				margin: 0;
 				font-family: "Jost", sans-serif;
+				font-size: 13px;
 				border-radius: 5px;
 
 				h3 {
