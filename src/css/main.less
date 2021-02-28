@@ -95,6 +95,31 @@ content {
 			background-image: linear-gradient(90deg, var(--sidebar-bg) 0%, rgba(0,0,0,.075) 50%, var(--sidebar-bg) 100%);
 		}
 
+		legend {
+			position: relative;
+			font-family: "Jost", sans-serif;
+			font-size: 14px;
+			font-weight: 500;
+			text-align: left;
+			padding: 3px 0 5px;
+			margin: 0;
+			color: #222;
+
+			&:hover .btn-toggle {
+				display: block;
+			}
+
+			.btn-toggle {
+				font-size: 11px;
+				display: none;
+				float: right;
+				position: relative;
+				top: 2px;
+				color: #999;
+				cursor: pointer;
+			}
+		}
+
 		.sidebar-wrapper {
 			position: absolute;
 			top: 0;
@@ -104,6 +129,31 @@ content {
 			background: var(--sidebar-bg);
 			border-right: 1px solid rgba(0,0,0,.1);
 			padding: 7px 9px;
+
+			.wrapper {
+
+				&.collapsed {
+					.list-wrapper {
+						max-height: 0;
+
+						> ul {
+							margin-top: -100%;
+						}
+					}
+				}
+
+				.list-wrapper {
+					position: relative;
+					max-height: 500px;
+					overflow: hidden;
+					transition: all 300ms ease-in-out;
+
+					> ul {
+						margin-top: 0;
+						transition: inherit;
+					}
+				}
+			}
 		}
 
 		.mini-calendar {
@@ -290,15 +340,6 @@ content {
 		}
 
 		.calendars {
-
-			h3 {
-				font-size: 15px;
-				text-align: left;
-				padding: 3px 0 5px;
-				margin: 0;
-				color: #333;
-			}
-
 			ul {
 
 				li {
