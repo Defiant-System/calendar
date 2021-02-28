@@ -35,7 +35,7 @@
 				break;
 			// custom events
 			case "popup-time-change":
-				console.log(event);
+				// console.log(event);
 				break;
 			case "popup-no-update-event":
 			case "popup-update-event":
@@ -68,7 +68,10 @@
 				// remove popup element from DOM
 				el.remove();
 				// unbind possible event handler
-				if (Self.els.wrapper) Self.els.wrapper.off("scroll", Self.dispatch);
+				if (Self.els.wrapper) {
+					Self.els.wrapper.off("scroll", Self.dispatch);
+					Self.els.wrapper = false;
+				}
 				break;
 			case "popup-event-details":
 				// conditional check

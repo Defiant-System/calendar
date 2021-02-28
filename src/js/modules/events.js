@@ -37,6 +37,10 @@ const Events = {
 				pEl = el.parent();
 				type = "move";
 
+				// if popup exists, remove and return
+				let exists = el.parents("[data-area]").find(".popup-event");
+				if (exists.length) return pEl.trigger("scroll");
+				
 				// conditional checks
 				if (!el.hasClass("col-day")
 						&& (!el.hasClass("event") || el.parents(".popup-event").length)
@@ -44,10 +48,6 @@ const Events = {
 						|| event.button === 2) {
 					return;
 				}
-
-				// if popup exists, remove and return
-				let exists = el.parents("[data-area]").find(".popup-event");
-				if (exists.length) return pEl.trigger("scroll");
 
 				// prevent default behaviour
 				event.preventDefault();
