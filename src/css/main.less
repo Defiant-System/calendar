@@ -80,6 +80,7 @@ content {
 	.sidebar {
 		position: relative;
 		width: 0;
+		border-radius: 0 0 0 4px;
 		overflow: hidden;
 		transition: width 150ms ease-in-out;
 
@@ -210,11 +211,12 @@ content {
 				text-align: left;
 				padding: 5px 3px 0;
 				margin: 0;
+				opacity: 1;
 				color: #333;
+				transition: opacity 100ms ease-in-out forwards;
 			}
 
 			.cal-reel {
-				// background: rgba(0,0,0,.1);
 				position: relative;
 				width: 100%;
 				overflow: hidden;
@@ -228,11 +230,19 @@ content {
 					&.go-next {
 						transition: left 250ms ease-in-out;
 						left: -204px;
+
+						.mini-cal-wrapper h2 {
+							opacity: 0;
+						}
 					}
 
 					&.go-prev {
 						transition: left 250ms ease-in-out;
 						left: 204px;
+
+						.mini-cal-wrapper h2 {
+							opacity: 0;
+						}
 					}
 
 					.mini-cal-wrapper {
