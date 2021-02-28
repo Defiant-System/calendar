@@ -48,9 +48,6 @@
 			case "render-calendar":
 				date = new Date(),
 				htm = Render.month({ date, weekNumbers: 1, mini: 1 });
-				// remove title
-				// htm.shift();
-
 				Self.els.miniCal.append(htm.join(""));
 				break;
 			case "toggle-calendars":
