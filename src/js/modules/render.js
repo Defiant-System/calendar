@@ -186,89 +186,49 @@ const Render = {
 			.find(".days-wrapper").scrollTop(320);
 	},
 	month(opt) {
-		let I18n = this.i18n,
-			now = new Date,
-			days = [...I18n.days],
-			nowYear = now.getFullYear(),
-			nowMonth = now.getMonth(),
-			nowDate = now.getDate(),
-			date = opt.date || now,
-			weekDays = opt.weekDays || 3,
-			htm = [],
-			toStart = 1;
-		
-		switch (I18n.weekStartsWith) {
-			case 5:
-				toStart = days.splice(5, 2);
-				days = toStart.concat(days);
-				toStart = -1;
-				break;
-			case 6:
-				toStart = days.splice(6, 1);
-				days = toStart.concat(days);
-				toStart = 0;
-				break;
-		}
-
-		// reset date to first of the month
-		date.setDate(1);
-
-		let iYear = date.getFullYear(),
-			iMonth = date.getMonth(),
-			iDay = date.getDay();
+		let date = new defiant.Moment(opt.date),
+			meta = date.render(opt),
+			htm = [];
+		// console.log( meta );
 
 		// title: month
-		htm.push(`<h2><b>${I18n.months[iMonth]}</b> ${iYear}</h2>`);
-		htm.push(`<div class="month ${opt.weekNumbers ? "show-week-numbers" : ""}" data-date="${iYear}-${iMonth}">`);
+		htm.push(`<h2><b>${meta.i18nMonth}</b> ${meta.i18nYear}</h2>`);
+		htm.push(`<div class="month ${opt.weekNumbers ? "show-week-numbers" : ""}" data-date="${meta.yearMonth}">`);
 		
 		// month name
-		htm.push(`<h3>${I18n.months[iMonth]}</h3>`);
+		htm.push(`<h3>${meta.i18nMonth}</h3>`);
 
-		// weekdays
+		// loop weekdays
 		htm.push(`<div class="weekdays">`);
-		// week number UI
-		if (opt.weekNumbers) htm.push(`<b class="week-nr"></b>`);
-		// loop days
-		days.map((name, index) => {
-			let className = [];
-
-			if (toStart === 1 && index >= 5) className.push("weekend");
-			if (toStart === 0 && (index >= 6 || index === 0)) className.push("weekend");
-			if (toStart === -1 && index <= 1) className.push("weekend");
-
-			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
-			htm.push(`<b${className}>${name.slice(0, weekDays)}</b>`);
+		if (opt.weekNumbers) {
+			htm.push(`<b class="week-nr"></b>`);
+		}
+		meta.weekdays.map(day => {
+			let className = day.type ? ` class="${day.type.join(" ")}"` : "";
+			htm.push(`<b${className}>${day.name}</b>`);
 		});
 		htm.push(`</div>`);
 
-		// iterate 42 days
+		// loop days
 		htm.push(`<div class="days">`);
-		[...Array(42)].map((a, index) => {
-			let mDate = new Date(iYear, iMonth, index - iDay + toStart + 1),
-				imWeek = mDate.getWeek(),
-				imDate = mDate.getDate(),
-				className = [];
-
-			if (opt.weekNumbers && index % 7 === 0) htm.push(`<b class="week-nr">${imWeek}</b>`);
-			if ([0,6].includes(mDate.getDay())) className.push("weekend");
-			if (mDate.getMonth() !== iMonth) className.push("non-day");
-			if (mDate.getFullYear() === nowYear &&
-				mDate.getMonth() === nowMonth &&
-				mDate.getDate() === nowDate) className.push("today");
-
-			className = (className.length) ? ` class="${className.join(" ")}"` : ``;
-			htm.push(`<b${className}><i>${imDate}</i><div class="entries-wrapper"></div></b>`);
+		meta.days.map(day => {
+			if (opt.weekNumbers && day.week) {
+				return htm.push(`<b class="week-nr">${day.week}</b>`);
+			}
+			if (day.date) {
+				let className = day.type ? ` class="${day.type.join(" ")}"` : "";
+				htm.push(`<b${className}><i>${day.date}</i>`);
+				if (!opt.mini) htm.push(`<div class="entries-wrapper"></div>`);
+				htm.push(`</b>`);
+			}
 		});
 		htm.push(`</div>`);
 
 		// closing tag
 		htm.push(`</div>`);
-		
-		if (opt.el) {
-			opt.el.html(htm.join(""));
-		} else {
-			return htm;
-		}
+
+		if (opt.el) opt.el.html(htm.join(""));
+		else return htm;
 	},
 	year(opt) {
 		let now = new Date,
@@ -287,7 +247,7 @@ const Render = {
 		// iterate 12 months
 		[...Array(12)].map((a, index) => {
 			let mDate = new Date(iYear, iMonth + index),
-				mHtm = this.month({ date: mDate, weekDays: 1 });
+				mHtm = this.month({ date: mDate, weekdayNameLength: 1 });
 			// remove title
 			mHtm.shift();
 			// add to rendered html

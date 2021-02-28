@@ -47,7 +47,8 @@
 				return !isOn;
 			case "render-calendar":
 				date = new Date(),
-				htm = Render.month({ date, weekDays: 3, weekNumbers: 1, nav: ["sidebar-go-prev", "sidebar-go-next"] });
+				htm = Render.month({ date, weekNumbers: 1, mini: 1 });
+				// htm = Render.month({ date, weekDays: 3, weekNumbers: 1 });
 				// remove title
 				// htm.shift();
 
