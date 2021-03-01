@@ -1,12 +1,29 @@
 
 <Events>
+	<Palette>
+		<i hex="#64b2eb" name="blue" />
+		<i hex="#bae0f6" name="lightblue" />
+		<i hex="#f67c7c" name="red" />
+		<i hex="#d38df4" name="purple" />
+		<i hex="#f29d5c" name="orange" />
+		<i hex="#faea4b" name="yellow" />
+		<i hex="#96f67d" name="green" />
+		<i hex="#9fe5e5" name="cyan" />
+		<i hex="#dddddd" name="gray" />
+	</Palette>
+
+	<Calendars>
+		<i id="lightblue" name="Holidays in Sweden"/>
+		<i id="green" name="Birthdays"/>
+		<i id="blue" name="Home"/>
+		<i id="purple" name="Work"/>
+	</Calendars>
 
 	<Holidays color="lightblue" title="Holidays in Sweden">
 		<event type="day" date="2021-01-01" title="Nyårsdagen" />
 		<event type="day" date="2021-01-06" title="Trettondedag jul" />
 		<event type="day" date="2021-02-14" title="Alla hjärtans dag" />
 		<event type="day" date="2021-02-16" title="Fettisdagen" />
-		<event type="day" date="2021-03-01" title="1 mars" />
 		<event type="day" date="2021-03-08" title="Internationella kvinnodagen" />
 		<event type="day" date="2021-03-28" title="Sommartid" />
 		<event type="day" date="2021-04-01" title="Skärtorsdagen" />
