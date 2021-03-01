@@ -17,8 +17,6 @@
 
 		// auto render sídebar contents
 		this.dispatch({ type: "render-calendar" });
-		// select "today"
-		this.els.reelWrapper.find("b.today").trigger("click");
 
 		// temp
 		setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
@@ -49,11 +47,17 @@
 					Self.els.sidebar.cssSequence("!show", "transitionend", el =>
 						// update now line
 						Events.dispatch({ type: "update-now-line" }));
+					
+					// close event popup, if showing
+					APP.popup.dispatch({ type: "close-popup-event" });
 				} else {
 					window.width += width;
 					Self.els.sidebar.cssSequence("show", "transitionend", el =>
 						// update now line
 						Events.dispatch({ type: "update-now-line" }));
+
+					// select "today"
+					Self.els.reelWrapper.find("b.today").trigger("click");
 				}
 				
 				return !isOn;
@@ -65,6 +69,8 @@
 			case "select-minical-day":
 				el = $(event.target);
 				if (!el.hasClass("day") || el.hasClass("non-day")) return;
+				// close event popup, if showing
+				APP.popup.dispatch({ type: "close-popup-event" });
 				// indicate selected day
 				el.parent().find(".selected").removeClass("selected");
 				el.addClass("selected");
@@ -96,10 +102,9 @@
 				break;
 			case "select-sidebar-entry":
 				target = $(event.target);
-				if (!target.data("id")) return;
-				
 				el = Self.els.content;
-				// el = Self.els.content.find(".view-"+ Self.els.content.prop("className").split("-")[1]);
+				if (!target.data("id")) return;
+				// popup event details
 				APP.popup.dispatch({ type: "popup-event-details", target, el });
 				break;
 			case "sidebar-go-prev":
