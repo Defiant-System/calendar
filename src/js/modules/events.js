@@ -397,8 +397,8 @@ const Events = {
 						top = (startHours * hHeight) + (startMinutes / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight,
 						htm = Self.renderEvent({ type: "week", id, color, top, height, timeStarts, title });
-					// add event html to pipe
-					pipe[dayDate].htm.push(htm);
+					// add event html to pipe, if not all-day event
+					if (ends) pipe[dayDate].htm.push(htm);
 				});
 
 				// expose rendered event html to DOM
@@ -438,8 +438,8 @@ const Events = {
 						top = (startHours * hHeight) + (startMinutes / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight,
 						htm = Self.renderEvent({ type: "day", id, color, top, height, timeStarts, title });
-					// add event html to pipe
-					pipe.htm.push(htm);
+					// add event html to pipe, if not all-day event
+					if (ends) pipe.htm.push(htm);
 				});
 				// expose rendered event html to DOM
 				el.find(".col-day").html(pipe.htm.join(""));

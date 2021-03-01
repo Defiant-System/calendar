@@ -41,7 +41,6 @@ const calendar = {
 			node.setAttribute("ends", ends.valueOf());
 		});
 
-
 		// initiate objects and view
 		View.init();
 		Render.init();
