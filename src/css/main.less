@@ -780,6 +780,77 @@ content {
 	}
 }
 
+b.has-event {
+	position: relative;
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 1px;
+		left: 1px;
+		right: 1px;
+		bottom: 1px;
+		border-radius: 3px;
+	}
+
+	&.blue:not(.today)  {
+		color: darken(@blue, 37%);
+		&:before { background: darken(@blue, 3%); }
+	}
+
+	&.lightblue:not(.today)  {
+		&:before { background: darken(@blue, 3%); }
+	}
+
+	&.gray:not(.today)  {
+		color: darken(@gray, 37%);
+		&:before { background: darken(@gray, 3%); }
+	}
+
+	&.green:not(.today)  {
+		color: darken(@green, 53%);
+		&:before { background: darken(@green, 3%); }
+	}
+
+	&.orange:not(.today) {
+		color: darken(@orange, 37%);
+		&:before { background: darken(@orange, 3%); }
+	}
+
+	&.yellow:not(.today) {
+		color: darken(@yellow, 47%);
+		&:before { background: darken(@yellow, 3%); }
+	}
+
+	&.purple:not(.today) {
+		color: darken(@purple, 43%);
+		&:before { background: darken(@purple, 3%); }
+	}
+
+	&.red:not(.today)    {
+		color: darken(@red, 47%);
+		&:before { background: darken(@red, 3%); }
+	}
+
+	&.cyan:not(.today)   {
+		color: darken(@cyan, 47%);
+		&:before { background: darken(@cyan, 3%); }
+	}
+
+	&.holiday:not(.today, .blue, .gray, .green, .orange, .yellow, .purple, .red, .cyan) {
+		&:before {
+			background: rgba(200,0,200,.125);
+			top: 0;
+			right: auto;
+			left: 50%;
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			margin-left: -10px;
+		}
+	}
+}
+
 .now-line {
 	position: absolute;
 	top: var(--time-top);
@@ -1281,77 +1352,6 @@ content {
 				&.non-day {
 					color: #c2c2c2;
 					font-weight: 300;
-				}
-
-				&.has-event {
-					position: relative;
-
-					&:before {
-						content: "";
-						position: absolute;
-						top: 1px;
-						left: 1px;
-						right: 1px;
-						bottom: 1px;
-						border-radius: 3px;
-					}
-
-					&.blue:not(.today)  {
-						color: darken(@blue, 37%);
-						&:before { background: darken(@blue, 3%); }
-					}
-
-					&.lightblue:not(.today)  {
-						&:before { background: darken(@blue, 3%); }
-					}
-
-					&.gray:not(.today)  {
-						color: darken(@gray, 37%);
-						&:before { background: darken(@gray, 3%); }
-					}
-
-					&.green:not(.today)  {
-						color: darken(@green, 53%);
-						&:before { background: darken(@green, 3%); }
-					}
-
-					&.orange:not(.today) {
-						color: darken(@orange, 37%);
-						&:before { background: darken(@orange, 3%); }
-					}
-
-					&.yellow:not(.today) {
-						color: darken(@yellow, 47%);
-						&:before { background: darken(@yellow, 3%); }
-					}
-
-					&.purple:not(.today) {
-						color: darken(@purple, 43%);
-						&:before { background: darken(@purple, 3%); }
-					}
-
-					&.red:not(.today)    {
-						color: darken(@red, 47%);
-						&:before { background: darken(@red, 3%); }
-					}
-
-					&.cyan:not(.today)   {
-						color: darken(@cyan, 47%);
-						&:before { background: darken(@cyan, 3%); }
-					}
-
-					&.holiday:not(.today, .blue, .gray, .green, .orange, .yellow, .purple, .red, .cyan) {
-						&:before {
-							background: rgba(200,0,200,.125);
-							top: 0;
-							right: auto;
-							left: 50%;
-							width: 20px;
-							height: 20px;
-							border-radius: 50%;
-							margin-left: -10px;
-						}
-					}
 				}
 
 				&.today {

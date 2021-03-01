@@ -23,6 +23,8 @@
 	dispatch(event) {
 		let APP = calendar,
 			Self = APP.sidebar,
+			starts,
+			ends,
 			width,
 			isOn,
 			htm,
@@ -76,7 +78,17 @@
 				htm = Render.month({ date: Self.date, weekNumbers: 1, mini: 1 });
 				htm.unshift(`<div class="mini-cal-wrapper ${event.className || ""}">`);
 				htm.push(`</div>`);
-				Self.els.reelWrapper.append(htm.join(""));
+				el = Self.els.reelWrapper.append(htm.join(""));
+
+				starts = Self.date.valueOf();
+				ends = new Date(starts);
+				ends.setMonth(ends.getMonth() + 1);
+				Events.dispatch({
+					type: "populate-mini-cal",
+					ends: ends.valueOf(),
+					starts,
+					el,
+				});
 				break;
 		}
 	}

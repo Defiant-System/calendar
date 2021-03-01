@@ -292,8 +292,9 @@ const Events = {
 					Self.dispatch({ type: "update-now-line" }), (60 - seconds) * 1000);
 				break;
 			case "populate-year":
+			case "populate-mini-cal":
 				// root DOM element
-				el = Self.els.year;
+				el = event.el || Self.els.year;
 				// iterate holiday nodes
 				xPath = `//Holidays/event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.data.selectNodes(xPath).map(node => {
