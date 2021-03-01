@@ -449,12 +449,44 @@ const Events = {
 
 				console.log("render sidebar");
 				break;
+			case "populate-sidebar-events":
+				// reset pipe to array
+				pipe = [];
+				// iterate event nodes
+				xPath = `.//event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
+				APP.xEvents.selectNodes(xPath).map(node => {
+					let id = node.getAttribute("id"),
+						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
+						title = node.getAttribute("title"),
+						starts = +node.getAttribute("starts"),
+						ends = +node.getAttribute("ends"),
+						dateStart = new Date(starts),
+						dateEnd = new Date(ends),
+						startHours = dateStart.getHours(),
+						startMinutes = dateStart.getMinutes(),
+						endHours = dateEnd.getHours(),
+						endMinutes = dateEnd.getMinutes(),
+						startsTime = Self.formatTime(startHours, startMinutes),
+						endsTime = Self.formatTime(endHours, endMinutes),
+						htm = Self.renderEvent({ type: "sidebar-entry", id, color, title, startsTime, endsTime });
+					// add event html to pipe
+					pipe.push(htm);
+				});
+				// expose rendered event html to DOM
+				event.el.html(`<ul>${pipe.join("")}</ul>`);
+				break;
 		}
 	},
 	renderEvent(opt) {
 		let isNew = opt.isNew ? "isNew" : "",
 			htm;
 		switch (opt.type) {
+			case "sidebar-entry":
+				htm = `<li data-id="${opt.id}" class="entry ${opt.color}">
+							<span class="entry-title">${opt.title}</span>
+							<span class="entry-time">${opt.startsTime} - ${opt.endsTime}</span>
+						</li>`;
+				break;
 			case "month":
 				htm = `<div data-id="${opt.id}" class="entry ${opt.color} ${isNew}">${opt.title}</div>`;
 				break;

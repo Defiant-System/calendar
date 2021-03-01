@@ -9,6 +9,7 @@
 			sidebar: window.find(".sidebar"),
 			wrapper: window.find(".sidebar-wrapper"),
 			reelWrapper: window.find(".reel-wrapper"),
+			dayEntries: window.find(".sidebar .day-entries"),
 		};
 
 		// reference to contextual date
@@ -88,6 +89,15 @@
 					ends: ends.valueOf(),
 					starts,
 					el,
+				});
+
+				ends = new Date(starts);
+				ends.setDate(ends.getDate() + 1);
+				Events.dispatch({
+					type: "populate-sidebar-events",
+					el: Self.els.dayEntries.find(".list-wrapper"),
+					ends: ends.valueOf(),
+					starts,
 				});
 				break;
 		}
