@@ -9,6 +9,7 @@
 			sidebar: window.find(".sidebar"),
 			wrapper: window.find(".sidebar-wrapper"),
 			reelWrapper: window.find(".reel-wrapper"),
+			calendars: window.find(".sidebar .wrapper.calendars"),
 			dayEntries: window.find(".sidebar .day-entries"),
 		};
 
@@ -16,6 +17,7 @@
 		this.date = new Date();
 
 		// auto render sídebar contents
+		this.dispatch({ type: "render-calendar-list" });
 		this.dispatch({ type: "render-calendar" });
 
 		// temp
@@ -35,6 +37,7 @@
 			isOn,
 			str,
 			htm,
+			match,
 			target,
 			el;
 		switch (event.type) {
@@ -128,6 +131,12 @@
 					wEl.find(".mini-cal-wrapper").get(0).remove();
 					wEl.removeClass("go-next");
 				});
+				break;
+			case "render-calendar-list":
+				match = "//Calendars";
+				target = Self.els.calendars.find(".list-wrapper");
+				// render calendar list
+				window.render({ template: "calendar-list", match, target });
 				break;
 			case "render-calendar":
 				htm = Render.month({ date: Self.date, weekNumbers: 1, mini: 1 });

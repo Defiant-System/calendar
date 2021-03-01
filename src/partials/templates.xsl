@@ -1,5 +1,29 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
+<xsl:template name="calendar-list">
+	<ul>
+		<xsl:for-each select="./*">
+			<li>
+				<span>
+					<xsl:attribute name="class">form-checkbox_ <xsl:value-of select="@id"/></xsl:attribute>
+					<input type="checkbox" checked="checked">
+						<xsl:attribute name="id">calendar-<xsl:value-of select="@id"/></xsl:attribute>
+					</input>
+					<i></i>
+				</span>
+				<label>
+					<xsl:attribute name="for">calendar-<xsl:value-of select="@id"/></xsl:attribute>
+					<xsl:value-of select="@name"/>
+				</label>
+			</li>
+		</xsl:for-each>
+		<li class="add-calendar">
+			<i class="icon-plus"></i>
+			<span>Add Calendar</span>
+		</li>
+	</ul>
+</xsl:template>
+
 <xsl:template name="popup-event">
 	<div class="popup-event" data-area="popup">
 		<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
