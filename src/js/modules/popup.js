@@ -77,7 +77,7 @@
 				// conditional check
 				if (!event.target.hasClass("event")) return;
 
-				if (event.el.find(".popup-event").length) {
+				if (Self.els.content.find(".popup-event").length) {
 					return Self.dispatch({ type: "popup-update-event" });
 				}
 
