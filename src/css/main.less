@@ -290,6 +290,7 @@ content {
 						position: relative;
 						z-index: 1;
 						font-style: normal;
+						pointer-events: none;
 					}
 				}
 
@@ -313,6 +314,7 @@ content {
 					b {
 						&.week-nr {
 							background: rgba(0,0,0,.05);
+							pointer-events: none;
 
 							&:nth-child(1) { border-radius: 3px 3px 0 0; }
 							&:nth-child(41) { border-radius: 0 0 3px 3px; }
@@ -325,9 +327,27 @@ content {
 						&.non-day {
 							color: #c2c2c2;
 							font-weight: 300;
+							pointer-events: none;
 						}
 
 						&.today:not(.non-day) {
+							position: relative;
+
+							&:before {
+								content: "";
+								box-shadow: inset 0 0 0 2px @today;
+								position: absolute;
+								top: 0;
+								right: auto;
+								left: 50%;
+								width: 20px;
+								height: 20px;
+								border-radius: 50%;
+								margin-left: -10px;
+							}
+						}
+
+						&.selected {
 							position: relative;
 							color: #fff;
 
@@ -429,35 +449,53 @@ content {
 					display: flex;
 					padding: 5px 0 5px 15px;
 
-					&.gray span:before      { background: lighten(@gray, 5%); }
-					&.blue span:before      { background: darken(@blue, 13%); }
-					&.lightblue span:before { background: darken(@blue, 5%); }
-					&.green span:before     { background: darken(@green, 29%); }
-					&.orange span:before    { background: darken(@orange, 11%); }
-					&.yellow span:before    { background: darken(@yellow, 13%); }
-					&.purple span:before    { background: darken(@purple, 11%); }
-					&.red span:before       { background: darken(@red, 11%); }
-					&.cyan span:before      { background: darken(@cyan, 21%); }
+					&.cal-date {
+						span.entry-time {
+							color: #bbb;
+						}
+
+					// 	padding-left: 31px;
+					// 	&:before {
+					// 		content: "";
+					// 		background: url(~/icons/icon-calendar.png) 50% 50%/contain no-repeat;
+					// 		position: absolute;
+					// 		top: 5px;
+					// 		left: 15px;
+					// 		width: 13px;
+					// 		height: 13px;
+					// 		filter: opacity(.75) invert(.5) sepia(1) saturate(2);
+					// 	}
+					}
+
+					&.gray .entry-title:before      { background: lighten(@gray, 5%); }
+					&.blue .entry-title:before      { background: darken(@blue, 13%); }
+					&.lightblue .entry-title:before { background: darken(@blue, 5%); }
+					&.green .entry-title:before     { background: darken(@green, 29%); }
+					&.orange .entry-title:before    { background: darken(@orange, 11%); }
+					&.yellow .entry-title:before    { background: darken(@yellow, 13%); }
+					&.purple .entry-title:before    { background: darken(@purple, 11%); }
+					&.red .entry-title:before       { background: darken(@red, 11%); }
+					&.cyan .entry-title:before      { background: darken(@cyan, 21%); }
 
 					span {
 						white-space: nowrap;
 						overflow: hidden;
 						text-overflow: ellipsis;
 
-						&:before {
-							content: "";
-							position: absolute;
-							top: 7px;
-							left: 1px;
-							width: 9px;
-							height: 9px;
-							box-shadow: inset 0 1px 1px rgba(0,0,0,.15);
-							border-radius: 50%;
-						}
-
 						&.entry-title {
 							flex: 1;
 							color: #333;
+
+							&:before {
+								content: "";
+								position: absolute;
+								top: 7px;
+								left: 1px;
+								width: 9px;
+								height: 9px;
+								box-shadow: inset 0 1px 1px rgba(0,0,0,.15);
+								border-radius: 50%;
+							}
 						}
 
 						&.entry-time {

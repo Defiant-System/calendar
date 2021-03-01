@@ -17,6 +17,8 @@
 
 		// auto render sídebar contents
 		this.dispatch({ type: "render-calendar" });
+		// select "today"
+		this.els.reelWrapper.find("b.today").trigger("click");
 
 		// temp
 		setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
@@ -52,6 +54,24 @@
 				el = $(event.target);
 				if (el.attr("type") !== "checkbox") return;
 				console.log(event);
+				break;
+			case "select-minical-day":
+				el = $(event.target);
+				if (!el.hasClass("day") || el.hasClass("non-day")) return;
+				// indicate selected day
+				el.parent().find(".selected").removeClass("selected");
+				el.addClass("selected");
+
+				// render day entries
+				starts = new Date(2021, 2, 1, 0, 0);
+				ends = new Date(starts);
+				ends.setDate(ends.getDate() + 1);
+				Events.dispatch({
+					type: "populate-sidebar-events",
+					el: Self.els.dayEntries.find(".list-wrapper"),
+					starts: starts.valueOf(),
+					ends: ends.valueOf(),
+				});
 				break;
 			case "sidebar-go-prev":
 				// next month + render HTML
@@ -89,15 +109,6 @@
 					ends: ends.valueOf(),
 					starts,
 					el,
-				});
-
-				ends = new Date(starts);
-				ends.setDate(ends.getDate() + 1);
-				Events.dispatch({
-					type: "populate-sidebar-events",
-					el: Self.els.dayEntries.find(".list-wrapper"),
-					ends: ends.valueOf(),
-					starts,
 				});
 				break;
 		}

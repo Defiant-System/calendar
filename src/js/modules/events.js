@@ -468,7 +468,8 @@ const Events = {
 						endMinutes = dateEnd.getMinutes(),
 						startsTime = Self.formatTime(startHours, startMinutes),
 						endsTime = Self.formatTime(endHours, endMinutes),
-						htm = Self.renderEvent({ type: "sidebar-entry", id, color, title, startsTime, endsTime });
+						allDay = !!ends === false,
+						htm = Self.renderEvent({ type: "sidebar-entry", id, color, title, startsTime, endsTime, allDay });
 					// add event html to pipe
 					pipe.push(htm);
 				});
@@ -479,12 +480,14 @@ const Events = {
 	},
 	renderEvent(opt) {
 		let isNew = opt.isNew ? "isNew" : "",
+			time,
 			htm;
 		switch (opt.type) {
 			case "sidebar-entry":
-				htm = `<li data-id="${opt.id}" class="entry ${opt.color}">
+				time = opt.allDay ? `all-day` : `${opt.startsTime} - ${opt.endsTime}`;
+				htm = `<li data-id="${opt.id}" class="entry ${opt.color} ${opt.allDay ? "cal-date": ""}">
 							<span class="entry-title">${opt.title}</span>
-							<span class="entry-time">${opt.startsTime} - ${opt.endsTime}</span>
+							<span class="entry-time">${time}</span>
 						</li>`;
 				break;
 			case "month":
