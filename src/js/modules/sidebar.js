@@ -63,7 +63,7 @@
 				el.addClass("selected");
 
 				// render day entries
-				starts = new Date(2021, 2, 1, 0, 0);
+				starts = new Date(2021, 2, el.text(), 0, 0);
 				ends = new Date(starts);
 				ends.setDate(ends.getDate() + 1);
 				Events.dispatch({

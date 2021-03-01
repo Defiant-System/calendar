@@ -450,21 +450,9 @@ content {
 					padding: 5px 0 5px 15px;
 
 					&.cal-date {
-						span.entry-time {
-							color: #bbb;
-						}
+						span.entry-time { max-width: 0; }
 
-					// 	padding-left: 31px;
-					// 	&:before {
-					// 		content: "";
-					// 		background: url(~/icons/icon-calendar.png) 50% 50%/contain no-repeat;
-					// 		position: absolute;
-					// 		top: 5px;
-					// 		left: 15px;
-					// 		width: 13px;
-					// 		height: 13px;
-					// 		filter: opacity(.75) invert(.5) sepia(1) saturate(2);
-					// 	}
+						&:hover span.entry-time { max-width: 70px; }
 					}
 
 					&.gray .entry-title:before      { background: lighten(@gray, 5%); }
