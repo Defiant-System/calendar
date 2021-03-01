@@ -26,11 +26,18 @@
 	dispatch(event) {
 		let APP = calendar,
 			Self = APP.sidebar,
+			now,
+			moment,
+			iYear,
+			iMonth,
+			iDate,
 			starts,
 			ends,
 			width,
 			isOn,
+			str,
 			htm,
+			target,
 			el;
 		switch (event.type) {
 			case "toggle-sidebar":
@@ -63,15 +70,37 @@
 				el.addClass("selected");
 
 				// render day entries
-				starts = new Date(2021, 2, el.text(), 0, 0);
+				now = new Date();
+				iYear = Self.date.getFullYear();
+				iMonth = Self.date.getMonth();
+				iDate = +el.text();
+				starts = new Date(iYear, iMonth, iDate, 0, 0);
 				ends = new Date(starts);
 				ends.setDate(ends.getDate() + 1);
+
+				// legend text
+				moment = new defiant.Moment(starts);
+				str = moment.format("MMMM D, YYYY");
+				if (now.getFullYear() === iYear &&
+					now.getMonth() === iMonth &&
+					now.getDate() === iDate) str = "<i>Today</i> "+ str;
+				Self.els.dayEntries.find("legend span:first").html(str);
+
+				// render events
 				Events.dispatch({
-					type: "populate-sidebar-events",
+					type: "populate-sidebar-entries",
 					el: Self.els.dayEntries.find(".list-wrapper"),
 					starts: starts.valueOf(),
 					ends: ends.valueOf(),
 				});
+				break;
+			case "select-sidebar-entry":
+				target = $(event.target);
+				if (!target.data("id")) return;
+				
+				el = Self.els.content;
+				// el = Self.els.content.find(".view-"+ Self.els.content.prop("className").split("-")[1]);
+				APP.popup.dispatch({ type: "popup-event-details", target, el });
 				break;
 			case "sidebar-go-prev":
 				// next month + render HTML
@@ -101,13 +130,16 @@
 				htm.push(`</div>`);
 				el = Self.els.reelWrapper.append(htm.join(""));
 
-				starts = Self.date.valueOf();
+				// populate month entries
+				iYear = Self.date.getFullYear();
+				iMonth = Self.date.getMonth();
+				starts = new Date(iYear, iMonth, 1, 0, 0);
 				ends = new Date(starts);
 				ends.setMonth(ends.getMonth() + 1);
 				Events.dispatch({
 					type: "populate-mini-cal",
+					starts: starts.valueOf(),
 					ends: ends.valueOf(),
-					starts,
 					el,
 				});
 				break;

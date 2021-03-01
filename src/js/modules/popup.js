@@ -61,8 +61,11 @@
 					// update event node
 					xEvent.setAttribute("title", title);
 					// update DOM element
-					if (eventEl.hasClass("entry")) eventEl.html(title);
-					else eventEl.find(".event-title").html(title);
+					eventEl.map(eEl => {
+						let el = $(eEl);
+						if (el.hasClass("entry") && el.prop("nodeName") !== "LI") el.html(title);
+						else el.find(".event-title, .entry-title").html(title);
+					});
 				}
 
 				// remove popup element from DOM

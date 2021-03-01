@@ -119,6 +119,11 @@ content {
 				color: #999;
 				cursor: pointer;
 			}
+
+			span i {
+				font-style: normal;
+				color: #888;
+			}
 		}
 
 		.sidebar-wrapper {
@@ -354,6 +359,7 @@ content {
 							&:before {
 								content: "";
 								background: @today;
+								box-shadow: inset 0 0 0 2px @today;
 								position: absolute;
 								top: 0;
 								right: auto;
@@ -371,7 +377,6 @@ content {
 
 		.calendars {
 			ul {
-
 				li {
 					padding: 2px 0;
 
@@ -445,9 +450,12 @@ content {
 		.day-entries {
 			ul {
 				li {
+					background: transparent;
+					border: 0;
 					position: relative;
 					display: flex;
 					padding: 5px 0 5px 15px;
+					cursor: pointer;
 
 					&.cal-date {
 						span.entry-time { max-width: 0; }
@@ -469,6 +477,7 @@ content {
 						white-space: nowrap;
 						overflow: hidden;
 						text-overflow: ellipsis;
+						pointer-events: none;
 
 						&.entry-title {
 							flex: 1;
@@ -481,7 +490,7 @@ content {
 								left: 1px;
 								width: 9px;
 								height: 9px;
-								box-shadow: inset 0 1px 1px rgba(0,0,0,.15);
+								box-shadow: 0 0 0;
 								border-radius: 50%;
 							}
 						}

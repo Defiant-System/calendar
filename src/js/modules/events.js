@@ -449,7 +449,7 @@ const Events = {
 
 				console.log("render sidebar");
 				break;
-			case "populate-sidebar-events":
+			case "populate-sidebar-entries":
 				// reset pipe to array
 				pipe = [];
 				// iterate event nodes
@@ -485,7 +485,7 @@ const Events = {
 		switch (opt.type) {
 			case "sidebar-entry":
 				time = opt.allDay ? `all-day` : `${opt.startsTime} - ${opt.endsTime}`;
-				htm = `<li data-id="${opt.id}" class="entry ${opt.color} ${opt.allDay ? "cal-date": ""}">
+				htm = `<li data-id="${opt.id}" class="event entry ${opt.color} ${opt.allDay ? "cal-date": ""}">
 							<span class="entry-title">${opt.title}</span>
 							<span class="entry-time">${time}</span>
 						</li>`;
