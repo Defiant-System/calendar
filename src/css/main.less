@@ -11,11 +11,11 @@
 @lgndEvent: #bae0f6;
 
 // applies to window body
-background: #fcfcfc;
 overflow: visible;
 transition: width 150ms ease-in-out;
 
 content {
+	background: rgba(255,255,255,.2);
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -772,19 +772,20 @@ content {
 	}
 
 	.col-day {
-		background-image: linear-gradient(#ddd 1px, transparent 1px),
-							linear-gradient(transparent 22px, #e0e0e0 23px, transparent 23px),
-							linear-gradient(rgba(0,0,0,.0125) 0px, rgba(0,0,0,.0125) 352px, transparent 352px, transparent 792px, rgba(0,0,0,.0125) 792px);
+		background-image: linear-gradient(rgba(0,0,0,.1) 1px, transparent 1px),
+							linear-gradient(transparent 22px, rgba(0,0,0,.08) 23px, transparent 23px),
+							linear-gradient(rgba(0,0,0,.015) 0px, rgba(0,0,0,.015) 352px, transparent 352px, transparent 792px, rgba(0,0,0,.015) 792px);
 		background-size: 100% 44px, 100% 44px, 100% 1056px;
 		background-position: 0 -1px;
-		border-left: 1px solid #ddd;
+		border-left: 1px solid rgba(0,0,0,.1);
 		position: relative;
 		flex: 1;
 		user-select: none;
 
 		&.col-weekend {
-			background-color: rgba(0,0,0,.0125);
-			background-image: linear-gradient(#ddd 1px, transparent 1px), linear-gradient(transparent 22px, #e0e0e0 23px, transparent 23px);
+			background-color: rgba(0,0,0,.015);
+			background-image: linear-gradient(rgba(0,0,0,.1) 1px, transparent 1px),
+								linear-gradient(transparent 22px, rgba(0,0,0,.08) 23px, transparent 23px);
 		}
 	}
 }
@@ -1080,7 +1081,7 @@ b.has-event {
 			display: flex;
 			flex-direction: column;
 			flex: 1;
-			border-right: 1px solid #ccc;
+			border-right: 1px solid rgba(0,0,0,.125);
 		}
 
 		.day-legends {
@@ -1093,9 +1094,9 @@ b.has-event {
 			b {
 				flex: 1;
 				position: relative;
-				border-top: 1px solid #d5d5d5;
-				border-left: 1px solid #d5d5d5;
-				border-bottom: 1px solid #ccc;
+				border-top: 1px solid rgba(0,0,0,.125);
+				border-left: 1px solid rgba(0,0,0,.125);
+				border-bottom: 1px solid rgba(0,0,0,.125);
 				min-height: 24px;
 				padding: 1px;
 
@@ -1123,7 +1124,7 @@ b.has-event {
 
 		.upcoming {
 			width: 260px;
-			background: #f9fcf8;
+			background: rgba(0,0,0,.05);
 			margin: 0 7px 7px;
 			padding: 5px 7px;
 			border-radius: 3px;
@@ -1183,7 +1184,7 @@ b.has-event {
 				font-size: 11px;
 				font-weight: 300;
 				color: #888;
-				border-bottom: 1px solid #d5d5d5;
+				border-bottom: 1px solid rgba(0,0,0,.125);
 
 				&.weekend i:nth-child(2) {
 					color: #aaa;
@@ -1230,8 +1231,8 @@ b.has-event {
 			b {
 				flex: 1;
 				position: relative;
-				border-left: 1px solid #d5d5d5;
-				border-bottom: 1px solid #ccc;
+				border-left: 1px solid rgba(0,0,0,.125);
+				border-bottom: 1px solid rgba(0,0,0,.125);
 				min-height: 24px;
 				padding: 1px;
 				min-width: 0;
