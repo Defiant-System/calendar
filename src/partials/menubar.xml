@@ -13,6 +13,8 @@
 		<Menu name="Cut"/>
 		<Menu name="Paste"/>
 		<Menu name="Delete"/>
+		<Menu type="divider"/>
+		<Menu name="Log Data" click="show-xml-data"/>
 	</Menu>
 	<Menu name="View">
 		<Menu name="By Day" check-group="view-option"/>
@@ -39,12 +41,13 @@
 		<Menu type="divider"/>
 		<Menu type="colors" caption="Calendar:" click="change-event-color">
 			<Color arg="#64b2eb" active="1"/>
+			<Color arg="#9fe5e5"/>
 			<Color arg="#f67c7c"/>
 			<Color arg="#d38df4"/>
 			<Color arg="#f29d5c"/>
 			<Color arg="#faea4b"/>
 			<Color arg="#96f67d"/>
-			<Color arg="#9fe5e5"/>
+			<Color arg="#dddddd"/>
 		</Menu>
 		<Menu type="divider"/>
 		<Menu name="Delete" click="delete-event-calendar"/>

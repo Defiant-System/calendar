@@ -13,50 +13,26 @@
 	</Palette>
 
 	<Calendars>
-		<i id="lightblue" name="Holidays in Sweden"/>
-		<i id="green" name="Birthdays"/>
+		<!-- <i link="2021/sv-SE"/>
 		<i id="blue" name="Home"/>
-		<i id="purple" name="Work"/>
+		<i id="purple" name="Work"/> -->
+		<i id="gray" name="gray"/>
+		<i id="blue" name="blue"/>
+		<i id="lightblue" name="lightblue"/>
+		<i id="green" name="green"/>
+		<i id="orange" name="orange"/>
+		<i id="yellow" name="yellow"/>
+		<i id="purple" name="purple"/>
+		<i id="red" name="red"/>
+		<i id="cyan" name="cyan"/>
 	</Calendars>
-
-	<Holidays color="lightblue" title="Holidays in Sweden">
-		<event type="day" date="2021-01-01" title="Nyårsdagen" />
-		<event type="day" date="2021-01-06" title="Trettondedag jul" />
-		<event type="day" date="2021-02-14" title="Alla hjärtans dag" />
-		<event type="day" date="2021-02-16" title="Fettisdagen" />
-		<event type="day" date="2021-03-08" title="Internationella kvinnodagen" />
-		<event type="day" date="2021-03-28" title="Sommartid" />
-		<event type="day" date="2021-04-01" title="Skärtorsdagen" />
-		<event type="day" date="2021-04-01" title="1 april" />
-		<event type="day" date="2021-04-02" title="Långfredagen" />
-		<event type="day" date="2021-04-03" title="Påskafton" />
-		<event type="day" date="2021-04-04" title="Påskdagen" />
-		<event type="day" date="2021-04-05" title="Annandag påsk" />
-		<event type="day" date="2021-05-01" title="Första maj" />
-		<event type="day" date="2021-05-13" title="Kristi Himmelsfärdsdag" />
-		<event type="day" date="2021-05-23" title="Pingstdagen" />
-		<event type="day" date="2021-05-24" title="Annandag pingst" />
-		<event type="day" date="2021-05-30" title="Mors dag" />
-		<event type="day" date="2021-07-06" title="Sveriges nationaldag" />
-		<event type="day" date="2021-07-25" title="Midsommarafton" />
-		<event type="day" date="2021-07-26" title="Midsommardagen" />
-		<event type="day" date="2021-10-31" title="Halloween" />
-		<event type="day" date="2021-10-31" title="Vintertid" />
-		<event type="day" date="2021-11-06" title="Alla helgons dag" />
-		<event type="day" date="2021-11-14" title="Fars dag" />
-		<event type="day" date="2021-12-13" title="Lucia" />
-		<event type="day" date="2021-12-24" title="Julafton" />
-		<event type="day" date="2021-12-25" title="Juldagen" />
-		<event type="day" date="2021-12-26" title="Annandag jul" />
-		<event type="day" date="2021-12-31" title="Nyårsafton" />
-	</Holidays>
 
 	<event iso-starts="2021-02-03 09:00" iso-ends="2021-02-03 12:00" calId="purple" title="Birthday"/>
 	<event iso-starts="2021-03-01 10:30" iso-ends="2021-03-01 11:30" calId="cyan" title="Dentist"/>
-	<!-- <event iso-starts="2021-03-03 12:15" iso-ends="2021-03-03 13:30" calId="yellow" title="Lunch with Bill"/>
+	<event iso-starts="2021-03-03 12:15" iso-ends="2021-03-03 13:30" calId="yellow" title="Lunch with Bill"/>
 	<event iso-starts="2021-03-04 14:00" iso-ends="2021-03-04 16:30" calId="green" title="VC meeting"/>
 	<event iso-starts="2021-03-05 09:00" iso-ends="2021-03-05 13:15" calId="purple" title="Project start"/>
-	<event iso-starts="2021-03-06 10:00" iso-ends="2021-03-06 11:00" calId="blue" title="Power walk"/>
+	<event iso-starts="2021-03-02 10:00" iso-ends="2021-03-02 11:00" calId="blue" title="Power walk"/>
 	<event iso-starts="2021-03-06 13:00" iso-ends="2021-03-06 15:30" calId="orange" title="Gym"/>
-	<event iso-starts="2021-03-07 14:00" iso-ends="2021-03-07 16:00" calId="blue" title="Power Walk"/> -->
+	<event iso-starts="2021-03-07 14:00" iso-ends="2021-03-07 16:00" calId="lightblue" title="Power Walk"/>
 </Events>

@@ -11,6 +11,12 @@ const calendar = {
 			content: window.find("content"),
 		};
 
+		// put values as data-attributes on content level
+		this.els.content.data({
+			hours: defiant.Moment.hours,
+			weekStartsWith: defiant.Moment.weekStartsWith,
+		});
+
 		// events data storage; temp in bluePrint
 		// TODO: move data to storage files
 		this.data = window.bluePrint;
@@ -81,6 +87,9 @@ const calendar = {
 				defiant.shell("fs -u '~/help/index.md'");
 				break;
 			// contextmenu events
+			case "show-xml-data":
+				console.log(Self.xEvents);
+				break;
 			case "change-event-color":
 				node = Self.data.selectSingleNode(`//Palette/*[@hex="${event.arg}"]`);
 				event.origin.el.prop({ className: `event ${node.getAttribute("name")}` });
