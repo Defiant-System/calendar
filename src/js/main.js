@@ -3,15 +3,6 @@
 @import "./modules/render.js";
 @import "./modules/view.js";
 
-const Palette = {
-		"#64b2eb": "blue",
-		"#f67c7c": "red",
-		"#d38df4": "purple",
-		"#f29d5c": "orange",
-		"#faea4b": "yellow",
-		"#96f67d": "green",
-		"#9fe5e5": "cyan",
-	};
 
 const calendar = {
 	init() {
@@ -55,6 +46,7 @@ const calendar = {
 	},
 	dispatch(event) {
 		let Self = calendar,
+			node,
 			date,
 			month,
 			name,
@@ -89,8 +81,9 @@ const calendar = {
 				defiant.shell("fs -u '~/help/index.md'");
 				break;
 			// contextmenu events
-			case "change-event-calendar":
-				event.origin.el.prop({ className: `event ${Palette[event.arg]}` });
+			case "change-event-color":
+				node = Self.data.selectSingleNode(`//Palette/*[@hex="${event.arg}"]`);
+				event.origin.el.prop({ className: `event ${node.getAttribute("name")}` });
 				break;
 			case "event-calendar-info":
 			case "delete-event-calendar":

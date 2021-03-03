@@ -37,7 +37,7 @@
 	<Menu for="event">
 		<Menu name="Get Info" click="event-calendar-info"/>
 		<Menu type="divider"/>
-		<Menu type="colors" caption="Calendar:" click="change-event-calendar">
+		<Menu type="colors" caption="Calendar:" click="change-event-color">
 			<Color arg="#64b2eb" active="1"/>
 			<Color arg="#f67c7c"/>
 			<Color arg="#d38df4"/>
