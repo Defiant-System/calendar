@@ -125,7 +125,7 @@ content {
 
 			span i {
 				font-style: normal;
-				color: #888;
+				opacity: .5;
 			}
 		}
 
@@ -314,7 +314,7 @@ content {
 
 				.weekdays {
 					font-size: 0;
-					color: #888;
+					opacity: .5;
 					padding: 3px 1px 0px;
 					margin-bottom: 3px;
 					text-transform: uppercase;
@@ -510,8 +510,11 @@ content {
 					border: 0;
 					position: relative;
 					display: flex;
+					flex-direction: row;
 					padding: 5px 0 5px 15px;
 					cursor: pointer;
+
+					&:before, &:after { display: none; }
 
 					&.cal-date {
 						span.entry-time { max-width: 0; }
@@ -530,9 +533,6 @@ content {
 					&.cyan .entry-title:before      { background: darken(@cyan, 21%); }
 
 					span {
-						white-space: nowrap;
-						overflow: hidden;
-						text-overflow: ellipsis;
 						pointer-events: none;
 
 						&.entry-title {
