@@ -21,12 +21,48 @@ transition: width 150ms ease-in-out;
 			color: #0ef;
 		}
 	}
-	
-	.view-week .week .weekdays {
-		b.today i:nth-child(2) {
+
+	h3 {
+		color: #0ef;
+	}
+
+	.view-week {
+		.week .weekdays b.today i:nth-child(2) {
 			background: #0ef;
 			color: #333;
 			text-shadow: 0 0 0;
+		}
+	}
+
+	.view-month {
+		.month {
+			.days {
+				b {
+					&.today {
+						i {
+							background: #0ef;
+							color: #333;
+							text-shadow: 0 0 0;
+						}
+					}
+
+					&.weekend:not(.non-day) {
+						color: #0ef;
+					}
+				}
+			}
+		}
+	}
+
+	.view-year {
+		.month {
+			&:hover {
+				background: rgba(0,0,0,.05);
+			}
+
+			.days b.weekend:not(.non-day) {
+				color: #0ef;
+			}
 		}
 	}
 
@@ -624,6 +660,7 @@ content {
 		font-family: "Jost", sans-serif;
 		padding: 0 11px;
 		margin-bottom: 5px;
+		text-shadow: var( --text-shadow );
 	}
 
 	h4 {
@@ -632,6 +669,7 @@ content {
 		font-family: "Jost", sans-serif;
 		padding: 0 11px;
 		margin-bottom: 5px;
+		text-shadow: var( --text-shadow );
 	}
 }
 
@@ -1387,16 +1425,18 @@ b.has-event {
 			display: flex;
 			height: 23px;
 			text-transform: uppercase;
-			border-bottom: 1px solid #ccc;
+			border-bottom: 1px solid rgba(0,0,0,.15);
 			font-family: "Jost", sans-serif;
 
 			b {
 				flex: 1;
 				padding: 5px 7px;
 				font-weight: 400;
+				opacity: .5;
+				text-shadow: var( --text-shadow );
 
 				&.weekend {
-					color: #999;
+					// color: #999;
 				}
 			}
 		}
@@ -1415,7 +1455,8 @@ b.has-event {
 				font-size: 14px;
 				border-right: 1px solid;
 				border-bottom: 1px solid;
-				border-color: #d0d0d0;
+				border-color: rgba(0,0,0,.125);
+				text-shadow: var( --text-shadow );
 
 				&:nth-child(7n) {
 					border-right: 0;
@@ -1440,15 +1481,17 @@ b.has-event {
 					}
 				}
 
-				&.weekend {
-					background: rgba(0,0,0,.025);
-					color: #999;
+				&.weekend:not(.non-day) {
+					background: rgba(0,0,0,.015);
+					color: @today;
 				}
 
 				&.non-day {
-					color: #c2c2c2;
+					background: rgba(0,0,0,.025);
+					text-shadow: 0 0 0;
 
 					i {
+						opacity: .35;
 						font-weight: 300;
 					}
 				}
@@ -1540,6 +1583,7 @@ b.has-event {
 	position: relative;
 	padding: 15px 19px 0;
 	font-size: 0;
+	user-select: none;
 
 	h2 {
 		margin-bottom: 7px;
@@ -1556,7 +1600,6 @@ b.has-event {
 
 		&:hover {
 			background: rgba(0,0,0,.03);
-			// box-shadow: 0 0 0 3px rgba(0,0,0,.075); // #3366dd4a
 		}
 
 		b {
@@ -1566,6 +1609,7 @@ b.has-event {
 			font-size: 11px;
 			text-align: center;
 			padding: 5px 0 4px;
+			text-shadow: var( --text-shadow );
 
 			i {
 				position: relative;
@@ -1575,8 +1619,8 @@ b.has-event {
 		}
 
 		.weekdays {
+			opacity: .65;
 			font-size: 0;
-			color: #aaa;
 			padding: 3px 1px 0px;
 			margin-bottom: 3px;
 		}
@@ -1586,13 +1630,16 @@ b.has-event {
 			padding: 0 1px;
 
 			b {
-				&.weekend {
-					color: #e77;
+				opacity: .75;
+
+				&.weekend:not(.non-day) {
+					color: @today;
 				}
 
 				&.non-day {
-					color: #c2c2c2;
+					opacity: .35;
 					font-weight: 300;
+					text-shadow: 0 0 0;
 				}
 
 				&.today:not(.non-day) {
