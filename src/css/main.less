@@ -166,11 +166,11 @@ content {
 					position: relative;
 					max-height: 500px;
 					overflow: hidden;
-					transition: all 300ms ease-in-out;
+					transition: max-height 200ms ease-in-out;
 
 					> ul {
 						margin-top: 0;
-						transition: inherit;
+						transition: margin-top 200ms ease-in-out;
 					}
 				}
 			}
@@ -575,6 +575,7 @@ content {
 		font-family: "Jost", sans-serif;
 		text-align: center;
 		margin-bottom: 11px;
+		text-shadow: var( --text-shadow );
 
 		i {
 			font-style: normal;
@@ -769,24 +770,27 @@ content {
 		font-family: "Jost", sans-serif;
 		font-size: 11px;
 		line-height: 0;
-		color: #aaa;
+		// color: #aaa;
+		text-shadow: var( --text-shadow );
 		user-select: none;
 
 		b {
 			display: block;
 			font-weight: 300;
 			height: 44px;
+			opacity: .5;
 
 			&.work-hours {
-				color: #222;
+				// color: #222;
+				opacity: 1;
 			}
 		}
 	}
 
 	.col-day {
-		background-image: linear-gradient(rgba(0,0,0,.1) 1px, transparent 1px),
-							linear-gradient(transparent 22px, rgba(0,0,0,.08) 23px, transparent 23px),
-							linear-gradient(rgba(0,0,0,.015) 0px, rgba(0,0,0,.015) 352px, transparent 352px, transparent 792px, rgba(0,0,0,.015) 792px);
+		background-image: linear-gradient(rgba(0,0,0,.125) 1px, transparent 1px),
+							linear-gradient(transparent 22px, rgba(0,0,0,.095) 23px, transparent 23px),
+							linear-gradient(rgba(0,0,0,.025) 0px, rgba(0,0,0,.025) 352px, transparent 352px, transparent 792px, rgba(0,0,0,.025) 792px);
 		background-size: 100% 44px, 100% 44px, 100% 1056px;
 		background-position: 0 -1px;
 		border-left: 1px solid rgba(0,0,0,.1);
@@ -795,9 +799,9 @@ content {
 		user-select: none;
 
 		&.col-weekend {
-			background-color: rgba(0,0,0,.015);
-			background-image: linear-gradient(rgba(0,0,0,.1) 1px, transparent 1px),
-								linear-gradient(transparent 22px, rgba(0,0,0,.08) 23px, transparent 23px);
+			background-color: rgba(0,0,0,.025);
+			background-image: linear-gradient(rgba(0,0,0,.125) 1px, transparent 1px),
+								linear-gradient(transparent 22px, rgba(0,0,0,.095) 23px, transparent 23px);
 		}
 	}
 }
@@ -1036,7 +1040,7 @@ b.has-event {
 
 	&.holiday:not(.today, .blue, .gray, .green, .orange, .yellow, .purple, .red, .cyan) {
 		&:before {
-			background: rgba(200,0,200,.125);
+			background: rgba(200,0,200,.175);
 			box-shadow: inset 0 0 0 1px rgba(200,0,100,.075);
 			top: 0;
 			right: auto;
@@ -1077,9 +1081,9 @@ b.has-event {
 		position: absolute;
 		top: -8px;
 		right: 100%;
-		background: var( --content-bg );
-		// color: saturate(darken(@today, 7%), 11%);
-		color: var( --content-fg );
+		background: var( --content-fg );
+		color: saturate(darken(@today, 7%), 11%);
+		// color: var( --content-bg );
 		text-align: right;
 		font-size: 12px;
 		white-space: nowrap;
@@ -1117,7 +1121,7 @@ b.has-event {
 			display: flex;
 			flex-direction: column;
 			flex: 1;
-			border-right: 1px solid rgba(0,0,0,.125);
+			border-right: 1px solid rgba(0,0,0,.175);
 		}
 
 		.day-legends {
@@ -1130,9 +1134,9 @@ b.has-event {
 			b {
 				flex: 1;
 				position: relative;
-				border-top: 1px solid rgba(0,0,0,.125);
-				border-left: 1px solid rgba(0,0,0,.125);
-				border-bottom: 1px solid rgba(0,0,0,.125);
+				border-top: 1px solid rgba(0,0,0,.175);
+				border-left: 1px solid rgba(0,0,0,.175);
+				border-bottom: 1px solid rgba(0,0,0,.175);
 				min-height: 24px;
 				padding: 1px;
 
@@ -1219,11 +1223,11 @@ b.has-event {
 				padding: 0 0 3px 3px;
 				font-size: 11px;
 				font-weight: 300;
-				color: #888;
-				border-bottom: 1px solid rgba(0,0,0,.125);
+				// color: #888;
+				border-bottom: 1px solid rgba(0,0,0,.175);
 
 				&.weekend i:nth-child(2) {
-					color: #aaa;
+					// color: #aaa;
 				}
 
 				&.today {
@@ -1243,15 +1247,18 @@ b.has-event {
 					width: 28px;
 					font-weight: 500;
 					font-style: normal;
+					text-shadow: var( --text-shadow );
+					opacity: .35;
 
 					&:nth-child(2) {
 						margin-top: 1px;
 						padding: 5px 0 7px;
 						font-size: 19px;
 						font-weight: 500;
-						color: #444;
+						// color: #444;
 						height: 28px;
 						border-radius: 50%;
+						opacity: .75;
 					}
 				}
 			}
@@ -1267,8 +1274,8 @@ b.has-event {
 			b {
 				flex: 1;
 				position: relative;
-				border-left: 1px solid rgba(0,0,0,.125);
-				border-bottom: 1px solid rgba(0,0,0,.125);
+				border-left: 1px solid rgba(0,0,0,.175);
+				border-bottom: 1px solid rgba(0,0,0,.175);
 				min-height: 24px;
 				padding: 1px;
 				min-width: 0;

@@ -34,7 +34,7 @@ const Render = {
 			htm.push(`<div class="col-hours">`);
 			list.map((time, index) => {
 				let className = [];
-				if (index > 6 && index < 18) className.push("work-hours");
+				if (index > 7 && index < 19) className.push("work-hours");
 				className = (className.length) ? ` class="${className.join(" ")}"` : ``;
 				if (index > 0) htm.push(`<b${className}>${time}</b>`);
 			});
