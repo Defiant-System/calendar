@@ -200,11 +200,13 @@ const Events = {
 						eHours = Math.floor(topHeight / hHeight).toString().padStart(2, "0"),
 						eMinutes = Math.round(((topHeight % hHeight) / hHeight) * 60).toString().padStart(2, "0"),
 						ends = `${sDate}-${sDay} ${eHours}:${eMinutes}`,
+						startsDate = new Date(starts),
+						endsDate = new Date(ends),
 						color = el.prop("className").split(" ")[1],
 						title = el.find(".event-title").html();
 
 					// create new event node
-					htm = `<event isNew="true" id="${id}" starts="${starts}" ends="${ends}" calId="${color}" title="${title}"/>`;
+					htm = `<event isNew="true" id="${id}" iso-starts="${starts}" iso-ends="${ends}" starts="${startsDate.valueOf()}" ends="${endsDate.valueOf()}" calId="${color}" title="${title}"/>`;
 					xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
 
 					// update event element with ID

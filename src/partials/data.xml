@@ -53,10 +53,10 @@
 
 	<event iso-starts="2021-02-03 09:00" iso-ends="2021-02-03 12:00" calId="purple" title="Birthday"/>
 	<event iso-starts="2021-03-01 10:30" iso-ends="2021-03-01 11:30" calId="cyan" title="Dentist"/>
-	<event iso-starts="2021-03-03 12:15" iso-ends="2021-03-03 13:30" calId="yellow" title="Lunch with Bill"/>
+	<!-- <event iso-starts="2021-03-03 12:15" iso-ends="2021-03-03 13:30" calId="yellow" title="Lunch with Bill"/>
 	<event iso-starts="2021-03-04 14:00" iso-ends="2021-03-04 16:30" calId="green" title="VC meeting"/>
 	<event iso-starts="2021-03-05 09:00" iso-ends="2021-03-05 13:15" calId="purple" title="Project start"/>
 	<event iso-starts="2021-03-06 10:00" iso-ends="2021-03-06 11:00" calId="blue" title="Power walk"/>
 	<event iso-starts="2021-03-06 13:00" iso-ends="2021-03-06 15:30" calId="orange" title="Gym"/>
-	<event iso-starts="2021-03-07 14:00" iso-ends="2021-03-07 16:00" calId="blue" title="Power Walk"/>
+	<event iso-starts="2021-03-07 14:00" iso-ends="2021-03-07 16:00" calId="blue" title="Power Walk"/> -->
 </Events>
