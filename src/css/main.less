@@ -14,6 +14,36 @@
 overflow: visible;
 transition: width 150ms ease-in-out;
 
+&[data-theme="dark"] {
+
+	h2 {
+		i {
+			color: #0ef;
+		}
+	}
+	
+	.view-week .week .weekdays {
+		b.today i:nth-child(2) {
+			background: #0ef;
+			color: #333;
+			text-shadow: 0 0 0;
+		}
+	}
+
+	.now-line {
+		border-top-color: #0ef;
+
+		&:before {
+			background-color: #0ef;
+		}
+
+		&:after {
+			box-shadow: 0 0 0 1px #0ef;
+			color: #333;
+		}
+	}
+}
+
 content {
 	// background: rgba(255,255,255,.2);
 	position: absolute;
