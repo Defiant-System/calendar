@@ -65,8 +65,15 @@ transition: width 150ms ease-in-out;
 				background: rgba(0,0,0,.05);
 			}
 
-			.days b.weekend:not(.non-day) {
-				color: #0ef;
+			.days b {
+				&.weekend:not(.non-day) {
+					color: #0ef;
+				}
+
+				&.has-event.weekend,
+				&.has-event {
+					color: #fff;
+				}
 			}
 		}
 	}
@@ -86,11 +93,32 @@ transition: width 150ms ease-in-out;
 
 	.sidebar {
 		.mini-calendar {
+			.cal-nav {
+				.icon-chevron-left,
+				.icon-chevron-right {
+					&:hover {
+						background-color: rgba(255,255,255,.15);
+					}
+					&:active {
+						background-color: rgba(255,255,255,.25);
+					}
+				}
+			}
+
 			.month {
 				.days {
 					b {
 						&.week-nr {
 							background: rgba(0,0,0,.1);
+						}
+
+						&.weekend:not(.non-day) {
+							color: #0ef;
+						}
+
+						&.has-event.weekend,
+						&.has-event {
+							color: #fff;
 						}
 					}
 				}
@@ -424,7 +452,7 @@ content {
 							&:nth-child(41) { border-radius: 0 0 3px 3px; }
 						}
 
-						&.weekend {
+						&.weekend:not(.non-day) {
 							color: #e77;
 						}
 
