@@ -16,6 +16,10 @@
 		color: #0ef;
 	}
 
+	.event {
+		box-shadow: 0 4px 3px -2px rgba(0,0,0,.25);
+	}
+
 	.view-week {
 		.week .weekdays b.today i:nth-child(2) {
 			background: #0ef;
@@ -38,6 +42,10 @@
 
 					&.weekend:not(.non-day) {
 						color: #0ef;
+					}
+
+					.entry:before {
+						box-shadow: 0 1px 1px rgba(0,0,0,.35);
 					}
 				}
 			}
@@ -72,6 +80,7 @@
 
 		&:after {
 			box-shadow: 0 0 0 1px #0ef;
+			background-color: #0ef;
 			color: #333;
 		}
 	}
@@ -124,6 +133,10 @@
 					}
 				}
 			}
+		}
+
+		.event {
+			box-shadow: 0 0 0;
 		}
 	}
 }
