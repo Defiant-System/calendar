@@ -10,122 +10,15 @@
 @today  : #e66;
 @lgndEvent: #bae0f6;
 
+
+// for dark theme
+@import "theme-dark";
+
+
 // applies to window body
 overflow: visible;
 transition: width 150ms ease-in-out;
 
-&[data-theme="dark"] {
-
-	[class*="icon-"],
-	[class^="icon-"] {
-		filter: invert(1) drop-shadow(0 1px 0 rgba(0,0,0,.35));
-	}
-
-	h2 {
-		i {
-			color: #0ef;
-		}
-	}
-
-	h3 {
-		color: #0ef;
-	}
-
-	.view-week {
-		.week .weekdays b.today i:nth-child(2) {
-			background: #0ef;
-			color: #333;
-			text-shadow: 0 0 0;
-		}
-	}
-
-	.view-month {
-		.month {
-			.days {
-				b {
-					&.today {
-						i {
-							background: #0ef;
-							color: #333;
-							text-shadow: 0 0 0;
-						}
-					}
-
-					&.weekend:not(.non-day) {
-						color: #0ef;
-					}
-				}
-			}
-		}
-	}
-
-	.view-year {
-		.month {
-			&:hover {
-				background: rgba(0,0,0,.05);
-			}
-
-			.days b {
-				&.weekend:not(.non-day) {
-					color: #0ef;
-				}
-
-				&.has-event.weekend,
-				&.has-event {
-					color: #fff;
-				}
-			}
-		}
-	}
-
-	.now-line {
-		border-top-color: #0ef;
-
-		&:before {
-			background-color: #0ef;
-		}
-
-		&:after {
-			box-shadow: 0 0 0 1px #0ef;
-			color: #333;
-		}
-	}
-
-	.sidebar {
-		.mini-calendar {
-			.cal-nav {
-				.icon-chevron-left,
-				.icon-chevron-right {
-					&:hover {
-						background-color: rgba(255,255,255,.15);
-					}
-					&:active {
-						background-color: rgba(255,255,255,.25);
-					}
-				}
-			}
-
-			.month {
-				.days {
-					b {
-						&.week-nr {
-							background: rgba(0,0,0,.1);
-						}
-
-						&.weekend:not(.non-day) {
-							color: #0ef;
-						}
-
-						&.has-event.weekend,
-						&.has-event {
-							color: #fff;
-						}
-					}
-				}
-			}
-		}
-	}
-}
 
 content {
 	// background: rgba(255,255,255,.2);
