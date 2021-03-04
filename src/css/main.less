@@ -16,6 +16,11 @@ transition: width 150ms ease-in-out;
 
 &[data-theme="dark"] {
 
+	[class*="icon-"],
+	[class^="icon-"] {
+		filter: invert(1) drop-shadow(0 1px 0 rgba(0,0,0,.35));
+	}
+
 	h2 {
 		i {
 			color: #0ef;
@@ -76,6 +81,20 @@ transition: width 150ms ease-in-out;
 		&:after {
 			box-shadow: 0 0 0 1px #0ef;
 			color: #333;
+		}
+	}
+
+	.sidebar {
+		.mini-calendar {
+			.month {
+				.days {
+					b {
+						&.week-nr {
+							background: rgba(0,0,0,.1);
+						}
+					}
+				}
+			}
 		}
 	}
 }
