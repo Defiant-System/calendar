@@ -51,6 +51,7 @@
 			case "popup-no-update-event":
 			case "popup-update-event":
 				el = Self.els.content.find(".popup-event");
+				if (!el.length) return;
 
 				// event node
 				id = el.data("id");
