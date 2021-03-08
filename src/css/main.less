@@ -345,7 +345,7 @@ content {
 							&:nth-child(41) { border-radius: 0 0 3px 3px; }
 						}
 
-						&.weekend:not(.non-day) {
+						&.weekend:not(.non-day, .today) {
 							color: #e77;
 						}
 
@@ -1088,7 +1088,7 @@ b.has-event {
 		position: absolute;
 		top: -8px;
 		right: 100%;
-		background: var( --content-fg );
+		background: var( --content-bg );
 		color: saturate(darken(@today, 7%), 11%);
 		// color: var( --content-bg );
 		text-align: right;
