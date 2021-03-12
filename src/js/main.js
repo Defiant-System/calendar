@@ -17,41 +17,48 @@ const calendar = {
 			weekStartsWith: defiant.Moment.weekStartsWith,
 		});
 
-		// events data storage; temp in bluePrint
-		// TODO: move data to storage files
-		this.data = window.bluePrint;
-		this.xEvents = this.data.selectSingleNode(`//Events`);
+		let Self = this;
+		// check storage for previously saved data
+		window.storage.getItem("events-2021")
+			.then(storageData => {
+				// events data storage; temp in bluePrint
+				Self.data = window.bluePrint;
+				Self.xEvents = Self.data.selectSingleNode(`//Events`);
 
+				if (storageData) {
+					// replace bluePrint data with storage data
+					Self.xEvents.parentNode.replaceChild(storageData, Self.xEvents);
+					Self.xEvents = Self.data.selectSingleNode(`//Events`);
+				}
 
-		// parse holidays
-		let xNodes = this.data.selectNodes(`//Holidays/*`);
-		Events.dispatch({ type: "parse-holidays", xNodes });
-		// parse events, set ID's
-		this.data.selectNodes(`//event[not(@id)]`).map((node, index) =>
-			node.setAttribute("id", index));
-		// parse events (temp)
-		this.data.selectNodes(`//event[not(@starts)]`).map(node => {
-			let starts = new Date(node.getAttribute("iso-starts")),
-				ends = new Date(node.getAttribute("iso-ends"));
-			// convert to milliseconds
-			node.setAttribute("starts", starts.valueOf());
-			node.setAttribute("ends", ends.valueOf());
-		});
+				// parse holidays
+				let xNodes = Self.data.selectNodes(`//Holidays/*`);
+				Events.dispatch({ type: "parse-holidays", xNodes });
+				// parse events, set ID's
+				Self.data.selectNodes(`//event[not(@id)]`).map((node, index) =>
+					node.setAttribute("id", index));
+				// parse events (temp)
+				Self.data.selectNodes(`//event[not(@starts)]`).map(node => {
+					let starts = new Date(node.getAttribute("iso-starts")),
+						ends = new Date(node.getAttribute("iso-ends"));
+					// convert to milliseconds
+					node.setAttribute("starts", starts.valueOf());
+					node.setAttribute("ends", ends.valueOf());
+				});
 
-		// initiate objects and view
-		View.init();
-		Render.init();
-		Events.init();
-		// init sub objects
-		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
+				// dispatch initiate
+				Self.dispatch({ type: "inititate-app" });
+				// initiate first view
+				window.find(".toolbar-tool_").get(5).trigger("click");
 
-		// initiate first view
-		window.find(".toolbar-tool_").get(5).trigger("click");
-
-		// setTimeout(() => window.find(".entry, .event").get(1).trigger("click"), 300);
+				// temp
+				// setTimeout(() => window.find(".entry, .event").get(1).trigger("click"), 300);
+			});
 	},
 	dispatch(event) {
 		let Self = calendar,
+			now,
+			data,
 			node,
 			date,
 			month,
@@ -65,7 +72,10 @@ const calendar = {
 			case "window.open":
 				break;
 			case "window.close":
-				// TODO: save event data to storage
+				// save calendar data to storage
+				// TODO: shard event data - yearly
+				data = Self.xEvents;
+				window.storage.setItem("events-2021", data);
 				break;
 			case "window.resize":
 				// update now line
@@ -99,6 +109,14 @@ const calendar = {
 				console.log(event);
 				break;
 			// custom events
+			case "inititate-app":
+				// initiate objects and view
+				View.init();
+				Render.init();
+				Events.init();
+				// init sub objects
+				Object.keys(Self).filter(i => Self[i].init).map(i => Self[i].init());
+				break;
 			case "toggle-sidebar":
 				return Self.sidebar.dispatch(event);
 			case "switch-view":

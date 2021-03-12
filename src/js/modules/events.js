@@ -24,7 +24,7 @@ const Events = {
 			xEvent,
 			xHolidays,
 			xPath,
-			color,
+			cal,
 			now, hours, minutes, seconds, time,
 			top, left, width, height, pos, type,
 			pEl, cols, clone, htm,
@@ -66,7 +66,7 @@ const Events = {
 					height = hHeight / 2;
 
 					// get color of first available calendar
-					color = Self.getCalendar().color;
+					cal = Self.getCalendar();
 
 					// render new event HTML
 					htm = Self.renderEvent({
@@ -75,7 +75,8 @@ const Events = {
 						type: "week",
 						title: "New Event",
 						timeStarts: Self.formatTime(hours, (minutes / hHeight) * 60),
-						color,
+						calId: cal.id,
+						color: cal.color,
 						height,
 						top,
 					});
@@ -206,11 +207,11 @@ const Events = {
 						ends = `${sDate}-${sDay} ${eHours}:${eMinutes}`,
 						startsDate = new Date(starts),
 						endsDate = new Date(ends),
-						color = el.prop("className").split(" ")[1],
+						calId = el.data("calId"),
 						title = el.find(".event-title").html();
 
 					// create new event node
-					htm = `<event isNew="true" id="${id}" iso-starts="${starts}" iso-ends="${ends}" starts="${startsDate.valueOf()}" ends="${endsDate.valueOf()}" calendar-id="${color}" title="${title}"/>`;
+					htm = `<event isNew="true" id="${id}" iso-starts="${starts}" iso-ends="${ends}" starts="${startsDate.valueOf()}" ends="${endsDate.valueOf()}" calendar-id="${calId}" title="${title}"/>`;
 					xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
 
 					// update event element with ID
@@ -262,7 +263,7 @@ const Events = {
 						title = node.getAttribute("title"),
 						calId = node.getAttribute("calendar-id"),
 						color = node.parentNode.getAttribute("color") || Self.getCalendar(calId).color,
-						htm = `<div data-id="${id}"class="event ${color}">${title}</div>`;
+						htm = `<div data-id="${id}" data-calId="${calId}" class="event ${color}">${title}</div>`;
 					
 					event.el.find(`.day-legends b[data-date="${wDate}"]`).append(htm);
 				});
@@ -348,7 +349,7 @@ const Events = {
 						title = node.getAttribute("title"),
 						calId = node.getAttribute("calendar-id"),
 						color = node.parentNode.getAttribute("color") || Self.getCalendar(calId).color,
-						htm = Self.renderEvent({ type: "month", id, color, title });
+						htm = Self.renderEvent({ type: "month", id, calId, color, title });
 					// add event html to pipe
 					pipe[iDate].htm.push(htm);
 				});
@@ -362,9 +363,10 @@ const Events = {
 						starts = +node.getAttribute("starts"),
 						date = new Date(starts),
 						dayDate = date.getDate(),
-						color = node.getAttribute("calendar-id") || node.parentNode.getAttribute("color"),
+						calId = node.getAttribute("calendar-id"),
+						color = node.parentNode.getAttribute("color") || Self.getCalendar(calId).color,
 						title = node.getAttribute("title"),
-						htm = Self.renderEvent({ type: "month", id, color, title });
+						htm = Self.renderEvent({ type: "month", id, calId, color, title });
 					// add event html to pipe
 					pipe[dayDate].htm.push(htm);
 				});
@@ -406,7 +408,7 @@ const Events = {
 						timeEnds = Self.formatTime(endHours, endMinutes),
 						top = (startHours * hHeight) + (startMinutes / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight,
-						htm = Self.renderEvent({ type: "week", id, color, top, height, timeStarts, title });
+						htm = Self.renderEvent({ type: "week", id, calId, color, top, height, timeStarts, title });
 					// add event html to pipe, if not all-day event
 					if (ends) pipe[dayDate].htm.push(htm);
 				});
@@ -448,7 +450,7 @@ const Events = {
 						timeEnds = Self.formatTime(endHours, endMinutes),
 						top = (startHours * hHeight) + (startMinutes / 60 * hHeight),
 						height = ((ends - starts) / 3600000) * hHeight,
-						htm = Self.renderEvent({ type: "day", id, color, top, height, timeStarts, title });
+						htm = Self.renderEvent({ type: "day", id, calId, color, top, height, timeStarts, title });
 					// add event html to pipe, if not all-day event
 					if (ends) pipe.htm.push(htm);
 				});
@@ -467,7 +469,8 @@ const Events = {
 				xPath = `.//event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.xEvents.selectNodes(xPath).map(node => {
 					let id = node.getAttribute("id"),
-						color = node.getAttribute("calendar-id") || node.parentNode.getAttribute("color"),
+						calId = node.getAttribute("calendar-id"),
+						color = node.parentNode.getAttribute("color") || Self.getCalendar(calId).color,
 						title = node.getAttribute("title"),
 						starts = +node.getAttribute("starts"),
 						ends = +node.getAttribute("ends"),
@@ -480,7 +483,7 @@ const Events = {
 						startsTime = Self.formatTime(startHours, startMinutes),
 						endsTime = Self.formatTime(endHours, endMinutes),
 						allDay = !!ends === false,
-						htm = Self.renderEvent({ type: "sidebar-entry", id, color, title, startsTime, endsTime, allDay });
+						htm = Self.renderEvent({ type: "sidebar-entry", id, calId, color, title, startsTime, endsTime, allDay });
 					// add event html to pipe
 					pipe.push(htm);
 				});
@@ -496,17 +499,17 @@ const Events = {
 		switch (opt.type) {
 			case "sidebar-entry":
 				time = opt.allDay ? `all-day` : `${opt.startsTime} - ${opt.endsTime}`;
-				htm = `<li data-id="${opt.id}" class="event entry ${opt.color} ${opt.allDay ? "cal-date": ""}">
+				htm = `<li data-id="${opt.id}" data-calId="${opt.calId}" class="event entry ${opt.color} ${opt.allDay ? "cal-date": ""}">
 							<span class="entry-title">${opt.title}</span>
 							<span class="entry-time">${time}</span>
 						</li>`;
 				break;
 			case "month":
-				htm = `<div data-id="${opt.id}" class="entry ${opt.color} ${isNew}">${opt.title}</div>`;
+				htm = `<div data-id="${opt.id}" data-calId="${opt.calId}" class="entry ${opt.color} ${isNew}">${opt.title}</div>`;
 				break;
 			case "week":
 			case "day":
-				htm = `<div data-context="event" data-id="${opt.id}" class="event ${opt.color} ${isNew}" style="top: ${opt.top}px; height: ${opt.height}px;">
+				htm = `<div data-context="event" data-id="${opt.id}" data-calId="${opt.calId}" class="event ${opt.color} ${isNew}" style="top: ${opt.top}px; height: ${opt.height}px;">
 						<span class="event-time">${opt.timeStarts}</span>
 						<span class="event-title">${opt.title}</span>
 					</div>`;

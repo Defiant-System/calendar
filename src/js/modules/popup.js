@@ -22,6 +22,7 @@
 			left,
 			popup,
 			pos,
+			calId,
 			id,
 			list,
 			eventEl,
@@ -73,6 +74,9 @@
 					// update event node
 					xEvent.setAttribute("title", title);
 					xEvent.removeAttribute("isNew");
+					// set calendar Id
+					calId = eventEl.data("calId");
+					xEvent.setAttribute("calendar-id", calId);
 					// update DOM element
 					if (eventEl.hasClass("entry") && eventEl.prop("nodeName") !== "LI") eventEl.html(title);
 					else eventEl.find(".event-title, .entry-title").html(title);
