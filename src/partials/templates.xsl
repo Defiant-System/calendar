@@ -35,7 +35,6 @@
 				<xsl:value-of select="@name"/>
 			</h3>
 		</div>
-		<hr/>
 		<div class="row-colors">
 			<span>Color:</span>
 			<div>
