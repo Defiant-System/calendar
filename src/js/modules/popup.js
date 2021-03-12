@@ -35,6 +35,9 @@
 				Self.dispatch({ type: "popup-update-event" });
 				break;
 			// custom events
+			case "change-calendar-color":
+				console.log(event);
+				break;
 			case "popup-time-change":
 				// console.log(event);
 				break;

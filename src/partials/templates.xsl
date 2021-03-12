@@ -28,6 +28,7 @@
 
 
 <xsl:template name="popup-calendar-details">
+	<xsl:variable name="current-color" select="@color"/>
 	<div class="popup-event" data-area="popup">
 		<xsl:attribute name="data-calId"><xsl:value-of select="@id"/></xsl:attribute>
 		<div class="row-head">
@@ -37,24 +38,22 @@
 		</div>
 		<div class="row-colors">
 			<span>Color:</span>
-			<div>
-				<i class="calendar-color blue active"></i>
-				<i class="calendar-color lightblue"></i>
-				<i class="calendar-color red"></i>
-				<i class="calendar-color purple"></i>
-				<i class="calendar-color orange"></i>
-				<i class="calendar-color yellow"></i>
-				<i class="calendar-color green"></i>
-				<i class="calendar-color cyan"></i>
-				<i class="calendar-color gray"></i>
+			<div data-click="change-calendar-color">
+				<xsl:for-each select="//Data/Palette/*">
+					<i>
+						<xsl:attribute name="class">calendar-color <xsl:value-of select="@id"/>
+							<xsl:if test="@id = $current-color"> active</xsl:if>
+						</xsl:attribute>
+					</i>
+				</xsl:for-each>
 			</div>
 		</div>
 		<hr/>
 		<div class="row-actions">
-			<div class="pop-button">
+			<div class="pop-button disabled">
 				<i class="icon-email"></i>
 			</div>
-			<div class="pop-button">
+			<div class="pop-button" title="Delete Calendar">
 				<i class="icon-trashcan"></i>
 			</div>
 		</div>

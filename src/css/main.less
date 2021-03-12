@@ -747,7 +747,12 @@ content {
 				border-radius: 3px;
 				cursor: pointer;
 
-				&:hover {
+				&.disabled {
+					opacity: .5;
+					cursor: default;
+				}
+
+				&:hover:not(.disabled) {
 					background: rgba(0,0,0,.05);
 				}
 
@@ -759,6 +764,8 @@ content {
 		}
 
 		&.row-colors {
+			pointer-events: none;
+
 			span {
 				display: inline-block;
 				opacity: .5;
@@ -766,6 +773,8 @@ content {
 			}
 
 			.calendar-color {
+				pointer-events: all;
+
 				&:not(.active) {
 					cursor: pointer;
 				}
