@@ -21,7 +21,8 @@
 		this.dispatch({ type: "render-calendar" });
 
 		// temp
-		// setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
+		setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
+		setTimeout(() => window.find(".cal-edit").get(1).trigger("click"), 900);
 	},
 	dispatch(event) {
 		let APP = calendar,
@@ -68,6 +69,11 @@
 				el = $(event.target);
 				if (el.attr("type") !== "checkbox") return;
 				console.log(event);
+				break;
+			case "edit-calendar-entry":
+				target = event.el.parent();
+				// popup event details
+				APP.popup.dispatch({ type: "popup-sidebar-calendar-details", target });
 				break;
 			case "select-minical-day":
 				el = $(event.target);

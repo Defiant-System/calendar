@@ -54,34 +54,40 @@
 				el = Self.els.content.find(".popup-event");
 				if (!el.length) return;
 
-				// event node
-				id = el.data("id");
-				xPath = `.//event[@id = "${id}"]`;
-				xEvent = APP.xEvents.selectSingleNode(xPath);
-				// DOM element
-				eventEl = Self.els.content.find(`.entry[data-id="${id}"], .event[data-id="${id}"]`);
-				eventEl.removeClass("isNew");
+				if (el.data("calId")) {
+					// reset sidebar calendar element
+					Self.els.content.find(".active").removeClass("active");
 
-				if (event.type === "popup-no-update-event") {
-					if (xEvent.getAttribute("isNew")) {
-						// remove event node
-						xEvent.parentNode.removeChild(xEvent);
-						// remove event HTML element
-						eventEl.remove();
+					console.log("update calendar node");
+				} else {
+					// event node
+					id = el.data("id");
+					xPath = `.//event[@id = "${id}"]`;
+					xEvent = APP.xEvents.selectSingleNode(xPath);
+					// DOM element
+					eventEl = Self.els.content.find(`.entry[data-id="${id}"], .event[data-id="${id}"]`);
+					eventEl.removeClass("isNew");
+
+					if (event.type === "popup-no-update-event") {
+						if (xEvent.getAttribute("isNew")) {
+							// remove event node
+							xEvent.parentNode.removeChild(xEvent);
+							// remove event HTML element
+							eventEl.remove();
+						}
+					} else {
+						let title = el.find("h3").text();
+						// update event node
+						xEvent.setAttribute("title", title);
+						xEvent.removeAttribute("isNew");
+						// set calendar Id
+						calId = eventEl.data("calId");
+						xEvent.setAttribute("calendar-id", calId);
+						// update DOM element
+						if (eventEl.hasClass("entry") && eventEl.prop("nodeName") !== "LI") eventEl.html(title);
+						else eventEl.find(".event-title, .entry-title").html(title);
 					}
-				} else {
-					let title = el.find("h3").text();
-					// update event node
-					xEvent.setAttribute("title", title);
-					xEvent.removeAttribute("isNew");
-					// set calendar Id
-					calId = eventEl.data("calId");
-					xEvent.setAttribute("calendar-id", calId);
-					// update DOM element
-					if (eventEl.hasClass("entry") && eventEl.prop("nodeName") !== "LI") eventEl.html(title);
-					else eventEl.find(".event-title, .entry-title").html(title);
 				}
-
 				// remove popup element from DOM
 				el.remove();
 				// unbind possible event handler
@@ -90,10 +96,38 @@
 					Self.els.wrapper = false;
 				}
 				break;
+			case "popup-sidebar-calendar-details":
+				// check if a popup already is shown
+				if (Self.els.content.find(".popup-event").length) {
+					return Self.dispatch({ type: "popup-update-event" });
+				}
+
+				id = event.target.data("id");
+				// ui update on edit calendar element
+				event.target.addClass("active");
+				// xpath matching event node
+				match = `//Events/Calendars/*[@id="${id}"]`;
+				// DOM element to append popup
+				Self.els.root = append = Self.els.content;
+				Self.els.wrapper = append.find(".days-wrapper");
+				// render calendar details
+				popup = window.render({ template: "popup-calendar-details", match, append });
+
+				// position popup
+				pos = Self.getPosition(event.target[0], append[0]);
+				pos.top -= 46;
+				// position popup
+				popup.css(pos);
+				// focus on first "input" field
+				popup.find("h3").focus();
+
+				// bind event handler
+				Self.els.wrapper.on("scroll", Self.dispatch);
+				break;
 			case "popup-event-details":
 				// conditional check
 				if (!event.target.hasClass("event")) return;
-
+				// check if a popup already is shown
 				if (Self.els.content.find(".popup-event").length) {
 					return Self.dispatch({ type: "popup-update-event" });
 				}

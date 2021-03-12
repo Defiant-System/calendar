@@ -4,6 +4,7 @@
 	<ul>
 		<xsl:for-each select="./*">
 			<li>
+				<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
 				<span>
 					<xsl:attribute name="class">form-checkbox_ <xsl:value-of select="@color"/></xsl:attribute>
 					<input type="checkbox" checked="checked">
@@ -15,6 +16,7 @@
 					<xsl:attribute name="for">calendar-<xsl:value-of select="@id"/></xsl:attribute>
 					<xsl:value-of select="@name"/>
 				</label>
+				<span class="cal-edit" data-click="edit-calendar-entry">Edit</span>
 			</li>
 		</xsl:for-each>
 		<li class="add-calendar">
@@ -23,6 +25,43 @@
 		</li>
 	</ul>
 </xsl:template>
+
+
+<xsl:template name="popup-calendar-details">
+	<div class="popup-event" data-area="popup">
+		<xsl:attribute name="data-calId"><xsl:value-of select="@id"/></xsl:attribute>
+		<div class="row-head">
+			<h3 contenteditable="true" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+				<xsl:value-of select="@name"/>
+			</h3>
+		</div>
+		<hr/>
+		<div class="row-colors">
+			<span>Color:</span>
+			<div>
+				<i class="calendar-color blue active"></i>
+				<i class="calendar-color lightblue"></i>
+				<i class="calendar-color red"></i>
+				<i class="calendar-color purple"></i>
+				<i class="calendar-color orange"></i>
+				<i class="calendar-color yellow"></i>
+				<i class="calendar-color green"></i>
+				<i class="calendar-color cyan"></i>
+				<i class="calendar-color gray"></i>
+			</div>
+		</div>
+		<hr/>
+		<div class="row-actions">
+			<div class="pop-button">
+				<i class="icon-email"></i>
+			</div>
+			<div class="pop-button">
+				<i class="icon-trashcan"></i>
+			</div>
+		</div>
+	</div>
+</xsl:template>
+
 
 <xsl:template name="popup-event">
 	<div class="popup-event" data-area="popup">
