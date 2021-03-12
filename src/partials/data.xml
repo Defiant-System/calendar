@@ -1,38 +1,36 @@
 
-<Events>
+<Data>
 	<Palette>
-		<i hex="#64b2eb" name="blue" />
-		<i hex="#bae0f6" name="lightblue" />
-		<i hex="#f67c7c" name="red" />
-		<i hex="#d38df4" name="purple" />
-		<i hex="#f29d5c" name="orange" />
-		<i hex="#faea4b" name="yellow" />
-		<i hex="#96f67d" name="green" />
-		<i hex="#9fe5e5" name="cyan" />
-		<i hex="#dddddd" name="gray" />
+		<i hex="#64b2eb" id="blue" name="Blue" />
+		<i hex="#bae0f6" id="lightblue" name="Lightblue" />
+		<i hex="#f67c7c" id="red" name="Red" />
+		<i hex="#d38df4" id="purple" name="Purple" />
+		<i hex="#f29d5c" id="orange" name="Orange" />
+		<i hex="#faea4b" id="yellow" name="Yellow" />
+		<i hex="#96f67d" id="green" name="Green" />
+		<i hex="#9fe5e5" id="cyan" name="Cyan" />
+		<i hex="#dddddd" id="gray" name="Gray" />
 	</Palette>
 
-	<Calendars>
-		<!-- <i link="2021/sv-SE"/>
-		<i id="blue" name="Home"/>
-		<i id="purple" name="Work"/> -->
-		<i id="gray" name="gray"/>
-		<i id="blue" name="blue"/>
-		<i id="lightblue" name="lightblue"/>
-		<i id="green" name="green"/>
-		<i id="orange" name="orange"/>
-		<i id="yellow" name="yellow"/>
-		<i id="purple" name="purple"/>
-		<i id="red" name="red"/>
-		<i id="cyan" name="cyan"/>
-	</Calendars>
+	<!-- <i link="2021/sv-SE"/> -->
 
-	<event iso-starts="2021-02-03 09:00" iso-ends="2021-02-03 12:00" calId="purple" title="Birthday"/>
-	<event iso-starts="2021-03-01 10:30" iso-ends="2021-03-01 11:30" calId="cyan" title="Dentist"/>
-	<event iso-starts="2021-03-03 12:15" iso-ends="2021-03-03 13:30" calId="yellow" title="Lunch with Bill"/>
-	<event iso-starts="2021-03-04 14:00" iso-ends="2021-03-04 16:30" calId="green" title="VC meeting"/>
-	<event iso-starts="2021-03-05 09:00" iso-ends="2021-03-05 13:15" calId="purple" title="Project start"/>
-	<event iso-starts="2021-03-02 10:00" iso-ends="2021-03-02 11:00" calId="blue" title="Power walk"/>
-	<event iso-starts="2021-03-06 13:00" iso-ends="2021-03-06 15:30" calId="orange" title="Gym"/>
-	<event iso-starts="2021-03-07 14:00" iso-ends="2021-03-07 16:00" calId="lightblue" title="Power Walk"/>
+	<!--
+	<DevEvents>
+		<event iso-starts="2021-02-03 09:00" iso-ends="2021-02-03 12:00" calendar-id="1" title="Birthday"/>
+		<event iso-starts="2021-03-08 10:30" iso-ends="2021-03-08 11:30" calendar-id="2" title="Dentist"/>
+		<event iso-starts="2021-03-09 12:15" iso-ends="2021-03-09 13:30" calendar-id="1" title="Lunch with Bill"/>
+		<event iso-starts="2021-03-10 14:00" iso-ends="2021-03-10 16:30" calendar-id="2" title="VC meeting"/>
+		<event iso-starts="2021-03-11 09:00" iso-ends="2021-03-11 13:15" calendar-id="2" title="Project start"/>
+		<event iso-starts="2021-03-12 10:00" iso-ends="2021-03-12 11:00" calendar-id="1" title="Power walk"/>
+		<event iso-starts="2021-03-13 13:00" iso-ends="2021-03-13 15:30" calendar-id="1" title="Gym"/>
+		<event iso-starts="2021-03-14 14:00" iso-ends="2021-03-14 16:00" calendar-id="1" title="Power Walk"/>
+	</DevEvents>
+	-->
+</Data>
+
+<Events>
+	<Calendars>
+		<i id="1" color="blue" name="Home"/>
+		<i id="2" color="purple" name="Work"/>
+	</Calendars>
 </Events>

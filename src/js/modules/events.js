@@ -24,6 +24,7 @@ const Events = {
 			xEvent,
 			xHolidays,
 			xPath,
+			color,
 			now, hours, minutes, seconds, time,
 			top, left, width, height, pos, type,
 			pEl, cols, clone, htm,
@@ -64,14 +65,17 @@ const Events = {
 					width = el.width() - 2;
 					height = hHeight / 2;
 
+					// get color of first available calendar
+					color = Self.getCalendar().color;
+
 					// render new event HTML
 					htm = Self.renderEvent({
 						id: Self.createEventId(),
 						isNew: true,
 						type: "week",
-						color: "purple",
 						title: "New Event",
 						timeStarts: Self.formatTime(hours, (minutes / hHeight) * 60),
+						color,
 						height,
 						top,
 					});
@@ -206,7 +210,7 @@ const Events = {
 						title = el.find(".event-title").html();
 
 					// create new event node
-					htm = `<event isNew="true" id="${id}" iso-starts="${starts}" iso-ends="${ends}" starts="${startsDate.valueOf()}" ends="${endsDate.valueOf()}" calId="${color}" title="${title}"/>`;
+					htm = `<event isNew="true" id="${id}" iso-starts="${starts}" iso-ends="${ends}" starts="${startsDate.valueOf()}" ends="${endsDate.valueOf()}" calendar-id="${color}" title="${title}"/>`;
 					xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
 
 					// update event element with ID
@@ -235,7 +239,7 @@ const Events = {
 				el = event.el.find(".entries-wrapper").prepend(htm);
 
 				// create new event node
-				htm = `<event isNew="true" id="${pipe.id}" starts="${pipe.starts.valueOf()}" ends="${pipe.ends.valueOf()}" calId="${pipe.color}" title="${pipe.title}"/>`;
+				htm = `<event isNew="true" id="${pipe.id}" starts="${pipe.starts.valueOf()}" ends="${pipe.ends.valueOf()}" calendar-id="${pipe.color}" title="${pipe.title}"/>`;
 				xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
 
 				el.trigger("click");
@@ -256,7 +260,8 @@ const Events = {
 						date = new Date(+node.getAttribute("starts")),
 						wDate = date.getDate(),
 						title = node.getAttribute("title"),
-						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
+						calId = node.getAttribute("calendar-id"),
+						color = node.parentNode.getAttribute("color") || Self.getCalendar(calId).color,
 						htm = `<div data-id="${id}"class="event ${color}">${title}</div>`;
 					
 					event.el.find(`.day-legends b[data-date="${wDate}"]`).append(htm);
@@ -319,7 +324,8 @@ const Events = {
 						date = new Date(starts),
 						dMonth = date.getFullYear() +"-"+ date.getMonth(),
 						dDate = date.getDate(),
-						color = node.getAttribute("calId") || node.parentNode.getAttribute("color");
+						calId = node.getAttribute("calendar-id"),
+						color = node.parentNode.getAttribute("color") || Self.getCalendar(calId).color;
 					// add class to day element
 					el.find(`.month[data-date="${dMonth}"] b:not(.non-day) i:contains("${dDate}")`)
 						.map(el => +el.innerHTML === +dDate ? $(el.parentNode).addClass(`has-event ${color}`) : null);
@@ -340,7 +346,8 @@ const Events = {
 						date = new Date(+node.getAttribute("starts")),
 						iDate = date.getDate(),
 						title = node.getAttribute("title"),
-						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
+						calId = node.getAttribute("calendar-id"),
+						color = node.parentNode.getAttribute("color") || Self.getCalendar(calId).color,
 						htm = Self.renderEvent({ type: "month", id, color, title });
 					// add event html to pipe
 					pipe[iDate].htm.push(htm);
@@ -355,7 +362,7 @@ const Events = {
 						starts = +node.getAttribute("starts"),
 						date = new Date(starts),
 						dayDate = date.getDate(),
-						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
+						color = node.getAttribute("calendar-id") || node.parentNode.getAttribute("color"),
 						title = node.getAttribute("title"),
 						htm = Self.renderEvent({ type: "month", id, color, title });
 					// add event html to pipe
@@ -388,7 +395,8 @@ const Events = {
 						dateStart = new Date(starts),
 						dateEnd = new Date(ends),
 						dayDate = dateStart.getDate(),
-						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
+						calId = node.getAttribute("calendar-id"),
+						color = node.parentNode.getAttribute("color") || Self.getCalendar(calId).color,
 						title = node.getAttribute("title"),
 						startHours = dateStart.getHours(),
 						startMinutes = dateStart.getMinutes(),
@@ -429,7 +437,8 @@ const Events = {
 						ends = +node.getAttribute("ends"),
 						dateStart = new Date(starts),
 						dateEnd = new Date(ends),
-						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
+						calId = node.getAttribute("calendar-id"),
+						color = node.parentNode.getAttribute("color") || Self.getCalendar(calId).color,
 						title = node.getAttribute("title"),
 						startHours = dateStart.getHours(),
 						startMinutes = dateStart.getMinutes(),
@@ -458,7 +467,7 @@ const Events = {
 				xPath = `.//event[@starts >= "${event.starts}" and @starts < "${event.ends}"]`;
 				APP.xEvents.selectNodes(xPath).map(node => {
 					let id = node.getAttribute("id"),
-						color = node.getAttribute("calId") || node.parentNode.getAttribute("color"),
+						color = node.getAttribute("calendar-id") || node.parentNode.getAttribute("color"),
 						title = node.getAttribute("title"),
 						starts = +node.getAttribute("starts"),
 						ends = +node.getAttribute("ends"),
@@ -517,6 +526,14 @@ const Events = {
 				minutes = minutes.toString().padStart(2, "0");
 				return `${hours}:${minutes} ${suffix}`;
 		}
+	},
+	getCalendar(id) {
+		let query = id ? `[@id="${id}"]` : "",
+			xCalendar = calendar.xEvents.selectSingleNode(`.//Calendars/*${query}`),
+			name = xCalendar.getAttribute("name"),
+			color = xCalendar.getAttribute("color");
+		if (!id) id = xCalendar.getAttribute("id");
+		return { id, color, name };
 	},
 	createEventId() {
 		let ids = calendar.xEvents.selectNodes(".//event").map(node => +node.getAttribute("id")),

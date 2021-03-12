@@ -92,7 +92,7 @@ const calendar = {
 				break;
 			case "change-event-color":
 				node = Self.data.selectSingleNode(`//Palette/*[@hex="${event.arg}"]`);
-				event.origin.el.prop({ className: `event ${node.getAttribute("name")}` });
+				event.origin.el.prop({ className: `event ${node.getAttribute("id")}` });
 				break;
 			case "event-calendar-info":
 			case "delete-event-calendar":

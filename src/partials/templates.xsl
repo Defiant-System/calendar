@@ -5,7 +5,7 @@
 		<xsl:for-each select="./*">
 			<li>
 				<span>
-					<xsl:attribute name="class">form-checkbox_ <xsl:value-of select="@id"/></xsl:attribute>
+					<xsl:attribute name="class">form-checkbox_ <xsl:value-of select="@color"/></xsl:attribute>
 					<input type="checkbox" checked="checked">
 						<xsl:attribute name="id">calendar-<xsl:value-of select="@id"/></xsl:attribute>
 					</input>
@@ -53,7 +53,7 @@
 			<xsl:otherwise>
 				<div class="row-head">
 					<i>
-						<xsl:attribute name="class">calendar-color <xsl:value-of select="@calId"/></xsl:attribute>
+						<xsl:attribute name="class">calendar-color <xsl:value-of select="//Events/Calendars/*[@id = current()/@calendar-id]/@color"/></xsl:attribute>
 					</i>
 					<h3 contenteditable="true" placeholder="New Event" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 						<xsl:if test="not(@isNew)"><xsl:value-of select="@title"/></xsl:if>

@@ -253,7 +253,7 @@ content {
 					font-size: 0;
 
 					&.go-next {
-						transition: left 250ms ease-in-out;
+						transition: left 250ms ease-in;
 						left: -204px;
 
 						.mini-cal-wrapper h2 {
@@ -262,7 +262,7 @@ content {
 					}
 
 					&.go-prev {
-						transition: left 250ms ease-in-out;
+						transition: left 250ms ease-in;
 						left: 204px;
 
 						.mini-cal-wrapper h2 {
@@ -337,6 +337,8 @@ content {
 					padding: 0 1px;
 
 					b {
+						color: var( --content-fg );
+
 						&.week-nr {
 							background: rgba(0,0,0,.05);
 							pointer-events: none;
@@ -660,12 +662,14 @@ content {
 
 	div {
 		display: flex;
+		user-select: none;
 
 		&.row-head {
 			margin-bottom: 7px;
 		}
 		&.row-location {}
 		&.row-date {
+
 			span {
 				position: relative;
 				padding: 0 2px;
@@ -763,6 +767,7 @@ content {
 		box-shadow: 0 0 0;
 		background: transparent;
 		font-size: 13px;
+		user-select: text;
 
 		&::-webkit-input-placeholder {
 			font-size: 13px;

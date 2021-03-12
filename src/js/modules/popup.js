@@ -72,6 +72,7 @@
 					let title = el.find("h3").text();
 					// update event node
 					xEvent.setAttribute("title", title);
+					xEvent.removeAttribute("isNew");
 					// update DOM element
 					if (eventEl.hasClass("entry") && eventEl.prop("nodeName") !== "LI") eventEl.html(title);
 					else eventEl.find(".event-title, .entry-title").html(title);
