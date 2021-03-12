@@ -227,6 +227,19 @@ const Events = {
 				}
 				break;
 			// custom events
+			case "change-event-color":
+				xPath = `.//event[@id= "${event.id}"]`;
+				xEvent = APP.xEvents.selectSingleNode(xPath);
+
+				// get calendar details
+				cal = Self.getCalendar(event.calId);
+				// update XML node
+				xEvent.setAttribute("calendar-id", cal.id);
+				// update DOM element
+				event.el
+					.prop({ className: `event ${cal.color}` })
+					.data({ calId: cal.id });
+				break;
 			case "create-event-month-view":
 				pipe = {
 					type: "month",
@@ -242,7 +255,7 @@ const Events = {
 				// create new event node
 				htm = `<event isNew="true" id="${pipe.id}" starts="${pipe.starts.valueOf()}" ends="${pipe.ends.valueOf()}" calendar-id="${pipe.color}" title="${pipe.title}"/>`;
 				xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
-
+				// auto trigger click event
 				el.trigger("click");
 				break;
 			case "parse-holidays":

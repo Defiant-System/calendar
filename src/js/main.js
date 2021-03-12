@@ -100,9 +100,20 @@ const calendar = {
 			case "show-xml-data":
 				console.log(Self.xEvents);
 				break;
+			case "clear-xml-data":
+				// window.storage.removeItem("events-2021");
+				window.storage.clear();
+				break;
 			case "change-event-color":
-				node = Self.data.selectSingleNode(`//Palette/*[@hex="${event.arg}"]`);
-				event.origin.el.prop({ className: `event ${node.getAttribute("id")}` });
+				el = event.origin.el;
+				// proxy command to Events object
+				Events.dispatch({
+					type: "change-event-color",
+					id: el.data("id"),
+					calId: 2,
+					el
+				});
+				// console.log(event);
 				break;
 			case "event-calendar-info":
 			case "delete-event-calendar":
