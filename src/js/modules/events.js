@@ -304,10 +304,12 @@ const Events = {
 
 				let nowDate = now.getDate(),
 					nowTop = (hours * hHeight) + (minutes / 60 * hHeight),
-					dayLeft = el.parent().find(`.col-day[data-date="${nowDate}"]`).offset().left,
-					style = `--time-top: ${nowTop}px; --day-left: ${dayLeft}px;`;
+					dayLeft = el.parent().find(`.col-day[data-date="${nowDate}"]`).offset().left;
 				// update now line
-				el.data({ time }).attr({ style });
+				el.data({ time }).css({
+					"--time-top": `${nowTop}px`,
+					"--day-left": `${dayLeft}px`,
+				});
 				// update every minute
 				Self.lineTimer = setTimeout(() =>
 					Self.dispatch({ type: "update-now-line" }), (60 - seconds) * 1000);
