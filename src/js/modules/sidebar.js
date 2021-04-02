@@ -1,5 +1,5 @@
 
-// calendar.areas.sidebar
+// calendar.sidebar
 
 {
 	init() {
@@ -21,8 +21,9 @@
 		this.dispatch({ type: "render-calendar" });
 
 		// temp
-		// setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
+		setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
 		// setTimeout(() => window.find(".cal-edit").get(1).trigger("click"), 900);
+		// setTimeout(() => window.find(".add-calendar span").trigger("click"), 900);
 	},
 	dispatch(event) {
 		let APP = calendar,
@@ -41,6 +42,7 @@
 			match,
 			target,
 			el;
+		// console.log(event);
 		switch (event.type) {
 			case "toggle-sidebar":
 				isOn = Self.els.sidebar.hasClass("show");
@@ -65,9 +67,9 @@
 				}
 				
 				return !isOn;
-			case "toggle-calendars":
-				el = $(event.target);
-				if (el.attr("type") !== "checkbox") return;
+			case "toggle-calendar":
+				// el = $(event.target);
+				// if (el.attr("type") !== "checkbox") return;
 				console.log(event);
 				break;
 			case "edit-calendar-entry":
@@ -162,6 +164,37 @@
 					ends: ends.valueOf(),
 					el,
 				});
+				break;
+			case "sidebar-add-calendar": {
+				let id = 3,
+					color = "green",
+					name = "New Calendar",
+					xCalendar = $.nodeFromString(`<i id="${id}" color="${color}" name="${name}"/>`);
+				
+				// add node to app data
+				xCalendar = APP.data.selectSingleNode(`.//Calendars`).appendChild(xCalendar);
+
+				let match = `//Calendars/*[@id="${id}"]`,
+					newCalendar = window.render({ template: "sidebar-calendar-entry", match });
+				// append new item to sidebar
+				newCalendar = event.el.before(newCalendar);
+				// trigger popup for edit
+				newCalendar.find(".cal-edit").trigger("click");
+				} break;
+			case "sidebar-delete-calendar": {
+				let id = event.origin.data("id");
+					xPath = `.//Calendars/*[@id="${id}"]`;
+					xCalendar = APP.data.selectSingleNode(xPath);
+					
+				// remove node from app data
+				xCalendar.parentNode.removeChild(xCalendar);
+				// remove from sidebar list
+				event.origin.remove();
+				// close event popup, if showing
+				APP.popup.dispatch({ type: "close-popup-event" });
+				} break;
+			case "sidebar-email-calendar":
+				console.log("TODO:", event);
 				break;
 		}
 	}

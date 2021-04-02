@@ -404,6 +404,7 @@ content {
 				li {
 					display: flex;
 					padding: 2px 0;
+					user-select: none;
 
 					&.active .cal-edit,
 					&:hover .cal-edit {
@@ -438,7 +439,7 @@ content {
 						}
 
 						.icon-plus {
-							top: -1px;
+							top: 2px;
 							left: 1px;
 							width: 13px;
 							height: 13px;
@@ -452,7 +453,7 @@ content {
 
 					.form-checkbox_ {
 						position: relative;
-						top: 1px;
+						top: 0;
 
 						&.gray i {
 							background: darken(@gray, 3%);

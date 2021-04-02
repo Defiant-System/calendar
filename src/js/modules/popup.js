@@ -1,5 +1,5 @@
 
-// calendar.areas.popup
+// calendar.popup
 
 {
 	init() {
@@ -29,6 +29,7 @@
 			eventType,
 			pEl,
 			el;
+		// console.log(event);
 		switch (event.type) {
 			// native events
 			case "scroll":
@@ -123,9 +124,18 @@
 				popup.css(pos);
 				// focus on first "input" field
 				popup.find("h3").focus();
+				// remember origin for next action
+				Self.origin = event.target;
 
 				// bind event handler
 				Self.els.wrapper.on("scroll", Self.dispatch);
+				break;
+			case "sidebar-email-calendar":
+			case "sidebar-delete-calendar":
+				if (event.el.hasClass("disabled")) return;
+				APP.sidebar.dispatch({ ...event, origin: Self.origin });
+				// forget reference to origin
+				Self.origin = false;
 				break;
 			case "popup-event-details":
 				// conditional check
