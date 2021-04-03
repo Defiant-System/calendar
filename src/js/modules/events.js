@@ -227,6 +227,11 @@ const Events = {
 				}
 				break;
 			// custom events
+			case "email-event":
+			case "event-info":
+			case "delete-event":
+				console.log(event);
+				break;
 			case "change-event-color":
 				xPath = `.//event[@id= "${event.id}"]`;
 				xEvent = APP.xEvents.selectSingleNode(xPath);

@@ -36,6 +36,10 @@
 				Self.dispatch({ type: "popup-update-event" });
 				break;
 			// custom events
+			case "email-event":
+			case "delete-event":
+				Events.dispatch(event);
+				break;
 			case "change-calendar-color":
 				console.log(event);
 				break;

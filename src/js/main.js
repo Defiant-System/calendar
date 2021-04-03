@@ -115,9 +115,10 @@ const calendar = {
 				});
 				// console.log(event);
 				break;
-			case "event-calendar-info":
-			case "delete-event-calendar":
-				console.log(event);
+			case "event-info":
+			case "delete-event":
+				// proxy command to Events object
+				Events.dispatch(event);
 				break;
 			// custom events
 			case "inititate-app":
