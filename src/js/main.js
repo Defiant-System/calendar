@@ -1,6 +1,7 @@
 
 @import "./modules/events.js";
 @import "./modules/render.js";
+@import "./modules/packer.js";
 @import "./modules/view.js";
 
 

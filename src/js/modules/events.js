@@ -436,10 +436,11 @@ const Events = {
 				// expose rendered event html to DOM
 				Object.keys(pipe).map(key => {
 					let htm = pipe[key].htm.join("");
-					if (htm) {
-						pipe[key].el.html(htm);
-					}
+					if (htm) pipe[key].el.html(htm);
 				});
+
+				// pack column events
+				el.find(`.col-day`).map(column => Packer.pack(column));
 
 				// now time line
 				Self.dispatch({ type: "append-now-line" });
