@@ -194,34 +194,44 @@ const Events = {
 					el.trigger("click");
 				}
 
+				let id = el.data("id"),
+					sDate = el.parents(".days-wrapper").data("date"),
+					sDay = el.parent().data("date").padStart(2, "0"),
+					sTime = el.find(".event-time").html(),
+					starts = `${sDate}-${sDay} ${sTime}`,
+					topHeight = top + height,
+					eHours = Math.floor(topHeight / hHeight).toString().padStart(2, "0"),
+					eMinutes = Math.round(((topHeight % hHeight) / hHeight) * 60).toString().padStart(2, "0"),
+					ends = `${sDate}-${sDay} ${eHours}:${eMinutes}`,
+					startsDate = new Date(starts),
+					endsDate = new Date(ends),
+					calId = el.data("calId"),
+					title = el.find(".event-title").html();
+
 				// clean up DOM
 				if (Drag.clone.hasClass("isNew")) {
-					let id = Self.createEventId(),
-						sDate = el.parents(".days-wrapper").data("date"),
-						sDay = el.parent().data("date").padStart(2, "0"),
-						sTime = el.find(".event-time").html(),
-						starts = `${sDate}-${sDay} ${sTime}`,
-						topHeight = top + height,
-						eHours = Math.floor(topHeight / hHeight).toString().padStart(2, "0"),
-						eMinutes = Math.round(((topHeight % hHeight) / hHeight) * 60).toString().padStart(2, "0"),
-						ends = `${sDate}-${sDay} ${eHours}:${eMinutes}`,
-						startsDate = new Date(starts),
-						endsDate = new Date(ends),
-						calId = el.data("calId"),
-						title = el.find(".event-title").html();
-
+					id = Self.createEventId();
 					// create new event node
-					htm = `<event isNew="true" id="${id}" iso-starts="${starts}" iso-ends="${ends}" starts="${startsDate.valueOf()}" ends="${endsDate.valueOf()}" calendar-id="${calId}" title="${title}"/>`;
+					htm = `<event isNew="true" id="${id}" starts="${startsDate.valueOf()}" ends="${endsDate.valueOf()}" calendar-id="${calId}" title="${title}"/>`;
 					xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
+					// update node attributes
+					Self.updateNodeI18n(xEvent);
 
 					// update event element with ID
 					el.data({ id }).trigger("click");
 
 				} else {
 					// event node
-					xPath = `.//event[@id= "${el.data("id")}"]`;
+					xPath = `.//event[@id= "${id}"]`;
 					xEvent = APP.xEvents.selectSingleNode(xPath);
+					// update node
+					xEvent.setAttribute("starts", starts);
+					xEvent.setAttribute("ends", ends);
+					// update node attributes
+					Self.updateNodeI18n(xEvent);
 					
+					console.log(xEvent);
+
 					// remove clone from DOM
 					Drag.clone.remove();
 				}
@@ -518,6 +528,19 @@ const Events = {
 				event.el.html(`<ul>${pipe.join("")}</ul>`);
 				break;
 		}
+	},
+	updateNodeI18n(node) {
+		// update event node with i18n values
+		let starts = +node.getAttribute("starts"),
+			ends = +node.getAttribute("ends"),
+			dateStart = new defiant.Moment(starts),
+			dateEnd = new defiant.Moment(ends);
+
+		node.setAttribute("iso-starts", dateStart.format("YYYY-MM-DD HH:mm"));
+		node.setAttribute("iso-ends", dateEnd.format("YYYY-MM-DD HH:mm"));
+		node.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
+		node.setAttribute("i18n-starts", dateStart.format("HH:mm"));
+		node.setAttribute("i18n-ends", dateEnd.format("HH:mm"));
 	},
 	renderEvent(opt) {
 		let isNew = opt.isNew ? "isNew" : "",
