@@ -168,7 +168,7 @@
 			case "sidebar-add-calendar": {
 				let id = 3,
 					color = "green",
-					name = "New Calendar",
+					name = defiant.i18n("New Calendar"),
 					xCalendar = $.nodeFromString(`<i id="${id}" color="${color}" name="${name}"/>`);
 				
 				// add node to app data
@@ -180,10 +180,15 @@
 				newCalendar = event.el.before(newCalendar);
 				// trigger popup for edit
 				newCalendar.find(".cal-edit").trigger("click");
-				} break;
+
+				requestAnimationFrame(() => {
+					let target = window.find(".popup-calendar h3")[0];
+					document.getSelection().selectAllChildren(target);
+				});
+				break; }
 			case "sidebar-delete-calendar": {
-				let id = event.origin.data("id");
-					xPath = `.//Calendars/*[@id="${id}"]`;
+				let id = event.origin.data("id"),
+					xPath = `.//Calendars/*[@id="${id}"]`,
 					xCalendar = APP.data.selectSingleNode(xPath);
 					
 				// remove node from app data
@@ -192,7 +197,7 @@
 				event.origin.remove();
 				// close event popup, if showing
 				APP.popup.dispatch({ type: "close-popup-event" });
-				} break;
+				break; }
 			case "sidebar-email-calendar":
 				console.log("TODO:", event);
 				break;

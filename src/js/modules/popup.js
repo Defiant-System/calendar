@@ -53,44 +53,54 @@
 					Self.els.wrapper = false;
 				}
 				break;
+			case "popup-update-calendar": {
+				el = Self.els.content.find(".popup-calendar");
+				if (!el.length) return;
+
+				// reset sidebar calendar element
+				Self.els.content.find(".calendars .list-wrapper li.active").removeClass("active");
+				
+				console.log("update calendar node");
+
+				// remove popup element from DOM
+				el.remove();
+				// unbind possible event handler
+				if (Self.els.wrapper) {
+					Self.els.wrapper.off("scroll", Self.dispatch);
+					Self.els.wrapper = false;
+				}
+				break; }
 			case "popup-no-update-event":
 			case "popup-update-event":
 				el = Self.els.content.find(".popup-event");
 				if (!el.length) return;
 
-				if (el.data("calId")) {
-					// reset sidebar calendar element
-					Self.els.content.find(".active").removeClass("active");
+				// event node
+				id = el.data("id");
+				xPath = `.//event[@id = "${id}"]`;
+				xEvent = APP.xEvents.selectSingleNode(xPath);
+				// DOM element
+				eventEl = Self.els.content.find(`.entry[data-id="${id}"], .event[data-id="${id}"]`);
+				eventEl.removeClass("isNew");
 
-					console.log("update calendar node");
-				} else {
-					// event node
-					id = el.data("id");
-					xPath = `.//event[@id = "${id}"]`;
-					xEvent = APP.xEvents.selectSingleNode(xPath);
-					// DOM element
-					eventEl = Self.els.content.find(`.entry[data-id="${id}"], .event[data-id="${id}"]`);
-					eventEl.removeClass("isNew");
-
-					if (event.type === "popup-no-update-event") {
-						if (xEvent.getAttribute("isNew")) {
-							// remove event node
-							xEvent.parentNode.removeChild(xEvent);
-							// remove event HTML element
-							eventEl.remove();
-						}
-					} else {
-						let title = el.find("h3").text();
-						// update event node
-						xEvent.setAttribute("title", title);
-						xEvent.removeAttribute("isNew");
-						// set calendar Id
-						calId = eventEl.data("calId");
-						xEvent.setAttribute("calendar-id", calId);
-						// update DOM element
-						if (eventEl.hasClass("entry") && eventEl.prop("nodeName") !== "LI") eventEl.html(title);
-						else eventEl.find(".event-title, .entry-title").html(title);
+				if (event.type === "popup-no-update-event") {
+					if (xEvent.getAttribute("isNew")) {
+						// remove event node
+						xEvent.parentNode.removeChild(xEvent);
+						// remove event HTML element
+						eventEl.remove();
 					}
+				} else {
+					let title = el.find("h3").text();
+					// update event node
+					xEvent.setAttribute("title", title);
+					xEvent.removeAttribute("isNew");
+					// set calendar Id
+					calId = eventEl.data("calId");
+					xEvent.setAttribute("calendar-id", calId);
+					// update DOM element
+					if (eventEl.hasClass("entry") && eventEl.prop("nodeName") !== "LI") eventEl.html(title);
+					else eventEl.find(".event-title, .entry-title").html(title);
 				}
 				// remove popup element from DOM
 				el.remove();
@@ -102,8 +112,8 @@
 				break;
 			case "popup-sidebar-calendar-details":
 				// check if a popup already is shown
-				if (Self.els.content.find(".popup-event").length) {
-					return Self.dispatch({ type: "popup-update-event" });
+				if (Self.els.content.find(".popup-calendar").length) {
+					return Self.dispatch({ type: "popup-update-calendar" });
 				}
 
 				id = event.target.data("id");

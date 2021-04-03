@@ -22,6 +22,7 @@
 		@import "src/partials/menubar.xml"
 	</Head>
 	
+	@import "public/i18n/en.xml"
 	@import "src/partials/data.xml"
 
 </Application>

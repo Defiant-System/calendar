@@ -246,7 +246,7 @@ const Events = {
 					id: Self.createEventId(),
 					color: "purple",
 					title: "New Event",
-					starts: new Date("2021-02-16 12:00"),
+					starts: new Date("2021-02-16 12:00"), // TODO
 					ends: new Date("2021-02-16 13:00"),
 				};
 				htm = Self.renderEvent(pipe);

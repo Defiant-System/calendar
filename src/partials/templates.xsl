@@ -34,7 +34,7 @@
 
 <xsl:template name="popup-calendar-details">
 	<xsl:variable name="current-color" select="@color"/>
-	<div class="popup-event" data-area="popup">
+	<div class="popup-calendar" data-area="popup">
 		<xsl:attribute name="data-calId"><xsl:value-of select="@id"/></xsl:attribute>
 		<div class="row-head">
 			<h3 contenteditable="true" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
@@ -55,7 +55,7 @@
 		</div>
 		<hr/>
 		<div class="row-actions">
-			<div class="pop-button disabled" data-click="sidebar-email-calendar">
+			<div class="pop-button disabled" title="Mail Calendar" data-click="sidebar-email-calendar">
 				<i class="icon-email"></i>
 			</div>
 			<div class="pop-button" title="Delete Calendar" data-click="sidebar-delete-calendar">
@@ -124,6 +124,15 @@
 				<div class="row-attachments">
 					<i class="icon-paperclip"></i>
 					<input type="text" placeholder="Add Notes, URL or Attachments"/>
+				</div>
+				<hr/>
+				<div class="row-actions">
+					<div class="pop-button disabled" title="Mail Event" data-click="email-event">
+						<i class="icon-email"></i>
+					</div>
+					<div class="pop-button" title="Delete Event" data-click="delete-event">
+						<i class="icon-trashcan"></i>
+					</div>
 				</div>
 			</xsl:otherwise>
 		</xsl:choose>
