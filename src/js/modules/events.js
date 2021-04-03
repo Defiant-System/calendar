@@ -225,6 +225,9 @@ const Events = {
 					// remove clone from DOM
 					Drag.clone.remove();
 				}
+
+				// pack column events
+				Drag.cols.map(item => Packer.pack(item.el));
 				break;
 			// custom events
 			case "email-event":
@@ -477,6 +480,9 @@ const Events = {
 				});
 				// expose rendered event html to DOM
 				el.find(".col-day").html(pipe.htm.join(""));
+
+				// pack column events
+				el.find(`.col-day`).map(column => Packer.pack(column));
 
 				// now time line
 				Self.dispatch({ type: "append-now-line" });
