@@ -39,7 +39,9 @@
 			// custom events
 			case "email-event":
 			case "delete-event":
-				Events.dispatch(event);
+				Events.dispatch({ ...event, origin: Self.origin });
+				// close popup-bubble
+				Self.dispatch({ type: "close-popup-event" });
 				break;
 			case "change-calendar-color":
 				console.log(event);

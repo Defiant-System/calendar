@@ -269,10 +269,24 @@ const Events = {
 				} break;
 			case "email-event":
 			case "event-info":
-			case "delete-event":
 				console.log(event);
 				break;
+			case "delete-event":
+				el = event.origin;
+				// xml node
+				xPath = `.//event[@id= "${el.data("id")}"]`;
+				xEvent = APP.xEvents.selectSingleNode(xPath);
+				// remove event node
+				xEvent.parentNode.removeChild(xEvent);
+				// remember parent element
+				pEl = el.parents(".col-day");
+				// remove element from DOM
+				el.remove();
+				// pack column events
+				pEl.map(column => Packer.pack(column));
+				break;
 			case "change-event-color":
+				// xml node
 				xPath = `.//event[@id= "${event.id}"]`;
 				xEvent = APP.xEvents.selectSingleNode(xPath);
 

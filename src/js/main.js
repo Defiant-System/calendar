@@ -128,7 +128,6 @@ const calendar = {
 				break;
 			case "before-contextmenu:event":
 			case "event-info":
-			case "delete-event":
 				// proxy command to Events object
 				Events.dispatch(event);
 				break;
