@@ -68,9 +68,13 @@
 				
 				return !isOn;
 			case "toggle-calendar":
-				// el = $(event.target);
-				// if (el.attr("type") !== "checkbox") return;
-				console.log(event);
+				el = event.el.parents("li");
+				
+				let events = Self.els.content.find(`.event[data-calId="${el.data("id")}"]`);
+				events.toggleClass("hidden", events.hasClass("hidden"));
+
+				// pack column events
+				Self.els.content.find(`.col-day`).map(column => Packer.pack(column));
 				break;
 			case "edit-calendar-entry":
 				target = event.el.parent();
