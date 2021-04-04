@@ -82,11 +82,9 @@
 			case "popup-update-calendar":
 				el = event.el;
 				// calendar node
-				id = el.data("id");
-				xPath = `.//calendar[@id = "${id}"]`;
+				id = event.origin.data("id");
+				xPath = `//Calendars/i[@id = "${id}"]`;
 				xNode = APP.data.selectSingleNode(xPath);
-
-				console.log(el);
 
 				// reset sidebar calendar element
 				event.origin.removeClass("active");
@@ -94,6 +92,8 @@
 				name = el.find("h3").text();
 				// update calendar name
 				event.origin.find("label").html(name);
+				// update xml node
+				xNode.setAttribute("name", name);
 				break;
 			case "popup-no-update-event":
 			case "popup-update-event":
