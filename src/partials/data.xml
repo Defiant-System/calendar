@@ -11,26 +11,12 @@
 		<i hex="#9fe5e5" id="cyan" name="Cyan" />
 		<i hex="#dddddd" id="gray" name="Gray" />
 	</Palette>
-
-	<!-- <i link="2021/sv-SE"/> -->
-
-	<!--
-	<DevEvents>
-		<event iso-starts="2021-02-03 09:00" iso-ends="2021-02-03 12:00" calendar-id="1" title="Birthday"/>
-		<event iso-starts="2021-03-08 10:30" iso-ends="2021-03-08 11:30" calendar-id="2" title="Dentist"/>
-		<event iso-starts="2021-03-09 12:15" iso-ends="2021-03-09 13:30" calendar-id="1" title="Lunch with Bill"/>
-		<event iso-starts="2021-03-10 14:00" iso-ends="2021-03-10 16:30" calendar-id="2" title="VC meeting"/>
-		<event iso-starts="2021-03-11 09:00" iso-ends="2021-03-11 13:15" calendar-id="2" title="Project start"/>
-		<event iso-starts="2021-03-12 10:00" iso-ends="2021-03-12 11:00" calendar-id="1" title="Power walk"/>
-		<event iso-starts="2021-03-13 13:00" iso-ends="2021-03-13 15:30" calendar-id="1" title="Gym"/>
-		<event iso-starts="2021-03-14 14:00" iso-ends="2021-03-14 16:00" calendar-id="1" title="Power Walk"/>
-	</DevEvents>
-	-->
 </Data>
 
 <Events>
 	<Calendars>
 		<i id="1" color="blue" name="Home"/>
 		<i id="2" color="purple" name="Work"/>
+		<!-- <i link="2021/sv-SE"/> -->
 	</Calendars>
 </Events>

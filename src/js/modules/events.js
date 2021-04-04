@@ -24,6 +24,7 @@ const Events = {
 			xEvent,
 			xHolidays,
 			xPath,
+			xNode,
 			cal,
 			now, hours, minutes, seconds, time,
 			top, left, width, height, pos, type,
@@ -240,6 +241,32 @@ const Events = {
 				Drag.cols.map(item => Packer.pack(item.el));
 				break;
 			// custom events
+			case "before-contextmenu:event": {
+				let calId = event.el.data("calId"),
+					xCalendar = APP.data.selectSingleNode(`//Calendars/i[@id="${calId}"]`),
+					paletteColors = {};
+				// populate palette colors
+				APP.data.selectNodes(`//Palette/i`).map(node =>
+					paletteColors[node.getAttribute("id")] = node.getAttribute("hex"));
+
+				// get app color state
+				let activeColor = paletteColors[xCalendar.getAttribute("color")],
+					availableColors = APP.data.selectNodes(`//Calendars/i`)
+						.map(node => paletteColors[node.getAttribute("color")]);
+				// iterate menu options
+				APP.data.selectNodes(`//Menu[@for="event"]/Menu[@type="colors"]/Color`)
+					.map(xColor => {
+						let value = xColor.getAttribute("arg");
+
+						// toggle "active"
+						if (value === activeColor) xColor.setAttribute("active", "1");
+						else xColor.removeAttribute("active");
+
+						// toggle visibility
+						if (availableColors.includes(value)) xColor.removeAttribute("type");
+						else xColor.setAttribute("type", "hidden");
+					});
+				} break;
 			case "email-event":
 			case "event-info":
 			case "delete-event":
