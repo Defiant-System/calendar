@@ -21,9 +21,9 @@
 		this.dispatch({ type: "render-calendar" });
 
 		// temp
-		// setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
+		setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
 		// setTimeout(() => window.find(".cal-edit").get(1).trigger("click"), 900);
-		// setTimeout(() => window.find(".add-calendar span").trigger("click"), 900);
+		setTimeout(() => window.find(".add-calendar span").trigger("click"), 900);
 	},
 	dispatch(event) {
 		let APP = calendar,
@@ -182,7 +182,7 @@
 				newCalendar.find(".cal-edit").trigger("click");
 
 				requestAnimationFrame(() => {
-					let target = window.find(".popup-calendar h3")[0];
+					let target = window.find(".popup-bubble h3")[0];
 					document.getSelection().selectAllChildren(target);
 				});
 				break; }

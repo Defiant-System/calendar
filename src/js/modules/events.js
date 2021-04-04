@@ -40,12 +40,12 @@ const Events = {
 				type = "move";
 
 				// if popup exists, remove and return
-				let exists = el.parents("[data-area]").find(".popup-event");
+				let exists = el.parents("[data-area]").find(".popup-bubble");
 				if (exists.length) return pEl.trigger("scroll");
 				
 				// conditional checks
 				if (!el.hasClass("col-day")
-						&& (!el.hasClass("event") || el.parents(".popup-event").length)
+						&& (!el.hasClass("event") || el.parents(".popup-bubble").length)
 						|| el.parents(".day-legends").length
 						|| event.button === 2) {
 					return;

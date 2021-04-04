@@ -34,7 +34,7 @@
 
 <xsl:template name="popup-calendar-details">
 	<xsl:variable name="current-color" select="@color"/>
-	<div class="popup-calendar" data-area="popup">
+	<div class="popup-bubble" data-type="calendar" data-area="popup">
 		<xsl:attribute name="data-calId"><xsl:value-of select="@id"/></xsl:attribute>
 		<div class="row-head">
 			<h3 contenteditable="true" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
@@ -67,7 +67,7 @@
 
 
 <xsl:template name="popup-event">
-	<div class="popup-event" data-area="popup">
+	<div class="popup-bubble" data-type="event" data-area="popup">
 		<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
 
 		<xsl:choose>

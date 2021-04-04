@@ -88,12 +88,12 @@ const calendar = {
 			case "window.keystroke":
 				switch (event.char) {
 					case "esc":
-						return Self.popup.dispatch({ type: "popup-no-update-event" });
+						return Self.popup.dispatch({ type: "popup-no-update-origin" });
 					case "return":
 						// prevent default behaviour
 						event.preventDefault();
 
-						Self.popup.dispatch({ type: "popup-update-event" });
+						Self.popup.dispatch({ type: "popup-update-origin" });
 						return;
 				}
 				break;

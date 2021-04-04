@@ -47,7 +47,7 @@
 				// console.log(event);
 				break;
 			case "close-popup-event":
-				el = Self.els.content.find(".popup-event");
+				el = Self.els.content.find(".popup-bubble");
 				if (!el.length) return;
 				// remove popup element from DOM
 				el.remove();
@@ -56,6 +56,10 @@
 					Self.els.wrapper.off("scroll", Self.dispatch);
 					Self.els.wrapper = false;
 				}
+				break;
+			case "popup-no-update-origin":
+			case "popup-update-origin":
+
 				break;
 			case "popup-update-calendar": {
 				el = Self.els.content.find(".popup-calendar");
@@ -76,7 +80,7 @@
 				break; }
 			case "popup-no-update-event":
 			case "popup-update-event":
-				el = Self.els.content.find(".popup-event");
+				el = Self.els.content.find(".popup-bubble");
 				if (!el.length) return;
 
 				// event node
@@ -155,7 +159,7 @@
 				// conditional check
 				if (!event.target.hasClass("event")) return;
 				// check if a popup already is shown
-				if (Self.els.content.find(".popup-event").length) {
+				if (Self.els.content.find(".popup-bubble").length) {
 					return Self.dispatch({ type: "popup-update-event" });
 				}
 
@@ -211,7 +215,7 @@
 				el = $(event.target);
 
 				// if popup exists, remove and return
-				if (!el.parents(".popup-event").length && event.el.find(".popup-event").length) {
+				if (!el.parents(".popup-bubble").length && event.el.find(".popup-bubble").length) {
 					return Self.dispatch({ type: "popup-update-event" });
 				}
 
