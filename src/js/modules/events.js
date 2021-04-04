@@ -225,8 +225,8 @@ const Events = {
 					xPath = `.//event[@id= "${id}"]`;
 					xEvent = APP.xEvents.selectSingleNode(xPath);
 					// update node
-					xEvent.setAttribute("starts", starts);
-					xEvent.setAttribute("ends", ends);
+					xEvent.setAttribute("starts", startsDate.valueOf());
+					xEvent.setAttribute("ends", endsDate.valueOf());
 					// update node attributes
 					Self.updateNodeI18n(xEvent);
 					
