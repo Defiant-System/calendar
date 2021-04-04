@@ -73,7 +73,7 @@
 				let events = Self.els.content.find(`.event[data-calId="${el.data("id")}"]`);
 				events.toggleClass("hidden", events.hasClass("hidden"));
 
-				// pack column events
+				// re-pack column events
 				Self.els.content.find(`.col-day`).map(column => Packer.pack(column));
 				break;
 			case "edit-calendar-entry":
