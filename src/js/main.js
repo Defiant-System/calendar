@@ -65,6 +65,7 @@ const calendar = {
 			month,
 			name,
 			target,
+			xPath,
 			pEl,
 			el;
 		// console.log(event);
@@ -107,11 +108,18 @@ const calendar = {
 				break;
 			case "change-event-color":
 				el = event.origin.el;
+
+				xPath = `//Palette/*[@hex="${event.arg}"]`;
+				node = Self.data.selectSingleNode(xPath);
+
+				xPath = `//Events/Calendars/*[@color = "${node.getAttribute("id")}"]`;
+				node = Self.data.selectSingleNode(xPath);
+				
 				// proxy command to Events object
 				Events.dispatch({
 					type: "change-event-color",
+					calId: node.getAttribute("id"),
 					id: el.data("id"),
-					calId: 2,
 					el
 				});
 				// console.log(event);
