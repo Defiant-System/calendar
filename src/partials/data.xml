@@ -2,21 +2,22 @@
 <Data>
 	<Palette>
 		<i hex="#64b2eb" id="blue" name="Blue" />
-		<i hex="#bae0f6" id="lightblue" name="Lightblue" />
-		<i hex="#f67c7c" id="red" name="Red" />
 		<i hex="#d38df4" id="purple" name="Purple" />
 		<i hex="#f29d5c" id="orange" name="Orange" />
 		<i hex="#faea4b" id="yellow" name="Yellow" />
 		<i hex="#96f67d" id="green" name="Green" />
 		<i hex="#9fe5e5" id="cyan" name="Cyan" />
+		<i hex="#f67c7c" id="red" name="Red" />
+		<i hex="#bae0f6" id="lightblue" name="Lightblue" />
 		<i hex="#dddddd" id="gray" name="Gray" />
 	</Palette>
+	
+	<!-- <i link="2021/sv-SE"/> -->
 </Data>
 
 <Events>
 	<Calendars>
 		<i id="1" color="blue" name="Home"/>
 		<i id="2" color="purple" name="Work"/>
-		<!-- <i link="2021/sv-SE"/> -->
 	</Calendars>
 </Events>

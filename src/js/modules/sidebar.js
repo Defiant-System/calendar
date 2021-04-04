@@ -158,6 +158,7 @@
 				starts = new Date(iYear, iMonth, 1, 0, 0);
 				ends = new Date(starts);
 				ends.setMonth(ends.getMonth() + 1);
+
 				Events.dispatch({
 					type: "populate-mini-cal",
 					starts: starts.valueOf(),
@@ -166,8 +167,8 @@
 				});
 				break;
 			case "sidebar-add-calendar": {
-				let id = 3,
-					color = "green",
+				let id = Events.createCalendarId(),
+					color = Events.getAvailableColor(),
 					name = defiant.i18n("New Calendar"),
 					xCalendar = $.nodeFromString(`<i id="${id}" color="${color}" name="${name}"/>`);
 				

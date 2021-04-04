@@ -609,15 +609,24 @@ const Events = {
 	},
 	getCalendar(id) {
 		let query = id ? `[@id="${id}"]` : "",
-			xCalendar = calendar.xEvents.selectSingleNode(`.//Calendars/*${query}`),
+			xCalendar = calendar.data.selectSingleNode(`//Calendars/*${query}`),
 			name = xCalendar.getAttribute("name"),
 			color = xCalendar.getAttribute("color");
 		if (!id) id = xCalendar.getAttribute("id");
 		return { id, color, name };
 	},
+	createCalendarId() {
+		let ids = calendar.data.selectNodes("//Calendars/i").map(node => +node.getAttribute("id"));
+		return Math.max(...ids) + 1;
+	},
+	getAvailableColor() {
+		let used = calendar.data.selectNodes("//Calendars/i").map(node => `[@id!='${node.getAttribute("color")}']`),
+			available = calendar.data.selectNodes(`//Palette/i${used.join("")}`).map(node => node.getAttribute("id"));
+		return available.length ? available[0] : "blue";
+	},
 	createEventId() {
 		let ids = calendar.xEvents.selectNodes(".//event").map(node => +node.getAttribute("id")),
-			idMax = ids.sort((a, b) => b - a)[0];
+			idMax = Math.max(...ids);
 		return idMax ? idMax + 1 : 1;
 	}
 };

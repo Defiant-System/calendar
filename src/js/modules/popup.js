@@ -12,7 +12,7 @@
 		let APP = calendar,
 			Self = APP.popup,
 			xPath,
-			xEvent,
+			xNode,
 			dateStart,
 			dateEnd,
 			append,
@@ -24,6 +24,7 @@
 			pos,
 			calId,
 			id,
+			name,
 			list,
 			eventEl,
 			eventType,
@@ -33,7 +34,7 @@
 		switch (event.type) {
 			// native events
 			case "scroll":
-				Self.dispatch({ type: "popup-update-event" });
+				Self.dispatch({ type: "popup-update-origin" });
 				break;
 			// custom events
 			case "email-event":
@@ -59,63 +60,70 @@
 				break;
 			case "popup-no-update-origin":
 			case "popup-update-origin":
-
-				break;
-			case "popup-update-calendar": {
-				el = Self.els.content.find(".popup-calendar");
+				el = Self.els.content.find(".popup-bubble");
 				if (!el.length) return;
 
-				// reset sidebar calendar element
-				Self.els.content.find(".calendars .list-wrapper li.active").removeClass("active");
-				
-				console.log("update calendar node");
+				// proxy to right switch-case
+				Self.dispatch({
+					type: "popup-update-"+ el.data("type"),
+					origin: Self.origin,
+					el,
+				});
 
 				// remove popup element from DOM
 				el.remove();
+
 				// unbind possible event handler
 				if (Self.els.wrapper) {
 					Self.els.wrapper.off("scroll", Self.dispatch);
 					Self.els.wrapper = false;
 				}
-				break; }
+				break;
+			case "popup-update-calendar":
+				el = event.el;
+				// calendar node
+				id = el.data("id");
+				xPath = `.//calendar[@id = "${id}"]`;
+				xNode = APP.data.selectSingleNode(xPath);
+
+				console.log(el);
+
+				// reset sidebar calendar element
+				event.origin.removeClass("active");
+				
+				name = el.find("h3").text();
+				// update calendar name
+				event.origin.find("label").html(name);
+				break;
 			case "popup-no-update-event":
 			case "popup-update-event":
-				el = Self.els.content.find(".popup-bubble");
-				if (!el.length) return;
-
+				el = event.el;
 				// event node
 				id = el.data("id");
 				xPath = `.//event[@id = "${id}"]`;
-				xEvent = APP.xEvents.selectSingleNode(xPath);
+				xNode = APP.xEvents.selectSingleNode(xPath);
 				// DOM element
 				eventEl = Self.els.content.find(`.entry[data-id="${id}"], .event[data-id="${id}"]`);
 				eventEl.removeClass("isNew");
 
 				if (event.type === "popup-no-update-event") {
-					if (xEvent.getAttribute("isNew")) {
+					if (xNode.getAttribute("isNew")) {
 						// remove event node
-						xEvent.parentNode.removeChild(xEvent);
+						xNode.parentNode.removeChild(xNode);
 						// remove event HTML element
 						eventEl.remove();
 					}
 				} else {
-					let title = el.find("h3").text();
+					name = el.find("h3").text();
 					// update event node
-					xEvent.setAttribute("title", title);
-					xEvent.removeAttribute("isNew");
+					xNode.setAttribute("title", name);
+					xNode.removeAttribute("isNew");
 					// set calendar Id
 					calId = eventEl.data("calId");
-					xEvent.setAttribute("calendar-id", calId);
+					xNode.setAttribute("calendar-id", calId);
 					// update DOM element
 					if (eventEl.hasClass("entry") && eventEl.prop("nodeName") !== "LI") eventEl.html(title);
-					else eventEl.find(".event-title, .entry-title").html(title);
-				}
-				// remove popup element from DOM
-				el.remove();
-				// unbind possible event handler
-				if (Self.els.wrapper) {
-					Self.els.wrapper.off("scroll", Self.dispatch);
-					Self.els.wrapper = false;
+					else eventEl.find(".event-title, .entry-title").html(name);
 				}
 				break;
 			case "popup-sidebar-calendar-details":
@@ -166,25 +174,27 @@
 				// DOM element to append popup
 				Self.els.root = append = event.el;
 				Self.els.wrapper = append.find(".days-wrapper");
+				// remember origin for next action
+				Self.origin = event.target;
 
 				// event node
 				id = event.target.data("id");
 				xPath = `.//event[@id = "${id}"]`;
-				xEvent = APP.xEvents.selectSingleNode(xPath);
+				xNode = APP.xEvents.selectSingleNode(xPath);
 
-				eventType = xEvent.getAttribute("type");
+				eventType = xNode.getAttribute("type");
 				switch (eventType) {
 					case "day":
-						dateStart = new defiant.Moment(+xEvent.getAttribute("starts"));
-						xEvent.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
+						dateStart = new defiant.Moment(+xNode.getAttribute("starts"));
+						xNode.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
 						break;
 					default:
 						// update event node with i18n values
-						dateStart = new defiant.Moment(+xEvent.getAttribute("starts"));
-						dateEnd = new defiant.Moment(+xEvent.getAttribute("ends"));
-						xEvent.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
-						xEvent.setAttribute("i18n-starts", dateStart.format("HH:mm"));
-						xEvent.setAttribute("i18n-ends", dateEnd.format("HH:mm"));
+						dateStart = new defiant.Moment(+xNode.getAttribute("starts"));
+						dateEnd = new defiant.Moment(+xNode.getAttribute("ends"));
+						xNode.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
+						xNode.setAttribute("i18n-starts", dateStart.format("HH:mm"));
+						xNode.setAttribute("i18n-ends", dateEnd.format("HH:mm"));
 				}
 
 				// xpath matching event node
@@ -228,22 +238,26 @@
 				// event node
 				id = event.target.data("id");
 				xPath = `.//event[@id = "${id}"]`;
-				xEvent = APP.xEvents.selectSingleNode(xPath);
+				xNode = APP.xEvents.selectSingleNode(xPath);
 
-				eventType = xEvent.getAttribute("type");
+				// update node attributes
+				Events.updateNodeI18n(xNode);
+				/*
+				eventType = xNode.getAttribute("type");
 				switch (eventType) {
 					case "day":
-						dateStart = new defiant.Moment(+xEvent.getAttribute("starts"));
-						xEvent.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
+						dateStart = new defiant.Moment(+xNode.getAttribute("starts"));
+						xNode.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
 						break;
 					default:
 						// update event node with i18n values
-						dateStart = new defiant.Moment(+xEvent.getAttribute("starts"));
-						dateEnd = new defiant.Moment(+xEvent.getAttribute("ends"));
-						xEvent.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
-						xEvent.setAttribute("i18n-starts", dateStart.format("HH:mm"));
-						xEvent.setAttribute("i18n-ends", dateEnd.format("HH:mm"));
+						dateStart = new defiant.Moment(+xNode.getAttribute("starts"));
+						dateEnd = new defiant.Moment(+xNode.getAttribute("ends"));
+						xNode.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
+						xNode.setAttribute("i18n-starts", dateStart.format("HH:mm"));
+						xNode.setAttribute("i18n-ends", dateEnd.format("HH:mm"));
 				}
+				*/
 
 				// DOM element to append popup
 				append = event.el;
