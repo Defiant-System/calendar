@@ -90,7 +90,7 @@ const Events = {
 				} else {
 					// pos & dim
 					top = el.prop("offsetTop") + 1;
-					left = pEl.prop("offsetLeft") + 1;
+					left = pEl.prop("offsetLeft") + el.prop("offsetLeft") + 1;
 					width = el.width();
 					height = el.height();
 					
@@ -231,7 +231,7 @@ const Events = {
 					// update node attributes
 					Self.updateNodeI18n(xEvent);
 					
-					console.log(xEvent);
+					// console.log(xEvent);
 
 					// remove clone from DOM
 					Drag.clone.remove();
