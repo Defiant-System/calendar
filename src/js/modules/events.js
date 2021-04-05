@@ -230,8 +230,6 @@ const Events = {
 					xEvent.setAttribute("ends", endsDate.valueOf());
 					// update node attributes
 					Self.updateNodeI18n(xEvent);
-					
-					// console.log(xEvent);
 
 					// remove clone from DOM
 					Drag.clone.remove();
