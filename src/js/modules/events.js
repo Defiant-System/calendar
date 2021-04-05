@@ -270,14 +270,22 @@ const Events = {
 				break;
 			case "change-calendar-color":
 				el = event.origin;
+
+				let oldColor = el.data("color"),
+					newColor = event.target.data("color");
+
 				// xml node
 				xPath = `//Calendars/i[@id= "${el.data("id")}"]`;
 				xNode = APP.data.selectSingleNode(xPath);
-				console.log(xNode);
+				xNode.setAttribute("color", newColor);
 
-				// get calendar details
-				// cal = Self.getCalendar(event.calId);
-				// console.log(cal);
+				// change color of origin element
+				el.data({ color: newColor });
+				el.find(".form-checkbox_").removeClass(oldColor).addClass(newColor);
+
+				// update all event in DOM view
+				Self.els.main.find(`.event.${oldColor}, .entry.${oldColor}`)
+					.removeClass(oldColor).addClass(newColor);
 				break;
 			case "delete-event":
 				el = event.origin;

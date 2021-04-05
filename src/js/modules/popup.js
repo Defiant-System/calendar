@@ -150,7 +150,7 @@
 				// exclude colors
 				let exclude = Events.getAvailableColor(true);
 				popup.find("i.calendar-color").map(el => {
-					let [base, color] = el.className.split(" ");
+					let color = el.getAttribute("data-color");
 					$(el).toggleClass("hidden", exclude.includes(color));
 				});
 

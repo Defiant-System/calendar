@@ -16,6 +16,7 @@
 <xsl:template name="sidebar-calendar-entry">
 	<li>
 		<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
+		<xsl:attribute name="data-color"><xsl:value-of select="@color"/></xsl:attribute>
 		<span>
 			<xsl:attribute name="class">form-checkbox_ <xsl:value-of select="@color"/></xsl:attribute>
 			<input type="checkbox" checked="checked" data-click="toggle-calendar">
@@ -46,6 +47,7 @@
 			<div data-click="change-calendar-color">
 				<xsl:for-each select="//Data/Palette/*">
 					<i>
+						<xsl:attribute name="data-color"><xsl:value-of select="@id"/></xsl:attribute>
 						<xsl:attribute name="class">calendar-color <xsl:value-of select="@id"/>
 							<xsl:if test="@id = $current-color"> active</xsl:if>
 						</xsl:attribute>
