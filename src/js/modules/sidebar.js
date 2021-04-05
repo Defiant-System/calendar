@@ -200,10 +200,24 @@
 			case "sidebar-delete-calendar": {
 				let id = event.origin.data("id"),
 					xPath = `.//Calendars/*[@id="${id}"]`,
-					xCalendar = APP.data.selectSingleNode(xPath);
-					
+					xCalendar = APP.data.selectSingleNode(xPath),
+					color = xCalendar.getAttribute("color");
+				
 				// remove node from app data
 				xCalendar.parentNode.removeChild(xCalendar);
+
+				Self.els.sidebar.find(`.mini-calendar .day.${color}`).removeClass(color);
+
+				// remove any rendered events from DOM
+				Self.els.content.find(`.event[data-calId="${id}"]`).remove();
+
+				// re-pack column events
+				Self.els.content.find(`.col-day`).map(column => Packer.pack(column));
+
+				// remove all calendar entries connected to calendar
+				APP.xEvents.selectNodes(`.//event[@calendar-id = "${id}"]`).map(node =>
+					node.parentNode.removeChild(node));
+
 				// remove from sidebar list
 				event.origin.remove();
 				// close event popup, if showing
