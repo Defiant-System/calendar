@@ -677,10 +677,6 @@ content {
 		border-right: 14px solid rgba(250,250,250,.825);
 	}
 
-	&[data-calId] {
-		width: auto;
-	}
-
 	hr {
 		margin: 10px -13px;
 		background: rgba(0,0,0,.1);
@@ -808,6 +804,10 @@ content {
 					bottom: -2px;
 					border-radius: inherit;
 					box-shadow: 0 0 0 2px rgba(0,0,0,.25);
+				}
+
+				&.hidden {
+					display: none;
 				}
 			}
 		}

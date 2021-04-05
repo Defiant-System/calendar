@@ -21,7 +21,6 @@ const Events = {
 			Nodes = event.xNodes,
 			hHeight = 44,
 			pipe = {},
-			xEvent,
 			xHolidays,
 			xPath,
 			xNode,
@@ -214,9 +213,9 @@ const Events = {
 					id = Self.createEventId();
 					// create new event node
 					htm = `<event isNew="true" id="${id}" starts="${startsDate.valueOf()}" ends="${endsDate.valueOf()}" calendar-id="${calId}" title="${title}"/>`;
-					xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
+					xNode = APP.xEvents.appendChild($.nodeFromString(htm));
 					// update node attributes
-					Self.updateNodeI18n(xEvent);
+					Self.updateNodeI18n(xNode);
 
 					// update event element with ID
 					el.data({ id }).trigger("click");
@@ -224,12 +223,12 @@ const Events = {
 				} else {
 					// event node
 					xPath = `.//event[@id= "${id}"]`;
-					xEvent = APP.xEvents.selectSingleNode(xPath);
+					xNode = APP.xEvents.selectSingleNode(xPath);
 					// update node
-					xEvent.setAttribute("starts", startsDate.valueOf());
-					xEvent.setAttribute("ends", endsDate.valueOf());
+					xNode.setAttribute("starts", startsDate.valueOf());
+					xNode.setAttribute("ends", endsDate.valueOf());
 					// update node attributes
-					Self.updateNodeI18n(xEvent);
+					Self.updateNodeI18n(xNode);
 
 					// remove clone from DOM
 					Drag.clone.remove();
@@ -269,13 +268,24 @@ const Events = {
 			case "event-info":
 				console.log(event);
 				break;
+			case "change-calendar-color":
+				el = event.origin;
+				// xml node
+				xPath = `//Calendars/i[@id= "${el.data("id")}"]`;
+				xNode = APP.data.selectSingleNode(xPath);
+				console.log(xNode);
+
+				// get calendar details
+				// cal = Self.getCalendar(event.calId);
+				// console.log(cal);
+				break;
 			case "delete-event":
 				el = event.origin;
 				// xml node
 				xPath = `.//event[@id= "${el.data("id")}"]`;
-				xEvent = APP.xEvents.selectSingleNode(xPath);
+				xNode = APP.xEvents.selectSingleNode(xPath);
 				// remove event node
-				xEvent.parentNode.removeChild(xEvent);
+				xNode.parentNode.removeChild(xNode);
 				// remember parent element
 				pEl = el.parents(".col-day");
 				// remove element from DOM
@@ -286,12 +296,12 @@ const Events = {
 			case "change-event-color":
 				// xml node
 				xPath = `.//event[@id= "${event.id}"]`;
-				xEvent = APP.xEvents.selectSingleNode(xPath);
+				xNode = APP.xEvents.selectSingleNode(xPath);
 
 				// get calendar details
 				cal = Self.getCalendar(event.calId);
 				// update XML node
-				xEvent.setAttribute("calendar-id", cal.id);
+				xNode.setAttribute("calendar-id", cal.id);
 				// update DOM element
 				event.el
 					.prop({ className: `event ${cal.color}` })
@@ -311,7 +321,7 @@ const Events = {
 
 				// create new event node
 				htm = `<event isNew="true" id="${pipe.id}" starts="${pipe.starts.valueOf()}" ends="${pipe.ends.valueOf()}" calendar-id="${pipe.color}" title="${pipe.title}"/>`;
-				xEvent = APP.xEvents.appendChild($.nodeFromString(htm));
+				xNode = APP.xEvents.appendChild($.nodeFromString(htm));
 				// auto trigger click event
 				el.trigger("click");
 				break;
@@ -631,9 +641,12 @@ const Events = {
 		let ids = calendar.data.selectNodes("//Calendars/i").map(node => +node.getAttribute("id"));
 		return Math.max(...ids) + 1;
 	},
-	getAvailableColor() {
+	getAvailableColor(all) {
 		let used = calendar.data.selectNodes("//Calendars/i").map(node => `[@id!='${node.getAttribute("color")}']`),
 			available = calendar.data.selectNodes(`//Palette/i${used.join("")}`).map(node => node.getAttribute("id"));
+		if (all) {
+			return available || ["blue"];
+		}
 		return available.length ? available[0] : "blue";
 	},
 	createEventId() {

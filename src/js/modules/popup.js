@@ -39,12 +39,10 @@
 			// custom events
 			case "email-event":
 			case "delete-event":
+			case "change-calendar-color":
 				Events.dispatch({ ...event, origin: Self.origin });
 				// close popup-bubble
 				Self.dispatch({ type: "close-popup-bubble" });
-				break;
-			case "change-calendar-color":
-				console.log(event);
 				break;
 			case "popup-time-change":
 				// console.log(event);
@@ -148,6 +146,13 @@
 				Self.els.wrapper = append.find(".days-wrapper");
 				// render calendar details
 				popup = window.render({ template: "popup-calendar-details", match, append });
+
+				// exclude colors
+				let exclude = Events.getAvailableColor(true);
+				popup.find("i.calendar-color").map(el => {
+					let [base, color] = el.className.split(" ");
+					$(el).toggleClass("hidden", exclude.includes(color));
+				});
 
 				// position popup
 				pos = Self.getPosition(event.target[0], append[0]);

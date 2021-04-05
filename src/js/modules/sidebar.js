@@ -21,8 +21,8 @@
 		this.dispatch({ type: "render-calendar" });
 
 		// temp
-		// setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
-		// setTimeout(() => window.find(".cal-edit").get(1).trigger("click"), 900);
+		setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
+		setTimeout(() => window.find(".cal-edit").get(1).trigger("click"), 900);
 		// setTimeout(() => window.find(".add-calendar span").trigger("click"), 900);
 	},
 	dispatch(event) {
