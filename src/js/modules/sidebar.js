@@ -21,8 +21,8 @@
 		this.dispatch({ type: "render-calendar" });
 
 		// temp
-		// setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
-		// setTimeout(() => window.find(".cal-edit").get(1).trigger("click"), 900);
+		setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
+		setTimeout(() => window.find(".cal-edit").get(1).trigger("click"), 900);
 		// setTimeout(() => window.find(".add-calendar span").trigger("click"), 900);
 	},
 	dispatch(event) {
@@ -206,10 +206,10 @@
 				// remove node from app data
 				xCalendar.parentNode.removeChild(xCalendar);
 
-				Self.els.sidebar.find(`.mini-calendar .day.${color}`).removeClass(color);
+				Self.els.content.find(`.day.${color}`).removeClass(color);
 
 				// remove any rendered events from DOM
-				Self.els.content.find(`.event[data-calId="${id}"]`).remove();
+				Self.els.content.find(`.event[data-calId="${id}"], .entry[data-calId="${id}"]`).remove();
 
 				// re-pack column events
 				Self.els.content.find(`.col-day`).map(column => Packer.pack(column));
