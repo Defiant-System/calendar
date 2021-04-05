@@ -38,7 +38,6 @@ const calendar = {
 				// parse events, set ID's
 				Self.data.selectNodes(`//event[not(@id)]`).map((node, index) =>
 					node.setAttribute("id", index));
-				/*
 				// parse events (temp)
 				Self.data.selectNodes(`//event[not(@starts)]`).map(node => {
 					let starts = new Date(node.getAttribute("iso-starts")),
@@ -47,7 +46,6 @@ const calendar = {
 					node.setAttribute("starts", starts.valueOf());
 					node.setAttribute("ends", ends.valueOf());
 				});
-				*/
 
 				// dispatch initiate
 				Self.dispatch({ type: "inititate-app" });
