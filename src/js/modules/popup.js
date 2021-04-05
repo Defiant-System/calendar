@@ -41,7 +41,7 @@
 			case "delete-event":
 				Events.dispatch({ ...event, origin: Self.origin });
 				// close popup-bubble
-				Self.dispatch({ type: "close-popup-event" });
+				Self.dispatch({ type: "close-popup-bubble" });
 				break;
 			case "change-calendar-color":
 				console.log(event);
@@ -49,11 +49,15 @@
 			case "popup-time-change":
 				// console.log(event);
 				break;
-			case "close-popup-event":
+			case "close-popup-bubble":
 				el = Self.els.content.find(".popup-bubble");
 				if (!el.length) return;
+
+				// reset origin element
+				Self.origin.removeClass("active");
 				// remove popup element from DOM
 				el.remove();
+
 				// unbind possible event handler
 				if (Self.els.wrapper) {
 					Self.els.wrapper.off("scroll", Self.dispatch);
@@ -168,10 +172,8 @@
 			case "popup-event-details":
 				// conditional check
 				if (!event.target.hasClass("event")) return;
-				// check if a popup already is shown
-				if (Self.els.content.find(".popup-bubble").length) {
-					return Self.dispatch({ type: "popup-update-event" });
-				}
+				// close current bubble, if any
+				Self.dispatch({ type: "popup-update-origin" });
 
 				// DOM element to append popup
 				Self.els.root = append = event.el;

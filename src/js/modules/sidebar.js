@@ -21,8 +21,8 @@
 		this.dispatch({ type: "render-calendar" });
 
 		// temp
-		// setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
-		// setTimeout(() => window.find(".cal-edit").get(1).trigger("click"), 900);
+		setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
+		setTimeout(() => window.find(".cal-edit").get(1).trigger("click"), 900);
 		// setTimeout(() => window.find(".add-calendar span").trigger("click"), 900);
 	},
 	dispatch(event) {
@@ -55,7 +55,7 @@
 						Events.dispatch({ type: "update-now-line" }));
 					
 					// close event popup, if showing
-					APP.popup.dispatch({ type: "close-popup-event" });
+					APP.popup.dispatch({ type: "close-popup-bubble" });
 				} else {
 					window.width += width;
 					Self.els.sidebar.cssSequence("show", "transitionend", el =>
@@ -77,6 +77,9 @@
 				Self.els.content.find(`.col-day`).map(column => Packer.pack(column));
 				break;
 			case "edit-calendar-entry":
+				// close popup-bubble, if any
+				APP.popup.dispatch({ type: "close-popup-bubble" });
+
 				target = event.el.parent();
 				// popup event details
 				APP.popup.dispatch({ type: "popup-sidebar-calendar-details", target });
@@ -85,7 +88,7 @@
 				el = $(event.target);
 				if (!el.hasClass("day") || el.hasClass("non-day")) return;
 				// close event popup, if showing
-				APP.popup.dispatch({ type: "close-popup-event" });
+				APP.popup.dispatch({ type: "close-popup-bubble" });
 				// indicate selected day
 				el.parent().find(".selected").removeClass("selected");
 				el.addClass("selected");
@@ -171,6 +174,9 @@
 				});
 				break;
 			case "sidebar-add-calendar": {
+				// close event popup, if showing
+				APP.popup.dispatch({ type: "close-popup-bubble" });
+
 				let id = Events.createCalendarId(),
 					color = Events.getAvailableColor(),
 					name = defiant.i18n("New Calendar"),
@@ -186,10 +192,10 @@
 				// trigger popup for edit
 				newCalendar.find(".cal-edit").trigger("click");
 
-				requestAnimationFrame(() => {
-					let target = window.find(".popup-bubble h3")[0];
-					document.getSelection().selectAllChildren(target);
-				});
+				// requestAnimationFrame(() => {
+				// 	let target = window.find(".popup-bubble h3")[0];
+				// 	document.getSelection().selectAllChildren(target);
+				// });
 				break; }
 			case "sidebar-delete-calendar": {
 				let id = event.origin.data("id"),
@@ -201,7 +207,7 @@
 				// remove from sidebar list
 				event.origin.remove();
 				// close event popup, if showing
-				APP.popup.dispatch({ type: "close-popup-event" });
+				APP.popup.dispatch({ type: "close-popup-bubble" });
 				break; }
 			case "sidebar-email-calendar":
 				console.log("TODO:", event);

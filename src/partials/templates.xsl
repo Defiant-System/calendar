@@ -37,7 +37,7 @@
 	<div class="popup-bubble" data-type="calendar" data-area="popup">
 		<xsl:attribute name="data-calId"><xsl:value-of select="@id"/></xsl:attribute>
 		<div class="row-head">
-			<h3 contenteditable="true" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+			<h3 contenteditable="true" placeholder="New Calendar" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 				<xsl:value-of select="@name"/>
 			</h3>
 		</div>
