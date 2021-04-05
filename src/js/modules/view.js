@@ -31,7 +31,8 @@ const View = {
 		if (!noGo) this.go();
 	},
 	go(to) {
-		let I18n = Render.i18n,
+		let APP = calendar,
+			I18n = Render.i18n,
 			dayInMs = 60 * 60 * 24 * 1000,
 			date = this.date,
 			type = this.active,
@@ -61,6 +62,9 @@ const View = {
 			default:
 				if (to) date = to;
 		}
+
+		// close event popup, if showing
+		APP.popup.dispatch({ type: "close-popup-bubble" });
 
 		// calculation helpers
 		tYear = date.getFullYear();

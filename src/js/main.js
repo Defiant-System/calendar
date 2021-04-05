@@ -52,7 +52,7 @@ const calendar = {
 				// dispatch initiate
 				Self.dispatch({ type: "inititate-app" });
 				// initiate first view
-				window.find(".toolbar-tool_").get(4).trigger("click");
+				window.find(".toolbar-tool_").get(5).trigger("click");
 
 				// temp
 				// setTimeout(() => window.find(".entry, .event").get(1).trigger("click"), 300);

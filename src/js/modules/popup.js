@@ -128,7 +128,7 @@
 					calId = eventEl.data("calId");
 					xNode.setAttribute("calendar-id", calId);
 					// update DOM element
-					if (eventEl.hasClass("entry") && eventEl.prop("nodeName") !== "LI") eventEl.html(title);
+					if (eventEl.hasClass("entry") && eventEl.prop("nodeName") !== "LI") eventEl.html(name);
 					else eventEl.find(".event-title, .entry-title").html(name);
 				}
 				break;
@@ -175,31 +175,22 @@
 				// close current bubble, if any
 				Self.dispatch({ type: "popup-update-origin" });
 
+				// event node
+				id = event.target.data("id");
+				xPath = `.//event[@id = "${id}"]`;
+				xNode = APP.xEvents.selectSingleNode(xPath);
+
+				// exit if node is not found
+				if (!xNode) return;
+
 				// DOM element to append popup
 				Self.els.root = append = event.el;
 				Self.els.wrapper = append.find(".days-wrapper");
 				// remember origin for next action
 				Self.origin = event.target;
 
-				// event node
-				id = event.target.data("id");
-				xPath = `.//event[@id = "${id}"]`;
-				xNode = APP.xEvents.selectSingleNode(xPath);
-
-				eventType = xNode.getAttribute("type");
-				switch (eventType) {
-					case "day":
-						dateStart = new defiant.Moment(+xNode.getAttribute("starts"));
-						xNode.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
-						break;
-					default:
-						// update event node with i18n values
-						dateStart = new defiant.Moment(+xNode.getAttribute("starts"));
-						dateEnd = new defiant.Moment(+xNode.getAttribute("ends"));
-						xNode.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
-						xNode.setAttribute("i18n-starts", dateStart.format("HH:mm"));
-						xNode.setAttribute("i18n-ends", dateEnd.format("HH:mm"));
-				}
+				// update node attributes
+				Events.updateNodeI18n(xNode);
 
 				// xpath matching event node
 				match = `//event[@id="${id}"]`;
@@ -239,6 +230,9 @@
 				}
 				if (!el.parent().hasClass("entries-wrapper")) return;
 
+				// remember origin for next action
+				Self.origin = event.target;
+
 				// event node
 				id = event.target.data("id");
 				xPath = `.//event[@id = "${id}"]`;
@@ -246,23 +240,6 @@
 
 				// update node attributes
 				Events.updateNodeI18n(xNode);
-				/*
-				eventType = xNode.getAttribute("type");
-				switch (eventType) {
-					case "day":
-						dateStart = new defiant.Moment(+xNode.getAttribute("starts"));
-						xNode.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
-						break;
-					default:
-						// update event node with i18n values
-						dateStart = new defiant.Moment(+xNode.getAttribute("starts"));
-						dateEnd = new defiant.Moment(+xNode.getAttribute("ends"));
-						xNode.setAttribute("i18n-date", dateStart.format("D MMM YYYY"));
-						xNode.setAttribute("i18n-starts", dateStart.format("HH:mm"));
-						xNode.setAttribute("i18n-ends", dateEnd.format("HH:mm"));
-				}
-				*/
-
 				// DOM element to append popup
 				append = event.el;
 				// inactivate old active item
