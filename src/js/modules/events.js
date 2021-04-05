@@ -4,6 +4,7 @@ const Events = {
 		// fast references
 		this.els = {
 			doc: $(document),
+			content: window.find("content"),
 			main: window.find(".main"),
 			year: window.find(".view-year"),
 			month: window.find(".view-month"),
@@ -27,7 +28,7 @@ const Events = {
 			cal,
 			now, hours, minutes, seconds, time,
 			top, left, width, height, pos, type,
-			pEl, cols, clone, htm,
+			pEl, cols, clone, htm, id,
 			el;
 		// console.log(opt);
 		switch (event.type) {
@@ -194,8 +195,8 @@ const Events = {
 					el.trigger("click");
 				}
 
-				let id = el.data("id"),
-					sDate = el.parents(".days-wrapper").data("date"),
+				id = el.data("id");
+				let sDate = el.parents(".days-wrapper").data("date"),
 					sDay = el.parent().data("date").padStart(2, "0"),
 					sTime = el.find(".event-time").html(),
 					starts = `${sDate}-${sDay} ${sTime}`,
@@ -289,15 +290,17 @@ const Events = {
 				break;
 			case "delete-event":
 				el = event.origin;
+				id = el.data("id");
 				// xml node
-				xPath = `.//event[@id= "${el.data("id")}"]`;
+				xPath = `.//event[@id="${id}"]`;
 				xNode = APP.xEvents.selectSingleNode(xPath);
 				// remove event node
 				xNode.parentNode.removeChild(xNode);
 				// remember parent element
 				pEl = el.parents(".col-day");
 				// remove element from DOM
-				el.remove();
+				Self.els.content.find(`.event[data-id="${id}"], .entry[data-id="${id}"]`).remove();
+
 				// pack column events
 				pEl.map(column => Packer.pack(column));
 				break;
