@@ -70,7 +70,7 @@
 
 				// proxy to right switch-case
 				type = event.type.slice(0, event.type.indexOf("-origin")) +"-"+ el.data("type");
-				if (el.hasClass("is-new")) type = `popup-no-update-${el.data("type")}`;
+				// if (el.hasClass("is-new")) type = `popup-no-update-${el.data("type")}`;
 				Self.dispatch({ origin: Self.origin, type, el });
 
 				// remove popup element from DOM
@@ -110,7 +110,6 @@
 				break;
 			case "popup-no-update-event":
 			case "popup-update-event":
-				console.log(event);
 				el = event.el;
 				// event node
 				id = el.data("id");

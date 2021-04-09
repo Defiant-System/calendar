@@ -15,13 +15,14 @@
 
 		// reference to contextual date
 		this.date = new Date();
+		this.selectedDate = new Date();
 
 		// auto render sídebar contents
 		this.dispatch({ type: "render-calendar-list" });
 		this.dispatch({ type: "render-calendar" });
 
 		// temp
-		// setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
+		setTimeout(() => window.find(".toolbar-tool_").get(0).trigger("click"), 300);
 		// setTimeout(() => window.find(".cal-edit").get(2).trigger("click"), 900);
 		// setTimeout(() => window.find(".add-calendar span").trigger("click"), 900);
 	},
@@ -41,6 +42,7 @@
 			htm,
 			match,
 			target,
+			value,
 			el;
 		// console.log(event);
 		switch (event.type) {
@@ -101,6 +103,9 @@
 				starts = new Date(iYear, iMonth, iDate, 0, 0);
 				ends = new Date(starts);
 				ends.setDate(ends.getDate() + 1);
+
+				// remembers selected date
+				Self.selectedDate = starts;
 
 				// legend text
 				moment = new defiant.Moment(starts);
@@ -172,6 +177,16 @@
 					ends: ends.valueOf(),
 					el,
 				});
+
+				value = Self.selectedDate.valueOf();
+				if (starts.valueOf() < value && ends.valueOf() > value) {
+					value = Self.selectedDate.getDate();
+					el.find(".day:not(.non-day) i").map(day => {
+						if (+day.innerText === value) {
+							$(day.parentNode).addClass("selected");
+						}
+					});
+				}
 				break;
 			case "sidebar-add-calendar": {
 				// close event popup, if showing
