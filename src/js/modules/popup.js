@@ -24,6 +24,7 @@
 			pos,
 			calId,
 			id,
+			type,
 			name,
 			list,
 			eventEl,
@@ -68,11 +69,9 @@
 				if (!el.length) return;
 
 				// proxy to right switch-case
-				Self.dispatch({
-					type: "popup-update-"+ el.data("type"),
-					origin: Self.origin,
-					el,
-				});
+				type = event.type.slice(0, event.type.indexOf("-origin")) +"-"+ el.data("type");
+				if (el.hasClass("is-new")) type = `popup-no-update-${el.data("type")}`;
+				Self.dispatch({ origin: Self.origin, type, el });
 
 				// remove popup element from DOM
 				el.remove();
@@ -83,6 +82,7 @@
 					Self.els.wrapper = false;
 				}
 				break;
+			case "popup-no-update-calendar":
 			case "popup-update-calendar":
 				el = event.el;
 				// calendar node
@@ -90,17 +90,27 @@
 				xPath = `//Calendars/i[@id = "${id}"]`;
 				xNode = APP.data.selectSingleNode(xPath);
 
-				// reset sidebar calendar element
-				event.origin.removeClass("active");
-				
-				name = el.find("h3").text();
-				// update calendar name
-				event.origin.find("label").html(name);
-				// update xml node
-				xNode.setAttribute("name", name);
+				if (event.type === "popup-no-update-calendar") {
+					if (xNode.getAttribute("isNew")) {
+						// remove event node
+						xNode.parentNode.removeChild(xNode);
+						// remove event HTML element
+						event.origin.remove();
+					}
+				} else {
+					// reset sidebar calendar element
+					event.origin.removeClass("active");
+					name = el.find("h3");
+					name = name.text() || name.attr("placeholder");
+					// update calendar name
+					event.origin.find("label").html(name);
+					// update xml node
+					xNode.setAttribute("name", name);
+				}
 				break;
 			case "popup-no-update-event":
 			case "popup-update-event":
+				console.log(event);
 				el = event.el;
 				// event node
 				id = el.data("id");
@@ -118,7 +128,8 @@
 						eventEl.remove();
 					}
 				} else {
-					name = el.find("h3").text();
+					name = el.find("h3");
+					name = name.text() || name.attr("placeholder");
 					// update event node
 					xNode.setAttribute("title", name);
 					xNode.removeAttribute("isNew");
@@ -226,7 +237,7 @@
 
 				// if popup exists, remove and return
 				if (!el.parents(".popup-bubble").length && event.el.find(".popup-bubble").length) {
-					return Self.dispatch({ type: "popup-update-event" });
+					return Self.dispatch({ type: "popup-update-origin" });
 				}
 
 				// conditions

@@ -180,7 +180,7 @@
 				let id = Events.createCalendarId(),
 					color = Events.getAvailableColor(),
 					name = defiant.i18n("New Calendar"),
-					xCalendar = $.nodeFromString(`<i id="${id}" color="${color}" name="${name}"/>`);
+					xCalendar = $.nodeFromString(`<i isNew="true" id="${id}" color="${color}" name="${name}"/>`);
 				
 				// add node to app data
 				xCalendar = APP.data.selectSingleNode(`.//Calendars`).appendChild(xCalendar);
