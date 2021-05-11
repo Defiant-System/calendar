@@ -69,6 +69,15 @@
 				}
 				
 				return !isOn;
+			case "toggle-sidebar-block":
+				str = event.el.attr("toggle-text");
+				isOn = event.el.attr("toggle-on") === "1";
+
+				event.el.attr("toggle-on", isOn ? "0" : "1");
+				event.el.attr("toggle-text", event.el.html());
+				event.el.html(str);
+				event.el.parents(".wrapper").toggleClass("collapsed", isOn);
+				break;
 			case "toggle-calendar":
 				el = event.el.parents("li");
 				
