@@ -22,7 +22,7 @@ const Render = {
 						time = hours.toString().padStart(2, "0") +":"+ minute;
 						break;
 					case "am/pm":
-						time = (hours % 12 || 12) +":"+ minute + ((hours < 12) ? " AM" : " PM");
+						time = (hours % 12 || 12) +":"+ minute + ((hours < 12) ? " AM" : " PM");
 						break;
 				}
 				list.push(time);
@@ -44,7 +44,7 @@ const Render = {
 	day(opt) {
 		let I18n = this.i18n,
 			now = new Date,
-			date = opt.date || now,
+			date = opt.date || now,
 			iYear = date.getFullYear(),
 			iMonth = date.getMonth(),
 			iDate = date.getDate(),
@@ -90,7 +90,7 @@ const Render = {
 			nowYear = now.getFullYear(),
 			nowMonth = now.getMonth(),
 			nowDate = now.getDate(),
-			date = opt.date || now,
+			date = opt.date || now,
 			dDay = date.getDay(),
 			htm = [],
 			toStart = 1;
@@ -133,7 +133,7 @@ const Render = {
 					className = [];
 
 				if (toStart === 1 && index >= 5) className.push("weekend");
-				if (toStart === -1 && (index >= 6 || index === 0)) className.push("weekend");
+				if (toStart === -1 && (index >= 6 || index === 0)) className.push("weekend");
 				if (toStart === -2 && index <= 1) className.push("weekend");
 				if (wDate.getFullYear() === nowYear &&
 					wDate.getMonth() === nowMonth &&
@@ -153,7 +153,7 @@ const Render = {
 					className = [];
 
 				if (toStart === 1 && index >= 5) className.push("weekend");
-				if (toStart === -1 && (index >= 6 || index === 0)) className.push("weekend");
+				if (toStart === -1 && (index >= 6 || index === 0)) className.push("weekend");
 				if (toStart === -2 && index <= 1) className.push("weekend");
 
 				className = (className.length) ? ` class="${className.join(" ")}"` : ``;
@@ -172,7 +172,7 @@ const Render = {
 						iwDate = wDate.getDate(),
 						className = ["col-day"];
 					if (toStart === 1 && index >= 5) className.push("col-weekend");
-					if (toStart === -1 && (index >= 6 || index === 0)) className.push("col-weekend");
+					if (toStart === -1 && (index >= 6 || index === 0)) className.push("col-weekend");
 					if (toStart === -2 && index <= 1) className.push("col-weekend");
 
 					htm.push(`<div class="${className.join(" ")}" data-date="${iwDate}"></div>`);
@@ -232,7 +232,7 @@ const Render = {
 	},
 	year(opt) {
 		let now = new Date,
-			date = opt.date || now,
+			date = opt.date || now,
 			htm = [];
 		
 		// title: year

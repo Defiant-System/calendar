@@ -45,7 +45,7 @@ const Events = {
 				
 				// conditional checks
 				if (!el.hasClass("col-day")
-						&& (!el.hasClass("event") || el.parents(".popup-bubble").length)
+						&& (!el.hasClass("event") || el.parents(".popup-bubble").length)
 						|| el.parents(".day-legends").length
 						|| event.button === 2) {
 					return;
@@ -635,7 +635,7 @@ const Events = {
 				return `${hours}:${minutes}`;
 			case "am/pm":
 				let suffix = hours < 12 ? "AM" : "PM";
-				hours = hours % 12 || 12;
+				hours = hours % 12 || 12;
 				minutes = minutes.toString().padStart(2, "0");
 				return `${hours}:${minutes} ${suffix}`;
 		}
@@ -656,7 +656,7 @@ const Events = {
 		let used = calendar.data.selectNodes("//Calendars/i").map(node => `[@id!='${node.getAttribute("color")}']`),
 			available = calendar.data.selectNodes(`//Palette/i${used.join("")}`).map(node => node.getAttribute("id"));
 		if (all) {
-			return available || ["blue"];
+			return available || ["blue"];
 		}
 		return available.length ? available[0] : "blue";
 	},

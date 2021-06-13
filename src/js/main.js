@@ -60,7 +60,6 @@ const calendar = {
 	dispatch(event) {
 		let Self = calendar,
 			now,
-			data,
 			node,
 			date,
 			month,
@@ -77,8 +76,7 @@ const calendar = {
 			case "window.close":
 				// save calendar data to storage
 				// TODO: shard event data - yearly
-				data = Self.xEvents;
-				window.storage.setItem("events-2021", data);
+				window.storage.setItem("events-2021", Self.xEvents);
 				break;
 			case "window.resize":
 				// update now line
