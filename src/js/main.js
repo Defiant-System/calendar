@@ -71,8 +71,6 @@ const calendar = {
 		// console.log(event);
 		switch (event.type) {
 			// system events
-			case "window.open":
-				break;
 			case "window.close":
 				// save calendar data to storage
 				// TODO: shard event data - yearly
