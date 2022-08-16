@@ -117,7 +117,7 @@
 				Self.selectedDate = starts;
 
 				// legend text
-				moment = new defiant.Moment(starts);
+				moment = new karaqu.Moment(starts);
 				str = moment.format("MMMM D, YYYY");
 				if (now.getFullYear() === iYear &&
 					now.getMonth() === iMonth &&
@@ -203,7 +203,7 @@
 
 				let id = Events.createCalendarId(),
 					color = Events.getAvailableColor(),
-					name = defiant.i18n("New Calendar"),
+					name = karaqu.i18n("New Calendar"),
 					xCalendar = $.nodeFromString(`<i isNew="true" id="${id}" color="${color}" name="${name}"/>`);
 				
 				// add node to app data

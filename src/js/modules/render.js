@@ -1,7 +1,7 @@
 
 const Render = {
 	init() {
-		this.i18n = defiant.Moment.i18n;
+		this.i18n = karaqu.Moment.i18n;
 	},
 	hours(opt, htm) {
 		let I18n = this.i18n,
@@ -186,7 +186,7 @@ const Render = {
 			.find(".days-wrapper").scrollTop(320);
 	},
 	month(opt) {
-		let date = new defiant.Moment(opt.date),
+		let date = new karaqu.Moment(opt.date),
 			meta = date.render(opt),
 			htm = [];
 		// console.log( meta );

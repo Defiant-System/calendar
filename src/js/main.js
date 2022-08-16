@@ -14,8 +14,8 @@ const calendar = {
 
 		// put values as data-attributes on content level
 		this.els.content.data({
-			hours: defiant.Moment.hours,
-			weekStartsWith: defiant.Moment.weekStartsWith,
+			hours: karaqu.Moment.hours,
+			weekStartsWith: karaqu.Moment.weekStartsWith,
 		});
 
 		let Self = this;
@@ -93,7 +93,7 @@ const calendar = {
 				}
 				break;
 			case "open-help":
-				defiant.shell("fs -u '~/help/index.md'");
+				karaqu.shell("fs -u '~/help/index.md'");
 				break;
 			// contextmenu events
 			case "show-xml-data":

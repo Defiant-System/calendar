@@ -593,8 +593,8 @@ const Events = {
 		// update event node with i18n values
 		let starts = +node.getAttribute("starts"),
 			ends = +node.getAttribute("ends"),
-			dateStart = new defiant.Moment(starts),
-			dateEnd = new defiant.Moment(ends);
+			dateStart = new karaqu.Moment(starts),
+			dateEnd = new karaqu.Moment(ends);
 
 		node.setAttribute("iso-starts", dateStart.format("YYYY-MM-DD HH:mm"));
 		node.setAttribute("iso-ends", dateEnd.format("YYYY-MM-DD HH:mm"));
