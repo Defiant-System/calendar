@@ -3,8 +3,8 @@
 	<style type="text/css">
 		.st0{fill:#F9F8F7;filter:url(#calendar-dropshadow);}
 		.st1{fill:url(#SVGID_1_);}
-		.st2{fill:#FFFFFF;font-family:Roboto;font-weight:700;font-size:10px;}
-		.st3{font-family:Roboto;font-weight:100;font-size:29px;}
+		.st2{fill:#FFFFFF;font-family:Arial;font-weight:700;font-size:10px;}
+		.st3{font-family:Arial;font-weight:100;font-size:29px;}
 	</style>
 	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="27.5" y1="52.9931" x2="27.5" y2="38.3352" gradientTransform="matrix(1 0 0 -1 0 56)">
 		<stop  offset="0" style="stop-color:#FF6557"/>
@@ -24,7 +24,7 @@
 	<text transform="matrix(1 0 0 1 -6.5341 13.5521)" class="st2">
 		<tspan x="34" text-anchor="middle" dy="0">{{node-manth}}</tspan>
 	</text>
-	<text transform="matrix(1 0 0 1 -55.4499 44.8135)" class="st3">
+	<text transform="matrix(1 0 0 1 -53 44.5)" class="st3">
 		<tspan x="80" text-anchor="middle" dy="0">{{node-date}}</tspan>
 	</text>
 </svg>
