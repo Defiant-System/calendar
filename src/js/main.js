@@ -55,6 +55,7 @@ const calendar = {
 				window.find(".toolbar-tool_").get(5).trigger("click");
 
 				// temp
+				// setTimeout(() => karaqu.shell("win -a"), 300);
 				// setTimeout(() => window.find(".entry, .event").get(1).trigger("click"), 300);
 			});
 	},
