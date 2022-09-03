@@ -18,10 +18,11 @@ const calendar = {
 			weekStartsWith: karaqu.Moment.weekStartsWith,
 		});
 
-		let Self = this;
+		let Self = this,
+			year = (new Date()).getFullYear();
 
 		// check storage for previously saved data
-		window.storage.getItem("events-2021")
+		window.storage.getItem(`events-${year}`)
 			.then(storageData => {
 				// events data storage; temp in bluePrint
 				Self.data = window.bluePrint;
@@ -74,7 +75,8 @@ const calendar = {
 			case "window.close":
 				// save calendar data to storage
 				// TODO: shard event data - yearly
-				window.storage.setItem("events-2021", Self.xEvents);
+				date = new Date();
+				window.storage.setItem(`events-${date.getFullYear()}`, Self.xEvents);
 				break;
 			case "window.resize":
 				// update now line
