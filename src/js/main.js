@@ -4,6 +4,8 @@
 @import "./modules/packer.js";
 @import "./modules/view.js";
 
+@import "./modules/test.js";
+
 
 const calendar = {
 	init() {
@@ -54,9 +56,9 @@ const calendar = {
 				// initiate first view
 				window.find(".toolbar-tool_").get(5).trigger("click");
 
-				// temp
-				// setTimeout(() => karaqu.shell("win -a"), 300);
-				// setTimeout(() => window.find(".entry, .event").get(1).trigger("click"), 300);
+				// DEV-ONLY-START
+				Test.init();
+				// DEV-ONLY-END
 			});
 	},
 	dispatch(event) {
