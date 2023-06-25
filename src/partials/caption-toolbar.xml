@@ -7,7 +7,7 @@
 			<Tool symbol="icon-chevron-right" click="view-go" arg="1"/>
 		</Options>
 	</Group>
-	<Group center="1">
+	<Group>
 		<Options>
 			<Tool name="Day" click="switch-view" arg="day"/>
 			<Tool name="Week" click="switch-view" arg="week"/>
