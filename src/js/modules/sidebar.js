@@ -50,19 +50,28 @@
 				isOn = Self.els.sidebar.hasClass("show");
 				width = Self.els.wrapper.width();
 
+				// enable smooth transition
+				Self.els.content.parent().addClass("smooth-trans");
+
 				if (isOn) {
 					window.width -= width;
-					Self.els.sidebar.cssSequence("!show", "transitionend", el =>
+					Self.els.sidebar.cssSequence("!show", "transitionend", el => {
 						// update now line
-						Events.dispatch({ type: "update-now-line" }));
+						Events.dispatch({ type: "update-now-line" });
+						// reset smooth transition
+						Self.els.content.parent().removeClass("smooth-trans");
+					});
 					
 					// close event popup, if showing
 					APP.popup.dispatch({ type: "close-popup-bubble" });
 				} else {
 					window.width += width;
-					Self.els.sidebar.cssSequence("show", "transitionend", el =>
+					Self.els.sidebar.cssSequence("show", "transitionend", el => {
 						// update now line
-						Events.dispatch({ type: "update-now-line" }));
+						Events.dispatch({ type: "update-now-line" });
+						// reset smooth transition
+						Self.els.content.parent().removeClass("smooth-trans");
+					});
 
 					// select "today"
 					Self.els.reelWrapper.find("b.today").trigger("click");
