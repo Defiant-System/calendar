@@ -24,7 +24,9 @@ overflow: visible;
 
 
 content {
-	// background: rgba(255,255,255,.2);
+	--head-line: rgba(0,0,0,.175);
+	--grid-line: rgba(0,0,0,.1);
+	--grid-shade: rgba(0,0,0,.025);
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -907,20 +909,20 @@ content {
 	}
 
 	.col-day {
-		background-image: linear-gradient(rgba(0,0,0,.125) 1px, transparent 1px),
-							linear-gradient(transparent 22px, rgba(0,0,0,.095) 23px, transparent 23px),
-							linear-gradient(rgba(0,0,0,.025) 0px, rgba(0,0,0,.025) 352px, transparent 352px, transparent 792px, rgba(0,0,0,.025) 792px);
+		background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+							linear-gradient(transparent 22px, var( --grid-line ) 23px, transparent 23px),
+							linear-gradient(var( --grid-shade ) 0px, var( --grid-shade ) 352px, transparent 352px, transparent 792px, var( --grid-shade ) 792px);
 		background-size: 100% 44px, 100% 44px, 100% 1056px;
 		background-position: 0 -1px;
-		border-left: 1px solid rgba(0,0,0,.1);
+		border-left: 1px solid var( --grid-line );
 		position: relative;
 		flex: 1;
 		user-select: none;
 
 		&.col-weekend {
-			background-color: rgba(0,0,0,.025);
-			background-image: linear-gradient(rgba(0,0,0,.125) 1px, transparent 1px),
-								linear-gradient(transparent 22px, rgba(0,0,0,.095) 23px, transparent 23px);
+			background-color: var( --grid-shade );
+			background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+								linear-gradient(transparent 22px, var( --grid-line ) 23px, transparent 23px);
 		}
 	}
 }
@@ -1244,7 +1246,7 @@ b.has-event {
 			display: flex;
 			flex-direction: column;
 			flex: 1;
-			border-right: 1px solid rgba(0,0,0,.175);
+			border-right: 1px solid var( --head-line );
 		}
 
 		.day-legends {
@@ -1257,9 +1259,9 @@ b.has-event {
 			b {
 				flex: 1;
 				position: relative;
-				border-top: 1px solid rgba(0,0,0,.175);
-				border-left: 1px solid rgba(0,0,0,.175);
-				border-bottom: 1px solid rgba(0,0,0,.175);
+				border-top: 1px solid var( --head-line );
+				border-left: 1px solid var( --head-line );
+				border-bottom: 1px solid var( --head-line );
 				min-height: 24px;
 				padding: 1px;
 
@@ -1347,7 +1349,7 @@ b.has-event {
 				font-size: 11px;
 				font-weight: 300;
 				// color: #888;
-				border-bottom: 1px solid rgba(0,0,0,.175);
+				border-bottom: 1px solid var( --head-line );
 
 				&.weekend i:nth-child(2) {
 					// color: #aaa;
@@ -1397,8 +1399,8 @@ b.has-event {
 			b {
 				flex: 1;
 				position: relative;
-				border-left: 1px solid rgba(0,0,0,.175);
-				border-bottom: 1px solid rgba(0,0,0,.175);
+				border-left: 1px solid var( --head-line );
+				border-bottom: 1px solid var( --head-line );
 				min-height: 24px;
 				padding: 1px;
 				min-width: 0;
