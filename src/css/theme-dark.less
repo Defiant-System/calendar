@@ -1,4 +1,9 @@
 
+@bgHighlight: #0ef;
+@fgHighlight: #333;
+// @bgHighlight: #c570ff;
+// @fgHighlight: #fff;
+
 &[data-theme="dark"] {
 	content {
 		--head-line: rgba(255,255,255,.175);
@@ -13,12 +18,12 @@
 
 	h2 {
 		i {
-			color: #0ef;
+			color: @bgHighlight;
 		}
 	}
 
 	h3 {
-		color: #0ef;
+		color: @bgHighlight;
 	}
 
 	.event {
@@ -28,26 +33,37 @@
 	.view-week {
 		.week .weekdays b.today i:nth-child(2) {
 			opacity: 1;
-			background: #0ef;
-			color: #333;
+			background: @bgHighlight;
+			color: @fgHighlight;
 			text-shadow: 0 0 0;
 		}
 	}
 
 	.view-month {
 		.month {
+			.weekdays {
+				border-bottom-color: var( --head-line );
+			}
+
 			.days {
 				b {
+					border-color: var( --grid-line );
+
 					&.today {
 						i {
-							background: #0ef;
-							color: #333;
+							background: @bgHighlight;
+							color: @fgHighlight;
 							text-shadow: 0 0 0;
 						}
 					}
 
 					&.weekend:not(.non-day) {
-						color: #0ef;
+						background: var( --grid-shade );
+						color: @bgHighlight;
+					}
+
+					&.non-day {
+						background: var( --grid-shade );
 					}
 
 					.entry:before {
@@ -60,13 +76,34 @@
 
 	.view-year {
 		.month {
+			position: relative;
+			border: 1px solid transparent;
+
 			&:hover {
 				background: rgba(0,0,0,.05);
+				border-color: rgba(0,0,0,.15);
+				border-bottom-color: rgba(255,255,255,.15);
+
+				&:after {
+					content: "";
+					position: absolute;
+					bottom: -1px;
+					left: 0;
+					right: 0;
+					height: 1px;
+					opacity: .35;
+					background: linear-gradient(90deg, transparent 5%, #fff 50%, transparent 95%);
+					pointer-events: none;
+				}
+			}
+
+			h3 {
+				color: darken(@bgHighlight, 7%);
 			}
 
 			.days b {
 				&.weekend:not(.non-day) {
-					color: #0ef;
+					color: darken(@bgHighlight, 11%);
 				}
 
 				&.has-event.weekend,
@@ -78,17 +115,17 @@
 	}
 
 	.now-line {
-		border-top-color: #0ef;
+		border-top-color: @bgHighlight;
 		box-shadow: 0 1px 0 rgba(0,0,0,.05);
 
 		&:before {
-			background-color: #0ef;
+			background-color: @bgHighlight;
 		}
 
 		&:after {
 			box-shadow: 0 1px 0 rgba(0,0,0,.05);
-			background-color: #0ef;
-			color: #333;
+			background-color: @bgHighlight;
+			color: @fgHighlight;
 		}
 	}
 
@@ -100,6 +137,7 @@
 					&:hover {
 						background-color: rgba(255,255,255,.15);
 					}
+
 					&:active {
 						background-color: rgba(255,255,255,.25);
 					}
@@ -114,7 +152,7 @@
 						}
 
 						&.weekend:not(.non-day) {
-							color: #0ef;
+							color: @bgHighlight;
 							text-shadow: 0 1px 1px rgba(0,0,0,.2);
 						}
 
@@ -130,17 +168,17 @@
 
 						&.today:not(.non-day) {
 							&:before {
-								box-shadow: inset 0 0 0 2px #0ef;
+								box-shadow: inset 0 0 0 2px @bgHighlight;
 							}
 						}
 
 						&.selected {
-							color: #333;
+							color: @fgHighlight;
 							text-shadow: 0 0 0;
 
 							&:before {
-								background: #0ef;
-								box-shadow: inset 0 0 0 2px #0ef;
+								background: @bgHighlight;
+								box-shadow: inset 0 0 0 2px @bgHighlight;
 							}
 						}
 					}
