@@ -229,4 +229,37 @@
 			box-shadow: 0 0 0;
 		}
 	}
+
+	.popup-bubble {
+		div {
+			&.row-date {
+				span {
+					&.event-starts,
+					&.event-ends {
+						&:hover {
+							color: #ddd;
+						}
+					}
+
+					&.drag-editing_ {
+						color: #fff;
+
+						&:before {
+							box-shadow: 0 0 0 3px #ffffff55;
+						}
+					}
+				}
+
+				&:active {
+					span:not(.drag-editing_) {
+						color: #ccc;
+					}
+				}
+			}
+		}
+
+		h3 {
+			color: #ddd;
+		}
+	}
 }
