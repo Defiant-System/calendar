@@ -645,8 +645,8 @@ content {
 }
 
 .popup-bubble {
-	background: rgba(240,240,240,.85);
-	backdrop-filter: blur(21px);
+	background: var( --content-bg ) radial-gradient(ellipse at bottom center, #ffffff22, transparent 95%);
+	// backdrop-filter: blur(21px);
 	position: absolute;
 	z-index: 11;
 	width: 260px;
@@ -681,7 +681,7 @@ content {
 		height: 0;
 		border-top: 12px solid transparent;
 		border-bottom: 12px solid transparent;
-		border-right: 14px solid rgba(250,250,250,.825);
+		border-right: 14px solid var( --content-bg );
 	}
 
 	hr {
