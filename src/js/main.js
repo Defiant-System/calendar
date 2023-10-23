@@ -160,7 +160,7 @@ const calendar = {
 					target = $(event.target);
 					pEl = target.parents("div[data-area]");
 					name = pEl.attr("data-area");
-					if (pEl.length && Self[name].dispatch) {
+					if (pEl.length && Self[name] && Self[name].dispatch) {
 						Self[name].dispatch({ ...event, target });
 					}
 				}
