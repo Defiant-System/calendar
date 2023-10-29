@@ -1678,10 +1678,22 @@ b.has-event {
 		}
 
 		.weekdays {
+			position: relative;
 			opacity: .65;
 			font-size: 0;
 			padding: 3px 1px 0px;
 			margin-bottom: 3px;
+
+			&:before {
+				content: "";
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: -3px;
+				right: -3px;
+				border-radius: 3px;
+				background: rgba(#000,.15);
+			}
 		}
 
 		.days {
