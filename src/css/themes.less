@@ -1,4 +1,49 @@
 
+[data-ui="royale-pink"] {
+	.win-body_ content {
+		--head-line: rgba(#919,.2);
+		--grid-line: rgba(#919,.15);
+		--grid-shade: rgba(#919,.05);
+
+		.view-day h2 i { color: #fef; }
+
+		.days-wrapper .col-hours b { color: #fef; }
+		.view-week .week .weekdays {
+			b { color: #fff; }
+			b i:nth-child(1) { opacity: .75; }
+			b i:nth-child(2) { opacity: .85; }
+			b.today i:nth-child(2) {
+				background: #e98ce9;
+				color: #fef;
+				text-shadow: 0 1px 0 rgba(#171,.15);
+			}
+		}
+
+		.view-month .month .weekdays b { color: #fef; }
+		.view-month .month .days b {
+			color: #fff;
+
+			&.weekend:not(.non-day) { color: #ede; }
+			&.today i { background: #e98ce9; color: #fef; }
+		}
+
+		.view-year .month {
+			h3 { color: #fef; }
+			.weekdays:before { background: #f186ffa3; }
+			.weekdays b { color: #fef; }
+			.days b.weekend:not(.non-day) { color: #ece; }
+			.days b.today:not(.non-day):before { background: #e98ce9; }
+		}
+
+		.now-line {
+			border-top-color: #ffd9ff;
+
+			&:before,
+			&:after { background-color: #ffd9ff; color: #b0b; text-shadow: 0 1px 0 rgba(#c3c,.35); }
+		}
+	}
+}
+
 [data-ui="royale-amber"] {
 	.win-body_ content {
 		.view-day h2 i { color: #fed; }
