@@ -1,9 +1,163 @@
 
+[data-ui="royale-amber"] {
+	.win-body_ content {
+		 .sidebar .mini-calendar {
+			.days b.day.weekend:not(.non-day) {
+				color: #b2987e;
+
+				&:before {
+					background: #754;
+					box-shadow: inset 0 0 0 2px #754;
+				}
+			}
+		}
+
+		.view-day h2 i { color: #fed; }
+
+		.view-week .week .weekdays b.today i:nth-child(2) {
+			background: #754;
+			color: #fed;
+		}
+
+		.view-month .month .days b {
+			&.weekend:not(.non-day) { color: #cb9; }
+			&.today i { background: #754; color: #fed; }
+		}
+
+		.view-year .month {
+			h3 { color: #fed; }
+			.days b.weekend:not(.non-day) { color: #ba8; }
+			.days b.today:not(.non-day):before { background: #754; }
+		}
+
+		.now-line {
+			border-top-color: #f70;
+
+			&:before,
+			&:after { background-color: #f70; color: #fff; }
+		}
+	}
+}
+
+[data-ui="royale-black"] {
+	.win-body_ content {
+		 .sidebar .mini-calendar {
+			.days b.day.weekend:not(.non-day) {
+				color: #88b;
+
+				&:before {
+					background: #5b5bb5;
+					box-shadow: inset 0 0 0 2px #5b5bb5;
+				}
+			}
+		}
+
+		.view-day h2 i { color: #eef; }
+
+		.view-week .week .weekdays b.today i:nth-child(2) {
+			background: #448;
+			color: #eef;
+		}
+
+		.view-month .month .days b {
+			&.weekend:not(.non-day) { color: #9bc; }
+			&.today i { background: #5b5bb5; color: #eef; }
+		}
+
+		.view-year .month {
+			h3 { color: #eef; }
+			.days b.weekend:not(.non-day) { color: #88b; }
+			.days b.today:not(.non-day):before { background: #5b5bb5; }
+		}
+
+		.now-line {
+			border-top-color: #88b;
+
+			&:before,
+			&:after { background-color: #88b; color: #eef; }
+		}
+	}
+}
+
+[data-ui="royale-emerald"] {
+	.win-body_ content {
+		 .sidebar .mini-calendar {
+			.days b.day.weekend:not(.non-day) {
+				color: #9c9;
+
+				&:before {
+					background: #484;
+					box-shadow: inset 0 0 0 2px #484;
+				}
+			}
+		}
+
+		.view-day h2 i { color: #efe; }
+
+		.view-week .week .weekdays b.today i:nth-child(2) {
+			background: #484;
+			color: #efe;
+		}
+
+		.view-month .month .days b {
+			&.weekend:not(.non-day) { color: #9c9; }
+			&.today i { background: #484; color: #efe; }
+		}
+
+		.view-year .month {
+			h3 { color: #efe; }
+			.days b.weekend:not(.non-day) { color: #8b8; }
+			.days b.today:not(.non-day):before { background: #484; }
+		}
+
+		.now-line {
+			border-top-color: #9c9;
+
+			&:before,
+			&:after { background-color: #9c9; color: #efe; }
+		}
+	}
+}
+
 [data-ui="royale-pink"] {
 	.win-body_ content {
 		--head-line: rgba(#919,.2);
 		--grid-line: rgba(#919,.15);
 		--grid-shade: rgba(#919,.05);
+		--content-fg: #fff;
+
+		 .sidebar .mini-calendar {
+			.icon-chevron-left,
+			.icon-chevron-right {
+				filter: invert(1) brightness(5) drop-shadow(0 1px 0 rgba(#000,.25));
+
+				&:after {
+					opacity: 1;
+				}
+			}
+
+			.month .weekdays {
+				opacity: .75;
+				text-shadow: 0 1px 0 rgba(#717,.15);
+			}
+
+			.month .days b.non-day {
+				color: #b657b782;
+			}
+
+			.days b.day.weekend:not(.non-day) {
+				color: #ede;
+
+				&:before {
+					background: #e98ce9;
+					box-shadow: inset 0 0 0 2px #e98ce9;
+				}
+			}
+		}
+
+		.sidebar .calendars ul li.add-calendar .icon-plus {
+			filter: invert(1) brightness(5) drop-shadow(0 1px 0 rgba(#000,.25));
+		}
 
 		.view-day h2 i { color: #fef; }
 
@@ -44,95 +198,19 @@
 	}
 }
 
-[data-ui="royale-amber"] {
-	.win-body_ content {
-		.view-day h2 i { color: #fed; }
-
-		.view-week .week .weekdays b.today i:nth-child(2) {
-			background: #754;
-			color: #fed;
-		}
-
-		.view-month .month .days b {
-			&.weekend:not(.non-day) { color: #cb9; }
-			&.today i { background: #754; color: #fed; }
-		}
-
-		.view-year .month {
-			h3 { color: #fed; }
-			.days b.weekend:not(.non-day) { color: #ba8; }
-			.days b.today:not(.non-day):before { background: #754; }
-		}
-
-		.now-line {
-			border-top-color: #f70;
-
-			&:before,
-			&:after { background-color: #f70; color: #fff; }
-		}
-	}
-}
-
-[data-ui="royale-black"] {
-	.win-body_ content {
-		.view-day h2 i { color: #eef; }
-
-		.view-week .week .weekdays b.today i:nth-child(2) {
-			background: #448;
-			color: #eef;
-		}
-
-		.view-month .month .days b {
-			&.weekend:not(.non-day) { color: #9bc; }
-			&.today i { background: #448; color: #eef; }
-		}
-
-		.view-year .month {
-			h3 { color: #eef; }
-			.days b.weekend:not(.non-day) { color: #88b; }
-			.days b.today:not(.non-day):before { background: #448; }
-		}
-
-		.now-line {
-			border-top-color: #88b;
-
-			&:before,
-			&:after { background-color: #88b; color: #eef; }
-		}
-	}
-}
-
-[data-ui="royale-emerald"] {
-	.win-body_ content {
-		.view-day h2 i { color: #efe; }
-
-		.view-week .week .weekdays b.today i:nth-child(2) {
-			background: #484;
-			color: #efe;
-		}
-
-		.view-month .month .days b {
-			&.weekend:not(.non-day) { color: #9c9; }
-			&.today i { background: #484; color: #efe; }
-		}
-
-		.view-year .month {
-			h3 { color: #efe; }
-			.days b.weekend:not(.non-day) { color: #8b8; }
-			.days b.today:not(.non-day):before { background: #484; }
-		}
-
-		.now-line {
-			border-top-color: #9c9;
-
-			&:before,
-			&:after { background-color: #9c9; color: #efe; }
-		}
-	}
-}
-
 [data-ui="royale-purple"] {
 	.win-body_ content {
+		 .sidebar .mini-calendar {
+			.days b.day.weekend:not(.non-day) {
+				color: #b8b;
+
+				&:before {
+					background: #848;
+					box-shadow: inset 0 0 0 2px #848;
+				}
+			}
+		}
+
 		.view-day h2 i { color: #fef; }
 
 		.view-week .week .weekdays b.today i:nth-child(2) {
