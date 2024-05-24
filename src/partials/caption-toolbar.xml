@@ -16,6 +16,6 @@
 		</Options>
 	</Group>
 	<Group width="31%">
-		<Search width="170px" placeholder="Search"/>
+		<Search width="170px" placeholder="Search" state="disabled"/>
 	</Group>
 </CaptionToolBar>
