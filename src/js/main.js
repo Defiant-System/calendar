@@ -175,25 +175,33 @@ const calendar = {
 	addIcs(path) {
 		// TODO:
 		karaqu.shell(`fs -o '${path}' null`).then(async cmd => {
+			let APP = calendar;
 			let fsHandle = await cmd.result.open({ responseType: "text" });
 			let jcalData = ICAL.parse(fsHandle.data);
 			let comp = new ICAL.Component(jcalData);
 			let vevent = comp.getFirstSubcomponent("vevent");
 			let calEvent = new ICAL.Event(vevent);
-
 			let id = Events.createEventId(),
 				startsDate = new Date(calEvent.startDate.toString()),
-				endsDate = new Date(calEvent.endDate.toString());
-
+				endsDate = new Date(calEvent.endDate.toString()),
+				xAttendees = [];
+			// loop attendees
+			calEvent.attendees.map(att => {
+				let [a, mail] = att.jCal[3].split(":");
+				xAttendees.push(`<i mail="${mail}"/>`);
+			});
 			// create new event node
-			let xStr = `<event isNew="true" id="${id}" starts="${startsDate.valueOf()}" ends="${endsDate.valueOf()}" calendar-id="1" title="${calEvent.summary}"/>`;
-			let xNode = calendar.xEvents.appendChild($.nodeFromString(xStr));
+			let xStr = `<event id="${id}" starts="${startsDate.valueOf()}" ends="${endsDate.valueOf()}" calendar-id="1" title="${calEvent.summary}">
+							<location><![CDATA[${calEvent.location}]]></location>
+							<attendees>${xAttendees.join("")}</attendees>
+						</event>`,
+				xNode = APP.xEvents.appendChild($.nodeFromString(xStr));
 			// update node attributes
 			Events.updateNodeI18n(xNode);
-			// console.log(xNode);
-
 			// View.switch("week", true);
 			View.go(new Date(startsDate));
+			// trigger click on new event
+			setTimeout(() => APP.els.content.find(`.event[data-id="${id}"]`).trigger("click"), 10);
 		});
 	},
 	// shell exposed methods: END

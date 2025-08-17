@@ -662,7 +662,7 @@ const Events = {
 	},
 	createEventId() {
 		let ids = calendar.xEvents.selectNodes(".//event").map(node => +node.getAttribute("id")),
-			idMax = Math.max(...ids, 0);
+			idMax = Math.max(...ids, Date.now(), 0);
 		return idMax ? idMax + 1 : 1;
 	}
 };

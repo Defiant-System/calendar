@@ -684,19 +684,25 @@ content {
 		border-right: 14px solid var( --content-bg );
 	}
 
-	hr {
+	> hr {
 		margin: 10px -13px;
 		background: rgba(0,0,0,.1);
 	}
 
-	div {
+	> div {
 		display: flex;
 		user-select: none;
 
 		&.row-head {
-			margin-bottom: 7px;
+			margin-bottom: 5px;
 		}
-		&.row-location {}
+
+		&.row-location {
+			.icon-location-pin {
+				top: 7px;
+			}
+		}
+		
 		&.row-date {
 			span {
 				position: relative;
@@ -736,8 +742,25 @@ content {
 				}
 			}
 		}
+		
 		&.row-info {}
-		&.row-users {}
+
+		&.row-users {
+			> div {
+				padding-top: 0;
+
+				span {
+					display: inline-block;
+					padding: 2px 7px 3px;
+					box-shadow: 0 0 0 1px #0002;
+					border-radius: 20px;
+					margin: 0 3px 5px 0;
+					background: #fff;
+					color: #555;
+				}
+			}
+		}
+		
 		&.row-attachments {}
 
 		&.row-actions {
@@ -850,16 +873,20 @@ content {
 			top: 2px;
 		}
 
-		h3, div, input {
+		> h3, > div {
 			flex: 1;
 			vertical-align: top;
 			padding: 3px 0;
 		}
 
 		h3 {
+			position: relative;
+			top: -2px;
 			font-size: 18px;
+			line-height: 1.35;
 			padding: 0;
 			color: #333;
+			margin: 0;
 
 			&:empty:before {
 				content: attr(placeholder);

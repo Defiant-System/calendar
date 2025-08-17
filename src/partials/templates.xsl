@@ -107,7 +107,13 @@
 				</div>
 				<div class="row-location">
 					<i class="icon-location-pin"></i>
-					<input type="text" placeholder="Add Location"/>
+					<div>
+						<input type="text" placeholder="Add Location">
+							<xsl:if test="location">
+								<xsl:attribute name="value"><xsl:value-of select="location"/></xsl:attribute>
+							</xsl:if>
+						</input>
+					</div>
 				</div>
 				<hr/>
 				<div class="row-date">
@@ -122,12 +128,21 @@
 				<hr/>
 				<div class="row-users">
 					<i class="icon-user"></i>
-					<input type="text" placeholder="Add Invitees"/>
+					<div>
+						<xsl:if test="attendees/*">
+							<xsl:for-each select="attendees/*">
+								<span class="attendee"><xsl:value-of select="@mail"/></span>
+							</xsl:for-each>
+						</xsl:if>
+						<input type="text" placeholder="Add Attendees" />
+					</div>
 				</div>
 				<hr/>
 				<div class="row-attachments">
 					<i class="icon-paperclip"></i>
-					<input type="text" placeholder="Add Notes, URL or Attachments"/>
+					<div>
+						<input type="text" placeholder="Add Notes, URL or Attachments"/>
+					</div>
 				</div>
 				<hr/>
 				<div class="row-actions">
