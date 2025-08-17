@@ -1,0 +1,5 @@
+<Shell>
+	<i object="calendar" type="Application" description="Public Interace for Calendar">
+		<i switch="a" name="addIcs" arg="NONE" description="Add ICS to calendar."/>
+	</i>
+</Shell>

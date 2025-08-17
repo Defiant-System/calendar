@@ -1,7 +1,10 @@
 <Application>
+	<Build>
+		<task action="skip" source="src/js/bundle.js" destination="public/js/bundle.js"/>
+	</Build>
 	<Head>
 		<meta name="id" value="calendar"/>
-		<meta name="title" value="Calendar" version="1.86"/>
+		<meta name="title" value="Calendar" version="1.87"/>
 		<meta name="author" value="Hakan Bilgin" namespace="ant"/>
 		<meta name="license" value="AGPL-3.0"/>
 		<meta name="repository" value="https://github.com/Defiant-System/calendar"/>
@@ -19,6 +22,7 @@
 		<meta name="content" value="src/partials/content.htm"/>
 		<meta name="xsl" value="src/partials/templates.xsl"/>
 
+		@import "src/partials/shell.xml"
 		@import "src/partials/caption-toolbar.xml"
 		@import "src/partials/menubar.xml"
 	</Head>

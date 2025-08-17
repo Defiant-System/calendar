@@ -6,6 +6,11 @@
 
 @import "./modules/test.js";
 
+// fetch bundled code
+const {
+	ICAL,
+} = await window.fetch("~/js/bundle.js");
+
 
 const calendar = {
 	init() {
@@ -57,7 +62,7 @@ const calendar = {
 				window.find(".toolbar-tool_").get(5).trigger("click");
 
 				// DEV-ONLY-START
-				Test.init();
+				Test.init(this);
 				// DEV-ONLY-END
 			});
 	},
@@ -166,6 +171,32 @@ const calendar = {
 				}
 		}
 	},
+	// shell exposed methods: START
+	addIcs(path) {
+		// TODO:
+		karaqu.shell(`fs -o '${path}' null`).then(async cmd => {
+			let fsHandle = await cmd.result.open({ responseType: "text" });
+			let jcalData = ICAL.parse(fsHandle.data);
+			let comp = new ICAL.Component(jcalData);
+			let vevent = comp.getFirstSubcomponent("vevent");
+			let calEvent = new ICAL.Event(vevent);
+
+			let id = Events.createEventId(),
+				startsDate = new Date(calEvent.startDate.toString()),
+				endsDate = new Date(calEvent.endDate.toString());
+
+			// create new event node
+			let xStr = `<event isNew="true" id="${id}" starts="${startsDate.valueOf()}" ends="${endsDate.valueOf()}" calendar-id="1" title="${calEvent.summary}"/>`;
+			let xNode = calendar.xEvents.appendChild($.nodeFromString(xStr));
+			// update node attributes
+			Events.updateNodeI18n(xNode);
+			// console.log(xNode);
+
+			// View.switch("week", true);
+			View.go(new Date(startsDate));
+		});
+	},
+	// shell exposed methods: END
 	sidebar: @import "./modules/sidebar.js",
 	popup: @import "./modules/popup.js",
 };
