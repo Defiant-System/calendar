@@ -2,7 +2,7 @@
 let Test = {
 	init(APP) {
 
-		setTimeout(() => APP.addIcs("~"+"/Mail/1755104678553/invite.ics"), 1e2);
+		// setTimeout(() => APP.addIcs("~"+"/Mail/1755104678553/invite.ics"), 1e2);
 
 		// let d = new Date("2013-05-14");
 		// console.log( d.toISOString().slice(0,10) );

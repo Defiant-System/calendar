@@ -28,13 +28,13 @@ const calendar = {
 		let Self = this,
 			year = (new Date()).getFullYear();
 
+		// events data storage; temp in bluePrint
+		Self.data = window.bluePrint;
+		Self.xEvents = Self.data.selectSingleNode(`//Events`);
+
 		// check storage for previously saved data
 		window.storage.getItem(`events-${year}`)
 			.then(storageData => {
-				// events data storage; temp in bluePrint
-				Self.data = window.bluePrint;
-				Self.xEvents = Self.data.selectSingleNode(`//Events`);
-
 				if (storageData) {
 					// replace bluePrint data with storage data
 					Self.xEvents.parentNode.replaceChild(storageData, Self.xEvents);
@@ -81,6 +81,8 @@ const calendar = {
 		switch (event.type) {
 			// system events
 			case "window.close":
+				// close popup-bubble, if any
+				Self.popup.dispatch({ type: "close-popup-bubble" });
 				// save calendar data to storage
 				// TODO: shard event data - yearly
 				date = new Date();
@@ -173,7 +175,7 @@ const calendar = {
 	},
 	// shell exposed methods: START
 	addIcs(path) {
-		// TODO:
+		// open ics file
 		karaqu.shell(`fs -o '${path}' null`).then(async cmd => {
 			let APP = calendar;
 			let fsHandle = await cmd.result.open({ responseType: "text" });
