@@ -9,6 +9,7 @@
 // fetch bundled code
 const {
 	ICAL,
+	ICalGenerator,
 } = await window.fetch("~/js/bundle.js");
 
 
