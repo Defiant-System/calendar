@@ -285,6 +285,9 @@
 					popup.find(".event-ends").addClass("drag-vRange_").data({ list: list.join(",") });
 				}
 				break;
+			case "popup-send-mail-to":
+				console.log(event);
+				break;
 		}
 	},
 	getPosition(el, rEl) {

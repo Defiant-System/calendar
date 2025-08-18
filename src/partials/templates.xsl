@@ -128,10 +128,13 @@
 				<hr/>
 				<div class="row-users">
 					<i class="icon-user"></i>
-					<div>
+					<div data-click="popup-send-mail-to">
 						<xsl:if test="attendees/*">
 							<xsl:for-each select="attendees/*">
-								<span class="attendee"><xsl:value-of select="@mail"/></span>
+								<span class="attendee">
+									<xsl:attribute name="data-mail"><xsl:value-of select="@mail"/></xsl:attribute>
+									<xsl:value-of select="@mail"/>
+								</span>
 							</xsl:for-each>
 						</xsl:if>
 						<input type="text" placeholder="Add Attendees" />

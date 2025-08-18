@@ -749,7 +749,7 @@ content {
 			> div {
 				padding-top: 0;
 
-				span {
+				.attendee {
 					display: inline-block;
 					padding: 2px 7px 3px;
 					box-shadow: 0 0 0 1px #0002;
@@ -757,11 +757,16 @@ content {
 					margin: 0 3px 5px 0;
 					background: #fff;
 					color: #555;
+					cursor: pointer;
 				}
 			}
 		}
 		
-		&.row-attachments {}
+		&.row-attachments {
+			.icon-paperclip {
+				top: 7px;
+			}
+		}
 
 		&.row-actions {
 			display: block;
