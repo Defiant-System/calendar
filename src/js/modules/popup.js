@@ -286,7 +286,13 @@
 				}
 				break;
 			case "popup-send-mail-to":
-				console.log(event);
+				el = $(event.target);
+				// start calerndar in the background
+				karaqu.shell(`win -o email`)
+					.then(resp => {
+						// add ICS filepath to calendar app
+						karaqu.shell(`email -w '${el.data("mail")}'`);
+					});
 				break;
 		}
 	},
